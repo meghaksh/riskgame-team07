@@ -1,4 +1,4 @@
-package org.soen6441.riskgame_team07;
+package org.soen6441.model;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
