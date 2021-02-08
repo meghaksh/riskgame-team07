@@ -1,38 +1,20 @@
 package org.soen6441.model;
-
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
 
 /**
- * Unit test for simple App.
+ * Unit test for Player CLass.
  */
-public class AppTest 
-    extends TestCase
+public class PlayerTest extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+/*
+ * Test Case for Player Name
+ */
+	public void testPlayername() {
+		Player p1 = new Player();
+		
+		assertEquals(p1.Playername, "Alpha");
+		
+		
+	}
 }
