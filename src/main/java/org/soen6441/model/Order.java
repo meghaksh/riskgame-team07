@@ -13,8 +13,7 @@ public class Order {
 	private String d_noOfArmies;
 	//private HashMap<Integer, String> d_order_list;
 	Scanner scan = new Scanner(System.in);
-	//	public Order(String order) {
-	public Order() {
+	public Order(String order) {
 		System.out.println("Enter command: ");
 		d_order = scan.nextLine(); 
 		//this.d_order = order;
