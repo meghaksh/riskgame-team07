@@ -53,7 +53,7 @@ public class Order {
 	public void execute() {
 
 		//CountryObject.deployArmies();
-		// but how to get country object with specific ID;
+		// how to get country object with specific ID;
 		// we need a list of all countries object for that
 
 	}
