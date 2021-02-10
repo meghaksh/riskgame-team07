@@ -7,7 +7,7 @@ package org.soen6441.model;
 
 public class Continent {
 	
-	int ID;
+	static int ID=0;
 	String Name;
 	int Continent_Control_Value;
 	
@@ -15,9 +15,9 @@ public class Continent {
 	/*
 	 * default constructor adding id, name and control value of continent to object
 	 */
-	public Continent(int ID, String Name, int Continent_Control_Value)
+	public Continent(String Name, int Continent_Control_Value)
 	{
-		this.ID=ID;
+		this.ID=ID++;
 		this.Name=Name;
 		this.Continent_Control_Value=Continent_Control_Value;
 	}

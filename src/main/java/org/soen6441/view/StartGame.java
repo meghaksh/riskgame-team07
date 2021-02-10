@@ -2,17 +2,25 @@ package org.soen6441.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.soen6441.model.Country;
+import org.soen6441.model.Map;
+
 public class StartGame {
 
 	public static void main(String[] args) {
 		CommandPrompt cp = new CommandPrompt();
 		System.out.println(Thread.currentThread());
+		
+		
+		
 	}
 
 }
