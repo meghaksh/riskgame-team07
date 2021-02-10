@@ -1,6 +1,9 @@
 package org.soen6441.model;
 
-
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 /**
  * The Player class represents the actual player participating in the game.
@@ -11,6 +14,9 @@ public class Player {
 	String d_playerName="";
 	int d_playerId;
 	String d_playerColor = "";
+    ArrayList<Country> d_countries = new ArrayList<Country>();
+	Queue<Order> d_order = new LinkedList<Order>();
+	Scanner d_scan;
 
 	
 	
@@ -35,6 +41,18 @@ public class Player {
 	{
 		return d_playerColor;
 	}
-	
+	public void setPlayerColor(String p_playerColor)
+	{
+		d_playerColor = p_playerColor;
+	}
+	public void issue_order()
+	{
+			
+	}
+	public Order nextOrder()
+	{
+		return d_order.remove();
+	}
+    
 	
 }
