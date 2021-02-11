@@ -1,6 +1,6 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class GameModel 
 {	/**
@@ -15,6 +15,8 @@ public class GameModel
 	private Player d_PlayerID;
 	private ArrayList<Player> d_PlayerList = new ArrayList<Player>();
 	private int d_PlayerCount;
+	private Queue<Player> d_PlayerQueue;
+	private static final int MAX_PLAYERS = 6;
 	
 	/**
 	 * This is a constructor of GameModel class which will initialize the Map and set the gamePhase 
@@ -82,6 +84,40 @@ public class GameModel
 	 */
 	public Map getSelectedMap() {
 		return d_map;
+
+	}
+	/**
+	 * Adds the player.
+	 *
+	 * @param playerName the player name
+	 * @return the string
+	 */
+	public String addPlayer(String p_PlayerName) {
+		if ((d_PlayerList.size() == d_PlayerCount && d_PlayerCount != 0) || d_PlayerList.size() == MAX_PLAYERS) 
+		{
+			return "Reached Max Number of Players can be added to the game";
+		}
+		if (existDuplicatePlayer(p_PlayerName)) {
+
+			return "Please enter a differnt Player name as this name already exists";
+		} else {
+			//Player l_Player_Object = new Player(d_PlayerList.size() + 1, p_PlayerName);
+			//d_PlayerList.add(l_Player_Object);
+			return "Player " + p_PlayerName + " added to the game";
+		}
+
+	}
+
+	/**
+	 * This method checks for duplicate players
+	 *
+	 * @param playerName Name of the player
+	 * @return true, if there is any duplicates
+	 */
+	public boolean existDuplicatePlayer(String p_PlayerName) {
+		
+
+		return false;
 
 	}
 
