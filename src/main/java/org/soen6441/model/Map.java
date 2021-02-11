@@ -62,7 +62,7 @@ public class Map {
 	 */
 	public void  LoadMap(String p_Filename) throws FileNotFoundException
 	{
-		int l_Count=0,l_ControlValue,l_ContinentID;
+		int l_ControlValue,l_ContinentID,l_CountryID;
 		File file =new File(p_Filename);
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine())
@@ -85,10 +85,10 @@ public class Map {
 				l_line=sc.nextLine();
 				while(!l_line.equals("") && sc.hasNextLine())
 				{
-					l_Count++;
 					String[] l_arr1=l_line.split(" ",4);
 					l_ContinentID=Integer.parseInt(l_arr1[2]);
-					d_CountryObjects.add(new Country(l_Count,l_arr1[1],l_ContinentID));
+					l_CountryID=Integer.parseInt(l_arr1[0]);
+					d_CountryObjects.add(new Country(l_CountryID,l_arr1[1],l_ContinentID));
 					l_line=sc.nextLine();
 				}
 
