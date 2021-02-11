@@ -41,7 +41,7 @@ public class GameEngine {
 	private void InitializeGame() 
 	{
 		
-		//d_GameModel_Object.startUpPhase();
+		///d_GameModel_Object.startUpPhase();
 
 
 	}
