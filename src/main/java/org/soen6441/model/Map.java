@@ -1,9 +1,12 @@
 package org.soen6441.model;
 
-import java.io.File;
+import java.io.*;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
-import java.util.Scanner;
+
 
 /** 
  * Model class for Map
@@ -32,7 +35,7 @@ public class Map {
 
 	/**
 	 * This method creates a user edited map
-	 * @param filename
+	 * @param p_Filename
 	 */
 
 	public void CreateMap(String p_Filename)
@@ -54,7 +57,7 @@ public class Map {
 
 	/**
 	 * This method loads a map file given by the user
-	 * @param filename
+	 * @param p_Filename
 	 * @throws FileNotFoundException 
 	 */
 	public void  LoadMap(String p_Filename) throws FileNotFoundException
@@ -75,7 +78,7 @@ public class Map {
 					d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
 					l_line=sc.nextLine();
 				}
-				
+
 			}
 			if(l_line.contains("countries"))
 			{
@@ -100,12 +103,12 @@ public class Map {
 					Country obj=d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
 					for(int l_k=1;l_k<l_arr2.length;l_k++)
 					{
-						
+
 						obj.setBorder(Integer.parseInt(l_arr2[l_k]));
 
 					}
 
-					
+
 
 					d_borders.clear();
 					d_Neighbors.put(Integer.parseInt(l_arr2[0]),d_borders);
@@ -121,12 +124,45 @@ public class Map {
 
 	}
 	/**
-	 * it saves the user edited map
+	 * It saves the user edited map
+	 * @param p_Filename 
+	 * @throws IOException 
 	 */
-	public void SaveMap()
+	public void SaveMap(String p_Filename) throws IOException
 	{
+		ArrayList<Integer> l_borders= new ArrayList<Integer>();
+		File file=new File(p_Filename);
+		FileWriter fw = new FileWriter(file);
+		PrintWriter pr = new PrintWriter(fw);
+		pr.println("continent");
+		for(Continent co: d_ContinentObjects)
+		{
+			pr.println(co.d_Name+" "+co.d_ContinentControlValue);
+		}
+		pr.println("");
+		pr.println("countries");
+		for(Country c: d_CountryObjects)
+		{
+			pr.println(c.d_ID+" "+c.d_Name+" "+c.d_ContinentID);
+		}
+		pr.println("");
+		pr.println("borders");
+		for(Country c: d_CountryObjects)
+		{
+			l_borders=c.getBorder();
+			pr.print(c.d_ID+" ");
+			for(int l_i: l_borders)
+			{
+				pr.print(l_i+" ");
+			}
+			pr.println("");
+		}
+		pr.close();
+		fw.close();
+		
+
 	}
-	
-	}
-	
+
+}
+
 
