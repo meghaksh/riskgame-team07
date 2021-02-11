@@ -115,7 +115,9 @@ public class GameModel
 	 * @return true, if there is any duplicates
 	 */
 	public boolean existDuplicatePlayer(String p_PlayerName) {
-		
+		for (Player Player : d_PlayerList )
+			if (Player .getPlayerName().equalsIgnoreCase(p_PlayerName))
+				return true;
 
 		return false;
 
