@@ -122,6 +122,33 @@ public class GameModel
 		return false;
 
 	}
+	/**
+	 * This Method removes players 
+	 *
+	 * @param playerName the player name
+	 * @return the string
+	 */
+	public String removePlayer(String p_PlayerName) 
+	{
+		Player l_CurrentPlayer;
+		boolean l_PlayerFound = false;
+		for (Player player:d_PlayerList) {
+			l_CurrentPlayer = player;
+			if (l_CurrentPlayer.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
+				l_PlayerFound = true;
+				//for(Country Country:getSelectedMap().getOwnedCountries(p_PlayerName))(mapclass)
+					//Country.setOwnedBy(null);(country)
+				d_PlayerList.remove(d_PlayerList.indexOf(player));
+				return ("Player " + p_PlayerName + " This Player removed from the game");
+
+			}
+		}
+		if (l_PlayerFound == false) {
+			return ("This Player not found");
+		}
+		return " ";
+
+	}
 
 
 
