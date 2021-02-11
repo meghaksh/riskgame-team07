@@ -8,10 +8,10 @@ import java.util.*;
  */
 public class Country {
 
-	int ID;
-	String Name;
-	int Continent_ID;
-	ArrayList<Integer> neighbors;
+	int d_ID;
+	String d_Name;
+	int d_ContinentID;
+	ArrayList<Integer> d_neighbors;
 
 
 
@@ -20,13 +20,13 @@ public class Country {
 	 * default constructor adding the id , name and continent id parameters to object 
 	 */
 
-	public Country(int ID, String Name, int Continent_ID)
+	public Country(int p_ID, String p_Name, int p_ContinentID)
 	{
 
-		this.Continent_ID=Continent_ID;
-		this.ID=ID;
-		this.Name=Name;
-		neighbors=new ArrayList<Integer>();
+		this.d_ContinentID=p_ContinentID;
+		this.d_ID=p_ID;
+		this.d_Name=p_Name;
+		d_neighbors=new ArrayList<Integer>();
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class Country {
 	 */
 	public  void setBorder(int borders)
 	{
-		this.neighbors.add(borders);
+		this.d_neighbors.add(borders);
 	}
 
 
@@ -43,7 +43,7 @@ public class Country {
 	 */
 	public  ArrayList<Integer> getBorder()
 	{
-		return this.neighbors;
+		return this.d_neighbors;
 	}
 
 }
