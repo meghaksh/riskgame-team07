@@ -14,6 +14,7 @@ public class Player {
 	String d_playerName="";
 	int d_playerId;
 	String d_playerColor = "";
+	int d_armies;
     ArrayList<Country> d_countries = new ArrayList<Country>();
 	Queue<Order> d_order = new LinkedList<Order>();
 	Scanner d_scan;
@@ -44,6 +45,14 @@ public class Player {
 	public void setPlayerColor(String p_playerColor)
 	{
 		d_playerColor = p_playerColor;
+	}
+	public void setPlayerArmies(int p_armies)
+	{
+		d_armies = p_armies;
+	}
+	public int getPlayerArmies()
+	{
+		return d_armies;
 	}
 	public void issue_order()
 	{
