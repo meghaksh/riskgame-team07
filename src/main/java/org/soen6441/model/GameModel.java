@@ -14,6 +14,7 @@ public class GameModel
 	private Map d_map;
 	private Player d_PlayerID;
 	private ArrayList<Player> d_PlayerList = new ArrayList<Player>();
+	private int d_PlayerCount;
 	
 	/**
 	 * This is a constructor of GameModel class which will initialize the Map and set the gamePhase 
@@ -56,6 +57,32 @@ public class GameModel
 	{
 		
 		this.d_PlayerID = d_PlayerID;
+	}
+	/**
+	 * this method will get all the players from the ArrayList
+	 * 
+	 * @return d_PlayerList, ArrayList of all the available players from player class
+	 */
+	public ArrayList<Player> getAllPlayers() {
+		return d_PlayerList;
+	}
+	/**
+	 * this method sets the  player count
+	 *
+	 * @return the GameModel
+	 */
+	public void setplayerCount() {
+		this.d_PlayerCount=this.d_PlayerList.size();
+			
+	}
+	/**
+	 * This method gets selected map.
+	 *
+	 * @return the selected map
+	 */
+	public Map getSelectedMap() {
+		return d_map;
+
 	}
 
 
