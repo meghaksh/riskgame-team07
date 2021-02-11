@@ -1,6 +1,7 @@
 package org.soen6441.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -56,7 +57,39 @@ public class Player {
 	}
 	public void issue_order()
 	{
+		int l_flag = 0;
+		d_scan = new Scanner(System.in);
+		String l_stringOrder = d_scan.nextLine();
+		String[] l_stringList = l_stringOrder.split(" ");
+		if(Integer.parseInt(l_stringList[2]) <= d_armies)
+		{
+			Iterator l_it = d_countries.iterator();
+			while(l_it.hasNext())
+			{
+				Country l_tempCountry = (Country)l_it.next() ;
+				if(Integer.parseInt(l_stringList[1])==l_tempCountry.d_ID)
+				{
+					l_flag=1;
+					break;
+				}
+			}
+			if(l_flag==1)
+			{
+				d_armies-= Integer.parseInt(l_stringList[2]);
+				d_order.add(new Order(l_stringOrder));
+			}
+			else
+			{
+				System.out.println("This country doesnot belongs to "+d_playerName);
+			}
 			
+		}
+		else
+		{
+			System.out.println(d_playerName+" is ot of armies");
+		}
+		
+		
 	}
 	public Order nextOrder()
 	{
