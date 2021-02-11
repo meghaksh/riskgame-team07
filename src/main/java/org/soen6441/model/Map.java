@@ -10,10 +10,10 @@ import java.util.Scanner;
  */
 
 public class Map {
-	ArrayList<Country> Country_objects; 
-	ArrayList<Continent> Continent_objects; 
-	ArrayList<Integer> borders;  
-	HashMap<Integer,ArrayList<Integer>> neighbors;
+	ArrayList<Country> d_CountryObjects; 
+	ArrayList<Continent> d_ContinentObjects;
+	ArrayList<Integer> d_borders;  
+	HashMap<Integer,ArrayList<Integer>> d_Neighbors;
 
 	/**
 	 * Default constructor
@@ -24,10 +24,10 @@ public class Map {
 
 	public Map()
 	{
-		Country_objects=new ArrayList<Country>();
-		new ArrayList<Integer>();
-		new ArrayList<Continent>();
-		new HashMap<Integer,ArrayList<Integer>>();
+		d_CountryObjects=new ArrayList<Country>();
+		d_borders=new ArrayList<Integer>();
+		d_ContinentObjects=new ArrayList<Continent>();
+		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
 	}
 
 	/**
@@ -35,16 +35,19 @@ public class Map {
 	 * @param filename
 	 */
 
-	public void CreateMap(String filename)
+	public void CreateMap(String p_Filename)
 	{
 
 
 	}
 
-
+	/**
+	 * This method returns the list of country objects
+	 * @return CountryObjects
+	 */
 	public ArrayList<Country> getCountryList()
 	{
-		return this.Country_objects;
+		return this.d_CountryObjects;
 	}
 
 
@@ -54,58 +57,58 @@ public class Map {
 	 * @param filename
 	 * @throws FileNotFoundException 
 	 */
-	public void LoadMap(String filename) throws FileNotFoundException
+	public void  LoadMap(String p_Filename) throws FileNotFoundException
 	{
-		int count=0,controlvalue,continent_id;
-		File file =new File(filename);
+		int l_Count=0,l_ControlValue,l_ContinentID;
+		File file =new File(p_Filename);
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine())
 		{
-			String line=sc.nextLine();
-			if(line.contains("continents"))
+			String l_line=sc.nextLine();
+			if(l_line.contains("continents"))
 			{
-				line=sc.nextLine();
-				while(!line.equals("") && sc.hasNextLine())
+				l_line=sc.nextLine();
+				while(!l_line.equals("") && sc.hasNextLine())
 				{
-					String[] arr = line.split(" ", 3);
-					controlvalue=Integer.parseInt(arr[1]);
-					Continent_objects.add(new Continent(arr[0],controlvalue));
-					line=sc.nextLine();
+					String[] l_arr = l_line.split(" ", 3);
+					l_ControlValue=Integer.parseInt(l_arr[1]);
+					d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
+					l_line=sc.nextLine();
 				}
 				
 			}
-			if(line.contains("countries"))
+			if(l_line.contains("countries"))
 			{
-				line=sc.nextLine();
-				while(!line.equals("") && sc.hasNextLine())
+				l_line=sc.nextLine();
+				while(!l_line.equals("") && sc.hasNextLine())
 				{
-					count++;
-					String[] arr1=line.split(" ",4);
-					continent_id=Integer.parseInt(arr1[2]);
-					Country_objects.add(new Country(count,arr1[1],continent_id));
-					line=sc.nextLine();
+					l_Count++;
+					String[] l_arr1=l_line.split(" ",4);
+					l_ContinentID=Integer.parseInt(l_arr1[2]);
+					d_CountryObjects.add(new Country(l_Count,l_arr1[1],l_ContinentID));
+					l_line=sc.nextLine();
 				}
 
 			}
-			if(line.contains("borders"))
+			if(l_line.contains("borders"))
 			{
 
-				while(!line.equals("") && sc.hasNextLine())
+				while(!l_line.equals("") && sc.hasNextLine())
 				{
-					line=sc.nextLine();
-					String[] arr2=line.split(" ");
-					Country obj=Country_objects.get(Integer.parseInt(arr2[0])-1);
-					for(int k=1;k<arr2.length;k++)
+					l_line=sc.nextLine();
+					String[] l_arr2=l_line.split(" ");
+					Country obj=d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
+					for(int l_k=1;l_k<l_arr2.length;l_k++)
 					{
 						
-						obj.setBorder(Integer.parseInt(arr2[k]));
+						obj.setBorder(Integer.parseInt(l_arr2[l_k]));
 
 					}
 
 					
 
-					borders.clear();
-					neighbors.put(Integer.parseInt(arr2[0]),borders);
+					d_borders.clear();
+					d_Neighbors.put(Integer.parseInt(l_arr2[0]),d_borders);
 
 				}
 
@@ -117,4 +120,13 @@ public class Map {
 		}
 
 	}
-}
+	/**
+	 * it saves the user edited map
+	 */
+	public void SaveMap()
+	{
+	}
+	
+	}
+	
+
