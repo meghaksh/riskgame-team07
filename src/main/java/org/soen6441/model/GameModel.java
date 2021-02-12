@@ -159,6 +159,17 @@ public class GameModel
 		this.d_PlayerQueue=d_PlayerQueue;
 				
 	}
+	/**
+	 * This method sets army count to all players.
+	 *
+	 * @param count the assigned army count 
+	 */
+	public void setPlayerArmies(int p_count) {
+		for (Player l_Player : getAllPlayers()) {
+			l_Player.setPlayerArmies(p_count);
+		}
+	}
+	
 
 
 
