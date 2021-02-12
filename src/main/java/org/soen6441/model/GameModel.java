@@ -149,6 +149,16 @@ public class GameModel
 		return " ";
 
 	}
+	/**
+	 * This method sets the player queue
+	 *
+	 * @param d_PlayerQueue the Player queue
+	 *
+	 */
+	public  void setplayerQueue(Queue<Player> d_PlayerQueue) {
+		this.d_PlayerQueue=d_PlayerQueue;
+				
+	}
 
 
 
