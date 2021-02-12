@@ -62,19 +62,45 @@ public class Player {
 	{
 		return d_armies;
 	}
+	/*
+	 * The getResult return the result whether the order was added to the order list or not to the Player controller.
+	 */
 	public String getResult()
 	{
 		return d_result;
 	}
+	/**
+	 * The setOrder method gets the order in string format for that player.
+	 * @param p_order
+	 */
 	public void setOrder(String p_order)
 	{
 		d_stringOrder = p_order;
 	}
+	/**
+	 * addCountry method adds the given country to the player's country list.
+	 * @param l_country
+	 */
+	public void addCountry(Country l_country)
+	{
+		d_countries.add(l_country);
+	}
+	/**
+	 * removeCountry removes the given country from the player's country list
+	 * @param l_country
+	 */
+	public void removeCountry(Country l_country)
+	{
+		d_countries.remove(l_country);
+	}
+	/**
+	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
+	 * and whether it has sufficient armies and it sets the result accordingly. 
+	 * If the country is in the country list and if the player has sufficient armies than the order is added to its order list.
+	 */
 	public void issue_order()
 	{
 		int l_flag = 0;
-		//d_scan = new Scanner(System.in);
-		//String l_stringOrder = d_scan.nextLine();
 		String[] l_stringList = d_stringOrder.split(" ");
 		if(Integer.parseInt(l_stringList[2]) <= d_armies)
 		{
