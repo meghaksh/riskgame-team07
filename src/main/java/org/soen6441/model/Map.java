@@ -162,6 +162,21 @@ public class Map {
 		
 
 	}
+	
+	
+	public void EditContinent(String p_input) {
+		String[] l_arr = p_input.split(" ");
+		this.d_ContinentObjects.add(new Continent(l_arr[2], Integer.parseInt(l_arr[3])));
+	}
+	public void EditCountry(String p_input) {
+		String[] l_arr = p_input.split(" ");
+	}
+	public void EditNeighbor(String p_input) {
+		String[] l_arr = p_input.split(" ");
+	}
+	public ArrayList<Continent> getContinentList(){
+		return this.d_ContinentObjects;
+	}
 
 }
 

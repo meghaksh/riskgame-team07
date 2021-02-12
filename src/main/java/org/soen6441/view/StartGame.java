@@ -14,31 +14,19 @@ import org.soen6441.model.Country;
 import org.soen6441.model.Map;
 
 public class StartGame {
-
 	public static void main(String[] args) {
 		CommandPrompt cp = new CommandPrompt();
-		System.out.println(Thread.currentThread());
-		
-		
-		
 	}
-
 }
 
 class CommandPrompt{
-	Thread t;
+	Map d_map;
 	public CommandPrompt(){
-		//t = new Thread(this);
-		//t.setName("Command Prompt");
-		//t.start();
+		d_map = new Map();
 		drawWindow();
-	}
-	public void run() {
-		//this.drawWindow();	
 	}
 	public void drawWindow() {
 		boolean mapDone = false;
-		System.out.println(Thread.currentThread());
 		JFrame commandPromptWindow = new JFrame("Command Prompt");
 		JPanel commandPromptPanel = new JPanel(new GridLayout(1,2));
 		JTextField commandInput = new JTextField(100);
@@ -52,17 +40,18 @@ class CommandPrompt{
 		commandPromptWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		commandSendButton.addActionListener(e -> {
-			System.out.println(commandInput.getText());
 			String str = commandInput.getText();
-			switch(str) {
+			
+			switch(str.split(" ")[0]) {
 				case "editcontinent" : 
-					System.out.println("editcontinent");
+					d_map.EditContinent(str);
+					System.out.println(d_map.getContinentList().get(0).GetContinentName());
 					break;
 				case "editcountry" :
-					System.out.println("editcountry");
+					d_map.EditCountry(str);
 					break;
 				case "editneighbour" :
-					System.out.println("editneighbour");
+					d_map.EditNeighbor(str);
 					break;
 				case "showmap":
 					if(mapDone) {
@@ -86,7 +75,7 @@ class CommandPrompt{
 				case "deploy":
 					break;
 			}
-				
+	
 			commandInput.setText("");
 		});
 	}

@@ -1,7 +1,7 @@
 package org.soen6441.model;
 
 
-/*
+/**
  * Class for all the Continents  of the Map
  */
 
@@ -12,7 +12,7 @@ public class Continent {
 	int d_ContinentControlValue;
 	
 	
-	/*
+	/**
 	 * default constructor adding id, name and control value of continent to object
 	 */
 	public Continent(String p_Name, int p_ContinentControlValue)
@@ -21,7 +21,13 @@ public class Continent {
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
 	}
-
+	
+	/**
+	 * Method to return continent name
+	 * */
+	public String GetContinentName() {
+		return this.d_Name;
+	}
 }
 
 
