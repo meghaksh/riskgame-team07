@@ -45,7 +45,7 @@ class CommandPrompt{
 			switch(str.split(" ")[0]) {
 				case "editcontinent" : 
 					d_map.EditContinent(str);
-					System.out.println(d_map.getContinentList().get(0).GetContinentName());
+					System.out.println(d_map.getContinentList().get(0).getContinentName());
 					break;
 				case "editcountry" :
 					d_map.EditCountry(str);
