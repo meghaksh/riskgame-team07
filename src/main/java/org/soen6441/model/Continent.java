@@ -7,27 +7,45 @@ package org.soen6441.model;
 
 public class Continent {
 	
-	static int d_ID=0;
+	int d_ID=0;
 	String d_Name;
 	int d_ContinentControlValue;
 	
 	
 	/**
-	 * default constructor adding id, name and control value of continent to object
+	 * Continent Object Constructor
+	 * @param p_ContinentID
+	 * @param p_Name
+	 * @param p_ContinentControlValue
 	 */
-	public Continent(String p_Name, int p_ContinentControlValue)
+	public Continent(int p_ContinentID,String p_Name, int p_ContinentControlValue)
 	{
-		this.d_ID=d_ID++;
+		
+		d_ID=p_ContinentID;
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
-	}
-	
+	}	
 	/**
 	 * Method to return continent name
 	 * */
-	public String GetContinentName() {
+	public String getContinentName() {
 		return this.d_Name;
 	}
+	/**
+	 * To get Continent Control Value
+	 * @return
+	 */
+	public int getContinentControlValue() {
+		return d_ContinentControlValue;
+	}
+	/**
+	 * To get Continent ID
+	 * @return ContinentID
+	 */
+	public int getContinentID() {
+		return d_ID;
+	}
+
 }
 
 
