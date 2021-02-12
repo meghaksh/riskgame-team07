@@ -62,7 +62,7 @@ public class Map {
 	 */
 	public void  LoadMap(String p_Filename) throws FileNotFoundException
 	{
-		int l_ControlValue,l_ContinentID,l_CountryID;
+		int l_ControlValue,l_ContinentID=1,l_CountryID;
 		File file =new File(p_Filename);
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine())
@@ -75,7 +75,8 @@ public class Map {
 				{
 					String[] l_arr = l_line.split(" ", 3);
 					l_ControlValue=Integer.parseInt(l_arr[1]);
-					d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
+					d_ContinentObjects.add(new Continent(l_ContinentID,l_arr[0],l_ControlValue));
+					l_ContinentID++;
 					l_line=sc.nextLine();
 				}
 
@@ -166,7 +167,8 @@ public class Map {
 	
 	public void EditContinent(String p_input) {
 		String[] l_arr = p_input.split(" ");
-		this.d_ContinentObjects.add(new Continent(l_arr[2], Integer.parseInt(l_arr[3])));
+		//Discuss with Akshita 
+		this.d_ContinentObjects.add(new Continent(Integer.parseInt(l_arr[3]),l_arr[2], Integer.parseInt(l_arr[3])));
 	}
 	public void EditCountry(String p_input) {
 		String[] l_arr = p_input.split(" ");
