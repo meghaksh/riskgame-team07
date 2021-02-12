@@ -21,8 +21,13 @@ public class Player {
     ArrayList<Country> d_countries = new ArrayList<Country>();
 	Queue<Order> d_order = new LinkedList<Order>();
 	Scanner d_scan;
+	String d_result="";
+	String d_stringOrder="";
 
-	
+	public Player()
+	{
+		
+	}
 	
 	Player(String p_playerName,int p_playerId,String p_playerColor)
 	{
@@ -57,12 +62,20 @@ public class Player {
 	{
 		return d_armies;
 	}
+	public String getResult()
+	{
+		return d_result;
+	}
+	public void setOrder(String p_order)
+	{
+		d_stringOrder = p_order;
+	}
 	public void issue_order()
 	{
 		int l_flag = 0;
-		d_scan = new Scanner(System.in);
-		String l_stringOrder = d_scan.nextLine();
-		String[] l_stringList = l_stringOrder.split(" ");
+		//d_scan = new Scanner(System.in);
+		//String l_stringOrder = d_scan.nextLine();
+		String[] l_stringList = d_stringOrder.split(" ");
 		if(Integer.parseInt(l_stringList[2]) <= d_armies)
 		{
 			Iterator l_it = d_countries.iterator();
@@ -78,17 +91,18 @@ public class Player {
 			if(l_flag==1)
 			{
 				d_armies-= Integer.parseInt(l_stringList[2]);
-				d_order.add(new Order(l_stringOrder));
+				d_order.add(new Order(d_stringOrder));
+				d_result = "order added to list of "+d_playerName;
 			}
 			else
 			{
-				System.out.println("This country doesnot belongs to "+d_playerName);
+				d_result = "This country "+l_stringList[1]+" doesnot belongs to "+d_playerName;
 			}
 			
 		}
 		else
 		{
-			System.out.println(d_playerName+" is ot of armies");
+			d_result = d_playerName+" has "+d_armies+" number of armies";
 		}
 		
 		
