@@ -29,7 +29,7 @@ public class GameModel
 		this.setGamePhase(Phases.Startup);
 	}
 	/**
-	 * This method used to get the game phases from enumuerator 
+	 * This method used to get the game phases from enumerator 
 	 * 
 	 * @return d_gamePhase
 	 */
@@ -168,6 +168,37 @@ public class GameModel
 		for (Player l_Player : getAllPlayers()) {
 			l_Player.setPlayerArmies(p_count);
 		}
+	}
+	/**
+	 * This method Assign all the countries randomly to the players
+	 *
+	 * 
+	 */
+	
+	public void startUpPhase() 
+	{
+
+		d_PlayerQueue.clear();
+		d_PlayerQueue.addAll(getAllPlayers());
+		List<String> l_CountryList = new ArrayList<>();
+
+		//l_CountryList  = getSelectedMap().getCountryList();
+		while (l_CountryList.size() > 0) 
+		{
+			Random l_Random = new Random();
+			int l_index = l_Random.nextInt(l_CountryList.size());
+			setPlayerId(d_PlayerQueue.remove());
+			//d_PlayerID.setCountriesOwned(l_CountryList.get(l_index));
+			//getSelectedMap().searchCountry(l_CountryList.get(l_index)).setOwnedBy(d_PlayerID);
+			d_PlayerQueue.add(d_PlayerID);
+			l_CountryList.remove(l_index);
+		}
+		
+	
+		
+
+
+
 	}
 	
 
