@@ -108,9 +108,6 @@ public class Map {
 						obj.setBorder(Integer.parseInt(l_arr2[l_k]));
 
 					}
-
-
-
 					d_borders.clear();
 					d_Neighbors.put(Integer.parseInt(l_arr2[0]),d_borders);
 
