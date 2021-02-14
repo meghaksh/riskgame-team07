@@ -15,44 +15,42 @@ import org.soen6441.model.Map;
  *
  */
 public class ShowMap {
-	
-InputStream d_is;
-BufferedReader d_br;
-String d_data="";
-Map d_map;
+
+	InputStream d_is;
+	BufferedReader d_br;
+	String d_data="";
+	Map d_map;
 
 	/**
 	 * COnstructor that takes Map file as input and reads it line by line and calls mapDetails function
 	 * @throws IOException
 	 */
 	public ShowMap() throws IOException {
-	
+
 		d_is = this.getClass().getResourceAsStream("bigeurope.map");
 		d_br = new BufferedReader(new InputStreamReader(d_is));
 		d_map = new Map();
-		
+
 		System.out.println("Reading the text File");
-		
+
 		while((d_data = d_br.readLine())!=null) {
 			System.out.println(d_data);
-			
 		}
-			
-		mapDetails();
 	}
-	
+
 	/**
-	 * 
+	 * Used to load and save the Map
 	 * @throws IOException
 	 */
 	void mapDetails() throws IOException{
 		d_map.LoadMap("bigeurope.map");
-		
-		d_map.SaveMap("Map.txt");
-		
-		printMap();
+		d_map.SaveMap("Map.txt");	
 	}
-	
+
+
+	/**
+	 * This method is used to  print out the map in text form to show the continents, its countries and the neighbouring countries
+	 */
 	void printMap() {
 		System.out.println("continent");
 		for(Continent l_co: d_map.getContinentList())
@@ -70,16 +68,18 @@ Map d_map;
 						}
 					}
 					System.out.println("");
-					
+
 				}
-				
+
 			}
 			System.out.println("-----------------------");
 		}
 	}
-	
+
 	public static void main(String []args) throws IOException {
 		ShowMap shmp = new ShowMap();
+		shmp.mapDetails();
+		shmp.printMap();
 	}
 
 }
