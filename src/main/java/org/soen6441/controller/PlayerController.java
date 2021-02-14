@@ -31,13 +31,24 @@ public class PlayerController {
 				l_tempPlayer.setOrder(l_stringOrder);
 				l_tempPlayer.issue_order();
 				String l_result = l_tempPlayer.getResult();
-
+				if(l_result.contains("armies"))
+				{
+					l_flag=1;System.out.println(l_result+"/n Please enter the next order accordingly");
+					int l_armies = l_tempPlayer.getPlayerArmies();
+					if(l_armies==0)
+					{
+						l_flag=1;l_removePlayer = l_tempPlayer;
+					}
+				}
 				if(l_result.contains("country"))
 				{
 					System.out.println(l_result);
 				}
 			}
-			
+			if(l_flag==1)
+			{
+				d_players.remove(l_removePlayer);
+			}
 		}
 		
 	}
