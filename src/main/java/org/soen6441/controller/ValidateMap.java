@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class which takes map input and validate it.
+ * Validation logic: Perform DFS on graph, Take Transpose of graph, Again perform DFS on graph*/
 public class ValidateMap {
 	static Scanner scan;
 	public static void main(String[] args) {
