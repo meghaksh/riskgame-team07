@@ -1,12 +1,12 @@
 package org.soen6441.model;
 import java.util.Scanner;
 
+
 /**
  * 
- * Class for Order issues by Players
+ * Class to issue order for players
  *
  */
-
 public class Order {
 	private String d_order;
 	private String d_countryId;
@@ -17,13 +17,13 @@ public class Order {
 		System.out.println("Enter command: ");
 		d_order = scan.nextLine(); 
 		//this.d_order = order;
-		run();
+		deploy();
 	}
-	/**
-	 * This method is used to check and display the order the player has issued
-	 */
 
-	public void run() {
+	/**
+	 * Method to check if the command issued is correct or not
+	 */
+	public void deploy() {
 
 		String[] splitted = d_order.split(" ");
 		//			if(i%2!=0) {
@@ -45,10 +45,10 @@ public class Order {
 		}
 
 	}
+
 	/**
 	 * This method is used to execute the orders issued by the players.
 	 */
-
 	public void execute() {
 
 		//CountryObject.deployArmies();
