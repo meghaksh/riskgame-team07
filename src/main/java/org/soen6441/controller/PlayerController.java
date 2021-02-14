@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import org.soen6441.model.Player;
-
+/**
+ * The Player Controller class controls the activities of all the players at once.
+ * @author Zeal
+ *
+ */
 public class PlayerController {
 
 	Scanner d_scan;
@@ -16,6 +20,11 @@ public class PlayerController {
 		d_scan =new Scanner(System.in);
 		d_players = p_players;
 	}
+	/**
+	 * The player_issue_order method asks each player to issue an order in a round robin fashion.
+	 * The loop terminates when all the players are removed from the list.
+	 * A player is removed from the list when all its armies are exhausted which is indicated from the result fetched from getResult method in Player class.
+	 */
 	public void player_issue_order()
 	{
 		while(!d_players.isEmpty())
