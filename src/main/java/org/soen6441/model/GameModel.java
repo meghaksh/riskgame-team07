@@ -90,7 +90,7 @@ public class GameModel
 	 * Adds the player.
 	 *
 	 * @param playerName the player name
-	 * @return the string
+	 * @return Player name  that has added
 	 */
 	public String addPlayer(String p_PlayerName) {
 		if ((d_PlayerList.size() == d_PlayerCount && d_PlayerCount != 0) || d_PlayerList.size() == MAX_PLAYERS) 
@@ -180,9 +180,9 @@ public class GameModel
 
 		d_PlayerQueue.clear();
 		d_PlayerQueue.addAll(getAllPlayers());
-		List<String> l_CountryList = new ArrayList<>();
+		List<Country> l_CountryList = new ArrayList<>();
 
-		//l_CountryList  = getSelectedMap().getCountryList();
+		l_CountryList  = getSelectedMap().getCountryList();
 		while (l_CountryList.size() > 0) 
 		{
 			Random l_Random = new Random();
