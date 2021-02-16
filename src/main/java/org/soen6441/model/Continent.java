@@ -6,12 +6,16 @@ package org.soen6441.model;
  */
 
 public class Continent {
-	
-	int d_ID=0;
-	String d_Name;
-	int d_ContinentControlValue;
-	
-	
+	private static int count=0;
+	private int d_ID;
+	private String d_Name;
+	private int d_ContinentControlValue;
+
+	public Continent(String p_Name, int p_ContinentControlValue) {
+		setContinentID(++count);
+		this.d_Name=p_Name;
+		this.d_ContinentControlValue=p_ContinentControlValue;
+	}
 	/**
 	 * Continent Object Constructor
 	 * @param p_ContinentID
@@ -20,11 +24,11 @@ public class Continent {
 	 */
 	public Continent(int p_ContinentID,String p_Name, int p_ContinentControlValue)
 	{
-		
+
 		d_ID=p_ContinentID;
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
-	}	
+	}
 	/**
 	 * Method to return continent name
 	 * */
@@ -46,7 +50,21 @@ public class Continent {
 	public int getContinentID() {
 		return d_ID;
 	}
+	public void setContinentID(int p_ContinentID) {
+		d_ID = p_ContinentID;
+	}
 
+	@Override
+	public boolean equals(Object p_Continent) {
+		if(this == p_Continent) {
+			return true;
+		}
+		if (p_Continent == null || this.getClass() != p_Continent.getClass()) {
+			return false;
+		}
+		Continent p1 = (Continent)p_Continent; 
+		return this.getContinentName().equals(p1.getContinentName());
+	}
 }
 
 

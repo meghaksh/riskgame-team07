@@ -49,23 +49,19 @@ public class CommandPrompt {
 		
 		commandSendButton.addActionListener(e -> {
 			String str = commandInput.getText().trim();
-			
 			switch(str.split(" ")[0]) {
 				case "editcontinent" : 
 					try {
-						d_mapCtrl.EditContinent(str);
+						String l_AckMsg = d_mapCtrl.EditMap("editcontinent", str);
+						l_CommandAcknowledgeArea.append(l_AckMsg + "\n");
 					}catch(Exception p_Exception) {
-						l_CommandAcknowledgeArea.setForeground(Color.red);
 						l_CommandAcknowledgeArea.append(p_Exception.getMessage());
 						l_CommandAcknowledgeArea.append("\n");
-						l_CommandAcknowledgeArea.setForeground(Color.cyan);
 					}
 					break;
 				case "editcountry" :
-					d_map.EditCountry(str);
 					break;
 				case "editneighbour" :
-					d_map.EditNeighbor(str);
 					break;
 				case "showmap":
 					if(l_MapDone) {

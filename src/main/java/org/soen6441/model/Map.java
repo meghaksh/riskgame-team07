@@ -135,7 +135,7 @@ public class Map {
 		pr.println("continent");
 		for(Continent co: d_ContinentObjects)
 		{
-			pr.println(co.d_Name+" "+co.d_ContinentControlValue);
+			pr.println(co.getContinentName()+" "+co.getContinentControlValue());
 		}
 		pr.println("");
 		pr.println("countries");
@@ -160,21 +160,45 @@ public class Map {
 		
 
 	}
-	
-	
-	public void EditContinent(String p_input) {
-		String[] l_arr = p_input.split(" ");
-		//Discuss with Akshita 
-		this.d_ContinentObjects.add(new Continent(Integer.parseInt(l_arr[3]),l_arr[2], Integer.parseInt(l_arr[3])));
+	public void AddContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
+		for(Continent l_contient:this.d_ContinentObjects) {
+			if(l_contient.getContinentName().equalsIgnoreCase(p_ContinentName)) {
+				throw new Exception("Continent Already Exists");
+			}
+		}
+		this.d_ContinentObjects.add(new Continent(p_ContinentName, Integer.parseInt(p_ContinentControlValue)));
 	}
-	public void EditCountry(String p_input) {
-		String[] l_arr = p_input.split(" ");
+	public void RemoveContinent(String p_ContinentName)throws Exception {
+		Iterator<Continent> l_Iterator = this.d_ContinentObjects.iterator();
+		boolean l_RemovedFlag = false;
+		while(l_Iterator.hasNext()) {
+			Continent l_TempContinent = l_Iterator.next();
+			if(l_TempContinent.getContinentName().equalsIgnoreCase(p_ContinentName)) {
+				l_Iterator.remove();
+				l_RemovedFlag = true;
+			}
+		}
+		if(!l_RemovedFlag){
+			throw new Exception("Country in the list does not exist !!");
+		}
 	}
-	public void EditNeighbor(String p_input) {
-		String[] l_arr = p_input.split(" ");
+	public void AddCountry() {
+		
+	}
+	public void RemoveCountry() {
+		
+	}
+	public void RemoveAllCountryInContinent() {
+		
 	}
 	public ArrayList<Continent> getContinentList(){
 		return this.d_ContinentObjects;
+	}
+
+	public void getContinents() {
+		for(Continent l_Continent: this.d_ContinentObjects) {
+			System.out.println("ID :  " + l_Continent.getContinentID() +" Name : "+l_Continent.getContinentName());
+		}
 	}
 
 }
