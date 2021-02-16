@@ -28,6 +28,10 @@ public class Player {
 	{
 		
 	}
+	public Player(String p_playerName)
+	{
+		d_playerName = p_playerName;
+	}
 	
 	Player(String p_playerName,int p_playerId,String p_playerColor)
 	{
@@ -44,6 +48,10 @@ public class Player {
 	public int getPlayerId()
 	{
 		return d_playerId;
+	}
+	public void setPlayerId(int p_playerId)
+	{
+		d_playerId = p_playerId;
 	}
 	
 	public String getPlayerColor()
@@ -93,6 +101,14 @@ public class Player {
 	{
 		d_countries.remove(l_country);
 	}
+	public int getCountriesSize()
+	{
+		return d_countries.size();
+	}
+	public int getOrderSize()
+	{
+		return d_order.size();
+	}
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
 	 * and whether it has sufficient armies and it sets the result accordingly. 
@@ -133,7 +149,7 @@ public class Player {
 		
 		
 	}
-	public Order nextOrder()
+	public Order next_order()
 	{
 		return d_order.remove();
 	}
