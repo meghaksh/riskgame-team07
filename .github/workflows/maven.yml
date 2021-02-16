@@ -24,3 +24,5 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Build Project
       run: mvn install
+    - name: Test
+      run: mvn test 
