@@ -201,6 +201,22 @@ public class GameModel
 
 	}
 	
+	/**
+	 * This Method will assign armies to the players.
+	 */
+	public void AssignReinforcementArmies()
+	{
+//		int l_ArmyCount = ((d_PlayerID.getCountriesOwned().size())/3);
+//		for(Continent l_Continent:getSelectedMap().getOwnedContinents(d_PlayerID.getPlayerName())) 
+//		{
+//			//l_ArmyCount += l_Continent.getControlValue();
+//		}
+//		l_ArmyCount += d_PlayerID.getPlayerArmies();
+//		l_ArmyCount= Math.max(l_ArmyCount, 3);
+//		d_PlayerID.setPlayerArmies(l_ArmyCount);
+		
+	}
+	
 
 
 
