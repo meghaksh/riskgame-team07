@@ -89,7 +89,7 @@ public class CommandPrompt {
 				case "deploy":
 					break;
 				default:
-					l_CommandAcknowledgeArea.append("Invalid Command\n");
+					l_CommandAcknowledgeArea.append("Invalid Command. Please try again.\n");
 					break;
 			}
 			commandInput.setText("");
