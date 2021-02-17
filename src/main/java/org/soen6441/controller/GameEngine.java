@@ -73,10 +73,15 @@ public class GameEngine {
 		}
 		
 		return l_ReturnString;
-	
-		
-	
-		
+	}
+	/**
+	 * This Method Will Assign all the countries to players
+	 * assign army to each country for a player
+	 * 
+	 */
+	public void AssignCountries()
+	{
+		d_GameModel_Object.startUpPhase();
 	}
 	
 
