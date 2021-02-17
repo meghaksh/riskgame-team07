@@ -8,14 +8,14 @@ import java.util.Scanner;
  *
  */
 public class Order {
-	private String d_order;
-	private String d_countryId;
-	private String d_noOfArmies;
+	private String d_Order;
+	private String d_CountryId;
+	private String d_NoOfArmies;
 	//private HashMap<Integer, String> d_order_list;
 	Scanner scan = new Scanner(System.in);
 	public Order(String order) {
 		System.out.println("Enter command: ");
-		d_order = scan.nextLine(); 
+		d_Order = scan.nextLine(); 
 		//this.d_order = order;
 		deploy();
 	}
@@ -25,7 +25,7 @@ public class Order {
 	 */
 	public void deploy() {
 
-		String[] splitted = d_order.split(" ");
+		String[] splitted = d_Order.split(" ");
 		//			if(i%2!=0) {
 		//				if(splitted[i].contains("-add")) {
 		//					System.out.println("ADD");
@@ -36,9 +36,9 @@ public class Order {
 		//				}
 
 		if(splitted[0].equals("-deploy")) {
-			d_countryId = splitted[1];
-			d_noOfArmies = splitted[2];
-			System.out.println("DEPLOY "+ d_noOfArmies + " armies on "+ d_countryId + " country" );
+			d_CountryId = splitted[1];
+			d_NoOfArmies = splitted[2];
+			System.out.println("DEPLOY "+ d_NoOfArmies + " armies on "+ d_CountryId + " country" );
 		}
 		else {
 			System.out.println("Invalid command");
