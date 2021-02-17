@@ -13,21 +13,28 @@ public class GameModel
 	private Phases d_gamePhase;
 	private Map d_map;
 	private Player d_PlayerID;
-	private ArrayList<Player> d_PlayerList = new ArrayList<Player>();
+	private ArrayList<Player> d_PlayerList;
 	private int d_PlayerCount;
-	private Queue<Player> d_PlayerQueue;
+	 Queue<Player> d_PlayerQueue= new LinkedList<Player>();
 	private static final int MAX_PLAYERS = 6;
+	ArrayList<Country> d_CountryObjects; 
+	ArrayList<Continent> d_ContinentObjects;
+	
+
 	
 	/**
 	 * This is a constructor of GameModel class which will initialize the Map and set the gamePhase 
 	 * @param intializing map parameter ,
 	 */
-	public GameModel(Map d_map) 
+	public GameModel(Map p_map) 
 	{
 		super();
-		this.d_map = d_map;
-		this.setGamePhase(Phases.Startup);
+		d_map=p_map;
+		d_PlayerList=new ArrayList<Player>();
+		
 	}
+	
+
 	/**
 	 * This method used to get the game phases from enumerator 
 	 * 
@@ -77,12 +84,15 @@ public class GameModel
 		this.d_PlayerCount=this.d_PlayerList.size();
 			
 	}
+	
+	
 	/**
 	 * This method gets selected map.
 	 *
 	 * @return the selected map
 	 */
 	public Map getSelectedMap() {
+		
 		return d_map;
 
 	}
@@ -92,18 +102,18 @@ public class GameModel
 	 * @param playerName the player name
 	 * @return Player name  that has added
 	 */
-	public String addPlayer(String p_PlayerName) {
-		if ((d_PlayerList.size() == d_PlayerCount && d_PlayerCount != 0) || d_PlayerList.size() == MAX_PLAYERS) 
-		{
-			return "Reached Max Number of Players can be added to the game";
-		}
+	public void addPlayer(String p_PlayerName)throws Exception {
+//		if ((d_PlayerList.size() == d_PlayerCount && d_PlayerCount != 0) || d_PlayerList.size() == MAX_PLAYERS) 
+//		{
+//			return "Reached Max Number of Players can be added to the game";
+//		}
 		if (existDuplicatePlayer(p_PlayerName)) {
+			throw new Exception("Please enter a differnt Player name as this name already exists");
 
-			return "Please enter a differnt Player name as this name already exists";
 		} else {
-			//Player l_Player_Object = new Player(d_PlayerList.size() + 1, p_PlayerName);
-			//d_PlayerList.add(l_Player_Object);
-			return "Player " + p_PlayerName + " added to the game";
+			Player l_Player_Object = new Player(p_PlayerName);
+			d_PlayerList.add(l_Player_Object);
+			//return "Player " + p_PlayerName + " added to the game";
 		}
 
 	}
@@ -128,7 +138,7 @@ public class GameModel
 	 * @param playerName the player name
 	 * @return the string
 	 */
-	public String removePlayer(String p_PlayerName) 
+	public void removePlayer(String p_PlayerName) throws Exception
 	{
 		Player l_CurrentPlayer;
 		boolean l_PlayerFound = false;
@@ -136,17 +146,16 @@ public class GameModel
 			l_CurrentPlayer = player;
 			if (l_CurrentPlayer.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
 				l_PlayerFound = true;
-				//for(Country Country:getSelectedMap().getOwnedCountries(p_PlayerName))(mapclass)
-					//Country.setOwnedBy(null);(country)
 				d_PlayerList.remove(d_PlayerList.indexOf(player));
-				return ("Player " + p_PlayerName + " This Player removed from the game");
+				//return ("Player " + p_PlayerName + " This Player removed from the game");
 
 			}
 		}
 		if (l_PlayerFound == false) {
-			return ("This Player not found");
+			throw new Exception("\"This Player not found");
+	
 		}
-		return " ";
+		//return " ";
 
 	}
 	/**
@@ -178,23 +187,24 @@ public class GameModel
 	public void startUpPhase() 
 	{
 
-		d_PlayerQueue.clear();
+		
 		d_PlayerQueue.addAll(getAllPlayers());
 		List<Country> l_CountryList = new ArrayList<>();
 
-		l_CountryList  = getSelectedMap().getCountryList();
+		l_CountryList  = getSelectedMap().getCountryList();		
 		while (l_CountryList.size() > 0) 
-		{
+		{	System.out.println("we are in main");
 			Random l_Random = new Random();
 			int l_index = l_Random.nextInt(l_CountryList.size());
 			setPlayerId(d_PlayerQueue.remove());
-			//d_PlayerID.setCountriesOwned(l_CountryList.get(l_index));
+			d_PlayerID.addCountry(l_CountryList.get(l_index));
 			//getSelectedMap().searchCountry(l_CountryList.get(l_index)).setOwnedBy(d_PlayerID);
+			//getSelectedMap().getCountryList().setOwnedBy(d_PlayerID);
 			d_PlayerQueue.add(d_PlayerID);
 			l_CountryList.remove(l_index);
 		}
 		
-	
+		//AssignReinforcementArmies();
 		
 
 
@@ -207,7 +217,7 @@ public class GameModel
 	public void AssignReinforcementArmies()
 	{
 //		int l_ArmyCount = ((d_PlayerID.getCountriesOwned().size())/3);
-//		for(Continent l_Continent:getSelectedMap().getOwnedContinents(d_PlayerID.getPlayerName())) 
+//		//for(Continent l_Continent:getSelectedMap().getOwnedContinents(d_PlayerID.getPlayerName())) 
 //		{
 //			//l_ArmyCount += l_Continent.getControlValue();
 //		}
