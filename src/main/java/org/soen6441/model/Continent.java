@@ -1,20 +1,22 @@
 package org.soen6441.model;
 
+import java.util.ArrayList;
 
 /**
  * Class for all the Continents  of the Map
  */
-
 public class Continent {
-	private static int count=0;
+	private static int d_COUNT=0;
 	private int d_ID;
 	private String d_Name;
 	private int d_ContinentControlValue;
+	private ArrayList<Country> d_countryList;
 
 	public Continent(String p_Name, int p_ContinentControlValue) {
-		setContinentID(++count);
+		setContinentID(++d_COUNT);
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
+		d_countryList = new ArrayList<Country>();
 	}
 	/**
 	 * Continent Object Constructor
@@ -24,7 +26,6 @@ public class Continent {
 	 */
 	public Continent(int p_ContinentID,String p_Name, int p_ContinentControlValue)
 	{
-
 		d_ID=p_ContinentID;
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
@@ -64,6 +65,13 @@ public class Continent {
 		}
 		Continent p1 = (Continent)p_Continent; 
 		return this.getContinentName().equals(p1.getContinentName());
+	}
+	
+	public void addCountry(Country p_country) {
+		this.d_countryList.add(p_country);
+	}
+	public ArrayList<Country> getCountryList(){
+		return this.d_countryList;
 	}
 }
 

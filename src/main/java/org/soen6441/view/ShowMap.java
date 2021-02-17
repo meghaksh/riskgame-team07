@@ -44,7 +44,7 @@ public class ShowMap {
 	 */
 	void mapDetails() throws IOException{
 		d_map.LoadMap("bigeurope.map");
-		d_map.SaveMap("Map.txt");	
+		//d_map.SaveMap("Map.txt");	
 	}
 
 
