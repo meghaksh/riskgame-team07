@@ -8,6 +8,7 @@ public class StartGame {
 		Map d_mapModel = new Map();
 		CommandPrompt d_cpView =  new CommandPrompt();
 		MapController d_mapController = new MapController(d_cpView, d_mapModel);
+		
 	}
 }
 
