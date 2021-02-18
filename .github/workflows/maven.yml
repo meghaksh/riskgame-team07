@@ -25,4 +25,6 @@ jobs:
     - name: Build Project
       run: mvn install
     - name: Test
-      run: mvn test 
+      run: mvn test
+    - name: Javadoc Generation
+      run: mvn javadoc:javadoc
