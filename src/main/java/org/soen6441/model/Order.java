@@ -11,8 +11,8 @@ public class Order {
 	private String d_Order;
 	private String d_CountryId;
 	private String d_NoOfArmies;
-	//private HashMap<Integer, String> d_order_list;
 	Scanner scan = new Scanner(System.in);
+	
 	public Order(String order) {
 		System.out.println("Enter command: ");
 		d_Order = scan.nextLine(); 
@@ -26,15 +26,6 @@ public class Order {
 	public void deploy() {
 
 		String[] splitted = d_Order.split(" ");
-		//			if(i%2!=0) {
-		//				if(splitted[i].contains("-add")) {
-		//					System.out.println("ADD");
-		//					
-		//				}
-		//				else if(splitted[i].contains("-remove")) {
-		//					System.out.println("REMOVE");
-		//				}
-
 		if(splitted[0].equals("-deploy")) {
 			d_CountryId = splitted[1];
 			d_NoOfArmies = splitted[2];
