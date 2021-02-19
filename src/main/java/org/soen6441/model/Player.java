@@ -20,9 +20,11 @@ public class Player {
 	int d_armies;
     ArrayList<Country> d_countries = new ArrayList<Country>();
 	Queue<Order> d_order = new LinkedList<Order>();
+	ArrayList<Continent> d_Continents = new ArrayList<Continent>();
 	Scanner d_scan;
 	String d_result="";
 	String d_stringOrder="";
+	GameModelNew d_gameModelNew;
 
 	public Player()
 	{
@@ -70,6 +72,16 @@ public class Player {
 	{
 		return d_armies;
 	}
+	public void setGameModelNew(GameModelNew p_gameModelNew)
+	{
+		d_gameModelNew = p_gameModelNew;
+	}
+	public void setContinentsList()
+	{
+		ArrayList <Continent> l_mapContinents = d_gameModelNew.getMap().getContinentList();
+		
+	}
+	
 	/*
 	 * The getResult return the result whether the order was added to the order list or not to the Player controller.
 	 */
