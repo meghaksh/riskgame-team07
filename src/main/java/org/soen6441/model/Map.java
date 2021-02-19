@@ -63,8 +63,9 @@ public class Map {
 	public void  LoadMap(String p_Filename) throws FileNotFoundException
 	{
 		System.out.println("Came inside");
+		String l_path="resource\\";
 		int l_ControlValue,l_ContinentID=1,l_CountryID;
-		File file =new File(p_Filename);
+		File file =new File(l_path+p_Filename);
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine())
 		{
@@ -132,8 +133,9 @@ public class Map {
 	 */
 	public void SaveMap(String p_Filename) throws Exception
 	{
+		String l_path="resource\\";
 		ArrayList<Integer> l_borders= new ArrayList<Integer>();
-		File file=new File(p_Filename);
+		File file=new File(l_path+p_Filename);
 		FileWriter fw = new FileWriter(file);
 		PrintWriter pr = new PrintWriter(fw);
 		pr.println("");
