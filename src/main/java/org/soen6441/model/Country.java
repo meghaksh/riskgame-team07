@@ -15,17 +15,6 @@ public class Country {
 	ArrayList<Integer> d_neighbors;
 	int d_NoOfArmies;
 
-	/**
-	 * default constructor adding the id , name and continent id parameters to object
-	 * @param CountryId, Country Name, Continent Id to which it belongs 
-	 */
-	public Country(int p_ID, String p_Name, int p_ContinentID)
-	{
-		//this.d_ContinentID=p_ContinentID;
-		this.d_ID=p_ID;
-		this.d_Name=p_Name;
-		d_neighbors=new ArrayList<Integer>();
-	}
 	public Country(String p_Name, String p_continentName) {
 		setCountryID(++d_COUNT);
 		this.d_Name = p_Name;
