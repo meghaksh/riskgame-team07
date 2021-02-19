@@ -136,6 +136,10 @@ public class GameController {
 									ArrayList<Country> l_countryList = l_continent.getCountryList();
 									for(Country l_country:l_countryList) {
 										d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
+										ArrayList<String> l_NeighborList = l_country.getBorder();
+										for(String l_Str:l_NeighborList) {
+											d_CpView.setCommandAcknowledgement("Border : " + l_Str);
+										}
 									}
 									d_CpView.setCommandAcknowledgement("\n");
 								}
@@ -158,6 +162,8 @@ public class GameController {
 						}
 						break;
 					case "validatemap":
+						String l_Str = d_MapController.ValidateMap();
+						d_CpView.setCommandAcknowledgement(l_Str);
 						break;
 					case "loadmap": 
 						try {

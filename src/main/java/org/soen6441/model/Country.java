@@ -12,14 +12,14 @@ public class Country {
 	String d_Name;
 	//int d_ContinentID;
 	String d_ContinentName;
-	ArrayList<Integer> d_neighbors;
+	ArrayList<String> d_neighbors;
 	int d_NoOfArmies;
 
 	public Country(String p_Name, String p_continentName) {
 		setCountryID(++d_COUNT);
 		this.d_Name = p_Name;
 		this.d_ContinentName = p_continentName;
-		d_neighbors=new ArrayList<Integer>();
+		d_neighbors=new ArrayList<String>();
 	}
 	public String getContinentName() {
 		return this.d_ContinentName;
@@ -28,9 +28,9 @@ public class Country {
 	 * Method to set the borders of neighboring Countries
 	 * @param borders
 	 */
-	public  void setBorder(int borders)
+	public  void setBorder(String p_Border)
 	{
-		this.d_neighbors.add(borders);
+		this.d_neighbors.add(p_Border);
 	}
 
 
@@ -38,7 +38,7 @@ public class Country {
 	 * Method to get the list of neighboring Countries
 	 * @return
 	 */
-	public  ArrayList<Integer> getBorder()
+	public  ArrayList<String> getBorder()
 	{
 		return this.d_neighbors;
 	}
@@ -80,5 +80,13 @@ public class Country {
 		Country p1 = (Country)p_Country; 
 		return this.getCountryName().equals(p1.getCountryName());
 	}
-
+	
+	public void removeBorder(String p_Border) {
+		Iterator l_Iterator = this.d_neighbors.iterator();
+		while(l_Iterator.hasNext()) {
+			if(l_Iterator.next().toString().equals(p_Border)) {
+				l_Iterator.remove();
+			}
+		}
+	}
 }
