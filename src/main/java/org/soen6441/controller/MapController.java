@@ -1,20 +1,20 @@
 package org.soen6441.controller;
 
 import org.soen6441.model.Map;
-
-
-
+/**
+ * This class update the MapModel. Also receives the acknowledgement for the update and pass it back to the parent GameController.
+ */
 public class MapController {
 	private Map d_mapModel;
 	
 	
-	
-	
-	
-	
-	
-	public MapController(Map p_map){
-		d_mapModel = p_map;	
+	/**
+	 * This is a constructor which receives Map object as parameter which is used throughout the class
+	 * 
+	 * @param p_map This is a reference of Map object (within GameModel) passed from parent GameController
+	 */
+	public MapController(Map p_map) {
+		d_mapModel = p_map;
 	}
 	public void SaveMap(String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
@@ -22,12 +22,12 @@ public class MapController {
 	}
 	public void LoadMap(String p_str)throws Exception{
 		String[] l_commandArray = p_str.split(" ");
-		if(l_commandArray[0].equals("editmap")){
+		if(l_commandArray[0].equals("editmap")) {
 			d_mapModel.LoadMap(l_commandArray[1]);
-		}else{
-			d_mapModel.LoadMap(l_commandArray[1]);}
+		}else {
+			d_mapModel.LoadMap(l_commandArray[1]);
+		}
 		
-	
 	}
 	public String EditMap(String p_command, String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
