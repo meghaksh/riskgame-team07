@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 
 import org.soen6441.model.Continent;
 import org.soen6441.model.Country;
+import org.soen6441.model.GameModel;
 import org.soen6441.model.Map;
 
 /**
@@ -20,6 +21,7 @@ public class ShowMap {
 	BufferedReader d_br;
 	String d_data="";
 	Map d_map;
+	GameModel d_gameModel;
 
 	/**
 	 * COnstructor that takes Map file as input and reads it line by line and calls mapDetails function
@@ -76,6 +78,30 @@ public class ShowMap {
 		}
 	}
 
+	public void showmap2() {
+		for(Continent l_co: d_map.getContinentList())
+		{
+			System.out.println("Continent : "+l_co.getContinentName()+" "+l_co.getContinentControlValue()+ " "+l_co.getContinentID());
+			for (Country l_cn : d_map.getCountryList()) {
+				if(l_cn.getContinentId() == l_co.getContinentID()) {
+					System.out.println("Country: "+l_cn.getCountryName());
+					System.out.println("   Neighbours: ");
+					for (int i : l_cn.getBorder()) {
+						for(Country cn : d_map.getCountryList()) {
+							if(cn.getCountryID() == i) {
+								System.out.print(" "+cn.getCountryName());
+							}
+						}
+					}
+					System.out.println("");
+
+				}
+
+			}
+			System.out.println("-----------------------");
+		}
+		
+	}
 	public static void main(String []args) throws IOException {
 		ShowMap shmp = new ShowMap();
 		shmp.mapDetails();
