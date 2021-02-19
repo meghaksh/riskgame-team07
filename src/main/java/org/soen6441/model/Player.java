@@ -106,6 +106,10 @@ public class Player {
 		}
 		
 	}
+	public ArrayList<Continent> getContinentList()
+	{
+		return d_Continents;
+	}
 	
 	/*
 	 * The getResult return the result whether the order was added to the order list or not to the Player controller.
