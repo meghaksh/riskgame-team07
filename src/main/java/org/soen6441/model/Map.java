@@ -76,7 +76,7 @@ public class Map {
 				{
 					String[] l_arr = l_line.split(" ", 3);
 					l_ControlValue=Integer.parseInt(l_arr[1]);
-					d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
+					this.d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
 					l_ContinentID++;
 					l_line=sc.nextLine();
 				}
@@ -90,7 +90,7 @@ public class Map {
 					String[] l_arr1=l_line.split(" ",4);
 					l_ContinentID=Integer.parseInt(l_arr1[2]);
 					l_CountryID=Integer.parseInt(l_arr1[0]);
-					d_CountryObjects.add(new Country(l_arr1[1],l_arr1[2]));
+					this.d_CountryObjects.add(new Country(l_arr1[1],l_arr1[2]));
 					l_line=sc.nextLine();
 				}
 
@@ -102,7 +102,7 @@ public class Map {
 				{
 					l_line=sc.nextLine();
 					String[] l_arr2=l_line.split(" ");
-					Country obj=d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
+					Country obj=this.d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
 					for(int l_k=1;l_k<l_arr2.length;l_k++)
 					{
 
