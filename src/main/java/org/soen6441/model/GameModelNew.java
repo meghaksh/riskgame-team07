@@ -167,7 +167,7 @@ public class GameModelNew {
 
 		l_CountryList  = getSelectedMap().getCountryList();		
 		while (l_CountryList.size() > 0) 
-		{	//System.out.println("we are in main");
+		{	
 			Random l_Random = new Random();
 			int l_index = l_Random.nextInt(l_CountryList.size());
 			setPlayerId(d_PlayerQueue.remove());
@@ -176,11 +176,7 @@ public class GameModelNew {
 			l_CountryList.remove(l_index);
 		}
 		
-		//AssignReinforcementArmies();
-		
-
-
-
+		AssignReinforcementArmies();
 	}
 	
 	/**
