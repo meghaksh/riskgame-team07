@@ -73,6 +73,11 @@ public class MapController {
 						
 						break;
 					case "editmap":
+						try {
+							LoadMap(str);
+						}catch(Exception exp) {
+							d_cpView.setCommandAcknowledgement(exp.getMessage());
+						}
 						break;
 					case "validatemap":
 						break;
@@ -106,7 +111,17 @@ public class MapController {
 	}
 	public void LoadMap(String p_str)throws Exception{
 		String[] l_commandArray = p_str.split(" ");
-		d_mapModel.LoadMap(l_commandArray[1]);
+		if(l_commandArray[0].equals("editmap"))
+			{
+			d_mapModel.LoadMap(l_commandArray[1]);
+			System.out.print("editphase");
+			}
+		else
+		{
+			d_mapModel.LoadMap(l_commandArray[1]);
+			d_mapDone=true;
+		}
+		
 	}
 	public String EditMap(String p_command, String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
