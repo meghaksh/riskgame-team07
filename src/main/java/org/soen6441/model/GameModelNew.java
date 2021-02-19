@@ -172,8 +172,6 @@ public class GameModelNew {
 			int l_index = l_Random.nextInt(l_CountryList.size());
 			setPlayerId(d_PlayerQueue.remove());
 			getPlayerId1().addCountry(l_CountryList.get(l_index));
-			//getSelectedMap().searchCountry(l_CountryList.get(l_index)).setOwnedBy(d_PlayerID);
-			//getSelectedMap().getCountryList().setOwnedBy(d_PlayerID);
 			d_PlayerQueue.add(d_PlayerID);
 			l_CountryList.remove(l_index);
 		}
@@ -189,16 +187,17 @@ public class GameModelNew {
 	 * This Method will assign armies to the players.
 	 */
 	public void AssignReinforcementArmies()
-	{
-//		int l_ArmyCount = ((d_PlayerID.getCountriesOwned().size())/3);
-//		//for(Continent l_Continent:getSelectedMap().getOwnedContinents(d_PlayerID.getPlayerName())) 
-//		{
-//			//l_ArmyCount += l_Continent.getControlValue();
-//		}
-//		l_ArmyCount += d_PlayerID.getPlayerArmies();
-//		l_ArmyCount= Math.max(l_ArmyCount, 3);
-//		d_PlayerID.setPlayerArmies(l_ArmyCount);
+	{	for (Player l_Player : getAllPlayers()) {
+		int l_ArmyCount = ((l_Player.getCountriesSize())/3);
+		//for(Continent l_Continent:getSelectedMap().getContinentList(l_Player.getPlayerName())) 
+		{
+			//l_ArmyCount += l_Continent.getContinentControlValue();
+		}
+		//l_ArmyCount += l_Player.getPlayerArmies();
+		l_ArmyCount= Math.max(l_ArmyCount, 3);
+		l_Player.setPlayerArmies(l_ArmyCount);
 		
+	}
 	}
 	
 	
