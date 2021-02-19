@@ -62,13 +62,13 @@ public class ShowMap {
 				if(l_cn.getContinentId() == l_co.getContinentID()) {
 					System.out.println("Country: "+l_cn.getCountryName());
 					System.out.println("   Neighbours: ");
-					for (int i : l_cn.getBorder()) {
-						for(Country cn : d_map.getCountryList()) {
-							if(cn.getCountryID() == i) {
-								System.out.print(" "+cn.getCountryName());
-							}
-						}
-					}
+//					for (int i : l_cn.getBorder()) {
+//						for(Country cn : d_map.getCountryList()) {
+//							if(cn.getCountryID() == i) {
+//								System.out.print(" "+cn.getCountryName());
+//							}
+//						}
+//					}
 					System.out.println("");
 
 				}
@@ -86,13 +86,13 @@ public class ShowMap {
 				if(l_cn.getContinentId() == l_co.getContinentID()) {
 					System.out.println("Country: "+l_cn.getCountryName());
 					System.out.println("   Neighbours: ");
-					for (int i : l_cn.getBorder()) {
-						for(Country cn : d_map.getCountryList()) {
-							if(cn.getCountryID() == i) {
-								System.out.print(" "+cn.getCountryName());
-							}
-						}
-					}
+//					for (int i : l_cn.getBorder()) {
+//						for(Country cn : d_map.getCountryList()) {
+//							if(cn.getCountryID() == i) {
+//								System.out.print(" "+cn.getCountryName());
+//							}
+//						}
+//					}
 					System.out.println("");
 
 				}

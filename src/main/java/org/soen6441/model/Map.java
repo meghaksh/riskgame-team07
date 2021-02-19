@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import org.soen6441.controller.ValidateMap;
+
 
 /** 
  * Model class for Map
@@ -122,7 +124,7 @@ public class Map {
 					for(int l_k=1;l_k<l_arr2.length;l_k++)
 					{
 
-						obj.setBorder(Integer.parseInt(l_arr2[l_k]));
+						obj.setBorder(l_arr2[l_k]);
 						l_Borders.add(Integer.parseInt(l_arr2[l_k]));
 					}
 					
@@ -147,7 +149,7 @@ public class Map {
 	public void SaveMap(String p_Filename) throws Exception
 	{
 		String l_path="resource\\";
-		ArrayList<Integer> l_borders= new ArrayList<Integer>();
+		ArrayList<String> l_borders= new ArrayList<>();
 		File file=new File(l_path+p_Filename);
 		FileWriter fw = new FileWriter(file);
 		PrintWriter pr = new PrintWriter(fw);
@@ -182,7 +184,7 @@ public class Map {
 		{
 			l_borders=c.getBorder();
 			pr.print(c.d_ID+" ");
-			for(int l_i: l_borders)
+			for(String l_i: l_borders)
 			{
 				pr.print(l_i+" ");
 			}
@@ -279,7 +281,7 @@ public class Map {
 		for(Country l_TempCountry : this.getCountryList()) {
 			if(l_TempCountry.getCountryName().equals(p_CountryName)) {
 				l_CountryId = l_TempCountry.getCountryID();
-				l_TempCountry.setBorder(l_NeighborId);
+				l_TempCountry.setBorder(p_NeighborName);
 			}
 		}
 		if(d_Neighbors.get(l_CountryId)==null) {
@@ -288,9 +290,27 @@ public class Map {
 		d_Neighbors.get(l_CountryId).add(l_NeighborId);
 	}
 	
-	public void RemoveBorder(String p_CountryId, String p_NeighbourId) {
-		if(d_Neighbors.containsKey(Integer.parseInt(p_CountryId))) {
-			ArrayList<Integer> l_TempList = d_Neighbors.get(Integer.parseInt(p_CountryId));
+	public void RemoveBorder(String p_CountryName, String p_NeighbourName) {
+		int l_NeighborId=0;
+		int l_CountryId=0;
+		for(Country l_TempCountry :  this.getCountryList()) {
+			if(l_TempCountry.getCountryName().equals(p_NeighbourName)) {
+				l_NeighborId = l_TempCountry.getCountryID();
+			}
+		}
+		for(Country l_TempCountry :  this.getCountryList()) {
+			if(l_TempCountry.getCountryName().equals(p_CountryName)) {
+				l_TempCountry.removeBorder(p_NeighbourName);
+			}
+		}
+		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
+			ArrayList<Integer> l_TempList = d_Neighbors.get(l_CountryId);
+			Iterator l_Iterator = l_TempList.iterator();
+			while(l_Iterator.hasNext()) {
+				if((int)l_Iterator.next()==l_NeighborId) {
+					l_Iterator.remove();
+				}
+			}
 		}
 	}
 	
@@ -307,6 +327,11 @@ public class Map {
 		for(Country l_country: this.d_CountryObjects) {
 			System.out.println("ID : " + l_country.getCountryID() + ", Name : " + l_country.getCountryName() + ", ContinentName :" + l_country.getContinentName());
 		}
+	}
+	
+	public String validateMap() {
+		ValidateMap l_VMap = new ValidateMap(this.d_Neighbors);
+		return l_VMap.isValid();
 	}
 }
 

@@ -2,15 +2,16 @@ package org.soen6441.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  * Class which takes map input and validate it.
  * Validation logic: Perform DFS on graph, Take Transpose of graph, Again perform DFS on graph*/
-public class ValidateMap {
+ class D {
 	static Scanner scan;
 	public static void main(String[] args) {
-		DummyMap d_dmap = openFile();
+		ValidateMap d_dmap = openFile();
 		closeFile();
 		/*Not strongly connected graph example*/
 //				d_dmap.addBorder(0, 1);
@@ -28,7 +29,7 @@ public class ValidateMap {
 		//		d_dmap.addBorder(4, 3);
 		d_dmap.showMap();
 		boolean l_isValidMap = d_dmap.runDFS(0);
-		DummyMap l_tempMap = d_dmap.getTranspose(d_dmap.d_vertexList);
+		ValidateMap l_tempMap = d_dmap.getTranspose(d_dmap.d_vertexList);
 		//l_tempMap.showMap();
 		boolean l_isValidTransposeMap = l_tempMap.runDFS(0);
 		if(l_isValidMap && l_isValidTransposeMap) {
@@ -37,8 +38,8 @@ public class ValidateMap {
 			System.out.println("Not A Strongly Connected Graph");
 		}
 	}
-	public static DummyMap openFile() {
-		DummyMap l_dmap = new DummyMap(180);
+	public static ValidateMap openFile() {
+		ValidateMap l_dmap = new ValidateMap(180);
 		try {
 			scan = new Scanner(new File("src\\main\\java\\org\\soen6441\\controller\\borders.txt"));
 			l_dmap = readFile(l_dmap);	
@@ -47,7 +48,7 @@ public class ValidateMap {
 		}
 		return l_dmap;
 	}
-	public static DummyMap readFile(DummyMap p_dmap) {
+	public static ValidateMap readFile(ValidateMap p_dmap) {
 		int l_counter=0;
 		while(scan.hasNextLine()) {
 			String[] l_tempArray = scan.nextLine().split(" ");
@@ -63,15 +64,50 @@ public class ValidateMap {
 	}
 }
 
-class DummyMap {
+public class ValidateMap {
 	int d_vertexCount;
 	ArrayList<ArrayList<Integer>> d_vertexList;
-	DummyMap(int p_vertexCount){
+	ValidateMap(int p_vertexCount){
 		d_vertexCount = p_vertexCount;
 		d_vertexList = new ArrayList<>(d_vertexCount);
 		for(int i=0;i<d_vertexCount;i++) {
 			d_vertexList.add(new ArrayList<Integer>());
 		}
+	}
+	public ValidateMap(HashMap<Integer, ArrayList<Integer>> p_HMap){
+		d_vertexCount = p_HMap.size();
+		d_vertexList = new ArrayList<>(d_vertexCount);
+		for(int i=0;i<d_vertexCount;i++) {
+			d_vertexList.add(new ArrayList<Integer>());
+		}
+		assignBorders(p_HMap);
+	}
+	
+	public void assignBorders(HashMap<Integer, ArrayList<Integer>> p_HMap) {
+		System.out.println("Printing Map " + p_HMap);
+		try {
+			for(int l_I=1;l_I<=p_HMap.size()+1;l_I++) {
+				ArrayList<Integer> l_TempList = p_HMap.get(l_I);
+				for(Integer l_Value : l_TempList) {
+					System.out.println("l_I : " + l_I + "         l_Value : " + l_Value);
+					addBorder(l_I, l_Value);
+				}
+			}
+		}catch(Exception e) {
+			System.out.println("Exception occured : " + e);
+		}
+		
+		System.out.println("Borders added");
+		
+	}
+	public String isValid() {
+		boolean b1 = this.runDFS(1);
+		ValidateMap l_tempMap = getTranspose(this.d_vertexList);
+		boolean b2 = l_tempMap.runDFS(1);
+		if(b1 && b2) {
+			return "Graph is Valid";
+		}
+		return "Graph is not valid";
 	}
 	public void showMap() {
 		for(int i=0;i<d_vertexList.size();i++) {
@@ -105,8 +141,8 @@ class DummyMap {
 			}
 		}
 	}
-	public DummyMap getTranspose(ArrayList<ArrayList<Integer>> p_vertexList) {
-		DummyMap l_tempMap = new DummyMap(p_vertexList.size());
+	public ValidateMap getTranspose(ArrayList<ArrayList<Integer>> p_vertexList) {
+		ValidateMap l_tempMap = new ValidateMap(p_vertexList.size());
 		for(int i=0;i<p_vertexList.size();i++) {
 			for(int j : p_vertexList.get(i)) {
 				l_tempMap.addBorder(j, i);

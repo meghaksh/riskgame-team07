@@ -29,6 +29,9 @@ public class MapController {
 		}
 		
 	}
+	public String ValidateMap() {
+		return d_mapModel.validateMap();
+	}
 	public String EditMap(String p_command, String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
 		int l_counter = 1;
@@ -51,6 +54,8 @@ public class MapController {
 						l_addCountryCounter+=1;
 						break;
 					case "editneighbor":
+						d_mapModel.AddBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
+						l_counter+=3;
 						break;
 				}
 
@@ -67,6 +72,8 @@ public class MapController {
 						l_removeCountryCounter+=1;
 						break;
 					case "editneighbor":
+						d_mapModel.RemoveBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
+						l_counter+=3;
 						break;
 				}
 				
