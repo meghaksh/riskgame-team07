@@ -79,6 +79,31 @@ public class Player {
 	public void setContinentsList()
 	{
 		ArrayList <Continent> l_mapContinents = d_gameModelNew.getMap().getContinentList();
+		for(Continent mapContinent : l_mapContinents)
+		{
+			ArrayList<Country> l_countryOfContinent = mapContinent.getCountryList();
+			int l_flag=0;
+			
+			outerloop:
+			for(Country countryOfContinent : l_countryOfContinent)
+			{
+			
+				
+				for(Country countryOfPlayer: d_countries)
+				{
+					if(!(countryOfPlayer==countryOfContinent))
+					{
+						l_flag =1;break outerloop;
+					}
+				}
+				
+			
+			}
+			if(l_flag==0)
+			{
+				d_Continents.add(mapContinent);
+			}
+		}
 		
 	}
 	
