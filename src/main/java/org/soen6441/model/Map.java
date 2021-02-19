@@ -69,9 +69,11 @@ public class Map {
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine())
 		{
+			
 			String l_line=sc.nextLine();
-			if(l_line.contains("continents"))
+			if(l_line.contains("continent"))
 			{
+				
 				l_line=sc.nextLine();
 				while(!l_line.equals("") && sc.hasNextLine())
 				{
@@ -136,7 +138,8 @@ public class Map {
 		File file=new File(l_path+p_Filename);
 		FileWriter fw = new FileWriter(file);
 		PrintWriter pr = new PrintWriter(fw);
-		pr.println("continent");
+		pr.println("");
+		pr.println("continents");
 		if(d_ContinentObjects.size()<=0) {
 			throw new Exception("No Continent to Save");
 		}
