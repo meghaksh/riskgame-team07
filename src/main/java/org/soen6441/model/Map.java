@@ -64,8 +64,7 @@ public class Map {
 	{
 		System.out.println("Came inside");
 		int l_ControlValue,l_ContinentID=1,l_CountryID;
-		String l_path="resource\\";
-		File file =new File(l_path+p_Filename);
+		File file =new File(p_Filename);
 		Scanner sc = new Scanner(file);
 		while(sc.hasNextLine())
 		{
@@ -77,7 +76,7 @@ public class Map {
 				{
 					String[] l_arr = l_line.split(" ", 3);
 					l_ControlValue=Integer.parseInt(l_arr[1]);
-					this.d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
+					d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
 					l_ContinentID++;
 					l_line=sc.nextLine();
 				}
@@ -91,7 +90,7 @@ public class Map {
 					String[] l_arr1=l_line.split(" ",4);
 					l_ContinentID=Integer.parseInt(l_arr1[2]);
 					l_CountryID=Integer.parseInt(l_arr1[0]);
-					this.d_CountryObjects.add(new Country(l_arr1[1],l_arr1[2]));
+					d_CountryObjects.add(new Country(l_arr1[1],l_arr1[2]));
 					l_line=sc.nextLine();
 				}
 
@@ -103,7 +102,7 @@ public class Map {
 				{
 					l_line=sc.nextLine();
 					String[] l_arr2=l_line.split(" ");
-					Country obj=this.d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
+					Country obj=d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
 					for(int l_k=1;l_k<l_arr2.length;l_k++)
 					{
 
@@ -132,8 +131,7 @@ public class Map {
 	public void SaveMap(String p_Filename) throws Exception
 	{
 		ArrayList<Integer> l_borders= new ArrayList<Integer>();
-		String l_path="resource\\";
-		File file=new File(l_path+p_Filename);
+		File file=new File(p_Filename);
 		FileWriter fw = new FileWriter(file);
 		PrintWriter pr = new PrintWriter(fw);
 		pr.println("continent");
@@ -197,26 +195,26 @@ public class Map {
 			throw new Exception("Country in the list does not exist !!");
 		}
 	}
-	public void AddCountry(String p_countryName, String p_continentName)throws Exception {
-		Country l_tempCountry = new Country(p_countryName, p_continentName);
-		for(Country l_country : d_CountryObjects) {
-			if(l_country.getCountryName().equalsIgnoreCase(p_countryName)) {
+	public void AddCountry(String p_CountryName, String p_ContinentName)throws Exception {
+		Country l_TempCountry = new Country(p_CountryName, p_ContinentName);
+		for(Country l_Country : d_CountryObjects) {
+			if(l_Country.getCountryName().equalsIgnoreCase(p_CountryName)) {
 				throw new Exception("Country Already Exist");
 			}
 		}
-		this.d_CountryObjects.add(l_tempCountry);
+		this.d_CountryObjects.add(l_TempCountry);
 		for(Continent l_continent : d_ContinentObjects) {
-			if(l_continent.getContinentName().equals(p_continentName)) {
-				l_continent.addCountry(l_tempCountry);
+			if(l_continent.getContinentName().equals(p_ContinentName)) {
+				l_continent.addCountry(l_TempCountry);
 			}
 		}
 	}
-	public void RemoveCountry(String p_countryName)throws Exception {
+	public void RemoveCountry(String p_CountryName)throws Exception {
 		Iterator<Country> l_Iterator = this.d_CountryObjects.iterator();
 		boolean l_RemovedFlag = false;
 		while(l_Iterator.hasNext()) {
 			Country l_tempCountry = l_Iterator.next();
-			if(l_tempCountry.getCountryName().equalsIgnoreCase(p_countryName)) {
+			if(l_tempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
 				l_Iterator.remove();
 				l_RemovedFlag = true;
 			}
@@ -225,29 +223,37 @@ public class Map {
 			throw new Exception("Country in the list does not exist !!");
 		}
 	}
-	public void RemoveAllCountryInContinent(Continent p_tempContinent)throws Exception {
-		ArrayList<Country> l_tempCountryList = p_tempContinent.getCountryList();
-		Iterator<Country> l_countriesOfContinent = l_tempCountryList.iterator();
-		while(l_countriesOfContinent.hasNext()) {
-			RemoveCountry(l_countriesOfContinent.next().getCountryName());
+	public void RemoveAllCountryInContinent(Continent p_TempContinent)throws Exception {
+		ArrayList<Country> l_TempCountryList = p_TempContinent.getCountryList();
+		Iterator<Country> l_CountriesOfContinent = l_TempCountryList.iterator();
+		while(l_CountriesOfContinent.hasNext()) {
+			RemoveCountry(l_CountriesOfContinent.next().getCountryName());
 		}
 	}
 	
-	public void AddBorder(String p_countryId, String p_neighbourId) {
-		for(Country l_tempCountry : this.getCountryList()) {
-			if(l_tempCountry.getCountryID()==Integer.parseInt(p_countryId)) {
-				l_tempCountry.setBorder(Integer.parseInt(p_neighbourId));
+	public void AddBorder(String p_CountryName, String p_NeighborName) {
+		int l_NeighborId=0;
+		int l_CountryId=0;
+		for(Country l_TempCountry :  this.getCountryList()) {
+			if(l_TempCountry.getCountryName().equals(p_NeighborName)) {
+				l_NeighborId = l_TempCountry.getCountryID();
 			}
 		}
-		if(d_Neighbors.get(Integer.parseInt(p_countryId))==null) {
-			d_Neighbors.put(Integer.parseInt(p_countryId), new ArrayList<>());
+		for(Country l_TempCountry : this.getCountryList()) {
+			if(l_TempCountry.getCountryName().equals(p_NeighborName)) {
+				l_CountryId = l_TempCountry.getCountryID();
+				l_TempCountry.setBorder(l_NeighborId);
+			}
 		}
-		d_Neighbors.get(Integer.parseInt(p_countryId)).add(Integer.parseInt(p_neighbourId));
+		if(d_Neighbors.get(l_CountryId)==null) {
+			d_Neighbors.put(l_CountryId, new ArrayList<>());
+		}
+		d_Neighbors.get(l_CountryId).add(l_NeighborId);
 	}
 	
-	public void RemoveBorder(String p_countryId, String p_neighbourId) {
-		if(d_Neighbors.containsKey(Integer.parseInt(p_countryId))) {
-			ArrayList<Integer> l_tempList = d_Neighbors.get(Integer.parseInt(p_countryId));
+	public void RemoveBorder(String p_CountryId, String p_NeighbourId) {
+		if(d_Neighbors.containsKey(Integer.parseInt(p_CountryId))) {
+			ArrayList<Integer> l_TempList = d_Neighbors.get(Integer.parseInt(p_CountryId));
 		}
 	}
 	
@@ -265,7 +271,6 @@ public class Map {
 			System.out.println("ID : " + l_country.getCountryID() + " Name : " + l_country.getCountryName() + " ContinentID : " + l_country.getContinentId());
 		}
 	}
-
 }
 
 
