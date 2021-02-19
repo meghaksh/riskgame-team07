@@ -122,4 +122,7 @@ public class GameEngine {
 
 	}
 	
+	public ArrayList<Player> getPlayerList() {
+		return d_GameModel_Object.getAllPlayers();
+	}
 }
