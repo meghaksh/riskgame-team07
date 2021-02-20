@@ -72,27 +72,24 @@ public class GameController {
 		List<String> Names = new ArrayList<>();
 
 		d_PlayerList=d_GameModelNew.getAllPlayers();
+		
+		
 		for(Player player:d_PlayerList)
+			
 		{
-			Names.add(player.getPlayerName()+"->"+player.getCountriesSize());
+			System.out.println(player.getPlayerName()+""+"armiesassigned->"+player.getPlayerArmies());
+			for(Country l_country:player.getCountryList()) 
+		{
+				System.out.println("Countriesowned"+l_country.getCountryName());
+		}
+			
+	
+			//Names.add(player.getPlayerName()+"->"+player.getCountriesSize()+"armiesassigned->"+player.getPlayerArmies());
 		}
 		
 		return Names; 
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	class CommandListener implements ActionListener{
 		private boolean d_mapDone = false;
 		@Override
@@ -184,10 +181,16 @@ public class GameController {
 						break;
 					case "assigncountries":
 						AssignCountries();
-						showall();
+						List<String> l_AckMsg1 = showall();
+						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
 						break;
 					case "deploy":
 						break;
+					case "show":
+						List<String> l_AckMsg2 = showall();
+						d_CpView.setCommandAcknowledgement(l_AckMsg2 + "\n");
+						break;
+						
 					default:
 						d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
 						break;
