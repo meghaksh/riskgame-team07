@@ -14,9 +14,9 @@ public class Order {
 	Scanner scan = new Scanner(System.in);
 	
 	public Order(String order) {
-		System.out.println("Enter command: ");
-		d_Order = scan.nextLine(); 
-		//this.d_order = order;
+		//System.out.println("Enter command: ");
+		//d_Order = scan.nextLine(); 
+		this.d_Order = order;
 		deploy();
 	}
 

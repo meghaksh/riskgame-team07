@@ -118,6 +118,10 @@ public class Player {
 	{
 		return d_result;
 	}
+	public void setResult(String p_result)
+	{
+		d_result = p_result;
+	}
 	/**
 	 * The setOrder method gets the order in string format for that player.
 	 * @param p_order
@@ -165,7 +169,7 @@ public class Player {
 			while(l_it.hasNext())
 			{
 				Country l_tempCountry = (Country)l_it.next() ;
-				if(Integer.parseInt(l_stringList[1])==l_tempCountry.d_ID)
+				if(l_stringList[1]==l_tempCountry.getCountryName())
 				{
 					l_flag=1;
 					break;
@@ -175,17 +179,17 @@ public class Player {
 			{
 				d_armies-= Integer.parseInt(l_stringList[2]);
 				d_order.add(new Order(d_stringOrder));
-				d_result = "order added to list of "+d_playerName;
+				setResult("order added to list of "+d_playerName);
 			}
 			else
 			{
-				d_result = "This country "+l_stringList[1]+" doesnot belongs to "+d_playerName;
+				setResult("This country "+l_stringList[1]+" doesnot belongs to "+d_playerName);
 			}
 			
 		}
 		else
 		{
-			d_result = d_playerName+" has "+d_armies+" number of armies";
+			setResult(d_playerName+" has "+d_armies+" number of armies");
 		}
 		
 		
