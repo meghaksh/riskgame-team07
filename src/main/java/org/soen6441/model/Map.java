@@ -64,11 +64,17 @@ public class Map {
 	 */
 	public void  LoadMap(String p_Filename) throws FileNotFoundException
 	{
+		this.d_ContinentObjects.clear();
+		this.d_CountryObjects.clear();
+		this.d_borders.clear();
+		this.d_Neighbors.clear();
+		
 		System.out.println("Came inside");
 		String l_path="resource\\";
 		int l_ControlValue,l_ContinentID=1,l_CountryID;
 		File file =new File(l_path+p_Filename);
 		Scanner sc = new Scanner(file);
+		
 		while(sc.hasNextLine())
 		{
 			
@@ -85,7 +91,7 @@ public class Map {
 					l_ContinentID++;
 					l_line=sc.nextLine();
 				}
-
+				System.out.print("no prob in continents");
 			}
 			if(l_line.contains("countries"))
 			{
@@ -110,7 +116,7 @@ public class Map {
 					}
 					l_line=sc.nextLine();
 				}
-
+				System.out.print("no prob in countries");
 			}
 			if(l_line.contains("borders"))
 			{
@@ -119,19 +125,24 @@ public class Map {
 				{
 					l_line=sc.nextLine();
 					String[] l_arr2=l_line.split(" ");
-					Country obj=d_CountryObjects.get(Integer.parseInt(l_arr2[0])-1);
-					ArrayList<Integer> l_Borders = new ArrayList<>();
-					for(int l_k=1;l_k<l_arr2.length;l_k++)
+					for(Country l_tempcountry: this.d_CountryObjects)
 					{
+						if (l_tempcountry.d_ID==Integer.parseInt(l_arr2[0]))
+						{
+							ArrayList<Integer> l_Borders = new ArrayList<>();
+							for(int l_k=1;l_k<l_arr2.length;l_k++)
+							{
 
-						obj.setBorder(l_arr2[l_k]);
-						l_Borders.add(Integer.parseInt(l_arr2[l_k]));
+								l_tempcountry.setBorder(l_arr2[l_k]);
+								l_Borders.add(Integer.parseInt(l_arr2[l_k]));
+							}
+							d_Neighbors.put(Integer.parseInt(l_arr2[0]),l_Borders);
+							break;
+						}
 					}
-					
-					d_Neighbors.put(Integer.parseInt(l_arr2[0]),l_Borders);
 
 				}
-
+				System.out.print("no prob in borders");
 				System.out.println("d_Neighbours in Loadmap : "+ d_Neighbors.size());
 
 			}
@@ -186,7 +197,15 @@ public class Map {
 			pr.print(c.d_ID+" ");
 			for(String l_i: l_borders)
 			{
-				pr.print(l_i+" ");
+				for(Country l_c: this.d_CountryObjects)
+				{
+					if(l_c.getCountryName().equals(l_i))
+					{
+						pr.print(l_c.getCountryID()+" ");
+						
+					}
+				}
+				
 			}
 			pr.println("");
 		}
