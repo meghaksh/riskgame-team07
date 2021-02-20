@@ -90,6 +90,58 @@ public class GameController {
 		return Names; 
 		
 	}
+	
+	
+	
+	public void showmap(Boolean p_bool) {
+		if(p_bool) {
+			System.out.println("Call gameplay wala showmap");
+			
+			ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
+			if(l_continentList.size()>0) {
+				for(Continent l_continent:l_continentList) {
+					d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
+					ArrayList<Country> l_countryList = l_continent.getCountryList();
+					for(Country l_country:l_countryList) {
+						d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
+						
+						for(Player l_player: d_PlayerList) {
+							if(l_player.getCountryList().contains(l_country)) {
+								d_CpView.setCommandAcknowledgement("Owned By: "+l_player.getPlayerName() );
+							}
+						}
+						
+						ArrayList<String> l_NeighborList = l_country.getBorder();
+						for(String l_Str:l_NeighborList) {
+							d_CpView.setCommandAcknowledgement("Border : " + l_Str);
+						}
+					}
+					d_CpView.setCommandAcknowledgement("\n");
+				}
+			}
+			
+		}
+		else {
+			System.out.println("Normal showmap");
+			ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
+			if(l_continentList.size()>0) {
+				for(Continent l_continent:l_continentList) {
+					d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
+					ArrayList<Country> l_countryList = l_continent.getCountryList();
+					for(Country l_country:l_countryList) {
+						d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
+						ArrayList<String> l_NeighborList = l_country.getBorder();
+						for(String l_Str:l_NeighborList) {
+							d_CpView.setCommandAcknowledgement("Border : " + l_Str);
+						}
+					}
+					d_CpView.setCommandAcknowledgement("\n");
+				}
+			}
+		}
+	}
+	
+	
 	class CommandListener implements ActionListener{
 		private boolean d_mapDone = false;
 		@Override
@@ -121,27 +173,27 @@ public class GameController {
 						String l_AckMsg = d_MapController.EditMap("editneighbor", str);
 						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
 						break;
-					case "showmap":
-						if(d_mapDone) {
-							System.out.println("Call gameplay wala showmap");
-						}else {
-							System.out.println("Normal showmap");
-							ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
-							if(l_continentList.size()>0) {
-								for(Continent l_continent:l_continentList) {
-									d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
-									ArrayList<Country> l_countryList = l_continent.getCountryList();
-									for(Country l_country:l_countryList) {
-										d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
-										ArrayList<String> l_NeighborList = l_country.getBorder();
-										for(String l_Str:l_NeighborList) {
-											d_CpView.setCommandAcknowledgement("Border : " + l_Str);
-										}
-									}
-									d_CpView.setCommandAcknowledgement("\n");
-								}
-							}
-						}
+					case "showmap": showmap(d_mapDone);
+//						if(d_mapDone) {
+//							System.out.println("Call gameplay wala showmap");
+//						}else {
+//							System.out.println("Normal showmap");
+//							ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
+//							if(l_continentList.size()>0) {
+//								for(Continent l_continent:l_continentList) {
+//									d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
+//									ArrayList<Country> l_countryList = l_continent.getCountryList();
+//									for(Country l_country:l_countryList) {
+//										d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
+//										ArrayList<String> l_NeighborList = l_country.getBorder();
+//										for(String l_Str:l_NeighborList) {
+//											d_CpView.setCommandAcknowledgement("Border : " + l_Str);
+//										}
+//									}
+//									d_CpView.setCommandAcknowledgement("\n");
+//								}
+//							}
+//						}
 						break;
 					case "savemap":
 						try {
