@@ -4,11 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import org.soen6441.model.Continent;
 import org.soen6441.model.Country;
 import org.soen6441.model.GameModel;
+import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Map;
+import org.soen6441.model.Player;
 
 /**
  * 
@@ -21,7 +24,7 @@ public class ShowMap {
 	BufferedReader d_br;
 	String d_data="";
 	Map d_map;
-	GameModel d_gameModel;
+	GameModelNew d_gameModel;
 
 	/**
 	 * COnstructor that takes Map file as input and reads it line by line and calls mapDetails function
@@ -79,12 +82,20 @@ public class ShowMap {
 	}
 
 	public void showmap2() {
+		ArrayList<Player> l_playerList = d_gameModel.getAllPlayers();
 		for(Continent l_co: d_map.getContinentList())
 		{
 			System.out.println("Continent : "+l_co.getContinentName()+" "+l_co.getContinentControlValue()+ " "+l_co.getContinentID());
 			for (Country l_cn : d_map.getCountryList()) {
 				if(l_cn.getContinentId() == l_co.getContinentID()) {
 					System.out.println("Country: "+l_cn.getCountryName());
+					
+					for(Player l_player : l_playerList) {
+						if(l_player.getCountryList().contains(l_cn)) {
+							System.out.println("Owned By: "+l_player.getPlayerName() );
+						}
+					}
+					
 					System.out.println("   Neighbours: ");
 //					for (int i : l_cn.getBorder()) {
 //						for(Country cn : d_map.getCountryList()) {
