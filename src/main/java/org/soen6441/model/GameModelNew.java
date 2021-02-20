@@ -152,6 +152,7 @@ public class GameModelNew {
 			l_Player.setPlayerArmies(p_count);
 		}
 	}
+	
 	/**
 	 * This method Assign all the countries randomly to the players
 	 *
@@ -185,11 +186,11 @@ public class GameModelNew {
 	public void AssignReinforcementArmies()
 	{	for (Player l_Player : getAllPlayers()) {
 		int l_ArmyCount = ((l_Player.getCountriesSize())/3);
-		//for(Continent l_Continent:getSelectedMap().getContinentList(l_Player.getPlayerName())) 
+		for(Continent l_Continent:l_Player.getContinentList()) 
 		{
-			//l_ArmyCount += l_Continent.getContinentControlValue();
+			l_ArmyCount += l_Continent.getContinentControlValue();
 		}
-		//l_ArmyCount += l_Player.getPlayerArmies();
+		l_ArmyCount += l_Player.getPlayerArmies();
 		l_ArmyCount= Math.max(l_ArmyCount, 3);
 		l_Player.setPlayerArmies(l_ArmyCount);
 		
