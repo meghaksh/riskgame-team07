@@ -17,6 +17,7 @@ public class GameController {
 	private MapController d_MapController;
 	private GameEngine d_GameEngine;
 	private ArrayList<Player> d_PlayerList;
+	PlayerController d_playerController;
 	public GameController(CommandPrompt p_CpView, GameModelNew p_GameModel) {
 		d_GameModelNew = p_GameModel;
 		d_CpView = p_CpView;
@@ -235,8 +236,12 @@ public class GameController {
 						AssignCountries();
 						List<String> l_AckMsg1 = showall();
 						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
+						d_playerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
+						d_playerController.player_issue_order();
+						d_playerController.player_next_order();
+						
 						break;
-					case "deploy":
+					case "deploy":d_playerController.setOrderString(str);
 						break;
 					case "show":
 						List<String> l_AckMsg2 = showall();
