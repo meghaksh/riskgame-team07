@@ -89,4 +89,8 @@ public class Country {
 			}
 		}
 	}
+	
+	public int getNoOfArmies() {
+		return d_NoOfArmies;
+	}
 }
