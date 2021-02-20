@@ -194,6 +194,10 @@ public class Player {
 	{
 		return d_order.remove();
 	}
+	
+	public ArrayList<Country> getCountryList(){
+		return d_countries;
+	}
     
 	
 }
