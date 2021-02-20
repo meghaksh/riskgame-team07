@@ -96,6 +96,9 @@ public class ShowMap {
 						}
 					}
 					
+					
+					System.out.println("Armies: "+l_cn.getNoOfArmies());
+					
 					System.out.println("   Neighbours: ");
 //					for (int i : l_cn.getBorder()) {
 //						for(Country cn : d_map.getCountryList()) {
