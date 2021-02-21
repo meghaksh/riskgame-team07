@@ -260,7 +260,7 @@ public class Player {
 			if(l_Flag==1)
 			{
 				d_TempArmies-= Integer.parseInt(l_StringList[2]);
-				d_Order.add(new Order(d_StringOrder));
+				d_Order.add(new Order(d_StringOrder,this.d_GameModelNew));
 				d_ResultInteger = 1;
 				setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);
 				if(d_TempArmies==0)
