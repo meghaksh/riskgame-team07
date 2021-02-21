@@ -100,4 +100,7 @@ public class Country {
 	public int getNoOfArmies() {
 		return d_NoOfArmies;
 	}
+	public void setNoOfArmies(int p_NoOfArmies) {
+		d_NoOfArmies = p_NoOfArmies;
+	}
 }
