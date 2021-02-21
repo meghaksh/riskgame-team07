@@ -16,16 +16,21 @@ public class MapController {
 	public MapController(Map p_map) {
 		d_mapModel = p_map;
 	}
-	public void SaveMap(String p_str)throws Exception {
+	public String SaveMap(String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
-		d_mapModel.SaveMap(l_commandArray[1]);
+		String l_result=d_mapModel.SaveMap(l_commandArray[1]);
+		return l_result;
 	}
-	public void LoadMap(String p_str)throws Exception{
+	public String LoadMap(String p_str)throws Exception{
 		String[] l_commandArray = p_str.split(" ");
 		if(l_commandArray[0].equals("editmap")) {
-			d_mapModel.LoadMap(l_commandArray[1]);
+			String l_result=d_mapModel.LoadMap(l_commandArray[1]);
+			l_result=l_result+" You Can Now Edit IT";
+			return l_result;
 		}else {
-			d_mapModel.LoadMap(l_commandArray[1]);
+			String l_result=d_mapModel.LoadMap(l_commandArray[1]);
+			l_result=l_result+" You Can Now Proceed To Add Players";
+			return l_result;
 		}
 		
 	}

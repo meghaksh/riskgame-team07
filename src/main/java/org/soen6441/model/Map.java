@@ -69,10 +69,10 @@ public class Map {
 	 * @param p_Filename
 	 * @throws FileNotFoundException 
 	 */
-	public void  LoadMap(String p_Filename) throws FileNotFoundException
+	public String  LoadMap(String p_Filename) throws FileNotFoundException
 	{
 		Reset();
-		String l_path="resource\\";
+		String l_path="resource\\",l_result;
 		int l_ControlValue,l_ContinentID=1,l_CountryID;
 		File file =new File(l_path+p_Filename);
 		Scanner sc = new Scanner(file);
@@ -90,7 +90,6 @@ public class Map {
 					String[] l_arr = l_line.split(" ", 3);
 					l_ControlValue=Integer.parseInt(l_arr[1]);
 					this.d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
-					l_ContinentID++;
 					l_line=sc.nextLine();
 				}
 				
@@ -125,7 +124,6 @@ public class Map {
 
 				while(!l_line.equals("") && sc.hasNextLine())
 				{
-					
 					l_line=sc.nextLine();
 					String[] l_arr2=l_line.split(" ");
 					for(Country l_tempcountry: this.d_CountryObjects)
@@ -158,10 +156,11 @@ public class Map {
 				}
 				
 			}
-
+			
 
 		}
-	
+		l_result="The Map is loaded with "+this.d_ContinentObjects.size()+" Continents and "+this.d_CountryObjects.size()+" Countries";
+		return l_result;
 
 	}
 	/**
@@ -169,7 +168,7 @@ public class Map {
 	 * @param p_Filename 
 	 * @throws IOException 
 	 */
-	public void SaveMap(String p_Filename) throws Exception
+	public String SaveMap(String p_Filename) throws Exception
 	{
 		String l_path="resource\\";
 		ArrayList<String> l_borders= new ArrayList<>();
@@ -223,7 +222,7 @@ public class Map {
 		}
 		pr.close();
 		fw.close();
-		
+		return "The Map Has Been Saved Successfully";
 
 	}
 	public void AddContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
