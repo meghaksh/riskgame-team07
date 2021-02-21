@@ -141,7 +141,24 @@ public class MapTest {
 		assertFalse(l_map.getContinentList().contains(c0));
 
 	}*/
-
+	@Test
+	public void testContinentForCountryExists() throws Exception{
+		
+			for(Country c : l_map.getCountryList())
+			{
+				int flag=0;
+				for(Continent cc : l_map.getContinentList())
+				{
+					if(cc.getContinentName().equals(c.getContinentName()))
+					{
+						flag=1;break;
+					}
+				}
+				assertEquals(1,flag);
+					//assertTrue(l_map.getContinentList().contains(c.getContinentName()));	
+			}
+			
+	}
 
 
 
