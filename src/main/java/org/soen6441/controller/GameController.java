@@ -50,6 +50,7 @@ public class GameController {
 				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
 				switch(l_CommandStringFromInput.split(" ")[0]){
 				case "editcontinent" : 
+					if(d_MapDone==false) {
 					try {
 						System.out.println("Inside GameController");
 						String l_AckMsg = d_MapController.EditMap("editcontinent", l_CommandStringFromInput);
@@ -58,9 +59,13 @@ public class GameController {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
 						d_CpView.setCommandAcknowledgement("\n");
 					}
+					}else {
+						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
+					}
 					break;
 					
 				case "editcountry" :
+					if(d_MapDone==false) {
 					try {
 						String l_AckMsg = d_MapController.EditMap("editcountry", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
@@ -68,11 +73,19 @@ public class GameController {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
 						d_CpView.setCommandAcknowledgement("\n");
 					}
+					}else {
+						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
+					}
 					break;
 					
 				case "editneighbor" :
+					if(d_MapDone==false) {
 					String l_AckMsg = d_MapController.EditMap("editneighbor", l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+					}
+					else {
+						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
+					}
 					break;
 					
 				case "showmap": 
@@ -80,18 +93,26 @@ public class GameController {
 					break;
 					
 				case "savemap":
+					if(d_MapDone==false) {
 					try {
 						d_MapController.SaveMap(l_CommandStringFromInput);
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
 					}
+					}else{
+						d_CpView.setCommandAcknowledgement("Cant Save Map In This Phase"+"\n");
+					}
 					break;
 					
 				case "editmap":
+					if(d_MapDone==false) {
 					try {
 						d_MapController.LoadMap(l_CommandStringFromInput);
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
+					}
+					}else{
+						d_CpView.setCommandAcknowledgement("Cant Edit Another Map In This Phase"+"\n");
 					}
 					break;
 					
@@ -109,6 +130,7 @@ public class GameController {
 					break;
 					
 				case "gameplayer":
+					if(d_MapDone==true) {
 					try {
 						String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
@@ -116,15 +138,22 @@ public class GameController {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
 						d_CpView.setCommandAcknowledgement("\n");
 					}
+					}else{
+						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Add Players"+"\n");
+					}
 					break;
 					
 				case "assigncountries":
+					if(d_MapDone==true) {
 					AssignCountries();
 					List<String> l_AckMsg1 = showAllPlayerWithArmies();
 					d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
 					d_PlayerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
 					d_PlayerController.player_issue_order();
 					d_PlayerController.player_next_order();
+					}else{
+						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Add Assign Countries"+"\n");
+					}
 					break;
 					
 				case "deploy":
@@ -132,8 +161,12 @@ public class GameController {
 					break;
 					
 				case "show":
+					if(d_MapDone==true) {
 					List<String> l_AckMsg2 = showAllPlayerWithArmies();
 					d_CpView.setCommandAcknowledgement(l_AckMsg2 + "\n");
+					}else{
+						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Perform Show Operation"+"\n");
+					}
 					break;
 					
 				default:
