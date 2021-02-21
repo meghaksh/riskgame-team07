@@ -1,13 +1,9 @@
 package org.soen6441.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.ArrayList;				import java.util.Iterator;
+import javax.swing.JOptionPane;			import org.soen6441.model.Order;
+import org.soen6441.model.Player;		import org.soen6441.view.CommandPrompt;
 
-import javax.swing.JOptionPane;
-
-import org.soen6441.model.Order;
-import org.soen6441.model.Player;
-import org.soen6441.view.CommandPrompt;
 /**
  * The Player Controller class controls the activities of all the players at once.
  * @author Zeal
@@ -15,32 +11,27 @@ import org.soen6441.view.CommandPrompt;
  */
 public class PlayerController {
 
-	
-	ArrayList <Player> d_players;
-	String d_orderString=null;
-	String d_orderAcknowledgment="";
+	private ArrayList <Player> d_Players;
+	private String d_OrderString=null;
+	private String d_OrderAcknowledgment="";
 	private CommandPrompt d_CpView;
-	
-	PlayerController(ArrayList p_players)
+	/**
+	 * Constructor of Player controller
+	 * @param p_Players list of players 
+	 * @param p_CpView object of command prompt for communicating with player
+	 */
+	PlayerController(ArrayList p_Players,CommandPrompt p_CpView)
 	{
-		d_players = p_players;
-	}
-	PlayerController(ArrayList p_players,CommandPrompt p_CpView)
-	{
-		d_players = p_players;
+		d_Players = p_Players;
 		d_CpView=p_CpView;
 	}
-	public void setOrderFromView(String p_orderString)
-	{
-		d_orderString = p_orderString;
-	}
-	public String getOrderAcknowledgment()
-	{
-		return d_orderAcknowledgment;
-	}
+	/**
+	 * Set method to set the Order from GameController written in Command Prompt.
+	 * @param p_OrderString Order written by the player
+	 */
 	public void setOrderString(String p_OrderString)
 	{
-		this.d_orderString=p_OrderString;
+		this.d_OrderString=p_OrderString;
 	}
 	/**
 	 * The player_issue_order method asks each player to issue an order in a round robin fashion.
@@ -50,128 +41,111 @@ public class PlayerController {
 	public void player_issue_order()
 	{
 		System.out.println("in player issue order");
-		ArrayList <Player> l_players = d_players;
-		for(Player p:d_players)
+		ArrayList <Player> l_Players = d_Players;
+		for(Player p:d_Players)
 		{
 			System.out.println(p.getPlayerName());
 		}
-		
-		while(!l_players.isEmpty())
+
+		while(!l_Players.isEmpty())
 		{
 			System.out.println("inside while loop");
-			
-			int l_flag =0;
-			ArrayList<Player> l_removePlayerList = new ArrayList();
-			Player l_removePlayer = new Player();
-			for(Player l_tempPlayer : l_players)
+
+			int l_Flag =0;
+			ArrayList<Player> l_RemovePlayerList = new ArrayList();
+			Player l_RemovePlayer = new Player();
+			for(Player l_TempPlayer : l_Players)
 			{
-			
+
 				System.out.println("inside nested while loop");
-				d_orderAcknowledgment = "\n"+l_tempPlayer.getPlayerName()+" Enter deploy order";
-				d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
-				
-				String l_stringOrder = JOptionPane.showInputDialog("Please Enter Your Deploy Order");
+				d_OrderAcknowledgment = "\n"+l_TempPlayer.getPlayerName()+" Enter deploy order";
+				d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 
-				
-				System.out.println("after wait for command " + l_stringOrder);
+				String l_StringOrder = JOptionPane.showInputDialog("Please Enter Your Deploy Order");
 
 
-				
-				System.out.println(l_stringOrder);
+				System.out.println("after wait for command " + l_StringOrder);
 
-				l_tempPlayer.setOrder(l_stringOrder);
-				l_tempPlayer.issue_order();
-				String l_result = l_tempPlayer.getResult();
-				int l_resultInteger = l_tempPlayer.getResultInteger();
-				
-				
-				if(l_resultInteger==2)
+
+
+				System.out.println(l_StringOrder);
+
+				l_TempPlayer.setOrder(l_StringOrder);
+				l_TempPlayer.issue_order();
+				String l_Result = l_TempPlayer.getResult();
+				int l_ResultInteger = l_TempPlayer.getResultInteger();
+
+
+				if(l_ResultInteger==2)
 				{
-					d_orderAcknowledgment=l_result;
-					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
-					l_flag=1;l_removePlayerList.add(l_tempPlayer);
-					System.out.println(l_tempPlayer.getPlayerName()+"'s armies have become zero");
+					d_OrderAcknowledgment=l_Result;
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					l_Flag=1;l_RemovePlayerList.add(l_TempPlayer);
+					System.out.println(l_TempPlayer.getPlayerName()+"'s armies have become zero");
 				}
-				else if(l_resultInteger==3)
+				else if(l_ResultInteger==3)
 				{
-					System.out.println(l_result);
-					d_orderAcknowledgment = l_result;
-					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
-					System.out.println("\nThis country does not belong to "+l_tempPlayer.getPlayerName());
+					System.out.println(l_Result);
+					d_OrderAcknowledgment = l_Result;
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					System.out.println("\nThis country does not belong to "+l_TempPlayer.getPlayerName());
 				}
-				else if(l_resultInteger==4)
+				else if(l_ResultInteger==4)
 				{
-					d_orderAcknowledgment = l_result+"\n Please enter the next order accordingly";
-					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
-					System.out.println(d_orderAcknowledgment);
+					d_OrderAcknowledgment = l_Result+"\n Please enter the next order accordingly";
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					System.out.println(d_OrderAcknowledgment);
 				}
-				else if(l_resultInteger==1)
+				else if(l_ResultInteger==1)
 				{
-					d_orderAcknowledgment = l_result;
-					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
-					System.out.println("\norder successfully added to "+l_tempPlayer.getPlayerName()+"'s order list");
+					d_OrderAcknowledgment = l_Result;
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					System.out.println("\norder successfully added to "+l_TempPlayer.getPlayerName()+"'s order list");
 				}
-				
-				
-				
-				/*if(l_result.contains("armies"))
-				{
-					l_flag=0;
-					d_orderAcknowledgment = l_result+"/n Please enter the next order accordingly";
-					System.out.println(d_orderAcknowledgment);
-					
-					int l_armies = l_tempPlayer.getPlayerArmies();
-					if(l_armies==0)
-					{
-						l_flag=1;l_removePlayer = l_tempPlayer;
-					}
-				}
-				if(l_result.contains("country"))
-				{
-					System.out.println(l_result);
-					d_orderAcknowledgment = l_result;
-				}*/
-			
+
 			}
-			if(l_flag==1)
+			if(l_Flag==1)
 			{
-				for(Player l_tempRemovePlayer : l_removePlayerList)
+				for(Player l_TempRemovePlayer : l_RemovePlayerList)
 				{
-					l_players.remove(l_tempRemovePlayer);
+					l_Players.remove(l_TempRemovePlayer);
 				}
-				//l_players.remove(l_removePlayer);
 			}
 		}
-		
+
 	}
+	/**
+	 * This method iterates till the player list doesn't becomes empty. This means all the orders of all the players are executed.
+	 * It works in a round robin fashion. All the players execute there orders one by one.
+	 * The player who's all orders are executed is removed from the list.
+	 */
 	public void player_next_order()
 	{
-		ArrayList <Player> l_players = d_players;
-		while(!l_players.isEmpty())
+		ArrayList <Player> l_Players = d_Players;
+		while(!l_Players.isEmpty())
 		{
-			Iterator it = l_players.iterator();
-			int l_flag =0;
-			Player l_removePlayer = new Player();
-			while(it.hasNext())
+			Iterator l_It = l_Players.iterator();
+			int l_Flag =0;
+			Player l_RemovePlayer = new Player();
+			while(l_It.hasNext())
 			{
-				Player l_player = (Player)it.next(); 
-				if(l_player.getOrderSize()!=0)
+				Player l_Player = (Player)l_It.next(); 
+				if(l_Player.getOrderSize()!=0)
 				{
-				Order order = l_player.next_order();
-				order.execute();
+					Order l_Order = l_Player.next_order();
+					l_Order.execute();
 				}
 				else
 				{
-					l_flag = 1; l_removePlayer = l_player;
+					l_Flag = 1; l_RemovePlayer = l_Player;
 				}
 			}
-			if(l_flag == 1)
+			if(l_Flag == 1)
 			{
-				l_players.remove(l_removePlayer);
+				l_Players.remove(l_RemovePlayer);
 			}
 		}
-		
-		
+
 	}
-	
+
 }
