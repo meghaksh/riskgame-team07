@@ -18,6 +18,8 @@ public class Player {
 	int d_playerId;
 	String d_playerColor = "";
 	int d_armies;
+	int d_tempArmies;
+	int d_resultInteger;
     ArrayList<Country> d_countries = new ArrayList<Country>();
 	Queue<Order> d_order = new LinkedList<Order>();
 	ArrayList<Continent> d_Continents = new ArrayList<Continent>();
@@ -67,6 +69,7 @@ public class Player {
 	public void setPlayerArmies(int p_armies)
 	{
 		d_armies = p_armies;
+		d_tempArmies = p_armies;
 	}
 	public int getPlayerArmies()
 	{
@@ -154,6 +157,11 @@ public class Player {
 	{
 		return d_order.size();
 	}
+	public int getResultInteger()
+	{
+		return d_resultInteger;
+	}
+	
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
 	 * and whether it has sufficient armies and it sets the result accordingly. 
@@ -162,34 +170,45 @@ public class Player {
 	public void issue_order()
 	{
 		int l_flag = 0;
+		d_resultInteger = 0;
 		String[] l_stringList = d_stringOrder.split(" ");
-		if(Integer.parseInt(l_stringList[2]) <= d_armies)
+		if(Integer.parseInt(l_stringList[2]) <= d_tempArmies)
 		{
-			Iterator l_it = d_countries.iterator();
-			while(l_it.hasNext())
-			{
-				Country l_tempCountry = (Country)l_it.next() ;
-				if(l_stringList[1]==l_tempCountry.getCountryName())
+			
+				Iterator l_it = d_countries.iterator();
+				while(l_it.hasNext())
 				{
-					l_flag=1;
-					break;
+					Country l_tempCountry = (Country)l_it.next() ;
+					if(l_stringList[1].equals(l_tempCountry.getCountryName()))
+					{
+						l_flag=1;
+						break;
+					}
 				}
-			}
-			if(l_flag==1)
-			{
-				d_armies-= Integer.parseInt(l_stringList[2]);
-				d_order.add(new Order(d_stringOrder));
-				setResult("order added to list of "+d_playerName);
-			}
-			else
-			{
-				setResult("This country "+l_stringList[1]+" doesnot belongs to "+d_playerName);
-			}
+				if(l_flag==1)
+				{
+					d_tempArmies-= Integer.parseInt(l_stringList[2]);
+					d_order.add(new Order(d_stringOrder));
+					d_resultInteger = 1;
+					setResult("\norder "+d_stringOrder+" added to list of "+d_playerName);
+					if(d_tempArmies==0)
+					{
+						d_resultInteger = 2;
+						setResult("\n"+d_playerName+" : Your armies have become zero now!!. You will not be able to issue an order");
+					}
+				}
+				else
+				{
+					d_resultInteger = 3;
+					setResult("\nThis country "+l_stringList[1]+" doesnot belongs to "+d_playerName);
+				}
+			
 			
 		}
 		else
 		{
-			setResult(d_playerName+" has "+d_armies+" number of armies");
+			d_resultInteger = 4;
+			setResult("\n"+d_playerName+" ; you have only "+d_armies+" number of armies!");
 		}
 		
 		
