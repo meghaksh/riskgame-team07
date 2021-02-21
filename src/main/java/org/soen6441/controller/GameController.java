@@ -1,23 +1,29 @@
 package org.soen6441.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.soen6441.model.Continent;
-import org.soen6441.model.Country;
-import org.soen6441.model.GameModelNew;
-import org.soen6441.model.Player;
+import java.util.ArrayList;						import java.util.List;
+import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
+import org.soen6441.model.Continent;			import org.soen6441.model.Country;
+import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This is the main controller class of MVC model. 
+ * This class has a references of View, Models and various child controllers. 
+ * This class acts as an intermediary between models/controllers and view.
+ */
 public class GameController {
 	private GameModelNew d_GameModelNew;
 	private CommandPrompt d_CpView;
 	private MapController d_MapController;
-	private GameEngine d_GameEngine;
 	private ArrayList<Player> d_PlayerList;
-	PlayerController d_playerController;
+	private PlayerController d_PlayerController;
+
+	/**
+	 * This controller takes view and model as arguments and use throughout the game. 
+	 * 
+	 * @param p_CpView main view of the game.
+	 * @param p_GameModel main model of the game.
+	 */
 	public GameController(CommandPrompt p_CpView, GameModelNew p_GameModel) {
 		d_GameModelNew = p_GameModel;
 		d_CpView = p_CpView;
@@ -25,94 +31,181 @@ public class GameController {
 		d_CpView.commandSendButtonListener(new CommandListener());
 	}
 	
-	public String GamePlayer(String p_Command,String p_Str) throws Exception
+	/**
+	 * This is a child class of the GameController which listens to the actions performed by button in view. 
+	 * This class implements the ActionListener and override the actionPerformed method.
+	 * This class is responsible for passing data from view to models/child controllers.
+	 */
+	class CommandListener implements ActionListener{
+		private boolean d_MapDone = false;
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			try {
+				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
+				switch(l_CommandStringFromInput.split(" ")[0]){
+				case "editcontinent" : 
+					try {
+						System.out.println("Inside GameController");
+						String l_AckMsg = d_MapController.EditMap("editcontinent", l_CommandStringFromInput);
+						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+					}catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+						d_CpView.setCommandAcknowledgement("\n");
+					}
+					break;
+					
+				case "editcountry" :
+					try {
+						String l_AckMsg = d_MapController.EditMap("editcountry", l_CommandStringFromInput);
+						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+					}catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+						d_CpView.setCommandAcknowledgement("\n");
+					}
+					break;
+					
+				case "editneighbor" :
+					String l_AckMsg = d_MapController.EditMap("editneighbor", l_CommandStringFromInput);
+					d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+					break;
+					
+				case "showmap": 
+					showMap(d_MapDone);
+					break;
+					
+				case "savemap":
+					try {
+						d_MapController.SaveMap(l_CommandStringFromInput);
+					}catch(Exception exp) {
+						d_CpView.setCommandAcknowledgement(exp.getMessage());
+					}
+					break;
+					
+				case "editmap":
+					try {
+						d_MapController.LoadMap(l_CommandStringFromInput);
+					}catch(Exception exp) {
+						d_CpView.setCommandAcknowledgement(exp.getMessage());
+					}
+					break;
+					
+				case "validatemap":
+					d_CpView.setCommandAcknowledgement(d_MapController.ValidateMap());
+					break;
+					
+				case "loadmap": 
+					try {
+						d_MapController.LoadMap(l_CommandStringFromInput);
+						this.d_MapDone = true;
+					}catch(Exception exp) {
+						d_CpView.setCommandAcknowledgement(exp.getMessage());
+					}
+					break;
+					
+				case "gameplayer":
+					try {
+						String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
+						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
+					}catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+						d_CpView.setCommandAcknowledgement("\n");
+					}
+					break;
+					
+				case "assigncountries":
+					AssignCountries();
+					List<String> l_AckMsg1 = showAllPlayerWithArmies();
+					d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
+					d_PlayerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
+					d_PlayerController.player_issue_order();
+					d_PlayerController.player_next_order();
+					break;
+					
+				case "deploy":
+					d_PlayerController.setOrderString(l_CommandStringFromInput);
+					break;
+					
+				case "show":
+					List<String> l_AckMsg2 = showAllPlayerWithArmies();
+					d_CpView.setCommandAcknowledgement(l_AckMsg2 + "\n");
+					break;
+					
+				default:
+					d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
+					break;
+				}
+				d_CpView.setCommandInput("");
+			}catch(Exception p_Exception) {
+				System.out.println("Exception in ActionPerformed Method in ActionListener : " + p_Exception.getMessage());
+			}
+		}
+	}
+	
+	public String editPlayer(String p_Command,String p_Str) throws Exception
 	{
-		String[] l_commandArray = p_Str.split(" ");
+		String[] l_CommandArray = p_Str.split(" ");
 		int l_Counter = 1;
 		int l_AddCounter = 0;
 		int l_RemoveCounter = 0;
 		String l_ReturnString = "";
-		while(l_Counter<l_commandArray.length) {
-			if(l_commandArray[l_Counter].equals("-add")) 
-			{
-				d_GameModelNew.addPlayer(l_commandArray[l_Counter+1]);
+		while(l_Counter<l_CommandArray.length) {
+			if(l_CommandArray[l_Counter].equals("-add")) {
+				d_GameModelNew.addPlayer(l_CommandArray[l_Counter+1]);
 				l_Counter+=2;
 				l_AddCounter+=1;
-				
-			}
-			else if(l_commandArray[l_Counter].equals("-remove")) 
-			{
-				d_GameModelNew.removePlayer(l_commandArray[l_Counter+1]);
+
+			} else if(l_CommandArray[l_Counter].equals("-remove")){
+				d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
 				l_Counter+=2;
 				l_RemoveCounter+=1;
-			}
-			else 
-			{
-				
+			} else {
 				break;
 			}
-			}
+		}
 		if(l_AddCounter>0) {
 			l_ReturnString += "Number of Players Added : " + l_AddCounter + "\n";
 		}
 		if(l_RemoveCounter>0) {
 			l_ReturnString += "Number of Players Removed : " + l_RemoveCounter + "\n";
 		}
-		
 		return l_ReturnString;
 	}
-	
-	
-	public void AssignCountries()
-	{
+
+	public void AssignCountries() {
 		d_GameModelNew.startUpPhase();
 	}
-	
-	public List<String> showall()
-	{
-		List<String> Names = new ArrayList<>();
 
+	public List<String> showAllPlayerWithArmies() {
+		List<String> l_Names = new ArrayList<>();
 		d_PlayerList=d_GameModelNew.getAllPlayers();
-		
-		
-		for(Player player:d_PlayerList)
-			
-		{
+		for(Player player:d_PlayerList){
 			System.out.println(player.getPlayerName()+""+"armiesassigned->"+player.getPlayerArmies());
-			for(Country l_country:player.getCountryList()) 
-		{
+			for(Country l_country:player.getCountryList()) {
 				System.out.println("Countriesowned"+l_country.getCountryName());
-		}
-			
-	
+			}
 			//Names.add(player.getPlayerName()+"->"+player.getCountriesSize()+"armiesassigned->"+player.getPlayerArmies());
 		}
-		
-		return Names; 
-		
+		return l_Names; 
 	}
-	
-	
-	
-	public void showmap(Boolean p_bool) {
-		if(p_bool) {
+
+	public void showMap(Boolean p_BooleanForGamePhaseStarted) {
+		if(p_BooleanForGamePhaseStarted) {
 			System.out.println("Call gameplay wala showmap");
-			
-			ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
-			if(l_continentList.size()>0) {
-				for(Continent l_continent:l_continentList) {
-					d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
-					ArrayList<Country> l_countryList = l_continent.getCountryList();
-					for(Country l_country:l_countryList) {
-						d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
-						
-						for(Player l_player: d_PlayerList) {
-							if(l_player.getCountryList().contains(l_country)) {
-								d_CpView.setCommandAcknowledgement("Owned By: "+l_player.getPlayerName() );
+			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+			if(l_ContinentList.size()>0) {
+				for(Continent l_Continent:l_ContinentList) {
+					d_CpView.setCommandAcknowledgement(l_Continent.getContinentName() + "--->");
+					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+					for(Country l_Country:l_CountryList) {
+						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ",");
+						for(Player l_Player: d_PlayerList) {
+							if(l_Player.getCountryList().contains(l_Country)) {
+								d_CpView.setCommandAcknowledgement("Owned By: "+l_Player.getPlayerName() );
 							}
 						}
-						
-						ArrayList<String> l_NeighborList = l_country.getBorder();
+						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						for(String l_Str:l_NeighborList) {
 							d_CpView.setCommandAcknowledgement("Border : " + l_Str);
 						}
@@ -120,142 +213,24 @@ public class GameController {
 					d_CpView.setCommandAcknowledgement("\n");
 				}
 			}
-			
-		}
-		else {
+		} else {
 			System.out.println("Normal showmap");
-			ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
-			if(l_continentList.size()>0) {
-				for(Continent l_continent:l_continentList) {
-					d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
-					ArrayList<Country> l_countryList = l_continent.getCountryList();
-					for(Country l_country:l_countryList) {
-						d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
-						ArrayList<String> l_NeighborList = l_country.getBorder();
+			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+			if(l_ContinentList.size()>0) {
+				for(Continent l_Continent:l_ContinentList) {
+					d_CpView.setCommandAcknowledgement(l_Continent.getContinentName() + "--->");
+					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+					for(Country l_Country:l_CountryList) {
+						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ",");
+						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						for(String l_Str:l_NeighborList) {
 							d_CpView.setCommandAcknowledgement("Border : " + l_Str);
 						}
 					}
 					d_CpView.setCommandAcknowledgement("\n");
 				}
-			}
-		}
-	}
-	
-	
-	class CommandListener implements ActionListener{
-		private boolean d_mapDone = false;
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			try {
-				String str = d_CpView.getCommandInput().trim();
-				switch(str.split(" ")[0]){
-					case "editcontinent" : 
-						try {
-							System.out.println("Inside GameController");
-							String l_AckMsg = d_MapController.EditMap("editcontinent", str);
-							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-						}catch(Exception p_Exception) {
-							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-							d_CpView.setCommandAcknowledgement("\n");
-						}
-						break;
-					case "editcountry" :
-						try {
-							String l_AckMsg = d_MapController.EditMap("editcountry", str);
-							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-						}catch(Exception p_Exception) {
-							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-							d_CpView.setCommandAcknowledgement("\n");
-						}
-						break;
-					case "editneighbor" :
-						String l_AckMsg = d_MapController.EditMap("editneighbor", str);
-						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-						break;
-					case "showmap": showmap(d_mapDone);
-//						if(d_mapDone) {
-//							System.out.println("Call gameplay wala showmap");
-//						}else {
-//							System.out.println("Normal showmap");
-//							ArrayList<Continent> l_continentList = d_GameModelNew.getMap().getContinentList();
-//							if(l_continentList.size()>0) {
-//								for(Continent l_continent:l_continentList) {
-//									d_CpView.setCommandAcknowledgement(l_continent.getContinentName() + "--->");
-//									ArrayList<Country> l_countryList = l_continent.getCountryList();
-//									for(Country l_country:l_countryList) {
-//										d_CpView.setCommandAcknowledgement(l_country.getCountryName() + ",");
-//										ArrayList<String> l_NeighborList = l_country.getBorder();
-//										for(String l_Str:l_NeighborList) {
-//											d_CpView.setCommandAcknowledgement("Border : " + l_Str);
-//										}
-//									}
-//									d_CpView.setCommandAcknowledgement("\n");
-//								}
-//							}
-//						}
-						break;
-					case "savemap":
-						try {
-							d_MapController.SaveMap(str);
-						}catch(Exception exp) {
-							d_CpView.setCommandAcknowledgement(exp.getMessage());
-						}
-						
-						break;
-					case "editmap":
-						try {
-							d_MapController.LoadMap(str);
-						}catch(Exception exp) {
-							d_CpView.setCommandAcknowledgement(exp.getMessage());
-						}
-						break;
-					case "validatemap":
-						String l_Str = d_MapController.ValidateMap();
-						d_CpView.setCommandAcknowledgement(l_Str);
-						break;
-					case "loadmap": 
-						try {
-							d_MapController.LoadMap(str);
-							this.d_mapDone = true;
-						}catch(Exception exp) {
-							d_CpView.setCommandAcknowledgement(exp.getMessage());
-						}
-						break;
-					case "gameplayer":
-						try {
-							String l_AckMsg1 = GamePlayer("GamePlayer", str);
-							d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
-						}catch(Exception p_Exception) {
-							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-							d_CpView.setCommandAcknowledgement("\n");
-						}
-						break;
-					case "assigncountries":
-						AssignCountries();
-						List<String> l_AckMsg1 = showall();
-						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
-						d_playerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
-						d_playerController.player_issue_order();
-						d_playerController.player_next_order();
-						
-						break;
-					case "deploy":d_playerController.setOrderString(str);
-						break;
-					case "show":
-						List<String> l_AckMsg2 = showall();
-						d_CpView.setCommandAcknowledgement(l_AckMsg2 + "\n");
-						break;
-						
-					default:
-						d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
-						break;
-				}
-				d_CpView.setCommandInput("");
-			}catch(Exception exp) {
-				System.out.println(exp);
 			}
 		}
 	}	
+	
 }
