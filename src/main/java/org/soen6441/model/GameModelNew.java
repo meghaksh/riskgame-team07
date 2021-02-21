@@ -18,25 +18,36 @@ public class GameModelNew {
 	private int d_PlayerCount;
 	private Queue<Player> d_PlayerQueue= new LinkedList<Player>();
 
-	public GameModelNew() 
+	/**
+	 * Default constructor which initializes map and player List 
+	 */
+	public GameModelNew()
 	{
 		d_Map = new Map();
 		d_PlayerList=new ArrayList<Player>();
 	}
 
+	/**
+	 * get Method for map
+	 * @return returns map
+	 */
 	public Map getMap() {
 		return this.d_Map;
 	}
 
 
-
+	/**
+	 * get Method for PlayerID 
+	 * @return returns PlayerID
+	 */
 	public Player getPlayerId1() 
 	{
 		return d_PlayerID;
 	}
+
 	/**
-	 * This method returns the  player id.
-	 * @return d_PlayerID of current  player.
+	 * set method for player id 
+	 * @param d_PlayerID player id of player
 	 */
 	public void setPlayerId(Player d_PlayerID) 
 	{
@@ -51,20 +62,15 @@ public class GameModelNew {
 	public ArrayList<Player> getAllPlayers() {
 		return d_PlayerList;
 	}
+
 	/**
-	 * this method sets the  player count
+	 * set Method for player count based on d_PlayerList size
 	 *
-	 * @return the GameModel
 	 */
 	public void setplayerCount() {
 		this.d_PlayerCount=this.d_PlayerList.size();
 
 	}
-
-	public Player getPlayerId() {
-		return this.d_PlayerID;
-	}
-
 
 	/**
 	 * This method gets selected map.
@@ -76,11 +82,11 @@ public class GameModelNew {
 		return d_Map;
 
 	}
+
 	/**
-	 * Adds the player.
-	 *
-	 * @param playerName the player name
-	 * @return Player name  that has added
+	 * This Method Adds the player based on user input from the command prompt.
+	 * @param p_PlayerName player name of player
+	 * @throws Exception if player size is more that country size or if player already exists
 	 */
 	public void addPlayer(String p_PlayerName)throws Exception {
 
@@ -88,13 +94,14 @@ public class GameModelNew {
 		//		{
 		//			throw new Exception("Reached Max Number of Players can be added to the game");
 		//		}
-		if (existDuplicatePlayer(p_PlayerName)) {
+		if (existDuplicatePlayer(p_PlayerName)) 
+		{
+
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 
 		} else {
 			Player l_Player_Object = new Player(p_PlayerName);
 			d_PlayerList.add(l_Player_Object);
-			//return "Player " + p_PlayerName + " added to the game";
 		}
 
 	}
@@ -102,8 +109,8 @@ public class GameModelNew {
 	/**
 	 * This method checks for duplicate players
 	 *
-	 * @param playerName Name of the player
-	 * @return true, if there is any duplicates
+	 * @param p_PlayerName Name of the player
+	 * @return boolean this returns boolean value based if player already exists or not
 	 */
 	public boolean existDuplicatePlayer(String p_PlayerName) {
 		for (Player Player : d_PlayerList )
@@ -115,29 +122,25 @@ public class GameModelNew {
 	}
 	/**
 	 * This Method removes players 
-	 *
-	 * @param playerName the player name
-	 * @return the string
+	 * @param p_PlayerName Name of the player
+	 * @throws Exception if player is not found
 	 */
 	public void removePlayer(String p_PlayerName) throws Exception
 	{
 		Player l_CurrentPlayer;
 		boolean l_PlayerFound = false;
-		for (Player player:d_PlayerList) {
-			l_CurrentPlayer = player;
+		for (Player l_Player:d_PlayerList) 
+		{
+			l_CurrentPlayer = l_Player;
 			if (l_CurrentPlayer.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
 				l_PlayerFound = true;
-				d_PlayerList.remove(d_PlayerList.indexOf(player));
-				//return ("Player " + p_PlayerName + " This Player removed from the game");
-
+				d_PlayerList.remove(d_PlayerList.indexOf(l_Player));
 			}
 		}
 		if (l_PlayerFound == false) {
 			throw new Exception("\"This Player not found");
 
 		}
-		//return " ";
-
 	}
 	/**
 	 * This method sets the player queue
@@ -145,27 +148,24 @@ public class GameModelNew {
 	 * @param d_PlayerQueue the Player queue
 	 *
 	 */
-	public  void setplayerQueue(Queue<Player> d_PlayerQueue) {
+	public  void setplayerQueue(Queue<Player> d_PlayerQueue) 
+	{
 		this.d_PlayerQueue=d_PlayerQueue;
 
 	}
 	/**
 	 * This method sets army count to all players.
 	 *
-	 * @param count the assigned army count 
+	 * @param p_count count the assigned army count 
 	 */
-	public void setPlayerArmies(int p_count) {
-		for (Player l_Player : getAllPlayers()) {
-			l_Player.setPlayerArmies(p_count);
+	public void setPlayerArmies(int p_Count) 
+	{
+		for (Player l_Player : getAllPlayers()) 
+		{
+			l_Player.setPlayerArmies(p_Count);
 		}
 	}
 
-	/**
-	 * This method Assign all the countries randomly to the players
-	 * @throws Exception 
-	 *
-	 * 
-	 */
 
 	public void startUpPhase() throws Exception 
 	{
@@ -181,7 +181,7 @@ public class GameModelNew {
 				int l_index = l_Random.nextInt(l_CountryList.size());
 				setPlayerId(d_PlayerQueue.remove());
 				getPlayerId1().addCountry(l_CountryList.get(l_index));
-				System.out.println(getPlayerId1());
+				//System.out.println(getPlayerId1());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_index);
 			}
