@@ -47,6 +47,30 @@ public class GameModelTest {
 		
 	 }
 	
+	@Test 
+//	(expected= Exception.class)
+	public void testRemovePlayer() throws Exception {
+		
+		Player c1 = new Player("raj");
+		Player c2 = new Player("kumar");
+		check.add(c1);
+		check.add(c2);
+		d_game.addPlayer("raj");
+		d_game.addPlayer("kumar");
+		d_game.removePlayer("raj");
+		for(Player l:check)
+		{
+		l_Names.add(l.getPlayerName());
+		}
+		for(Player l:d_game.getAllPlayers())
+		{
+		l_checkNames.add(l.getPlayerName());
+		}
+		assertFalse(l_checkNames.equals(l_Names));
+	 }
+	
+	
+	
 	
 	
 
