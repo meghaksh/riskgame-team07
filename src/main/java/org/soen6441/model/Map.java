@@ -55,7 +55,14 @@ public class Map {
 		return this.d_CountryObjects;
 	}
 
-
+	public void Reset()
+	{
+		this.d_ContinentObjects.clear();
+		this.d_CountryObjects.clear();
+		this.d_Neighbors.clear();
+		Country.setCount(0);
+		Continent.setCount(0);
+	}
 
 	/**
 	 * This method loads a map file given by the user
@@ -64,12 +71,7 @@ public class Map {
 	 */
 	public void  LoadMap(String p_Filename) throws FileNotFoundException
 	{
-		this.d_ContinentObjects.clear();
-		this.d_CountryObjects.clear();
-		this.d_borders.clear();
-		this.d_Neighbors.clear();
-		
-		System.out.println("Came inside");
+		Reset();
 		String l_path="resource\\";
 		int l_ControlValue,l_ContinentID=1,l_CountryID;
 		File file =new File(l_path+p_Filename);
@@ -91,7 +93,7 @@ public class Map {
 					l_ContinentID++;
 					l_line=sc.nextLine();
 				}
-				System.out.print("no prob in continents");
+				
 			}
 			if(l_line.contains("countries"))
 			{
@@ -116,40 +118,50 @@ public class Map {
 					}
 					l_line=sc.nextLine();
 				}
-				System.out.print("no prob in countries");
+				
 			}
 			if(l_line.contains("borders"))
 			{
 
 				while(!l_line.equals("") && sc.hasNextLine())
 				{
+					
 					l_line=sc.nextLine();
 					String[] l_arr2=l_line.split(" ");
 					for(Country l_tempcountry: this.d_CountryObjects)
 					{
+						
 						if (l_tempcountry.d_ID==Integer.parseInt(l_arr2[0]))
 						{
+							
 							ArrayList<Integer> l_Borders = new ArrayList<>();
 							for(int l_k=1;l_k<l_arr2.length;l_k++)
 							{
-
-								l_tempcountry.setBorder(l_arr2[l_k]);
+								
+								for(Country l_tcountry: this.d_CountryObjects)
+								{
+									if(l_tcountry.d_ID==Integer.parseInt(l_arr2[l_k]))
+									{
+										l_tempcountry.setBorder(l_tcountry.d_Name);
+									}
+								}
+								
 								l_Borders.add(Integer.parseInt(l_arr2[l_k]));
+							
 							}
+					
 							d_Neighbors.put(Integer.parseInt(l_arr2[0]),l_Borders);
 							break;
 						}
 					}
 
 				}
-				System.out.print("no prob in borders");
-				System.out.println("d_Neighbours in Loadmap : "+ d_Neighbors.size());
-
+				
 			}
 
 
 		}
-		System.out.println("outof while");
+	
 
 	}
 	/**
