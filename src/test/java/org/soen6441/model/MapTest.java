@@ -155,9 +155,13 @@ public class MapTest {
 					}
 				}
 				assertEquals(1,flag);
-					//assertTrue(l_map.getContinentList().contains(c.getContinentName()));	
 			}
 			
+	}
+	@Test
+	public void testRemoveCountryFromContinent() throws Exception{
+		l_map.RemoveCountryFromContinent(cc1.getCountryName(), c0.getCountryList());		
+		assertFalse(c0.getCountryList().contains(cc1));
 	}
 
 
