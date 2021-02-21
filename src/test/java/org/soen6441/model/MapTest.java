@@ -163,6 +163,19 @@ public class MapTest {
 		l_map.RemoveCountryFromContinent(cc1.getCountryName(), c0.getCountryList());		
 		assertFalse(c0.getCountryList().contains(cc1));
 	}
+	@Test
+	public void testRemoveAllCountryFromContinent() throws Exception{
+		l_map.RemoveAllCountryInContinent(c1);
+		int flag=0;
+		for(Country c : c1.getCountryList() )
+		{
+			if(l_map.getCountryList().contains(c)) {
+				flag =1;break;
+			}
+		}
+		assertEquals(0,flag);
+		//assertEquals(check,l_map.getCountryList());
+	}
 
 
 
