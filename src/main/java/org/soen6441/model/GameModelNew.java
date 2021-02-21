@@ -26,6 +26,16 @@ public class GameModelNew {
 		d_Map = new Map();
 		d_PlayerList=new ArrayList<Player>();
 	}
+	/**
+	 * This is parameterized constructor which takes Map parameter 
+	 * @param p_map parameter of map
+	 */
+	public GameModelNew(Map p_map)
+	{
+		d_Map = p_map;
+		d_PlayerList=new ArrayList<Player>();
+		
+	}
 
 	/**
 	 * get Method for map
@@ -54,6 +64,7 @@ public class GameModelNew {
 
 		this.d_PlayerID = d_PlayerID;
 	}
+	
 	/**
 	 * this method will get all the players from the ArrayList
 	 * 
