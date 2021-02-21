@@ -19,17 +19,9 @@ public class Continent {
 		d_CountryList = new ArrayList<Country>();
 	}
 	
-	/**
-	 * Continent Object Constructor
-	 * @param p_ContinentID
-	 * @param p_Name
-	 * @param p_ContinentControlValue
-	 */
-	public Continent(int p_ContinentID,String p_Name, int p_ContinentControlValue)
+	public static void setCount(int p_count)
 	{
-		d_ID=p_ContinentID;
-		this.d_Name=p_Name;
-		this.d_ContinentControlValue=p_ContinentControlValue;
+		d_COUNT=p_count;
 	}
 	
 	/**
