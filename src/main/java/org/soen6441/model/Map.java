@@ -261,17 +261,19 @@ public class Map {
 			}
 		}
 	}
-	public void RemoveCountry(String p_CountryName)throws Exception {
+	public void RemoveCountry(String p_CountryName, boolean p_IsOnlyCountryRemove)throws Exception {
 		Iterator<Country> l_Iterator = this.d_CountryObjects.iterator();
 		boolean l_RemovedFlag = false;
 		while(l_Iterator.hasNext()) {
 			Country l_tempCountry = l_Iterator.next();
 			if(l_tempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
-				String l_OwnerContinent = l_tempCountry.getContinentName();
-				for(Continent l_TempContinent : d_ContinentObjects) {
-					if(l_TempContinent.getContinentName().equals(l_OwnerContinent)) {
-						ArrayList<Country> d_CountryList = l_TempContinent.getCountryList();
-						RemoveCountryFromContinent(p_CountryName, d_CountryList);
+				if(p_IsOnlyCountryRemove) {			//This block is executed only when editcountry remove command is there. Not for editcontinent command. 
+					String l_OwnerContinent = l_tempCountry.getContinentName();
+					for(Continent l_TempContinent : d_ContinentObjects) {
+						if(l_TempContinent.getContinentName().equals(l_OwnerContinent)) {
+							ArrayList<Country> d_CountryList = l_TempContinent.getCountryList();
+							RemoveCountryFromContinent(p_CountryName, d_CountryList);
+						}
 					}
 				}
 				l_Iterator.remove();
@@ -295,7 +297,8 @@ public class Map {
 		ArrayList<Country> l_TempCountryList = p_TempContinent.getCountryList();
 		Iterator<Country> l_CountriesOfContinent = l_TempCountryList.iterator();
 		while(l_CountriesOfContinent.hasNext()) {
-			RemoveCountry(l_CountriesOfContinent.next().getCountryName());
+			Country l_TempCountryToBeRemoved = l_CountriesOfContinent.next();
+			RemoveCountry(l_TempCountryToBeRemoved.getCountryName(),false);
 		}
 	}
 	

@@ -72,7 +72,7 @@ public class MapController {
 						l_removeContinentCounter+=1;
 						break;
 					case "editcountry":
-						d_mapModel.RemoveCountry(l_commandArray[l_counter+1]);
+						d_mapModel.RemoveCountry(l_commandArray[l_counter+1],true);
 						l_counter+=2;
 						l_removeCountryCounter+=1;
 						break;
