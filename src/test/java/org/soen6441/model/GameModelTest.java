@@ -1,16 +1,7 @@
 package org.soen6441.model;
-import org.soen6441.model.*;
-
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
+import org.soen6441.model.*;			import static org.junit.Assert.assertEquals;											
+import java.util.ArrayList;				import java.util.List;import static org.junit.Assert.*;
+import org.junit.Before;				import org.junit.Test;
 public class GameModelTest {
 	GameModelNew d_game = new GameModelNew();
 	ArrayList<Player> check;
@@ -55,6 +46,8 @@ public class GameModelTest {
 		assertEquals(l_checkNames,l_Names);
 		
 	 }
+	
+	
 	
 
 	
