@@ -148,13 +148,21 @@ public class GameController {
 					
 				case "assigncountries":
 					if(d_MapDone==true) {
+					try {
 					AssignCountries();
+					}
+					catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+						d_CpView.setCommandAcknowledgement("\n");
+					}
 					List<String> l_AckMsg1 = showAllPlayerWithArmies();
 					d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
 					d_PlayerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
 					d_PlayerController.player_issue_order();
 					d_PlayerController.player_next_order();
-					}else{
+					}
+					
+					else{
 						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Add Assign Countries"+"\n");
 					}
 					break;
@@ -212,7 +220,7 @@ public class GameController {
 		return l_ReturnString;
 	}
 
-	public void AssignCountries() {
+	public void AssignCountries() throws Exception {
 		d_GameModelNew.startUpPhase();
 	}
 
