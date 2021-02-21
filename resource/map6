@@ -1,0 +1,16 @@
+
+continents
+africa 3
+aus 4
+
+countries
+1 kenya 2
+2 mosambique 2
+3 sydney 0
+4 mel 0
+
+borders
+1 4 
+2 
+3 
+4 1 

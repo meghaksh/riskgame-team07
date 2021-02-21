@@ -19,9 +19,9 @@ public class GameModelTest {
 		l_checkNames = new ArrayList<>();
 		
 		d_map = new Map();
-		d_map.AddCountry("india","asia");
-		d_map.AddCountry("china","asia");
-		d_map.AddContinent("asia","0");
+		d_map.addCountry("india","asia");
+		d_map.addCountry("china","asia");
+		d_map.addContinent("asia","0");
 	}
 	
 	@Test 

@@ -43,13 +43,13 @@ public class MapTest {
 		check.add(cc3);
 		check.add(cc4);
 		check.add(cc5);
-		l_map.AddContinent(c0.getContinentName(), "0");
-		l_map.AddContinent(c1.getContinentName(), "0");
-		l_map.AddCountry("india","asia");
-		l_map.AddCountry("china","asia");
-		l_map.AddCountry("japan","asia");
-		l_map.AddCountry("kenya","africa");
-		l_map.AddCountry("egypt","africa");
+		l_map.addContinent(c0.getContinentName(), "0");
+		l_map.addContinent(c1.getContinentName(), "0");
+		l_map.addCountry("india","asia");
+		l_map.addCountry("china","asia");
+		l_map.addCountry("japan","asia");
+		l_map.addCountry("kenya","africa");
+		l_map.addCountry("egypt","africa");
 	}
 
 
@@ -65,7 +65,7 @@ public class MapTest {
 	@Test
 	public void testRemoveCountry() throws Exception {
 
-		l_map.RemoveCountry("egypt", true);
+		l_map.removeCountry("egypt", true);
 
 		assertFalse(l_map.getCountryList().contains(cc5));
 
@@ -74,8 +74,8 @@ public class MapTest {
 
 	@Test
 	public void testAddBorder() {
-		l_map.AddBorder("india", "china");
-		l_map.AddBorder("india", "kenya");
+		l_map.addBorder("india", "china");
+		l_map.addBorder("india", "kenya");
 
 		for(Country c: l_map.getCountryList()) {
 			if(c.getCountryName().equals("india")) {
@@ -137,7 +137,7 @@ public class MapTest {
 	}
 	@Test
 	public void testRemoveContinent() throws Exception{
-		l_map.RemoveContinent(c0.getContinentName());	
+		l_map.removeContinent(c0.getContinentName());	
 		assertFalse(l_map.getContinentList().contains(c0));
 
 	}
@@ -160,12 +160,12 @@ public class MapTest {
 	}
 	@Test
 	public void testRemoveCountryFromContinent() throws Exception{
-		l_map.RemoveCountryFromContinent(cc1.getCountryName(), c0.getCountryList());		
+		l_map.removeCountryFromContinent(cc1.getCountryName(), c0.getCountryList());		
 		assertFalse(c0.getCountryList().contains(cc1));
 	}
 	@Test
 	public void testRemoveAllCountryFromContinent() throws Exception{
-		l_map.RemoveAllCountryInContinent(c1);
+		l_map.removeAllCountryInContinent(c1);
 		int flag=0;
 		for(Country c : c1.getCountryList() )
 		{
@@ -176,6 +176,7 @@ public class MapTest {
 		assertEquals(0,flag);
 		//assertEquals(check,l_map.getCountryList());
 	}
+	
 
 
 
