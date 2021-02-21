@@ -58,16 +58,16 @@ public class PlayerController {
 		
 		while(!l_players.isEmpty())
 		{
-System.out.println("inside while loop");
+			System.out.println("inside while loop");
 			
 			int l_flag =0;
+			ArrayList<Player> l_removePlayerList = new ArrayList();
 			Player l_removePlayer = new Player();
 			for(Player l_tempPlayer : l_players)
 			{
 			
-				l_flag = 0;
 				System.out.println("inside nested while loop");
-				d_orderAcknowledgment = l_tempPlayer.getPlayerName()+" Enter deploy order";
+				d_orderAcknowledgment = "\n"+l_tempPlayer.getPlayerName()+" Enter deploy order";
 				d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
 				
 				String l_stringOrder = JOptionPane.showInputDialog("Please Enter Your Deploy Order");
@@ -82,9 +82,41 @@ System.out.println("inside while loop");
 				l_tempPlayer.setOrder(l_stringOrder);
 				l_tempPlayer.issue_order();
 				String l_result = l_tempPlayer.getResult();
-				if(l_result.contains("armies"))
+				int l_resultInteger = l_tempPlayer.getResultInteger();
+				
+				
+				if(l_resultInteger==2)
 				{
-					l_flag=1;
+					d_orderAcknowledgment=l_result;
+					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
+					l_flag=1;l_removePlayerList.add(l_tempPlayer);
+					System.out.println(l_tempPlayer.getPlayerName()+"'s armies have become zero");
+				}
+				else if(l_resultInteger==3)
+				{
+					System.out.println(l_result);
+					d_orderAcknowledgment = l_result;
+					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
+					System.out.println("\nThis country does not belong to "+l_tempPlayer.getPlayerName());
+				}
+				else if(l_resultInteger==4)
+				{
+					d_orderAcknowledgment = l_result+"\n Please enter the next order accordingly";
+					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
+					System.out.println(d_orderAcknowledgment);
+				}
+				else if(l_resultInteger==1)
+				{
+					d_orderAcknowledgment = l_result;
+					d_CpView.setCommandAcknowledgement(d_orderAcknowledgment);
+					System.out.println("\norder successfully added to "+l_tempPlayer.getPlayerName()+"'s order list");
+				}
+				
+				
+				
+				/*if(l_result.contains("armies"))
+				{
+					l_flag=0;
 					d_orderAcknowledgment = l_result+"/n Please enter the next order accordingly";
 					System.out.println(d_orderAcknowledgment);
 					
@@ -98,12 +130,16 @@ System.out.println("inside while loop");
 				{
 					System.out.println(l_result);
 					d_orderAcknowledgment = l_result;
-				}
+				}*/
 			
 			}
 			if(l_flag==1)
 			{
-				l_players.remove(l_removePlayer);
+				for(Player l_tempRemovePlayer : l_removePlayerList)
+				{
+					l_players.remove(l_tempRemovePlayer);
+				}
+				//l_players.remove(l_removePlayer);
 			}
 		}
 		
