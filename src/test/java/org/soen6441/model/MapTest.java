@@ -19,6 +19,7 @@ public class MapTest {
 	Country cc1,cc2,cc3;
 	Country cc4,cc5;
 	ArrayList<Country> check;
+	ArrayList<Continent> checkContinent;
 	Map l_map;
 	
 	
@@ -35,12 +36,17 @@ public class MapTest {
 		cc4 = new Country("kenya","africa");
 		cc5 = new Country("egypt","africa");
 		check =  new ArrayList<Country>();
+		checkContinent = new ArrayList<Continent>();
 		l_map = new Map();
+		checkContinent.add(c0);
+		checkContinent.add(c1);
 		check.add(cc1);
 		check.add(cc2);
 		check.add(cc3);
 		check.add(cc4);
 		check.add(cc5);
+		l_map.AddContinent(c0.getContinentName(), "0");
+		l_map.AddContinent(c1.getContinentName(), "0");
 		l_map.AddCountry("india","asia");
 		l_map.AddCountry("china","asia");
 		l_map.AddCountry("japan","asia");
@@ -126,13 +132,20 @@ public class MapTest {
 //			assertFalse(message.contains(("Country Already Exist")));
 //		}
 			
-	
-	public static void main(String args[]) throws Exception {
-		MapTest mp = new MapTest();
-		mp.setTestContext();
-		mp.testAddCountry();
+	@Test
+	public void testAddContinent() throws Exception{
 		
+		assertTrue(l_map.getContinentList().contains(c0));
 	}
+	/*@Test
+	public void testRemoveContinent() throws Exception{
+		l_map.RemoveContinent(c0.getContinentName());	
+		assertFalse(l_map.getContinentList().contains(c0));
+			
+	}*/
+	
+	
+	
 	
 	
 	}
