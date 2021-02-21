@@ -166,7 +166,20 @@ public class GameModelNew {
 		}
 	}
 
-
+	/**
+	 * <p>
+	 * This Method is the startup Phase method
+	 * <p>
+	 * <ul>
+	 * <li>This Method will take all the players in a queue
+	 * <li>Then it will check for all the countries available in a map 
+	 * <li>It will run the loop until all the countries are assigned to players
+	 * <li>Now it will Randomly assign countries to all players and remove the assigned countries from the list
+	 * <li>Finally once the assigning countries to players is completed it will call AssignReinforcementArmies Method
+	 * </ul> 
+	 * @throws Exception if there are no players in the list
+	 *
+	 */
 	public void startUpPhase() throws Exception 
 	{
 		if(getAllPlayers().size()>0)
@@ -197,7 +210,17 @@ public class GameModelNew {
 	}
 
 	/**
+	 * <p>
 	 * This Method will assign armies to the players.
+	 * <ul>
+	 * <li>This Method will check if they players size is greater than 0
+	 * <li>If it is greater than 0 it will check for no of countries assigned for player /3 and assign armies count
+	 * <li>If a PLayer holds complete continent Then we will add its continent value to the player army count
+	 * <li>Now here we have used Max to assign Minimum armies to players of the army count is less than 3 else it gives max armies
+	 * <li>Once the respective armies has been assigned to that particular player it will set armies to the player based on armycount
+	 * </ul>
+	 * @throws Exception this Method will throw an Exception if player size is less than 0
+	 * 
 	 */
 	public void AssignReinforcementArmies() throws Exception
 	{	
@@ -209,7 +232,6 @@ public class GameModelNew {
 				{
 					l_ArmyCount += l_Continent.getContinentControlValue();
 				}
-				l_ArmyCount += l_Player.getPlayerArmies();
 				l_ArmyCount= Math.max(l_ArmyCount, 3);
 				l_Player.setPlayerArmies(l_ArmyCount);
 			}
