@@ -6,24 +6,30 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * This is the  GameModelNew class of MVC model. 
+ * This class has a references of  Models. 
+ * This class acts as an Data info for other controllers.
+ */
 public class GameModelNew {
-	private Map d_map;
+	private Map d_Map;
 	private Player d_PlayerID;
 	private ArrayList<Player> d_PlayerList;
 	private int d_PlayerCount;
 	private Queue<Player> d_PlayerQueue= new LinkedList<Player>();
-	
-	public GameModelNew() {
-		d_map = new Map();
+
+	public GameModelNew() 
+	{
+		d_Map = new Map();
 		d_PlayerList=new ArrayList<Player>();
 	}
-	
+
 	public Map getMap() {
-		return this.d_map;
+		return this.d_Map;
 	}
-	
-	
-	
+
+
+
 	public Player getPlayerId1() 
 	{
 		return d_PlayerID;
@@ -34,7 +40,7 @@ public class GameModelNew {
 	 */
 	public void setPlayerId(Player d_PlayerID) 
 	{
-		
+
 		this.d_PlayerID = d_PlayerID;
 	}
 	/**
@@ -52,22 +58,22 @@ public class GameModelNew {
 	 */
 	public void setplayerCount() {
 		this.d_PlayerCount=this.d_PlayerList.size();
-			
+
 	}
-	
+
 	public Player getPlayerId() {
 		return this.d_PlayerID;
 	}
-	
-	
+
+
 	/**
 	 * This method gets selected map.
 	 *
 	 * @return the selected map
 	 */
 	public Map getSelectedMap() {
-		
-		return d_map;
+
+		return d_Map;
 
 	}
 	/**
@@ -77,10 +83,11 @@ public class GameModelNew {
 	 * @return Player name  that has added
 	 */
 	public void addPlayer(String p_PlayerName)throws Exception {
-//		if ((d_PlayerList.size() == d_PlayerCount && d_PlayerCount != 0) || d_PlayerList.size() == MAX_PLAYERS) 
-//		{
-//			return "Reached Max Number of Players can be added to the game";
-//		}
+
+		//		if ((d_PlayerList.size() >= getSelectedMap().getCountryList().size())) 
+		//		{
+		//			throw new Exception("Reached Max Number of Players can be added to the game");
+		//		}
 		if (existDuplicatePlayer(p_PlayerName)) {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 
@@ -127,7 +134,7 @@ public class GameModelNew {
 		}
 		if (l_PlayerFound == false) {
 			throw new Exception("\"This Player not found");
-	
+
 		}
 		//return " ";
 
@@ -140,7 +147,7 @@ public class GameModelNew {
 	 */
 	public  void setplayerQueue(Queue<Player> d_PlayerQueue) {
 		this.d_PlayerQueue=d_PlayerQueue;
-				
+
 	}
 	/**
 	 * This method sets army count to all players.
@@ -152,61 +159,67 @@ public class GameModelNew {
 			l_Player.setPlayerArmies(p_count);
 		}
 	}
-	
+
 	/**
 	 * This method Assign all the countries randomly to the players
+	 * @throws Exception 
 	 *
 	 * 
 	 */
-	
-	public void startUpPhase() 
+
+	public void startUpPhase() throws Exception 
 	{
+		if(getAllPlayers().size()>0)
+		{
+			d_PlayerQueue.addAll(getAllPlayers());
+			List<Country> l_CountryList = new ArrayList<>();
 
-		
-		d_PlayerQueue.addAll(getAllPlayers());
-		List<Country> l_CountryList = new ArrayList<>();
+			l_CountryList  = getSelectedMap().getCountryList();		
+			while (l_CountryList.size() > 0) 
+			{	
+				Random l_Random = new Random();
+				int l_index = l_Random.nextInt(l_CountryList.size());
+				setPlayerId(d_PlayerQueue.remove());
+				getPlayerId1().addCountry(l_CountryList.get(l_index));
+				System.out.println(getPlayerId1());
+				d_PlayerQueue.add(d_PlayerID);
+				l_CountryList.remove(l_index);
+			}
 
-		l_CountryList  = getSelectedMap().getCountryList();		
-		while (l_CountryList.size() > 0) 
-		{	
-			Random l_Random = new Random();
-			int l_index = l_Random.nextInt(l_CountryList.size());
-			setPlayerId(d_PlayerQueue.remove());
-			getPlayerId1().addCountry(l_CountryList.get(l_index));
-			d_PlayerQueue.add(d_PlayerID);
-			l_CountryList.remove(l_index);
+			AssignReinforcementArmies();
 		}
-		
-		AssignReinforcementArmies();
+		else
+		{
+			throw new Exception ("\"Please enter players using gameplayer add command");
+
+		}
+
 	}
-	
+
 	/**
 	 * This Method will assign armies to the players.
 	 */
-	public void AssignReinforcementArmies()
-	{	for (Player l_Player : getAllPlayers()) {
-		int l_ArmyCount = ((l_Player.getCountriesSize())/3);
-		for(Continent l_Continent:l_Player.getContinentList()) 
+	public void AssignReinforcementArmies() throws Exception
+	{	
+		if(getAllPlayers().size()>0)
 		{
-			l_ArmyCount += l_Continent.getContinentControlValue();
+			for (Player l_Player : getAllPlayers()) {
+				int l_ArmyCount = ((l_Player.getCountriesSize())/3);
+				for(Continent l_Continent:l_Player.getContinentList()) 
+				{
+					l_ArmyCount += l_Continent.getContinentControlValue();
+				}
+				l_ArmyCount += l_Player.getPlayerArmies();
+				l_ArmyCount= Math.max(l_ArmyCount, 3);
+				l_Player.setPlayerArmies(l_ArmyCount);
+			}
 		}
-		l_ArmyCount += l_Player.getPlayerArmies();
-		l_ArmyCount= Math.max(l_ArmyCount, 3);
-		l_Player.setPlayerArmies(l_ArmyCount);
-		
+		else
+		{
+			throw new Exception ("\"Please enter players using gameplayer add command");
+
+		}
 	}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 }
