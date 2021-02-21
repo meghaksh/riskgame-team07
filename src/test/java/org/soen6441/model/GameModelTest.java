@@ -20,8 +20,9 @@ public class GameModelTest {
 		
 		d_map = new Map();
 		d_map.addCountry("india","asia");
-		d_map.addCountry("china","asia");
+		//d_map.addCountry("china","asia");
 		d_map.addContinent("asia","0");
+		d_game = new GameModelNew(d_map);
 	}
 	
 	@Test 
@@ -88,6 +89,83 @@ public class GameModelTest {
 		
 	 }
 	
+	@Test 
+////(expected= Exception.class)
+public void testIssueOrder() throws Exception {
+		
+	String l_command="deploy india 4";
+	
+	String[] l_CommandArray = l_command.split(" ");
+	String l_country=l_CommandArray[1];
+	
+	d_game.addPlayer("raj");
+	d_game.addPlayer("kumar");
+	d_game.startUpPhase();
+	boolean l_flag=false;
+	String l_result="";
+//	String l_Expected="raj ; you have only 0 number of armies!";
+//	
+	
+	for(Player l:d_game.getAllPlayers())
+	{
+	if(l.getPlayerName().equalsIgnoreCase("raj"))
+	{	
+		l.setPlayerArmies(Integer.parseInt(l_CommandArray[2]));
+		l.setOrder(l_command);
+		
+		for(Country l_C:l.getCountryList())
+		{
+			if(l_C.getCountryName().equalsIgnoreCase(l_country))
+				{
+					l_flag=true;
+					//System.out.println(l_C.getCountryName());
+				}
+		}
+		l.issue_order();
+		l_result=l.getResult();
+		//System.out.println(l_result);
+	}
+//		l.issue_order();
+//		l_result=l.getResult();
+		//System.out.println(l_result);
+		
+	}
+//	if(l_Expected.equalsIgnoreCase(l_result))
+//	{
+//	System.out.println("same");
+//	}
+	//assertEquals(l_Expected,l_result);
+	
+	
+	assertTrue(l_flag);
+	
+	}
+	
+	
+//	
+////	for(Player l:d_game.getAllPlayers())
+////	{
+		
+//		{
+//		for(Country l_co:l.getCountryList())
+//		{
+//			if(l_co.getCountryName().equalsIgnoreCase(l_country))
+//			{
+//				l_flag=true;
+//			}
+//		}
+//		}
+//		
+//	}
+//	assertTrue(l_flag,)
+		
+//		List<C> l_checkNames=l.getCountryList();
+//		assertTrue(3<=value);
+		
+	
+	
+ }
+	
 
 	
 //	@Test (expected= Exception.class)
@@ -114,4 +192,4 @@ public class GameModelTest {
 //		l_game.removePlayer(l_playerName);
 //		l_game.removePlayer(l_playerName1);
 //	 }
-}
+
