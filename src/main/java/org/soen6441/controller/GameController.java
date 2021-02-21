@@ -45,7 +45,7 @@ public class GameController {
 		 * Based on the type of the command, it will call the method of specific controllers. 
 		 */
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent l_E) {
 			try {
 				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
 				switch(l_CommandStringFromInput.split(" ")[0]){
@@ -53,7 +53,7 @@ public class GameController {
 					if(d_MapDone==false) {
 					try {
 						System.out.println("Inside GameController");
-						String l_AckMsg = d_MapController.EditMap("editcontinent", l_CommandStringFromInput);
+						String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
 					}catch(Exception p_Exception) {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
@@ -67,7 +67,7 @@ public class GameController {
 				case "editcountry" :
 					if(d_MapDone==false) {
 					try {
-						String l_AckMsg = d_MapController.EditMap("editcountry", l_CommandStringFromInput);
+						String l_AckMsg = d_MapController.editMap("editcountry", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
 					}catch(Exception p_Exception) {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
@@ -80,7 +80,7 @@ public class GameController {
 					
 				case "editneighbor" :
 					if(d_MapDone==false) {
-					String l_AckMsg = d_MapController.EditMap("editneighbor", l_CommandStringFromInput);
+					String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
 					}
 					else {
@@ -95,7 +95,7 @@ public class GameController {
 				case "savemap":
 					if(d_MapDone==false) {
 					try {
-						String l_Result=d_MapController.SaveMap(l_CommandStringFromInput);
+						String l_Result=d_MapController.saveMap(l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
@@ -108,7 +108,7 @@ public class GameController {
 				case "editmap":
 					if(d_MapDone==false) {
 					try {
-						String l_Result=d_MapController.LoadMap(l_CommandStringFromInput);
+						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
@@ -119,12 +119,12 @@ public class GameController {
 					break;
 					
 				case "validatemap":
-					d_CpView.setCommandAcknowledgement(d_MapController.ValidateMap());
+					d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
 					break;
 					
 				case "loadmap": 
 					try {
-						String l_Result=d_MapController.LoadMap(l_CommandStringFromInput);
+						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
 						this.d_MapDone = true;
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception exp) {

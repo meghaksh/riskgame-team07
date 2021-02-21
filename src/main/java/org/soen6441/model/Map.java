@@ -128,7 +128,7 @@ public class Map {
 	 * @param p_Filename 
 	 * @throws IOException 
 	 */
-	public String SaveMap(String p_FileName) throws Exception
+	public String saveMap(String p_FileName) throws Exception
 	{
 		String l_Path="resource\\";
 		ArrayList<String> l_Borders= new ArrayList<>();

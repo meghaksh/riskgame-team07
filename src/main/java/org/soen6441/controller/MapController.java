@@ -15,12 +15,12 @@ public class MapController {
 	public MapController(Map p_map) {
 		d_mapModel = p_map;
 	}
-	public String SaveMap(String p_str)throws Exception {
+	public String saveMap(String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
-		String l_result=d_mapModel.SaveMap(l_commandArray[1]);
+		String l_result=d_mapModel.saveMap(l_commandArray[1]);
 		return l_result;
 	}
-	public String LoadMap(String p_str)throws Exception{
+	public String loadMap(String p_str)throws Exception{
 		String[] l_commandArray = p_str.split(" ");
 		if(l_commandArray[0].equals("editmap")) {
 			String l_result=d_mapModel.loadMap(l_commandArray[1]);
@@ -33,10 +33,10 @@ public class MapController {
 		}
 		
 	}
-	public String ValidateMap() {
+	public String validateMap() {
 		return d_mapModel.validateMap();
 	}
-	public String EditMap(String p_command, String p_str)throws Exception {
+	public String editMap(String p_command, String p_str)throws Exception {
 		String[] l_commandArray = p_str.split(" ");
 		int l_counter = 1;
 		int l_addContinentCounter = 0;
