@@ -72,6 +72,21 @@ public class GameModelTest {
 	
 	
 	
+	@Test 
+////	(expected= Exception.class)
+	public void testAssignReinforcements() throws Exception {
+		
+		d_game.addPlayer("raj");
+		d_game.addPlayer("kumar");
+		d_game.startUpPhase();
+		for(Player l:d_game.getAllPlayers())
+		{
+			int value=l.getPlayerArmies();
+			assertTrue(3<=value);
+			
+		}
+		
+	 }
 	
 
 	
