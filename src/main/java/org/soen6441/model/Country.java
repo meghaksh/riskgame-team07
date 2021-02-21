@@ -12,14 +12,14 @@ public class Country {
 	String d_Name;
 	//int d_ContinentID;
 	String d_ContinentName;
-	ArrayList<String> d_neighbors;
+	ArrayList<String> d_Neighbors;
 	int d_NoOfArmies;
 
-	public Country(String p_Name, String p_continentName) {
+	public Country(String p_Name, String p_ContinentName) {
 		setCountryID(++d_COUNT);
 		this.d_Name = p_Name;
-		this.d_ContinentName = p_continentName;
-		d_neighbors=new ArrayList<String>();
+		this.d_ContinentName = p_ContinentName;
+		d_Neighbors=new ArrayList<String>();
 	}
 	public String getContinentName() {
 		return this.d_ContinentName;
@@ -30,7 +30,7 @@ public class Country {
 	 */
 	public  void setBorder(String p_Border)
 	{
-		this.d_neighbors.add(p_Border);
+		this.d_Neighbors.add(p_Border);
 	}
 
 
@@ -40,7 +40,7 @@ public class Country {
 	 */
 	public  ArrayList<String> getBorder()
 	{
-		return this.d_neighbors;
+		return this.d_Neighbors;
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class Country {
 	}
 	
 	public void removeBorder(String p_Border) {
-		Iterator l_Iterator = this.d_neighbors.iterator();
+		Iterator l_Iterator = this.d_Neighbors.iterator();
 		while(l_Iterator.hasNext()) {
 			if(l_Iterator.next().toString().equals(p_Border)) {
 				l_Iterator.remove();
