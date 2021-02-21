@@ -1,8 +1,5 @@
 package org.soen6441.model;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -50,14 +47,41 @@ public class MapTest {
 		l_map.AddCountry("kenya","africa");
 		l_map.AddCountry("egypt","africa");
 	}
+	
+	
+	
 	@Test 
 	public void testAddCountry() throws Exception {
-	
 		
-		for (Continent co: l_map.getContinentList()){
-		if (co.getContinentName().equals("asia")){
-			assertEquals(check,co.getCountryList());
+		assertTrue(l_map.getCountryList().contains(cc5));
+		
+	}
+		
+		
+	@Test
+	public void testRemoveCountry() throws Exception {
+		
+		l_map.RemoveCountry("egypt");
+		
+		assertFalse(l_map.getCountryList().contains(cc5));
+		
+	}
+	
+	
+	@Test
+	public void testAddBorder() {
+		l_map.AddBorder("india", "china");
+		l_map.AddBorder("india", "kenya");
+		
+		for(Country c: l_map.getCountryList()) {
+			if(c.getCountryName().equals("india")) {
+				assertTrue(c.getBorder().contains("china"));
+			}
 		}
+	}
+	
+	@Test
+	public void testRemoveBorder() {
 		
 	}
 		
@@ -89,21 +113,8 @@ public class MapTest {
 //			
 //		}
 //		
-		
-		
 		//assertTrue(flag);
-		
-
-		
 		//assertTrue(flag2);
-		
-		
-		
-		
-		
-		
-		
-		
 		
 //		try {
 //			l_map.AddCountry(l_country, l_continent);
@@ -114,7 +125,16 @@ public class MapTest {
 //			System.out.println(message);
 //			assertFalse(message.contains(("Country Already Exist")));
 //		}
-				
+			
+	
+	public static void main(String args[]) throws Exception {
+		MapTest mp = new MapTest();
+		mp.setTestContext();
+		mp.testAddCountry();
+		
+	}
+	
+	
 	}
 
-}
+
