@@ -1,9 +1,7 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;		import java.util.Iterator;
+import java.util.LinkedList;	import java.util.Queue;
 import java.util.Scanner;
 
 
@@ -14,154 +12,228 @@ import java.util.Scanner;
  *
  */
 public class Player {
-	String d_playerName="";
-	int d_playerId;
-	String d_playerColor = "";
-	int d_armies;
-	int d_tempArmies;
-	int d_resultInteger;
-    ArrayList<Country> d_countries = new ArrayList<Country>();
-	Queue<Order> d_order = new LinkedList<Order>();
-	ArrayList<Continent> d_Continents = new ArrayList<Continent>();
-	Scanner d_scan;
-	String d_result="";
-	String d_stringOrder="";
-	GameModelNew d_gameModelNew;
+	private String d_PlayerName="";
+	private int d_PlayerId;
+	private String d_PlayerColor = "";
+	private int d_Armies;
+	private int d_TempArmies;
+	private int d_ResultInteger;
+	private ArrayList<Country> d_Countries = new ArrayList<Country>();
+	private Queue<Order> d_Order = new LinkedList<Order>();
+	private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
+	private String d_Result="";
+	private String d_StringOrder="";
+	private GameModelNew d_GameModelNew;
 
+	/**
+	 * default constructor of Player class	
+	 */
 	public Player()
 	{
-		
+
 	}
-	public Player(String p_playerName)
+	/**
+	 * constructor of Player class with only player name as the parameters
+	 * @param p_PlayerName  Name of the player
+	 */
+	Player(String p_PlayerName)
 	{
-		d_playerName = p_playerName;
+		d_PlayerName = p_PlayerName;
 	}
-	
-	Player(String p_playerName,int p_playerId,String p_playerColor)
+	/**
+	 * constructor with player name, player id, and player color as parameters 
+	 * @param p_PlayerName Name of the player
+	 * @param p_PlayerId Id of the player
+	 * @param p_PlayerColor color of the player
+	 */
+	Player(String p_PlayerName,int p_PlayerId,String p_PlayerColor)
 	{
-		d_playerName = p_playerName;
-		d_playerId = p_playerId;
-		d_playerColor = p_playerColor;
+		d_PlayerName = p_PlayerName;
+		d_PlayerId = p_PlayerId;
+		d_PlayerColor = p_PlayerColor;
 	}
-	
+	/**
+	 * addCountry method adds the given country to the player's country list.
+	 * @param l_Country country object
+	 */
+	public void addCountry(Country l_Country)
+	{
+		d_Countries.add(l_Country);
+	}
+	/**
+	 * removeCountry removes the given country from the player's country list
+	 * @param country object
+	 */
+	public void removeCountry(Country l_Country)
+	{
+		d_Countries.remove(l_Country);
+	}
+	/**
+	 * get method for player name
+	 * @return returns player name
+	 */
 	public String getPlayerName()
 	{
-		return d_playerName;
+		return d_PlayerName;
 	}
-	
+	/**
+	 * get method for player id 
+	 * @return returns player id
+	 */
 	public int getPlayerId()
 	{
-		return d_playerId;
+		return d_PlayerId;
 	}
-	public void setPlayerId(int p_playerId)
-	{
-		d_playerId = p_playerId;
-	}
-	
+
+	/**
+	 * get method for player color
+	 * @return returns player color
+	 */
 	public String getPlayerColor()
 	{
-		return d_playerColor;
+		return d_PlayerColor;
 	}
-	public void setPlayerColor(String p_playerColor)
+
+	/**
+	 * set method for player id 
+	 * @param p_PlayerId player id of player
+	 */
+	public void setPlayerId(int p_PlayerId)
 	{
-		d_playerColor = p_playerColor;
+		d_PlayerId = p_PlayerId;
 	}
-	public void setPlayerArmies(int p_armies)
+	/**
+	 * set method for player color
+	 * @param p_PlayerColor Player Color of the player
+	 */
+	public void setPlayerColor(String p_PlayerColor)
 	{
-		d_armies = p_armies;
-		d_tempArmies = p_armies;
+		d_PlayerColor = p_PlayerColor;
 	}
+	/**
+	 * set method for allocating armies to player
+	 * @param p_Armies Armies off the player
+	 */
+	public void setPlayerArmies(int p_Armies)
+	{
+		d_Armies = p_Armies;
+		d_TempArmies = p_Armies;
+	}
+	/**
+	 * get method for armies of player
+	 * @return returns armies of players
+	 */
 	public int getPlayerArmies()
 	{
-		return d_armies;
+		return d_Armies;
 	}
-	public void setGameModelNew(GameModelNew p_gameModelNew)
+	/**
+	 * set GameModelNew object to get the map.
+	 * @param p_GameModelNew game model object 
+	 */
+	public void setGameModelNew(GameModelNew p_GameModelNew)
 	{
-		d_gameModelNew = p_gameModelNew;
+		d_GameModelNew = p_GameModelNew;
 	}
+	/**
+	 * set Continent list for the player. It consists of only those continent objects whose all countries belong to this player.
+	 */
 	public void setContinentsList()
 	{
-		ArrayList <Continent> l_mapContinents = d_gameModelNew.getMap().getContinentList();
-		for(Continent mapContinent : l_mapContinents)
+		ArrayList <Continent> l_MapContinents = d_GameModelNew.getMap().getContinentList();
+		for(Continent MapContinent : l_MapContinents)
 		{
-			ArrayList<Country> l_countryOfContinent = mapContinent.getCountryList();
-			int l_flag=0;
-			
+			ArrayList<Country> l_CountryOfContinent = MapContinent.getCountryList();
+			int l_Flag=0;
+
 			outerloop:
-			for(Country countryOfContinent : l_countryOfContinent)
-			{
-			
-				
-				for(Country countryOfPlayer: d_countries)
+				for(Country CountryOfContinent : l_CountryOfContinent)
 				{
-					if(!(countryOfPlayer==countryOfContinent))
+
+
+					for(Country CountryOfPlayer: d_Countries)
 					{
-						l_flag =1;break outerloop;
+						if(!(CountryOfPlayer==CountryOfContinent))
+						{
+							l_Flag =1;break outerloop;
+						}
 					}
+
+
 				}
-				
-			
-			}
-			if(l_flag==0)
+			if(l_Flag==0)
 			{
-				d_Continents.add(mapContinent);
+				d_Continents.add(MapContinent);
 			}
 		}
-		
+
 	}
+	/**
+	 * get method for continent list of the player
+	 * @return returns the list of continents
+	 */
 	public ArrayList<Continent> getContinentList()
 	{
 		return d_Continents;
 	}
-	
-	/*
+
+	/**
 	 * The getResult return the result whether the order was added to the order list or not to the Player controller.
+	 * @return returns the result of issue order
 	 */
 	public String getResult()
 	{
-		return d_result;
+		return d_Result;
 	}
-	public void setResult(String p_result)
+	/**
+	 * set method for result of issue order
+	 * @param p_Result the result after issuing an order
+	 */
+	public void setResult(String p_Result)
 	{
-		d_result = p_result;
+		d_Result = p_Result;
 	}
 	/**
 	 * The setOrder method gets the order in string format for that player.
-	 * @param p_order
+	 * @param p_order Order entered by the player
 	 */
-	public void setOrder(String p_order)
+	public void setOrder(String p_Order)
 	{
-		d_stringOrder = p_order;
+		d_StringOrder = p_Order;
 	}
+
 	/**
-	 * addCountry method adds the given country to the player's country list.
-	 * @param l_country
+	 * get method for the size of the country list of the player
+	 * @return size of the country list
 	 */
-	public void addCountry(Country l_country)
-	{
-		d_countries.add(l_country);
-	}
-	/**
-	 * removeCountry removes the given country from the player's country list
-	 * @param l_country
-	 */
-	public void removeCountry(Country l_country)
-	{
-		d_countries.remove(l_country);
-	}
 	public int getCountriesSize()
 	{
-		return d_countries.size();
+		return d_Countries.size();
 	}
+	/**
+	 * Get method for the Country list of the player
+	 * @return returns the country list of the player
+	 */
+	public ArrayList<Country> getCountryList(){
+		return d_Countries;
+	}
+	/**
+	 * get method for the Order list size of the player
+	 * @return size of the order list 
+	 */
 	public int getOrderSize()
 	{
-		return d_order.size();
+		return d_Order.size();
 	}
+	/**
+	 * get method for the result Integer. It is a flag which defines the result of the issue order method
+	 * @return integer set for determining the result of issue order method
+	 */
 	public int getResultInteger()
 	{
-		return d_resultInteger;
+		return d_ResultInteger;
 	}
-	
+
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
 	 * and whether it has sufficient armies and it sets the result accordingly. 
@@ -169,58 +241,59 @@ public class Player {
 	 */
 	public void issue_order()
 	{
-		int l_flag = 0;
-		d_resultInteger = 0;
-		String[] l_stringList = d_stringOrder.split(" ");
-		if(Integer.parseInt(l_stringList[2]) <= d_tempArmies)
+		int l_Flag = 0;
+		d_ResultInteger = 0;
+		String[] l_StringList = d_StringOrder.split(" ");
+		if(Integer.parseInt(l_StringList[2]) <= d_TempArmies)
 		{
-			
-				Iterator l_it = d_countries.iterator();
-				while(l_it.hasNext())
+
+			Iterator l_It = d_Countries.iterator();
+			while(l_It.hasNext())
+			{
+				Country l_TempCountry = (Country)l_It.next() ;
+				if(l_StringList[1].equals(l_TempCountry.getCountryName()))
 				{
-					Country l_tempCountry = (Country)l_it.next() ;
-					if(l_stringList[1].equals(l_tempCountry.getCountryName()))
-					{
-						l_flag=1;
-						break;
-					}
+					l_Flag=1;
+					break;
 				}
-				if(l_flag==1)
+			}
+			if(l_Flag==1)
+			{
+				d_TempArmies-= Integer.parseInt(l_StringList[2]);
+				d_Order.add(new Order(d_StringOrder));
+				d_ResultInteger = 1;
+				setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);
+				if(d_TempArmies==0)
 				{
-					d_tempArmies-= Integer.parseInt(l_stringList[2]);
-					d_order.add(new Order(d_stringOrder));
-					d_resultInteger = 1;
-					setResult("\norder "+d_stringOrder+" added to list of "+d_playerName);
-					if(d_tempArmies==0)
-					{
-						d_resultInteger = 2;
-						setResult("\n"+d_playerName+" : Your armies have become zero now!!. You will not be able to issue an order");
-					}
+					d_ResultInteger = 2;
+					setResult("\n"+d_PlayerName+" : Your armies have become zero now!!. You will not be able to issue an order");
 				}
-				else
-				{
-					d_resultInteger = 3;
-					setResult("\nThis country "+l_stringList[1]+" doesnot belongs to "+d_playerName);
-				}
-			
-			
+			}
+			else
+			{
+				d_ResultInteger = 3;
+				setResult("\nThis country "+l_StringList[1]+" doesnot belongs to "+d_PlayerName);
+			}
+
+
 		}
 		else
 		{
-			d_resultInteger = 4;
-			setResult("\n"+d_playerName+" ; you have only "+d_armies+" number of armies!");
+			d_ResultInteger = 4;
+			setResult("\n"+d_PlayerName+" ; you have only "+d_Armies+" number of armies!");
 		}
-		
-		
+
+
 	}
+	/**
+	 * This method removes the first order in the queue Order list
+	 * @return returns the first order in the Order List
+	 */
 	public Order next_order()
 	{
-		return d_order.remove();
+		return d_Order.remove();
 	}
-	
-	public ArrayList<Country> getCountryList(){
-		return d_countries;
-	}
-    
-	
+
+
+
 }
