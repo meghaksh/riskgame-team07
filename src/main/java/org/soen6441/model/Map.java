@@ -157,7 +157,6 @@ public class Map {
 				
 			}
 			
-
 		}
 		l_result="The Map is loaded with "+this.d_ContinentObjects.size()+" Continents and "+this.d_CountryObjects.size()+" Countries";
 		return l_result;
