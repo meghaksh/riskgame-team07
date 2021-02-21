@@ -135,12 +135,12 @@ public class MapTest {
 
 		assertTrue(l_map.getContinentList().contains(c0));
 	}
-	/*@Test
+	@Test
 	public void testRemoveContinent() throws Exception{
 		l_map.RemoveContinent(c0.getContinentName());	
 		assertFalse(l_map.getContinentList().contains(c0));
 
-	}*/
+	}
 	@Test
 	public void testContinentForCountryExists() throws Exception{
 		
