@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -17,22 +18,41 @@ public class MapTest {
 //	public ExpectedException exception = ExpectedException.none();
 //	(expected= Exception.class)
 	
-	@Test 
-	public void testAddCountry() throws Exception {
+	Continent c0,c1;
+	Country cc1,cc2,cc3;
+	Country cc4,cc5;
+	ArrayList<Country> check;
+	Map l_map;
 	
-		Country c1 = new Country("india","asia");
-		Country c2 = new Country("china","asia");
-		Country c3 = new Country("japan","asia");
-		ArrayList<Country> check =  new ArrayList<Country>();
-		check.add(c1);
-		check.add(c2);
-		check.add(c3);
-
-		Map l_map = new Map();
+	
+	
+	
+	@Before
+	public void setTestContext() throws Exception
+	{
+		c0 = new Continent("asia",0);
+		c1 =  new Continent("africa",0);
+		cc1 = new Country("india","asia");
+		cc2 = new Country("china","asia");
+		cc3 = new Country("japan","asia");
+		cc4 = new Country("kenya","africa");
+		cc5 = new Country("egypt","africa");
+		check =  new ArrayList<Country>();
+		l_map = new Map();
+		check.add(cc1);
+		check.add(cc2);
+		check.add(cc3);
+		check.add(cc4);
+		check.add(cc5);
 		l_map.AddCountry("india","asia");
 		l_map.AddCountry("china","asia");
 		l_map.AddCountry("japan","asia");
-
+		l_map.AddCountry("kenya","africa");
+		l_map.AddCountry("egypt","africa");
+	}
+	@Test 
+	public void testAddCountry() throws Exception {
+	
 		
 		for (Continent co: l_map.getContinentList()){
 		if (co.getContinentName().equals("asia")){
