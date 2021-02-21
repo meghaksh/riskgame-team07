@@ -7,7 +7,6 @@ import org.soen6441.model.Map;
 public class MapController {
 	private Map d_mapModel;
 	
-	
 	/**
 	 * This is a constructor which receives Map object as parameter which is used throughout the class
 	 * 
