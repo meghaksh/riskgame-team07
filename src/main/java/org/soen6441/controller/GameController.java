@@ -39,9 +39,13 @@ public class GameController {
 	class CommandListener implements ActionListener{
 		private boolean d_MapDone = false;
 		
+		/**
+		 * {@inheritDoc}
+		 * On click of the button in view, this method gets the string which user entered. 
+		 * Based on the type of the command, it will call the method of specific controllers. 
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			try {
 				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
 				switch(l_CommandStringFromInput.split(" ")[0]){
@@ -143,8 +147,7 @@ public class GameController {
 		}
 	}
 	
-	public String editPlayer(String p_Command,String p_Str) throws Exception
-	{
+	public String editPlayer(String p_Command,String p_Str) throws Exception {
 		String[] l_CommandArray = p_Str.split(" ");
 		int l_Counter = 1;
 		int l_AddCounter = 0;
