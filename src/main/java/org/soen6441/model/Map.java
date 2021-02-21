@@ -15,6 +15,7 @@ public class Map {
 	private ArrayList<Country> d_CountryObjects; 
 	private ArrayList<Continent> d_ContinentObjects;
 	private HashMap<Integer,ArrayList<Integer>> d_Neighbors;
+	//private HashMap<String, ArrayList<String>> d_NeighborsName;
 
 	/**
 	 * This is the default constructor of the class. 
@@ -25,6 +26,7 @@ public class Map {
 		d_CountryObjects=new ArrayList<Country>();
 		d_ContinentObjects=new ArrayList<Continent>();
 		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
+		//d_NeighborsName = new HashMap<String, ArrayList<String>>();
 	}
 
 	/**
@@ -47,6 +49,7 @@ public class Map {
 		this.d_ContinentObjects.clear();
 		this.d_CountryObjects.clear();
 		this.d_Neighbors.clear();
+		//this.d_NeighborsName.clear();
 		Country.setCount(0);
 		Continent.setCount(0);
 	}
@@ -113,6 +116,7 @@ public class Map {
 								l_Borders.add(Integer.parseInt(l_Arr2[l_K]));
 							}
 							d_Neighbors.put(Integer.parseInt(l_Arr2[0]),l_Borders);
+							//d_NeighborsName.put(l_Tempcountry.getCountryName(), l_Tempcountry.getBorder());
 							break;
 						}
 					}
@@ -150,10 +154,12 @@ public class Map {
 			String l_ContinentName = l_C.getContinentName();
 			System.out.println("Continent Name Outside if : " + l_ContinentName);
 			int l_ContinentId=0;
+			int l_ContinentOrder=0;
 			for(Continent ct:this.d_ContinentObjects) {
+				l_ContinentOrder+=1;
 				if(ct.getContinentName().equals(l_ContinentName)) {
 					System.out.println("Continent Name inside if : " + ct.getContinentName());
-					l_ContinentId = ct.getContinentID();
+					l_ContinentId = l_ContinentOrder;
 				}
 			}
 			System.out.println("Continent ID after changing : " + l_ContinentId);
@@ -259,11 +265,22 @@ public class Map {
 					String l_OwnerContinent = l_TempCountry.getContinentName();
 					for(Continent l_TempContinent : d_ContinentObjects) {
 						if(l_TempContinent.getContinentName().equals(l_OwnerContinent)) {
-							ArrayList<Country> d_CountryList = l_TempContinent.getCountryList();
-							removeCountryFromContinent(p_CountryName, d_CountryList);
+							ArrayList<Country> d_CountryListOfOwnerContinent = l_TempContinent.getCountryList();
+							removeCountryFromContinent(p_CountryName, d_CountryListOfOwnerContinent);
 						}
 					}
 				}
+				for(Country l_Country : d_CountryObjects) {
+					ArrayList<String> l_CountryNeighbors = l_Country.getBorder();
+					Iterator l_NeighborIterator = l_CountryNeighbors.iterator();
+					while(l_NeighborIterator.hasNext()) {
+						String l_NeighborName = l_NeighborIterator.next().toString();
+						if(l_NeighborName.equalsIgnoreCase(p_CountryName)) {
+							l_NeighborIterator.remove();
+						}
+					}
+				}
+				//Here we have to remove from the hashmap. 
 				l_Iterator.remove();
 				l_RemovedFlag = true;
 			}
@@ -328,7 +345,11 @@ public class Map {
 		if(d_Neighbors.get(l_CountryId)==null) {
 			d_Neighbors.put(l_CountryId, new ArrayList<>());
 		}
+//		if(d_NeighborsName.get(p_CountryName)==null) {
+//			d_NeighborsName.put(p_CountryName, new ArrayList<>());
+//		}
 		d_Neighbors.get(l_CountryId).add(l_NeighborId);
+		//d_NeighborsName.get(p_CountryName).add(p_NeighborName);
 	}
 
 	/**
@@ -359,6 +380,15 @@ public class Map {
 				}
 			}
 		}
+//		if(d_NeighborsName.get(p_CountryName).contains(p_NeighbourName)) {
+//			ArrayList<String> l_TempList = d_NeighborsName.get(p_CountryName);
+//			Iterator<String> l_Iterator = l_TempList.iterator();
+//			while(l_Iterator.hasNext()) {
+//				if(l_Iterator.next().toString().equalsIgnoreCase(p_NeighbourName)) {
+//					l_Iterator.remove();
+//				}
+//			}
+//		}
 	}
 
 	/**
@@ -397,6 +427,7 @@ public class Map {
 	public String validateMap() {
 		ValidateMap l_VMap = new ValidateMap(this.d_Neighbors);
 		return l_VMap.isValid();
+		//return "";
 	}
 }
 
