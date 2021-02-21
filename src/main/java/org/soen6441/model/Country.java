@@ -21,6 +21,13 @@ public class Country {
 		this.d_ContinentName = p_ContinentName;
 		d_Neighbors=new ArrayList<String>();
 	}
+	
+	public static void setCount(int p_count)
+	{
+		d_COUNT=p_count;
+	}
+	
+
 	public String getContinentName() {
 		return this.d_ContinentName;
 	}
