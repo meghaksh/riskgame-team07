@@ -95,7 +95,8 @@ public class GameController {
 				case "savemap":
 					if(d_MapDone==false) {
 					try {
-						d_MapController.SaveMap(l_CommandStringFromInput);
+						String l_result=d_MapController.SaveMap(l_CommandStringFromInput);
+						d_CpView.setCommandAcknowledgement(l_result+"\n");
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
 					}
@@ -107,7 +108,8 @@ public class GameController {
 				case "editmap":
 					if(d_MapDone==false) {
 					try {
-						d_MapController.LoadMap(l_CommandStringFromInput);
+						String l_result=d_MapController.LoadMap(l_CommandStringFromInput);
+						d_CpView.setCommandAcknowledgement(l_result+"\n");
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
 					}
@@ -122,8 +124,9 @@ public class GameController {
 					
 				case "loadmap": 
 					try {
-						d_MapController.LoadMap(l_CommandStringFromInput);
+						String l_result=d_MapController.LoadMap(l_CommandStringFromInput);
 						this.d_MapDone = true;
+						d_CpView.setCommandAcknowledgement(l_result+"\n");
 					}catch(Exception exp) {
 						d_CpView.setCommandAcknowledgement(exp.getMessage());
 					}
