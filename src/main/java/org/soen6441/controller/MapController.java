@@ -15,10 +15,18 @@ public class MapController {
 	public MapController(Map p_map) {
 		d_mapModel = p_map;
 	}
-	public String saveMap(String p_str)throws Exception {
-		String[] l_commandArray = p_str.split(" ");
-		String l_result=d_mapModel.saveMap(l_commandArray[1]);
-		return l_result;
+	
+	/**
+	 * This method calls the savemap method of the mapmodel to save the map in file.
+	 * 
+	 * @param p_str the command given by user to save map
+	 * @return a feedback message on success or error of save function.
+	 * @throws Exception throws exception when there is any error during savemap
+	 */
+	public String saveMap(String p_Str)throws Exception {
+		String[] l_CommandArray = p_Str.split(" ");
+		String l_Result=d_mapModel.saveMap(l_CommandArray[1]);
+		return l_Result;
 	}
 	public String loadMap(String p_str)throws Exception{
 		String[] l_commandArray = p_str.split(" ");
