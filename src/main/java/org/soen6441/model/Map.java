@@ -1,61 +1,48 @@
 package org.soen6441.model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.io.File;			import java.io.FileNotFoundException;
+import java.io.FileWriter;		import java.io.IOException;
+import java.io.PrintWriter;		import java.util.ArrayList;
+import java.util.HashMap;		import java.util.Iterator;
+import java.util.Scanner;		import org.soen6441.controller.ValidateMap;
 
-import org.soen6441.controller.ValidateMap;
-
-
-/** 
- * Model class for Map
+/**
+ * This is the model class for the Map used in the game. 
+ * This class consists of all the data members and behavior associated with Map. 
+ * This class includes methods to add/remove continents, countries and borders as well as loadmap and savemap functionalities. 
  */
-
 public class Map {
-	ArrayList<Country> d_CountryObjects; 
-	ArrayList<Continent> d_ContinentObjects;
-	ArrayList<Integer> d_borders;  
-	HashMap<Integer,ArrayList<Integer>> d_Neighbors;
+	private ArrayList<Country> d_CountryObjects; 
+	private ArrayList<Continent> d_ContinentObjects;
+	private HashMap<Integer,ArrayList<Integer>> d_Neighbors;
 
 	/**
-	 * Default constructor
-	 * 
+	 * This is the default constructor of the class. 
+	 * When the map object is created, this class initializes Continent, Countries and Neighbour containers
 	 */
 	public Map()
 	{
 		d_CountryObjects=new ArrayList<Country>();
-		d_borders=new ArrayList<Integer>();
 		d_ContinentObjects=new ArrayList<Continent>();
 		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
 	}
 
 	/**
-	 * This method creates a user edited map
-	 * @param p_Filename
-	 */
-
-	public void CreateMap(String p_Filename)
-	{
-
-
-	}
-
-	/**
-	 * This method returns the list of country objects
-	 * @return CountryObjects
+	 * This method returns the ArrayList of country objects
+	 * 
+	 * @return ArrayList of CountryObjects
 	 */
 	public ArrayList<Country> getCountryList()
 	{
 		return this.d_CountryObjects;
 	}
 
-	public void Reset()
+	/**
+	 * This method initializes the map from scratch by clearing all the containers inside it. 
+	 * This method clears Continent, Country and Neighbor containers. 
+	 * This method also set the static IDs of Country and Continents back to zero. 
+	 */
+	public void reset()
 	{
 		this.d_ContinentObjects.clear();
 		this.d_CountryObjects.clear();
@@ -69,185 +56,176 @@ public class Map {
 	 * @param p_Filename
 	 * @throws FileNotFoundException 
 	 */
-	public String  LoadMap(String p_Filename) throws FileNotFoundException
+	public String  loadMap(String p_FileName) throws FileNotFoundException
 	{
-		Reset();
-		String l_path="resource\\",l_result;
-		int l_ControlValue,l_ContinentID=1,l_CountryID;
-		File file =new File(l_path+p_Filename);
-		Scanner sc = new Scanner(file);
-		
-		while(sc.hasNextLine())
+		reset();
+		String l_Path="resource\\",l_Result;
+		int l_ControlValue,l_ContinentID=1;
+		File l_File =new File(l_Path+p_FileName);
+		Scanner l_Sc = new Scanner(l_File);
+		while(l_Sc.hasNextLine())
 		{
-			
-			String l_line=sc.nextLine();
-			if(l_line.contains("continent"))
-			{
-				
-				l_line=sc.nextLine();
-				while(!l_line.equals("") && sc.hasNextLine())
-				{
-					String[] l_arr = l_line.split(" ", 3);
-					l_ControlValue=Integer.parseInt(l_arr[1]);
-					this.d_ContinentObjects.add(new Continent(l_arr[0],l_ControlValue));
-					l_line=sc.nextLine();
+			String l_Line=l_Sc.nextLine();
+			if(l_Line.contains("continent")){	
+				l_Line=l_Sc.nextLine();
+				while(!l_Line.equals("") && l_Sc.hasNextLine()){
+					String[] l_Arr = l_Line.split(" ", 3);
+					l_ControlValue=Integer.parseInt(l_Arr[1]);
+					this.d_ContinentObjects.add(new Continent(l_Arr[0],l_ControlValue));
+					l_Line=l_Sc.nextLine();
 				}
-				
 			}
-			if(l_line.contains("countries"))
-			{
-				l_line=sc.nextLine();
-				while(!l_line.equals("") && sc.hasNextLine())
-				{
-					String[] l_arr1=l_line.split(" ",4);
-					l_ContinentID=Integer.parseInt(l_arr1[2]);
-					l_CountryID=Integer.parseInt(l_arr1[0]);
+			if(l_Line.contains("countries")){
+				l_Line=l_Sc.nextLine();
+				while(!l_Line.equals("") && l_Sc.hasNextLine()){
+					String[] l_Arr1=l_Line.split(" ",4);
+					l_ContinentID=Integer.parseInt(l_Arr1[2]);
 					String l_NeighborName="";
 					for(Continent l_Continent : this.d_ContinentObjects) {
 						if(l_Continent.getContinentID() == l_ContinentID) {
 							l_NeighborName = l_Continent.getContinentName();
 						}
 					}
-					Country l_TempCountry = new Country(l_arr1[1],l_NeighborName);
+					Country l_TempCountry = new Country(l_Arr1[1],l_NeighborName);
 					this.d_CountryObjects.add(l_TempCountry);
 					for(Continent l_Continent :this. d_ContinentObjects) {
 						if(l_Continent.getContinentID() == l_ContinentID) {
 							l_Continent.addCountry(l_TempCountry);
 						}
 					}
-					l_line=sc.nextLine();
+					l_Line=l_Sc.nextLine();
 				}
-				
-			}
-			if(l_line.contains("borders"))
-			{
 
-				while(!l_line.equals("") && sc.hasNextLine())
-				{
-					l_line=sc.nextLine();
-					String[] l_arr2=l_line.split(" ");
-					for(Country l_tempcountry: this.d_CountryObjects)
-					{
-						
-						if (l_tempcountry.d_ID==Integer.parseInt(l_arr2[0]))
-						{
-							
+			}
+			if(l_Line.contains("borders")){
+				while(!l_Line.equals("") && l_Sc.hasNextLine()){
+					l_Line=l_Sc.nextLine();
+					String[] l_Arr2=l_Line.split(" ");
+					for(Country l_Tempcountry: this.d_CountryObjects){
+						if (l_Tempcountry.d_ID==Integer.parseInt(l_Arr2[0])){
 							ArrayList<Integer> l_Borders = new ArrayList<>();
-							for(int l_k=1;l_k<l_arr2.length;l_k++)
-							{
-								
-								for(Country l_tcountry: this.d_CountryObjects)
-								{
-									if(l_tcountry.d_ID==Integer.parseInt(l_arr2[l_k]))
-									{
-										l_tempcountry.setBorder(l_tcountry.d_Name);
+							for(int l_K=1;l_K<l_Arr2.length;l_K++){
+								for(Country l_TCountry: this.d_CountryObjects){
+									if(l_TCountry.d_ID==Integer.parseInt(l_Arr2[l_K])){
+										l_Tempcountry.setBorder(l_TCountry.d_Name);
 									}
 								}
-								
-								l_Borders.add(Integer.parseInt(l_arr2[l_k]));
-							
+								l_Borders.add(Integer.parseInt(l_Arr2[l_K]));
 							}
-					
-							d_Neighbors.put(Integer.parseInt(l_arr2[0]),l_Borders);
+							d_Neighbors.put(Integer.parseInt(l_Arr2[0]),l_Borders);
 							break;
 						}
 					}
-
 				}
-				
 			}
-			
 		}
-		l_result="The Map is loaded with "+this.d_ContinentObjects.size()+" Continents and "+this.d_CountryObjects.size()+" Countries";
-		return l_result;
-
+		l_Sc.close();
+		l_Result="The Map is loaded with "+this.d_ContinentObjects.size()+" Continents and "+this.d_CountryObjects.size()+" Countries";
+		return l_Result;
 	}
 	/**
 	 * It saves the user edited map
 	 * @param p_Filename 
 	 * @throws IOException 
 	 */
-	public String SaveMap(String p_Filename) throws Exception
+	public String SaveMap(String p_FileName) throws Exception
 	{
-		String l_path="resource\\";
-		ArrayList<String> l_borders= new ArrayList<>();
-		File file=new File(l_path+p_Filename);
-		FileWriter fw = new FileWriter(file);
-		PrintWriter pr = new PrintWriter(fw);
-		pr.println("");
-		pr.println("continents");
+		String l_Path="resource\\";
+		ArrayList<String> l_Borders= new ArrayList<>();
+		File l_File=new File(l_Path+p_FileName);
+		FileWriter l_Fw = new FileWriter(l_File);
+		PrintWriter l_Pr = new PrintWriter(l_Fw);
+		l_Pr.println("");
+		l_Pr.println("continents");
 		if(this.d_ContinentObjects.size()<=0) {
+			l_Pr.close();
 			throw new Exception("No Continent to Save");
 		}
-		for(Continent co: this.d_ContinentObjects)
-		{
-			pr.println(co.getContinentName()+" "+co.getContinentControlValue());
+		for(Continent l_Co: this.d_ContinentObjects){
+			l_Pr.println(l_Co.getContinentName()+" "+l_Co.getContinentControlValue());
 		}
-		pr.println("");
-		pr.println("countries");
-		for(Country c: this.d_CountryObjects)
-		{
-			String continentName = c.getContinentName();
-			System.out.println("Continent Name Outside if : " + continentName);
-			int continentId=0;
+		l_Pr.println("");
+		l_Pr.println("countries");
+		for(Country l_C: this.d_CountryObjects){
+			String l_ContinentName = l_C.getContinentName();
+			System.out.println("Continent Name Outside if : " + l_ContinentName);
+			int l_ContinentId=0;
 			for(Continent ct:this.d_ContinentObjects) {
-				if(ct.getContinentName().equals(continentName)) {
+				if(ct.getContinentName().equals(l_ContinentName)) {
 					System.out.println("Continent Name inside if : " + ct.getContinentName());
-					continentId = ct.getContinentID();
+					l_ContinentId = ct.getContinentID();
 				}
 			}
-			System.out.println("Continent ID after changing : " + continentId);
-			pr.println(c.d_ID+" "+c.d_Name+" "+continentId);
+			System.out.println("Continent ID after changing : " + l_ContinentId);
+			l_Pr.println(l_C.d_ID+" "+l_C.d_Name+" "+l_ContinentId);
 		}
-		pr.println("");
-		pr.println("borders");
-		for(Country c: d_CountryObjects)
-		{
-			l_borders=c.getBorder();
-			pr.print(c.d_ID+" ");
-			for(String l_i: l_borders)
-			{
-				for(Country l_c: this.d_CountryObjects)
-				{
-					if(l_c.getCountryName().equals(l_i))
-					{
-						pr.print(l_c.getCountryID()+" ");
-						
+		l_Pr.println("");
+		l_Pr.println("borders");
+		for(Country l_C: d_CountryObjects){
+			l_Borders=l_C.getBorder();
+			l_Pr.print(l_C.d_ID+" ");
+			for(String l_Str: l_Borders){
+				for(Country l_Country: this.d_CountryObjects){
+					if(l_Country.getCountryName().equals(l_Str)){
+						l_Pr.print(l_Country.getCountryID()+" ");
 					}
 				}
-				
-			}
-			pr.println("");
-		}
-		pr.close();
-		fw.close();
-		return "The Map Has Been Saved Successfully";
 
+			}
+			l_Pr.println("");
+		}
+		l_Pr.close();
+		l_Fw.close();
+		return "The Map Has Been Saved Successfully";
 	}
-	public void AddContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
-		for(Continent l_contient:this.d_ContinentObjects) {
-			if(l_contient.getContinentName().equalsIgnoreCase(p_ContinentName)) {
+
+	/**
+	 * This method receives ContinentName and its Control value from the user through command and saves the continent in map. 
+	 * 
+	 * @param p_ContinentName Name of the continent to be added
+	 * @param p_ContinentControlValue Control value of the continent to be added
+	 * @throws Exception In case of continent already exists, it throws an exception
+	 */
+	public void addContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
+		for(Continent l_Contient:this.d_ContinentObjects) {
+			if(l_Contient.getContinentName().equalsIgnoreCase(p_ContinentName)) {
 				throw new Exception("Continent Already Exists");
 			}
 		}
 		this.d_ContinentObjects.add(new Continent(p_ContinentName, Integer.parseInt(p_ContinentControlValue)));
 	}
-	public void RemoveContinent(String p_ContinentName)throws Exception {
+
+	/**
+	 * This method removes the continent when user enters remove continent command.
+	 * It also removes all the countries inside that continent. 
+	 * 
+	 * @param p_ContinentName Name of the continent to be removed
+	 * @throws Exception In case the continent doesn't exist, it throws an exception
+	 */
+	public void removeContinent(String p_ContinentName)throws Exception {
 		Iterator<Continent> l_Iterator = this.d_ContinentObjects.iterator();
 		boolean l_RemovedFlag = false;
 		while(l_Iterator.hasNext()) {
 			Continent l_TempContinent = l_Iterator.next();
 			if(l_TempContinent.getContinentName().equalsIgnoreCase(p_ContinentName)) {
-				RemoveAllCountryInContinent(l_TempContinent);
+				removeAllCountryInContinent(l_TempContinent);
 				l_Iterator.remove();
 				l_RemovedFlag = true;
 			}
 		}
 		if(!l_RemovedFlag){
-			throw new Exception("Country in the list does not exist !!");
+			throw new Exception("Continent does not exist !!");
 		}
 	}
-	public void AddCountry(String p_CountryName, String p_ContinentName)throws Exception {
+
+	/**
+	 * This method adds a new country in the map. 
+	 * 
+	 * @param p_CountryName Name of the country to be added
+	 * @param p_ContinentName Name of the parent continent
+	 * @throws Exception In case country already exists, it throws an exception
+	 */
+	public void addCountry(String p_CountryName, String p_ContinentName)throws Exception {
 		Country l_TempCountry = new Country(p_CountryName, p_ContinentName);
 		for(Country l_Country : d_CountryObjects) {
 			if(l_Country.getCountryName().equalsIgnoreCase(p_CountryName)) {
@@ -255,24 +233,34 @@ public class Map {
 			}
 		}
 		this.d_CountryObjects.add(l_TempCountry);
-		for(Continent l_continent : d_ContinentObjects) {
-			if(l_continent.getContinentName().equals(p_ContinentName)) {
-				l_continent.addCountry(l_TempCountry);
+		for(Continent l_Continent : d_ContinentObjects) {
+			if(l_Continent.getContinentName().equals(p_ContinentName)) {
+				l_Continent.addCountry(l_TempCountry);
 			}
 		}
 	}
-	public void RemoveCountry(String p_CountryName, boolean p_IsOnlyCountryRemove)throws Exception {
+
+	/**
+	 * This method removes the country from the map. 
+	 * This method is used at two places. 1) editcountry remove 2) editcontinent remove (to remove all countries of continent)
+	 * 
+	 * @param p_CountryName Name of the country to be removed
+	 * @param p_IsOnlyCountryRemove This flag tells the method if it is a editcontinent command or editcountry. True for editcountry 
+	 * @throws Exception if country in the list doesn't exist, it throws an exception
+	 */
+	public void removeCountry(String p_CountryName, boolean p_IsOnlyCountryRemove)throws Exception {
 		Iterator<Country> l_Iterator = this.d_CountryObjects.iterator();
 		boolean l_RemovedFlag = false;
 		while(l_Iterator.hasNext()) {
-			Country l_tempCountry = l_Iterator.next();
-			if(l_tempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
-				if(p_IsOnlyCountryRemove) {			//This block is executed only when editcountry remove command is there. Not for editcontinent command. 
-					String l_OwnerContinent = l_tempCountry.getContinentName();
+			Country l_TempCountry = l_Iterator.next();
+			if(l_TempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
+				//Below block is executed only when "editcountry remove" command is called. Not for "editcontinent remove" command. 
+				if(p_IsOnlyCountryRemove) {											
+					String l_OwnerContinent = l_TempCountry.getContinentName();
 					for(Continent l_TempContinent : d_ContinentObjects) {
 						if(l_TempContinent.getContinentName().equals(l_OwnerContinent)) {
 							ArrayList<Country> d_CountryList = l_TempContinent.getCountryList();
-							RemoveCountryFromContinent(p_CountryName, d_CountryList);
+							removeCountryFromContinent(p_CountryName, d_CountryList);
 						}
 					}
 				}
@@ -281,10 +269,17 @@ public class Map {
 			}
 		}
 		if(!l_RemovedFlag){
-			throw new Exception("Country in the list does not exist !!");
+			throw new Exception("Country does not exist !!");
 		}
 	}
-	public void RemoveCountryFromContinent(String p_CountryName, ArrayList<Country> d_CountryList) {
+
+	/**
+	 * This method is called to remove specific country from the country list of continent
+	 * 
+	 * @param p_CountryName Name of the country to be removed
+	 * @param d_CountryList	List of all countries of the parent continent where this country belongs
+	 */
+	public void removeCountryFromContinent(String p_CountryName, ArrayList<Country> d_CountryList) {
 		Iterator<Country> l_Iterator = d_CountryList.iterator();
 		while(l_Iterator.hasNext()) {
 			Country l_tempCountry = l_Iterator.next();
@@ -293,16 +288,30 @@ public class Map {
 			}
 		}
 	}
-	public void RemoveAllCountryInContinent(Continent p_TempContinent)throws Exception {
+
+	/**
+	 * This method removes all the countries in a given continent.
+	 * 
+	 * @param p_TempContinent Reference of continent object for which all countries are to be removed. 
+	 * @throws Exception throws exception in case of error
+	 */
+	public void removeAllCountryInContinent(Continent p_TempContinent)throws Exception {
 		ArrayList<Country> l_TempCountryList = p_TempContinent.getCountryList();
 		Iterator<Country> l_CountriesOfContinent = l_TempCountryList.iterator();
 		while(l_CountriesOfContinent.hasNext()) {
 			Country l_TempCountryToBeRemoved = l_CountriesOfContinent.next();
-			RemoveCountry(l_TempCountryToBeRemoved.getCountryName(),false);
+			removeCountry(l_TempCountryToBeRemoved.getCountryName(),false);
 		}
 	}
-	
-	public void AddBorder(String p_CountryName, String p_NeighborName) {
+
+	/**
+	 * This method adds the border between two countries in the map. 
+	 * This is a one directional addition of border from source to target country. 
+	 * 
+	 * @param p_CountryName Name of the source country
+	 * @param p_NeighborName Name of the target country
+	 */
+	public void addBorder(String p_CountryName, String p_NeighborName) {
 		int l_NeighborId=0;
 		int l_CountryId=0;
 		for(Country l_TempCountry :  this.getCountryList()) {
@@ -321,8 +330,14 @@ public class Map {
 		}
 		d_Neighbors.get(l_CountryId).add(l_NeighborId);
 	}
-	
-	public void RemoveBorder(String p_CountryName, String p_NeighbourName) {
+
+	/**
+	 * This method removes the border between source and target. Uni-directional remove only
+	 * 
+	 * @param p_CountryName Name of the source country
+	 * @param p_NeighbourName Name of the target country
+	 */
+	public void removeBorder(String p_CountryName, String p_NeighbourName) {
 		int l_NeighborId=0;
 		int l_CountryId=0;
 		for(Country l_TempCountry :  this.getCountryList()) {
@@ -337,7 +352,7 @@ public class Map {
 		}
 		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
 			ArrayList<Integer> l_TempList = d_Neighbors.get(l_CountryId);
-			Iterator l_Iterator = l_TempList.iterator();
+			Iterator<Integer> l_Iterator = l_TempList.iterator();
 			while(l_Iterator.hasNext()) {
 				if((int)l_Iterator.next()==l_NeighborId) {
 					l_Iterator.remove();
@@ -345,22 +360,40 @@ public class Map {
 			}
 		}
 	}
-	
+
+	/**
+	 * This method is to get list of continents
+	 * 
+	 * @return ArrayList of continents
+	 */
 	public ArrayList<Continent> getContinentList(){
 		return this.d_ContinentObjects;
 	}
 
+	/**
+	 * This method prints the list of continents
+	 */
 	public void getContinents() {
 		for(Continent l_Continent: this.d_ContinentObjects) {
 			System.out.println("ID :  " + l_Continent.getContinentID() +" Name : "+l_Continent.getContinentName());
 		}
 	}
+
+	/**
+	 * This method prints the list of countries
+	 */
 	public void getCountries() {
-		for(Country l_country: this.d_CountryObjects) {
-			System.out.println("ID : " + l_country.getCountryID() + ", Name : " + l_country.getCountryName() + ", ContinentName :" + l_country.getContinentName());
+		for(Country l_Country: this.d_CountryObjects) {
+			System.out.println("ID : " + l_Country.getCountryID() + ", Name : " + l_Country.getCountryName() + ", ContinentName :" + l_Country.getContinentName());
 		}
 	}
-	
+
+	/**
+	 * This method is used to validate the map. 
+	 * It creates an object of validate map and pass the neighbors hashmap to it. 
+	 * 
+	 * @return It returns the string to inform if map is valid or not. 
+	 */
 	public String validateMap() {
 		ValidateMap l_VMap = new ValidateMap(this.d_Neighbors);
 		return l_VMap.isValid();

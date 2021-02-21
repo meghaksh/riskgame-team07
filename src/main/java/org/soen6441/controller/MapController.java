@@ -24,11 +24,11 @@ public class MapController {
 	public String LoadMap(String p_str)throws Exception{
 		String[] l_commandArray = p_str.split(" ");
 		if(l_commandArray[0].equals("editmap")) {
-			String l_result=d_mapModel.LoadMap(l_commandArray[1]);
+			String l_result=d_mapModel.loadMap(l_commandArray[1]);
 			l_result=l_result+" You Can Now Edit IT";
 			return l_result;
 		}else {
-			String l_result=d_mapModel.LoadMap(l_commandArray[1]);
+			String l_result=d_mapModel.loadMap(l_commandArray[1]);
 			l_result=l_result+" You Can Now Proceed To Add Players";
 			return l_result;
 		}
@@ -49,17 +49,17 @@ public class MapController {
 			if(l_commandArray[l_counter].equals("add")) {
 				switch(p_command) {
 					case "editcontinent":
-						d_mapModel.AddContinent(l_commandArray[l_counter+1],l_commandArray[l_counter+2]);
+						d_mapModel.addContinent(l_commandArray[l_counter+1],l_commandArray[l_counter+2]);
 						l_counter+=3;
 						l_addContinentCounter+=1;
 						break;
 					case "editcountry":
-						d_mapModel.AddCountry(l_commandArray[l_counter+1],l_commandArray[l_counter+2]);
+						d_mapModel.addCountry(l_commandArray[l_counter+1],l_commandArray[l_counter+2]);
 						l_counter+=3;
 						l_addCountryCounter+=1;
 						break;
 					case "editneighbor":
-						d_mapModel.AddBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
+						d_mapModel.addBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
 						l_counter+=3;
 						break;
 				}
@@ -67,17 +67,17 @@ public class MapController {
 			}else if(l_commandArray[l_counter].equals("remove")) {
 				switch(p_command) {
 					case "editcontinent":
-						d_mapModel.RemoveContinent(l_commandArray[l_counter+1]);
+						d_mapModel.removeContinent(l_commandArray[l_counter+1]);
 						l_counter+=2;
 						l_removeContinentCounter+=1;
 						break;
 					case "editcountry":
-						d_mapModel.RemoveCountry(l_commandArray[l_counter+1],true); 
+						d_mapModel.removeCountry(l_commandArray[l_counter+1],true); 
 						l_counter+=2;
 						l_removeCountryCounter+=1;
 						break;
 					case "editneighbor":
-						d_mapModel.RemoveBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
+						d_mapModel.removeBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
 						l_counter+=3;
 						break;
 				}
