@@ -191,6 +191,16 @@ public class GameController {
 		}
 	}
 	
+	/**
+	 * <p>
+	 * this Method will take inputs from the user and will add or remove player according
+	 * to the inputs provided by the user
+	 * 
+	 * @param p_Command this is command entered by the player
+	 * @param p_Str  this is name entered by the player in the command prompt
+	 * @return returns string acknowledgement based on the added or removed players
+	 * @throws Exception this is user defined exception based on the add player or remove player method
+	 */
 	public String editPlayer(String p_Command,String p_Str) throws Exception {
 		String[] l_CommandArray = p_Str.split(" ");
 		int l_Counter = 1;
@@ -220,10 +230,21 @@ public class GameController {
 		return l_ReturnString;
 	}
 
+	/**
+	 * This Method will take assign countries from command prompt and will do 
+	 * startup Phase as well as assigning reinforcements to the player  
+	 * @throws Exception this is user defined exception based on AssignCountries if there are no players assigned
+	 * then it will throw an exception
+	 * 
+	 */
 	public void AssignCountries() throws Exception {
 		d_GameModelNew.startUpPhase();
 	}
 
+	/**
+	 * this is a method to show all player details like  PlayerNames,armies,Countriesowned  
+	 * @return this returns a list with all player details
+	 */
 	public List<String> showAllPlayerWithArmies() {
 		List<String> l_Names = new ArrayList<>();
 		d_PlayerList=d_GameModelNew.getAllPlayers();
