@@ -25,11 +25,11 @@ public class MapController {
 		String[] l_commandArray = p_str.split(" ");
 		if(l_commandArray[0].equals("editmap")) {
 			String l_result=d_mapModel.LoadMap(l_commandArray[1]);
-			l_result=l_result+". You Can Now Edit IT";
+			l_result=l_result+" You Can Now Edit IT";
 			return l_result;
 		}else {
 			String l_result=d_mapModel.LoadMap(l_commandArray[1]);
-			l_result=l_result+". You Can Now Proceed To Add Players";
+			l_result=l_result+" You Can Now Proceed To Add Players";
 			return l_result;
 		}
 		
