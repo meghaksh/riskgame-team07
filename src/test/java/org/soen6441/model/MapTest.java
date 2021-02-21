@@ -13,11 +13,11 @@ import org.junit.rules.ExpectedException;
 
 public class MapTest {
 	
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
+//	@Rule
+//	public ExpectedException exception = ExpectedException.none();
+//	(expected= Exception.class)
 	
-	
-	@Test (expected= Exception.class)
+	@Test 
 	public void testAddCountry() throws Exception {
 	
 		Country c1 = new Country("india","asia");
