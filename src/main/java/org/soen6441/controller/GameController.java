@@ -38,6 +38,7 @@ public class GameController {
 	 */
 	class CommandListener implements ActionListener{
 		private boolean d_MapDone = false;
+		private boolean d_StartUpDone = false;
 		
 		/**
 		 * {@inheritDoc}
@@ -133,7 +134,7 @@ public class GameController {
 					break;
 					
 				case "gameplayer":
-					if(d_MapDone==true) {
+					if(d_MapDone==true & d_StartUpDone==false) {
 					try {
 						String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
@@ -142,7 +143,7 @@ public class GameController {
 						d_CpView.setCommandAcknowledgement("\n");
 					}
 					}else{
-						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Add Players"+"\n");
+						d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Players or you are trying to remove or add players after the startup phase"+"\n");
 					}
 					break;
 					
@@ -150,11 +151,14 @@ public class GameController {
 					if(d_MapDone==true) {
 					try {
 					AssignCountries();
+					
 					}
 					catch(Exception p_Exception) {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
 						d_CpView.setCommandAcknowledgement("\n");
+						break;
 					}
+					d_StartUpDone=true;
 					List<String> l_AckMsg1 = showAllPlayerWithArmies();
 					d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
 					d_PlayerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
