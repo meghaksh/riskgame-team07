@@ -10,14 +10,15 @@ public class Continent {
 	private int d_ID;
 	private String d_Name;
 	private int d_ContinentControlValue;
-	private ArrayList<Country> d_countryList;
+	private ArrayList<Country> d_CountryList;
 
 	public Continent(String p_Name, int p_ContinentControlValue) {
 		setContinentID(++d_COUNT);
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
-		d_countryList = new ArrayList<Country>();
+		d_CountryList = new ArrayList<Country>();
 	}
+	
 	/**
 	 * Continent Object Constructor
 	 * @param p_ContinentID
@@ -30,12 +31,14 @@ public class Continent {
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
 	}
+	
 	/**
 	 * Method to return continent name
 	 * */
 	public String getContinentName() {
 		return this.d_Name;
 	}
+	
 	/**
 	 * To get Continent Control Value
 	 * @return
@@ -43,6 +46,7 @@ public class Continent {
 	public int getContinentControlValue() {
 		return d_ContinentControlValue;
 	}
+	
 	/**
 	 * To get Continent ID
 	 * 
@@ -51,10 +55,19 @@ public class Continent {
 	public int getContinentID() {
 		return d_ID;
 	}
+	
+	/**
+	 * To set Continent ID
+	 * 
+	 * @param p_ContinentID
+	 */
 	public void setContinentID(int p_ContinentID) {
 		d_ID = p_ContinentID;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean equals(Object p_Continent) {
 		if(this == p_Continent) {
@@ -66,12 +79,21 @@ public class Continent {
 		Continent p1 = (Continent)p_Continent; 
 		return this.getContinentName().equals(p1.getContinentName());
 	}
-	
+
+	/**
+	 * To add Country to the Continent
+	 * @param p_country
+	 */
 	public void addCountry(Country p_country) {
-		this.d_countryList.add(p_country);
+		this.d_CountryList.add(p_country);
 	}
+	
+	/**
+	 * To return the arraylist of all the countries in the continent
+	 * @return
+	 */
 	public ArrayList<Country> getCountryList(){
-		return this.d_countryList;
+		return this.d_CountryList;
 	}
 }
 
