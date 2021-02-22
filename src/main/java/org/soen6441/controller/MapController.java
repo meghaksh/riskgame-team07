@@ -55,6 +55,8 @@ public class MapController {
 		int l_removeContinentCounter = 0;
 		int l_addCountryCounter=0;
 		int l_removeCountryCounter=0;
+		int l_addBorderCounter=0;
+		int l_removeBorderCounter=0;
 		String l_ReturnString = "";
 		while(l_counter<l_commandArray.length) {
 			if(l_commandArray[l_counter].equals("add")) {
@@ -72,6 +74,7 @@ public class MapController {
 					case "editneighbor":
 						d_mapModel.addBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
 						l_counter+=3;
+						l_addBorderCounter+=1;
 						break;
 				}
 
@@ -90,6 +93,7 @@ public class MapController {
 					case "editneighbor":
 						d_mapModel.removeBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
 						l_counter+=3;
+						l_removeBorderCounter+=1;
 						break;
 				}
 				
@@ -108,6 +112,12 @@ public class MapController {
 		}
 		if(l_removeCountryCounter>0) {
 			l_ReturnString += "Number of Countries Removed : " + l_removeCountryCounter + "\n";
+		}
+		if(l_addBorderCounter>0) {
+			l_ReturnString += "Number of Borders Added : " + l_addBorderCounter + "\n";
+		}
+		if(l_removeBorderCounter>0) {
+			l_ReturnString += "Number of Borders Removed : " + l_removeBorderCounter + "\n";
 		}
 		d_mapModel.getContinents();
 		if(d_mapModel.getCountryList().size()>0) {

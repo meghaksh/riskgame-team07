@@ -315,7 +315,7 @@ public class GameController {
 					for(Country l_Country:l_CountryList) {
 						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ", ");
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
-						if(l_NeighborList!=null) {
+						if(l_NeighborList.size()>0) {
 							d_CpView.setCommandAcknowledgement("--> Borders : ");
 							for(String l_Str:l_NeighborList) {
 								d_CpView.setCommandAcknowledgement(l_Str+ " ");
