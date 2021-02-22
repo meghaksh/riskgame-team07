@@ -168,7 +168,7 @@ public class GameController {
 					}
 					
 					else{
-						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Add Assign Countries"+"\n");
+						d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Assign Countries"+"\n");
 					}
 					break;
 					
@@ -270,7 +270,9 @@ public class GameController {
 
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
+				d_CpView.setCommandAcknowledgement("\n");
 				for(Continent l_Continent:l_ContinentList) {
+					
 					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
 					d_CpView.setCommandAcknowledgement("Countries:"+"\n");
@@ -287,7 +289,7 @@ public class GameController {
 							}
 						}
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
-						if(l_NeighborList.size()>1) {
+						if(l_NeighborList.size()>0) {
 							d_CpView.setCommandAcknowledgement("--> Borders : ");
 							for(String l_Str:l_NeighborList) {
 								d_CpView.setCommandAcknowledgement(l_Str+ ",");
@@ -304,6 +306,7 @@ public class GameController {
 			System.out.println("Normal showmap");
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
+				d_CpView.setCommandAcknowledgement("\n");
 				for(Continent l_Continent:l_ContinentList) {
 					
 					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
