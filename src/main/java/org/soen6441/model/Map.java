@@ -238,6 +238,19 @@ public class Map {
 	 * @throws Exception In case country already exists, it throws an exception
 	 */
 	public void addCountry(String p_CountryName, String p_ContinentName)throws Exception {
+		int l_flag =0;
+		for(Continent c: this.getContinentList())
+		{
+			if(c.getContinentName().equals(p_ContinentName))
+			{
+				l_flag=1;
+				break;
+			}
+		}
+		if(l_flag==0)
+		{
+			throw new Exception("Continent Doesn't Exist to add a Country");
+		}
 		Country l_TempCountry = new Country(p_CountryName, p_ContinentName);
 		for(Country l_Country : d_CountryObjects) {
 			if(l_Country.getCountryName().equalsIgnoreCase(p_CountryName)) {

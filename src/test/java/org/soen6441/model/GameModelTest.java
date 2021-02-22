@@ -19,9 +19,10 @@ public class GameModelTest {
 		l_checkNames = new ArrayList<>();
 
 		d_map = new Map();
+		d_map.addContinent("asia","0");
 		d_map.addCountry("india","asia");
 		//d_map.addCountry("china","asia");
-		d_map.addContinent("asia","0");
+		
 		d_game = new GameModelNew(d_map);
 	}
 
