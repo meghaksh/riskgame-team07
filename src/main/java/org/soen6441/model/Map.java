@@ -382,6 +382,18 @@ public class Map {
 		{
 			throw new Exception("Neighbour Country does not exists!");
 		}
+		int l_flag1=0;
+		for(Country c : this.getCountryList())
+		{
+			if(c.getCountryName().equals(p_CountryName))
+			{
+				l_flag1=1;break;
+			}
+		}
+		if(l_flag1==0)
+		{
+			throw new Exception("Country does not exists!");
+		}
 		int l_NeighborId=0;
 		int l_CountryId=0;
 		for(Country l_TempCountry :  this.getCountryList()) {
