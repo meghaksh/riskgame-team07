@@ -263,10 +263,12 @@ public class Map {
 	public void removeCountry(String p_CountryName, boolean p_IsOnlyCountryRemove)throws Exception {
 		Iterator<Country> l_Iterator = this.d_CountryObjects.iterator();
 		boolean l_RemovedFlag = false;
+		int l_TempCountryIdOfCountryToBeRemoved = 0;
 		while(l_Iterator.hasNext()) {
 			Country l_TempCountry = l_Iterator.next();
 			if(l_TempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
 				//Below block is executed only when "editcountry remove" command is called. Not for "editcontinent remove" command. 
+				l_TempCountryIdOfCountryToBeRemoved = l_TempCountry.getCountryID();
 				if(p_IsOnlyCountryRemove) {											
 					String l_OwnerContinent = l_TempCountry.getContinentName();
 					for(Continent l_TempContinent : d_ContinentObjects) {
@@ -287,6 +289,20 @@ public class Map {
 					}
 				}
 				//Here we have to remove from the hashmap. 
+				for(int i=1;i<=d_Neighbors.size();i++) {
+					if(d_Neighbors.get(i)!=null) {
+						ArrayList<Integer> l_TempCountryIdList = d_Neighbors.get(i);
+						Iterator<Integer> l_TempCountryNeighborIterator = l_TempCountryIdList.iterator();
+						while(l_TempCountryNeighborIterator.hasNext()) {
+							if(l_TempCountryNeighborIterator.next()==l_TempCountryIdOfCountryToBeRemoved) {
+								l_TempCountryNeighborIterator.remove();
+							}
+						}
+					}
+					if(i==l_TempCountryIdOfCountryToBeRemoved) {
+						d_Neighbors.remove(l_TempCountryIdOfCountryToBeRemoved);
+					}
+				}
 				l_Iterator.remove();
 				l_RemovedFlag = true;
 			}
@@ -374,19 +390,22 @@ public class Map {
 		}
 		for(Country l_TempCountry :  this.getCountryList()) {
 			if(l_TempCountry.getCountryName().equals(p_CountryName)) {
+				l_CountryId = l_TempCountry.getCountryID();
 				l_TempCountry.removeBorder(p_NeighbourName);
 			}
 		}
 		//removing it from all the countries in hasmap
-//		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
-//			ArrayList<Integer> l_TempList = d_Neighbors.get(l_CountryId);
-//			Iterator<Integer> l_Iterator = l_TempList.iterator();
-//			while(l_Iterator.hasNext()) {
-//				if((int)l_Iterator.next()==l_NeighborId) {
-//					l_Iterator.remove();
-//				}
-//			}
-//		}
+		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
+			System.out.println("Country ID in neighbor : " + l_CountryId + " NeighborID : " + l_NeighborId);
+			ArrayList<Integer> l_ListOfNeighbors = d_Neighbors.get(l_CountryId);
+			Iterator<Integer> l_NeighborListIterator = l_ListOfNeighbors.iterator();
+			while(l_NeighborListIterator.hasNext()) {
+				if(l_NeighborListIterator.next()==l_NeighborId) {
+					l_NeighborListIterator.remove();
+				}
+			}
+		}	
+		
 //		if(d_NeighborsName.get(p_CountryName).contains(p_NeighbourName)) {
 //			ArrayList<String> l_TempList = d_NeighborsName.get(p_CountryName);
 //			Iterator<String> l_Iterator = l_TempList.iterator();
