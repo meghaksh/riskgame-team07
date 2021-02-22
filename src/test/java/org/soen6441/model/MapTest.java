@@ -73,7 +73,7 @@ public class MapTest {
 
 
 	@Test
-	public void testAddBorder() {
+	public void testAddBorder() throws Exception {
 		l_map.addBorder("india", "china");
 		l_map.addBorder("india", "kenya");
 

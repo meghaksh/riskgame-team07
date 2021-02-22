@@ -367,8 +367,21 @@ public class Map {
 	 * 
 	 * @param p_CountryName Name of the source country
 	 * @param p_NeighborName Name of the target country
+	 * @throws Exception 
 	 */
-	public void addBorder(String p_CountryName, String p_NeighborName) {
+	public void addBorder(String p_CountryName, String p_NeighborName) throws Exception {
+		int l_flag=0;
+		for(Country c : this.getCountryList())
+		{
+			if(c.getCountryName().equals(p_NeighborName))
+			{
+				l_flag=1;break;
+			}
+		}
+		if(l_flag==0)
+		{
+			throw new Exception("Neighbour Country does not exists!");
+		}
 		int l_NeighborId=0;
 		int l_CountryId=0;
 		for(Country l_TempCountry :  this.getCountryList()) {
