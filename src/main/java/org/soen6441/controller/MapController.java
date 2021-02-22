@@ -90,16 +90,25 @@ public class MapController {
 			}else if(l_commandArray[l_counter].equals("remove")) {
 				switch(p_command) {
 					case "editcontinent":
+						if(l_commandArray.length<3) {
+							throw new Exception ("Please add continent to remove");
+						}
 						d_mapModel.removeContinent(l_commandArray[l_counter+1]);
 						l_counter+=2;
 						l_removeContinentCounter+=1;
 						break;
 					case "editcountry":
+						if(l_commandArray.length<3) {
+							throw new Exception ("Please add country to remove");
+						}
 						d_mapModel.removeCountry(l_commandArray[l_counter+1],true); 
 						l_counter+=2;
 						l_removeCountryCounter+=1;
 						break;
 					case "editneighbor":
+						if(l_commandArray.length<4) {
+							throw new Exception ("Please add neighbor to remove");
+						}
 						d_mapModel.removeBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
 						l_counter+=3;
 						l_removeBorderCounter+=1;
