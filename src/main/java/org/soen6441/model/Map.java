@@ -15,6 +15,7 @@ public class Map {
 	private ArrayList<Country> d_CountryObjects; 
 	private ArrayList<Continent> d_ContinentObjects;
 	private HashMap<Integer,ArrayList<Integer>> d_Neighbors;
+	private HashMap<Integer,Integer>d_PreviousSave;
 	//private HashMap<String, ArrayList<String>> d_NeighborsName;
 
 	/**
@@ -26,6 +27,7 @@ public class Map {
 		d_CountryObjects=new ArrayList<Country>();
 		d_ContinentObjects=new ArrayList<Continent>();
 		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
+		d_PreviousSave=new HashMap<Integer,Integer>();
 		//d_NeighborsName = new HashMap<String, ArrayList<String>>();
 	}
 
@@ -50,6 +52,7 @@ public class Map {
 		this.d_CountryObjects.clear();
 		this.d_Neighbors.clear();
 		//this.d_NeighborsName.clear();
+		this.d_PreviousSave.clear();
 		Country.setCount(0);
 		Continent.setCount(0);
 	}
@@ -63,7 +66,7 @@ public class Map {
 	{
 		reset();
 		String l_Path="resource\\",l_Result;
-		int l_ControlValue,l_ContinentID=1;
+		int l_ControlValue,l_ContinentID=1,l_PreviousID,l_NewID,l_NewNeighborID;
 		File l_File =new File(l_Path+p_FileName);
 		Scanner l_Sc = new Scanner(l_File);
 		while(l_Sc.hasNextLine())
@@ -79,6 +82,7 @@ public class Map {
 				}
 			}
 			if(l_Line.contains("countries")){
+				
 				l_Line=l_Sc.nextLine();
 				while(!l_Line.equals("") && l_Sc.hasNextLine()){
 					String[] l_Arr1=l_Line.split(" ",4);
@@ -150,30 +154,32 @@ public class Map {
 		}
 		l_Pr.println("");
 		l_Pr.println("countries");
+		int l_CountryOrder=0;
 		for(Country l_C: this.d_CountryObjects){
+			l_CountryOrder++;
 			String l_ContinentName = l_C.getContinentName();
-			System.out.println("Continent Name Outside if : " + l_ContinentName);
 			int l_ContinentId=0;
 			int l_ContinentOrder=0;
 			for(Continent ct:this.d_ContinentObjects) {
 				l_ContinentOrder+=1;
 				if(ct.getContinentName().equals(l_ContinentName)) {
-					System.out.println("Continent Name inside if : " + ct.getContinentName());
 					l_ContinentId = l_ContinentOrder;
 				}
 			}
-			System.out.println("Continent ID after changing : " + l_ContinentId);
-			l_Pr.println(l_C.d_ID+" "+l_C.d_Name+" "+l_ContinentId);
+			this.d_PreviousSave.put(l_C.d_ID,l_CountryOrder);
+			l_Pr.println(l_CountryOrder+" "+l_C.d_Name+" "+l_ContinentId);
 		}
 		l_Pr.println("");
 		l_Pr.println("borders");
 		for(Country l_C: d_CountryObjects){
+			int l_New=this.d_PreviousSave.get(l_C.d_ID);
 			l_Borders=l_C.getBorder();
-			l_Pr.print(l_C.d_ID+" ");
+			l_Pr.print(l_New+" ");
 			for(String l_Str: l_Borders){
 				for(Country l_Country: this.d_CountryObjects){
 					if(l_Country.getCountryName().equals(l_Str)){
-						l_Pr.print(l_Country.getCountryID()+" ");
+						int l_NewNeighbor=this.d_PreviousSave.get(l_Country.d_ID);
+						l_Pr.print(l_NewNeighbor+" ");
 					}
 				}
 
@@ -371,6 +377,7 @@ public class Map {
 				l_TempCountry.removeBorder(p_NeighbourName);
 			}
 		}
+		//removing it from all the countries in hasmap
 		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
 			ArrayList<Integer> l_TempList = d_Neighbors.get(l_CountryId);
 			Iterator<Integer> l_Iterator = l_TempList.iterator();
