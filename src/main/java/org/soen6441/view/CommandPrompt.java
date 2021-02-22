@@ -6,6 +6,7 @@ import java.awt.GridLayout;				import java.awt.event.ActionListener;
 import javax.swing.JButton;				import javax.swing.JFrame;
 import javax.swing.JPanel;				import javax.swing.JScrollPane;
 import javax.swing.JTextArea;			import javax.swing.JTextField;
+import javax.swing.text.DefaultCaret;
 
 /**
  * This class is the View part of the MVC architecture. The window interacts with the user and show feedback. 
@@ -19,6 +20,7 @@ public class CommandPrompt {
 	private JButton d_CommandSendButton;
 	private JScrollPane d_AckAreaScrollPane;
 	private Font d_Font;
+	private DefaultCaret d_Caret;
 
 	/**
 	 * This is a default constructor which initialize the window and its components to display. 
@@ -30,6 +32,7 @@ public class CommandPrompt {
 		d_CommandAcknowledgeArea = new JTextArea(30,1);
 		d_CommandSendButton = new JButton("Execute");
 		d_AckAreaScrollPane = new JScrollPane(d_CommandAcknowledgeArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		d_Caret = (DefaultCaret)d_CommandAcknowledgeArea.getCaret();
 		d_Font = new Font("Verdana", Font.BOLD, 12);
 		drawWindow();
 	}
@@ -70,6 +73,7 @@ public class CommandPrompt {
 		d_CommandAcknowledgeArea.setBackground(Color.black);
 		d_CommandAcknowledgeArea.setForeground(Color.cyan);
 		d_CommandAcknowledgeArea.setFont(d_Font);
+		d_Caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		d_CommandAcknowledgeArea.append("Welcome to RISK DOMINATION !!\n\n");
 		d_CommandAcknowledgeArea.append("Below are the list of commands you can use : \n");
 		d_CommandAcknowledgeArea.append("editcontinent -add continentID continentvalue -remove continentID \n"
