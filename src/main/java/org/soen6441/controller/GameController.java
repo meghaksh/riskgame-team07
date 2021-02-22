@@ -168,7 +168,7 @@ public class GameController {
 					d_StartUpDone=true;
 					showAllPlayerWithArmies();
 					d_CpView.setCommandAcknowledgement("\n");
-					d_PlayerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
+					d_PlayerController = new PlayerController(d_GameModelNew,d_CpView);
 					d_PlayerController.player_issue_order();
 					d_PlayerController.player_next_order();
 					}

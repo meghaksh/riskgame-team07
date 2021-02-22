@@ -1,8 +1,14 @@
 package org.soen6441.controller;
 
-import java.util.ArrayList;				import java.util.Iterator;
-import javax.swing.JOptionPane;			import org.soen6441.model.Order;
-import org.soen6441.model.Player;		import org.soen6441.view.CommandPrompt;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.swing.JOptionPane;
+
+import org.soen6441.model.GameModelNew;
+import org.soen6441.model.Order;
+import org.soen6441.model.Player;
+import org.soen6441.view.CommandPrompt;
 
 /**
  * The Player Controller class controls the activities of all the players at once.
@@ -15,14 +21,16 @@ public class PlayerController {
 	private String d_OrderString=null;
 	private String d_OrderAcknowledgment="";
 	private CommandPrompt d_CpView;
+	private GameModelNew d_GameModelNew;
 	/**
 	 * Constructor of Player controller
 	 * @param p_Players list of players 
 	 * @param p_CpView object of command prompt for communicating with player
 	 */
-	PlayerController(ArrayList p_Players,CommandPrompt p_CpView)
+	PlayerController(GameModelNew p_GameModelNew,CommandPrompt p_CpView)
 	{
-		d_Players = p_Players;
+		d_GameModelNew = p_GameModelNew;
+		d_Players = d_GameModelNew.getAllPlayers();
 		d_CpView=p_CpView;
 	}
 	/**
