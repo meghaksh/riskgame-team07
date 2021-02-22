@@ -17,7 +17,7 @@ public class OrderTest {
 	{
 
 		l_map = new Map();
-		l_map.addContinent("asia", "0");
+		l_map.addContinent("asia", "1");
 		l_map.addCountry("india","asia");
 		GameModelNew = new GameModelNew(l_map);
 		o =  new Order(order,GameModelNew);

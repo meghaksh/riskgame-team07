@@ -43,8 +43,8 @@ public class MapTest {
 		check.add(cc3);
 		check.add(cc4);
 		check.add(cc5);
-		l_map.addContinent(c0.getContinentName(), "0");
-		l_map.addContinent(c1.getContinentName(), "0");
+		l_map.addContinent(c0.getContinentName(), "1");
+		l_map.addContinent(c1.getContinentName(), "1");
 		l_map.addCountry("india","asia");
 		l_map.addCountry("china","asia");
 		l_map.addCountry("japan","asia");

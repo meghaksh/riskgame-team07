@@ -199,6 +199,11 @@ public class Map {
 	 * @throws Exception In case of continent already exists, it throws an exception
 	 */
 	public void addContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
+		if(p_ContinentControlValue.equals("0"))
+		{
+			throw new Exception("Continent control value cannot be 0");
+		}
+			
 		for(Continent l_Contient:this.d_ContinentObjects) {
 			if(l_Contient.getContinentName().equalsIgnoreCase(p_ContinentName)) {
 				throw new Exception("Continent Already Exists");
