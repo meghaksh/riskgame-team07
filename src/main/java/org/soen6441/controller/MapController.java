@@ -35,6 +35,10 @@ public class MapController {
 			l_result=l_result+" You Can Now Edit IT";
 			return l_result;
 		}else {
+			if(l_commandArray.length<2)
+			{
+				throw new Exception("Please Enter valid Filename");
+			}
 			String l_result=d_mapModel.loadMap(l_commandArray[1]);
 			l_result=l_result+" You Can Now Proceed To Add Players";
 			return l_result;

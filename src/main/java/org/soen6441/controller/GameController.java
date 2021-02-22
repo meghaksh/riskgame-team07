@@ -112,7 +112,8 @@ public class GameController {
 						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception exp) {
-						d_CpView.setCommandAcknowledgement(exp.getMessage());
+						d_CpView.setCommandAcknowledgement("The Mapfile Doesnt Exist. Please Create A New Map" +"\n");
+						
 					}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Edit Another Map In This Phase"+"\n");
