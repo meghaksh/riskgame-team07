@@ -25,7 +25,7 @@ public class CommandPrompt {
 		d_CommandPromptWindow = new JFrame("Command Prompt");
 		d_CommandPromptPanel = new JPanel(new GridLayout(1,2));
 		d_CommandInput = new JTextField(100);
-		d_CommandAcknowledgeArea = new JTextArea(20,1);
+		d_CommandAcknowledgeArea = new JTextArea(30,1);
 		d_CommandSendButton = new JButton("Execute");
 		d_AckAreaScrollPane = new JScrollPane(d_CommandAcknowledgeArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		drawWindow();
@@ -75,7 +75,7 @@ public class CommandPrompt {
 		d_CommandPromptPanel.add(d_CommandSendButton);
 		d_CommandPromptWindow.add(d_AckAreaScrollPane, BorderLayout.PAGE_START);
 		d_CommandPromptWindow.add(d_CommandPromptPanel, BorderLayout.SOUTH);
-		d_CommandPromptWindow.setSize(400,400);
+		d_CommandPromptWindow.setSize(550,550);
 		d_CommandPromptWindow.setVisible(true);
 		d_CommandPromptWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
