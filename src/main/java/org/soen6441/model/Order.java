@@ -48,7 +48,7 @@ public class Order {
 		
 		for(Country c : d_GameModelNew.getMap().getCountryList())
 		{
-			if(c.getContinentName().equals(d_CountryName))
+			if(c.getCountryName().equals(d_CountryName))
 			{
 				c.setNoOfArmies(d_NoOfArmies);
 			}
