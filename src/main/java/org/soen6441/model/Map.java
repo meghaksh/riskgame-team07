@@ -378,15 +378,15 @@ public class Map {
 			}
 		}
 		//removing it from all the countries in hasmap
-		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
-			ArrayList<Integer> l_TempList = d_Neighbors.get(l_CountryId);
-			Iterator<Integer> l_Iterator = l_TempList.iterator();
-			while(l_Iterator.hasNext()) {
-				if((int)l_Iterator.next()==l_NeighborId) {
-					l_Iterator.remove();
-				}
-			}
-		}
+//		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
+//			ArrayList<Integer> l_TempList = d_Neighbors.get(l_CountryId);
+//			Iterator<Integer> l_Iterator = l_TempList.iterator();
+//			while(l_Iterator.hasNext()) {
+//				if((int)l_Iterator.next()==l_NeighborId) {
+//					l_Iterator.remove();
+//				}
+//			}
+//		}
 //		if(d_NeighborsName.get(p_CountryName).contains(p_NeighbourName)) {
 //			ArrayList<String> l_TempList = d_NeighborsName.get(p_CountryName);
 //			Iterator<String> l_Iterator = l_TempList.iterator();
