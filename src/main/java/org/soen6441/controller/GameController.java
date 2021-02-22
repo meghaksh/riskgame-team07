@@ -160,8 +160,8 @@ public class GameController {
 						break;
 					}
 					d_StartUpDone=true;
-					List<String> l_AckMsg1 = showAllPlayerWithArmies();
-					d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
+					showAllPlayerWithArmies();
+					d_CpView.setCommandAcknowledgement("\n");
 					d_PlayerController = new PlayerController(d_GameModelNew.getAllPlayers(),d_CpView);
 					d_PlayerController.player_issue_order();
 					d_PlayerController.player_next_order();
@@ -178,8 +178,8 @@ public class GameController {
 					
 				case "show":
 					if(d_MapDone==true) {
-					List<String> l_AckMsg2 = showAllPlayerWithArmies();
-					d_CpView.setCommandAcknowledgement(l_AckMsg2 + "\n");
+					showAllPlayerWithArmies();
+					d_CpView.setCommandAcknowledgement("\n");
 					}else{
 						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Perform Show Operation"+"\n");
 					}
@@ -250,38 +250,52 @@ public class GameController {
 	 * this is a method to show all player details like  PlayerNames,armies,Countriesowned  
 	 * @return this returns a list with all player details
 	 */
-	public List<String> showAllPlayerWithArmies() {
+	public void showAllPlayerWithArmies() {
 		List<String> l_Names = new ArrayList<>();
 		d_PlayerList=d_GameModelNew.getAllPlayers();
 		for(Player player:d_PlayerList){
-			System.out.println(player.getPlayerName()+""+"armiesassigned->"+player.getPlayerArmies());
+			d_CpView.setCommandAcknowledgement("\n"+player.getPlayerName()+"-->"+"armies assigned:"+player.getPlayerArmies());
+			d_CpView.setCommandAcknowledgement("\n"+"Countries Assigned: ");
 			for(Country l_country:player.getCountryList()) {
-				System.out.println("Countriesowned"+l_country.getCountryName());
+				d_CpView.setCommandAcknowledgement(l_country.getCountryName()+ ",");
 			}
 			//Names.add(player.getPlayerName()+"->"+player.getCountriesSize()+"armiesassigned->"+player.getPlayerArmies());
 		}
-		return l_Names; 
+		
 	}
 
 	public void showMap(Boolean p_BooleanForGamePhaseStarted) {
 		if(p_BooleanForGamePhaseStarted) {
 			System.out.println("Call gameplay wala showmap");
+
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
 				for(Continent l_Continent:l_ContinentList) {
-					d_CpView.setCommandAcknowledgement(l_Continent.getContinentName() + "--->");
+					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+					d_CpView.setCommandAcknowledgement("Countries:"+"\n");
 					for(Country l_Country:l_CountryList) {
-						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ",");
-						for(Player l_Player: d_PlayerList) {
-							if(l_Player.getCountryList().contains(l_Country)) {
-								d_CpView.setCommandAcknowledgement("Owned By: "+l_Player.getPlayerName() );
+						d_CpView.setCommandAcknowledgement(l_Country.getCountryName()+", ");
+						if(this.d_PlayerList!=null) {
+							System.out.println("Inside player list");
+							for(Player l_Player: d_PlayerList) {
+								System.out.println("hello");
+								if(l_Player.getCountryList().contains(l_Country)) {
+									System.out.println("xyz");
+									d_CpView.setCommandAcknowledgement("Owned By: "+l_Player.getPlayerName() );
+								}
 							}
 						}
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
-						for(String l_Str:l_NeighborList) {
-							d_CpView.setCommandAcknowledgement("Border : " + l_Str);
+						if(l_NeighborList.size()>1) {
+							d_CpView.setCommandAcknowledgement("--> Borders : ");
+							for(String l_Str:l_NeighborList) {
+								d_CpView.setCommandAcknowledgement(l_Str+ ",");
+							}
+							
 						}
+						
+						d_CpView.setCommandAcknowledgement("\n");
 					}
 					d_CpView.setCommandAcknowledgement("\n");
 				}
@@ -291,19 +305,27 @@ public class GameController {
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
 				for(Continent l_Continent:l_ContinentList) {
-					d_CpView.setCommandAcknowledgement(l_Continent.getContinentName() + "--->");
+					
+					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+					d_CpView.setCommandAcknowledgement("Countries:"+"\n");
 					for(Country l_Country:l_CountryList) {
-						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ",");
+						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ", ");
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
-						for(String l_Str:l_NeighborList) {
-							d_CpView.setCommandAcknowledgement("Border : " + l_Str);
+						if(l_NeighborList!=null) {
+							d_CpView.setCommandAcknowledgement("--> Borders : ");
+							for(String l_Str:l_NeighborList) {
+								d_CpView.setCommandAcknowledgement(l_Str+ " ");
+							}
+							
 						}
+						
+						d_CpView.setCommandAcknowledgement("\n");
 					}
 					d_CpView.setCommandAcknowledgement("\n");
 				}
 			}
 		}
 	}	
-	
+
 }
