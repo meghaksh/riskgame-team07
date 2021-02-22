@@ -193,7 +193,7 @@ public class GameModelNew {
 	 */
 	public void startUpPhase() throws Exception 
 	{
-		if(getAllPlayers().size()>0)
+		if(getAllPlayers().size()>1)
 		{
 			d_PlayerQueue.addAll(getAllPlayers());
 			List<Country> l_CountryList = new ArrayList<>();
@@ -214,7 +214,14 @@ public class GameModelNew {
 		}
 		else
 		{
-			throw new Exception ("\"Please enter players using gameplayer add command");
+			if(getAllPlayers().size()==0) {
+				throw new Exception ("\"Please enter players using gameplayer add command");
+				
+			}
+			else {
+				throw new Exception ("\"One Player Found. Please enter more players using gameplayer add command");
+			}
+			
 
 		}
 

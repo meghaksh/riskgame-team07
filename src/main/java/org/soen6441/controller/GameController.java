@@ -81,8 +81,13 @@ public class GameController {
 					
 				case "editneighbor" :
 					if(d_MapDone==false) {
+						try {
 					String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+							d_CpView.setCommandAcknowledgement("\n");
+						}
 					}
 					else {
 						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
@@ -151,6 +156,7 @@ public class GameController {
 				case "assigncountries":
 					if(d_MapDone==true) {
 					try {
+						
 					AssignCountries();
 					
 					}
@@ -251,7 +257,6 @@ public class GameController {
 	 * @return this returns a list with all player details
 	 */
 	public void showAllPlayerWithArmies() {
-		List<String> l_Names = new ArrayList<>();
 		d_PlayerList=d_GameModelNew.getAllPlayers();
 		for(Player player:d_PlayerList){
 			d_CpView.setCommandAcknowledgement("\n"+player.getPlayerName()+"-->"+"armies assigned:"+player.getPlayerArmies());

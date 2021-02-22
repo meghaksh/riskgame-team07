@@ -62,16 +62,25 @@ public class MapController {
 			if(l_commandArray[l_counter].equals("add")) {
 				switch(p_command) {
 					case "editcontinent":
+						if(l_commandArray.length<4) {
+							throw new Exception ("Please add control value for the continent");
+						}
 						d_mapModel.addContinent(l_commandArray[l_counter+1],l_commandArray[l_counter+2]);
 						l_counter+=3;
 						l_addContinentCounter+=1;
 						break;
 					case "editcountry":
+						if(l_commandArray.length<4) {
+							throw new Exception ("Please add continent for the country");
+						}
 						d_mapModel.addCountry(l_commandArray[l_counter+1],l_commandArray[l_counter+2]);
 						l_counter+=3;
 						l_addCountryCounter+=1;
 						break;
 					case "editneighbor":
+						if(l_commandArray.length<4) {
+							throw new Exception ("Please add neighbor for the country ");
+						}
 						d_mapModel.addBorder(l_commandArray[l_counter+1], l_commandArray[l_counter+2]);
 						l_counter+=3;
 						l_addBorderCounter+=1;
