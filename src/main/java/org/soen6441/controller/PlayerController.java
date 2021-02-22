@@ -142,6 +142,10 @@ public class PlayerController {
 				{
 					Order l_Order = l_Player.next_order();
 					l_Order.execute();
+					String l_Result = l_Order.getExecuteResult();
+					d_OrderAcknowledgment = l_Result;
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					
 				}
 				else
 				{
