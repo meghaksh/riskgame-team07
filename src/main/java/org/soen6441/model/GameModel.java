@@ -29,8 +29,8 @@ public class GameModel
 	public GameModel(Map p_map) 
 	{
 		super();
-		d_map=p_map;
-		d_PlayerList=new ArrayList<Player>();
+		this.d_map=p_map;
+		this.d_PlayerList=new ArrayList<Player>();
 		
 	}
 	
@@ -41,7 +41,7 @@ public class GameModel
 	 * @return d_gamePhase
 	 */
 	public Phases getGamePhase() {
-		return d_gamePhase;
+		return this.d_gamePhase;
 	}
 	/**
 	 * This method used to set phase of the game 
@@ -56,7 +56,7 @@ public class GameModel
 	 */
 	public Player getPlayerId() 
 	{
-		return d_PlayerID;
+		return this.d_PlayerID;
 	}
 	/**
 	 * This method returns the  player id.
@@ -73,7 +73,7 @@ public class GameModel
 	 * @return d_PlayerList, ArrayList of all the available players from player class
 	 */
 	public ArrayList<Player> getAllPlayers() {
-		return d_PlayerList;
+		return this.d_PlayerList;
 	}
 	/**
 	 * this method sets the  player count
@@ -93,7 +93,7 @@ public class GameModel
 	 */
 	public Map getSelectedMap() {
 		
-		return d_map;
+		return this.d_map;
 
 	}
 	/**
@@ -111,8 +111,8 @@ public class GameModel
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 
 		} else {
-			Player l_Player_Object = new Player(p_PlayerName);
-			d_PlayerList.add(l_Player_Object);
+			//Player l_Player_Object = new Player(p_PlayerName, );
+			//d_PlayerList.add(l_Player_Object);
 			//return "Player " + p_PlayerName + " added to the game";
 		}
 

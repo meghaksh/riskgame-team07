@@ -268,15 +268,13 @@ public class GameController {
 			for(Country l_country:player.getCountryList()) {
 				d_CpView.setCommandAcknowledgement(l_country.getCountryName()+ ",");
 			}
-			//Names.add(player.getPlayerName()+"->"+player.getCountriesSize()+"armiesassigned->"+player.getPlayerArmies());
 		}
-		
 	}
 
 	public void showMap(Boolean p_BooleanForGamePhaseStarted) {
 		if(p_BooleanForGamePhaseStarted) {
 			System.out.println("Call gameplay wala showmap");
-
+			d_PlayerList = d_GameModelNew.getAllPlayers();
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
 				d_CpView.setCommandAcknowledgement("\n");
@@ -294,6 +292,7 @@ public class GameController {
 								if(l_Player.getCountryList().contains(l_Country)) {
 									System.out.println("xyz");
 									d_CpView.setCommandAcknowledgement("Owned By: "+l_Player.getPlayerName() );
+									d_CpView.setCommandAcknowledgement("Armies owned: "+l_Country.getNoOfArmies());
 								}
 							}
 						}
@@ -302,10 +301,8 @@ public class GameController {
 							d_CpView.setCommandAcknowledgement("--> Borders : ");
 							for(String l_Str:l_NeighborList) {
 								d_CpView.setCommandAcknowledgement(l_Str+ ",");
-							}
-							
+							}	
 						}
-						
 						d_CpView.setCommandAcknowledgement("\n");
 					}
 					d_CpView.setCommandAcknowledgement("\n");
@@ -329,9 +326,7 @@ public class GameController {
 							for(String l_Str:l_NeighborList) {
 								d_CpView.setCommandAcknowledgement(l_Str+ " ");
 							}
-							
 						}
-						
 						d_CpView.setCommandAcknowledgement("\n");
 					}
 					d_CpView.setCommandAcknowledgement("\n");
@@ -339,5 +334,4 @@ public class GameController {
 			}
 		}
 	}	
-
 }
