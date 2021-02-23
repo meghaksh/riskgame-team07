@@ -63,6 +63,12 @@ public class ValidateMap {
 		return true;
 	}
 	
+	/**
+	 * This method takes the arraylist of country objects and creates a new hashmap which is then returned to validation method
+	 * All the updation in countryid and their respective borders after addition/removal is taken care for the sake of validation.
+	 * @param p_CountryObjects List of country objects
+	 * @return d_UpdatedMap Hashmap which contains the updated ID and their respective borders of each country 
+	 */
 	public HashMap<Integer,ArrayList<Integer>> updateCount(ArrayList<Country> p_CountryObjects ){
 		int l_Sequence=0,l_ID;
 		ArrayList<String>d_UpdatedNeighbors=new ArrayList<String>();
