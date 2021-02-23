@@ -28,7 +28,11 @@ public class GameModelTest {
 		check.add(c1);
 		check.add(c2);
 	}
-
+	
+	/**
+	 * This test case check the functionality of addplayer method
+	 * @throws Exception
+	 */
 	@Test 
 	//	(expected= Exception.class)
 	public void testAddPlayer() throws Exception {
@@ -44,6 +48,10 @@ public class GameModelTest {
 
 	}
 	
+	/**
+	 * This test case check the functionality of RemovePlayer method
+	 * @throws Exception
+	 */
 	@Test 
 	//	(expected= Exception.class)
 	public void testRemovePlayer() throws Exception {
@@ -59,6 +67,10 @@ public class GameModelTest {
 		assertFalse(l_checkNames.equals(l_Names));
 	}
 	
+	/**
+	 * This test case check the functionality of AssignReinforcements method
+	 * @throws Exception
+	 */
 	@Test 
 	////	(expected= Exception.class)
 	public void testAssignReinforcements() throws Exception {
@@ -70,6 +82,11 @@ public class GameModelTest {
 		}
 	}
 	
+	/**
+	 * This test case check the functionality of whether player contains a particular country where he is deploying
+	 * This a test case in IssueOrder Method
+	 * @throws Exception
+	 */
 	@Test 
 	////(expected= Exception.class)
 	public void testIssueOrder() throws Exception {
@@ -100,6 +117,12 @@ public class GameModelTest {
 		}
 		assertTrue(l_flag);
 	}
+	
+	/**
+	 * This test case check the functionality of whether player contains a enough armies to deploy
+	 * This a test case in IssueOrder Method
+	 * @throws Exception
+	 */
 	@Test 
 	////(expected= Exception.class)
 	public void testIssueOrderSizecheck() throws Exception {
