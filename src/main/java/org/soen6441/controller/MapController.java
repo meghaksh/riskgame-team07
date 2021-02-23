@@ -85,6 +85,7 @@ public class MapController {
 						l_counter+=3;
 						l_addBorderCounter+=1;
 						break;
+						
 				}
 
 			}else if(l_commandArray[l_counter].equals("-remove")) {
