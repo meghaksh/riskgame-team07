@@ -95,12 +95,14 @@ public class GameModelNew {
 	 * @throws Exception if player size is more that country size or if player already exists
 	 */
 	public void addPlayer(String p_PlayerName)throws Exception {
+		if ((d_PlayerList.size() >= getSelectedMap().getCountryList().size())) 
+					{
+						throw new Exception("Reached Max Number of Players can be added to the game");
+					}
 		if (existDuplicatePlayer(p_PlayerName)) {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 		} else {
 			Player l_Player_Object = new Player(p_PlayerName, this);
-			System.out.println("This is the object of game model new:"+this);
-			System.out.println("This is the object of game model new countries:"+this.getSelectedMap().getCountryList());
 			d_PlayerList.add(l_Player_Object);
 		}
 	}
@@ -177,15 +179,12 @@ public class GameModelNew {
 		if(getAllPlayers().size()>1) {
 			d_PlayerQueue.addAll(getAllPlayers());
 			List<Country> l_CountryList = new ArrayList<>();
-			
-			System.out.println("Game model object: "+ this.getSelectedMap());
 			l_CountryList  = (List<Country>) getSelectedMap().getCountryList().clone();		
 			while (l_CountryList.size() > 0) {	
 				Random l_Random = new Random();
 				int l_index = l_Random.nextInt(l_CountryList.size());
 				setPlayerId(d_PlayerQueue.remove());
 				getPlayerId1().addCountry(l_CountryList.get(l_index));
-				//System.out.println(getPlayerId1());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_index);
 			}

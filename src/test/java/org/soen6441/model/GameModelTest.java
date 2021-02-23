@@ -19,6 +19,7 @@ public class GameModelTest {
 		d_Map = new Map();
 		d_Map.addContinent("asia","1");
 		d_Map.addCountry("india","asia");
+		d_Map.addCountry("china","asia");
 		d_Game = new GameModelNew(d_Map);
 		d_Game.addPlayer("raj");
 		d_Game.addPlayer("kumar");
@@ -72,6 +73,7 @@ public class GameModelTest {
 		for(Player l:d_Game.getAllPlayers()) {
 			int value=l.getPlayerArmies();
 			assertTrue(3<=value);
+			
 		}
 	}
 	
@@ -83,86 +85,24 @@ public class GameModelTest {
 	@Test 
 	////(expected= Exception.class)
 	public void testIssueOrder() throws Exception {
-		String l_command="deploy india 4";
-		String[] l_CommandArray = l_command.split(" ");
-		String l_country=l_CommandArray[1];
-		d_Game.startUpPhase();
-		boolean l_flag=false;
-		String l_result="";
-		for(Player l:d_Game.getAllPlayers()) {
-			if(l.getPlayerName().equalsIgnoreCase("raj")) {	
-				l.setPlayerArmies(Integer.parseInt(l_CommandArray[2]));
-				l.setOrder(l_command);
-
-				for(Country l_C:l.getCountryList()) {
-					if(l_C.getCountryName().equalsIgnoreCase(l_country)) {
-						l_flag=true;
-					}
-				}
-				l.issue_order();
-				l_result=l.getResult();
-			}
-		}
-		assertTrue(l_flag);
-	}
-	
-	/**
-	 * This test case d_Check the functionality of whether player contains a enough armies to deploy
-	 * This a test case in IssueOrder Method
-	 * @throws Exception
-	 */
-	@Test 
-	////(expected= Exception.class)
-	public void testIssueOrderSized_Check() throws Exception {
 		String l_command="deploy india 3";
-		String[] l_CommandArray = l_command.split(" ");
-		String l_country=l_CommandArray[1];
-		d_Game.startUpPhase();
-		boolean l_flag=false;
-		boolean l_flag_armies=false;
-		String l_result="";
-		for(Player l:d_Game.getAllPlayers()) {
-			if(l.getPlayerName().equalsIgnoreCase("raj")) {	
-				l.setPlayerArmies(3);
-				if(l.getPlayerArmies()>=Integer.parseInt(l_CommandArray[2])) {	
-					l_flag_armies=true;
-					l.setOrder(l_command);
-					for(Country l_C:l.getCountryList()) {
-						if(l_C.getCountryName().equalsIgnoreCase(l_country)) {
-							l_flag=true;
-						}
-					}
-					l.issue_order();
-					l_result=l.getResult();
-				}
-			}
-			assertTrue(l_flag_armies);
-		}
+		String l_expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
+		c1.setOrder(l_command);
+		c1.setPlayerArmies(3);
+		c1.addCountry(d_Map.getCountryList().get(0));
+		c1.issue_order();
+		String l_Result=c1.getResult();
+		System.out.println(l_Result);
+		assertEquals(l_expected,l_Result);
+		
+		String l_command1="deploy kenya 3";
+		String l_expected1="\nThis country kenya doesnot belongs to raj";
+		c1.setPlayerArmies(3);
+		c1.setOrder(l_command1);
+		c1.issue_order();
+		String l_Result1=c1.getResult();
+		assertEquals(l_expected1,l_Result1);
+		
+		
 	}
-}
-
-//	@Test (expected= Exception.class)
-//	public void testAddPlayer() throws Exception {
-//		
-//		String l_playerName = "raj";
-//		String l_playerName1 ="raj";
-//		
-//		GameModelNew l_game = new GameModelNew();
-//		
-//		
-//		l_game.addPlayer(l_playerName);
-//		l_game.addPlayer(l_playerName1);
-//	 }
-//	@Test (expected= Exception.class)
-//	public void testremovePlayer() throws Exception {
-//		
-//		String l_playerName = "raj";
-//		String l_playerName1 ="raj";
-//		
-//		GameModelNew l_game = new GameModelNew();
-//		
-//		
-//		l_game.removePlayer(l_playerName);
-//		l_game.removePlayer(l_playerName1);
-//	 }
-
+	}
