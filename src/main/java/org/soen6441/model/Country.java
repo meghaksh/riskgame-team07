@@ -7,7 +7,7 @@ import java.util.*;
  *
  */
 public class Country {
-	private static int d_COUNT = 0;
+	private static int D_Count = 0;
 	int d_ID;
 	String d_Name;
 	//int d_ContinentID;
@@ -16,7 +16,7 @@ public class Country {
 	int d_NoOfArmies;
 
 	public Country(String p_Name, String p_ContinentName) {
-		setCountryID(++d_COUNT);
+		setCountryID(++D_Count);
 		this.d_Name = p_Name;
 		this.d_ContinentName = p_ContinentName;
 		d_Neighbors=new ArrayList<String>();
@@ -24,7 +24,7 @@ public class Country {
 	
 	public static void setCount(int p_count)
 	{
-		d_COUNT=p_count;
+		D_Count=p_count;
 	}
 	
 
