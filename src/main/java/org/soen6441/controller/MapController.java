@@ -87,7 +87,7 @@ public class MapController {
 						break;
 				}
 
-			}else if(l_commandArray[l_counter].equals("remove")) {
+			}else if(l_commandArray[l_counter].equals("-remove")) {
 				switch(p_command) {
 					case "editcontinent":
 						if(l_commandArray.length<3) {
