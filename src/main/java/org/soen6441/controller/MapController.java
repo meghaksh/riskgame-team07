@@ -45,7 +45,7 @@ public class MapController {
 		}
 		
 	}
-	public String validateMap() {
+	public String validateMap() throws Exception {
 		return d_mapModel.validateMap();
 	}
 	public String editMap(String p_command, String p_str)throws Exception {
@@ -59,7 +59,7 @@ public class MapController {
 		int l_removeBorderCounter=0;
 		String l_ReturnString = "";
 		while(l_counter<l_commandArray.length) {
-			if(l_commandArray[l_counter].equals("add")) {
+			if(l_commandArray[l_counter].equals("-add")) {
 				switch(p_command) {
 					case "editcontinent":
 						if(l_commandArray.length<4) {
@@ -116,7 +116,8 @@ public class MapController {
 				}
 				
 			}else {
-				break;
+				
+				throw new Exception("Please Enter a Valid Command");
 			}
 		}
 		if(l_addContinentCounter>0) {

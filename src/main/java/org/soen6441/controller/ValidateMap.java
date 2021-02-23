@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class ValidateMap {
+import org.soen6441.model.Continent;
+import org.soen6441.model.Country;
+
+	public class ValidateMap {
 	int d_vertexCount;
 	ArrayList<ArrayList<Integer>> d_vertexList;
 	ValidateMap(int p_vertexCount){
@@ -15,7 +18,54 @@ public class ValidateMap {
 			d_vertexList.add(new ArrayList<Integer>());
 		}
 	}
-	public ValidateMap(HashMap<Integer, ArrayList<Integer>> p_HMap){
+	public boolean checkCountryAndContinent(ArrayList<Country> p_CountryObjects,ArrayList<Continent> p_ContinentObjects) {
+		for(Continent l_C1:p_ContinentObjects)
+		{
+			if(l_C1.getCountryList().size()<1)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	public HashMap<Integer,ArrayList<Integer>>  updateCount(ArrayList<Country> p_CountryObjects ){
+		//checking if every continent has a country and vice versa
+		int l_Sequence=0,l_ID;
+		ArrayList<String>d_UpdatedNeighbors=new ArrayList<String>();
+		ArrayList<Country> d_NCountryObjects=p_CountryObjects;
+		HashMap<Integer,Integer> d_UpdatedIDCount=new HashMap<Integer,Integer>();
+		HashMap<Integer,ArrayList<Integer>> d_UpdatedMap=new HashMap<Integer,ArrayList<Integer>>();
+		for(Country l_C: d_NCountryObjects)
+		{
+			l_Sequence++;
+			d_UpdatedIDCount.put(l_C.getCountryID(),l_Sequence);
+		}
+		for(Country l_C: d_NCountryObjects)
+		{
+			ArrayList<Integer>d_StoreNeighbors=new ArrayList<Integer>();
+			l_ID=d_UpdatedIDCount.get(l_C.getCountryID());
+			d_UpdatedNeighbors=l_C.getBorder();
+			for(String l_S: d_UpdatedNeighbors)
+			{
+				for(Country l_C2: d_NCountryObjects)
+				{
+					if(l_C2.getCountryName().equals(l_S))
+					{
+						int l_NewNeighborID=d_UpdatedIDCount.get(l_C2.getCountryID());
+						d_StoreNeighbors.add(l_NewNeighborID);	
+					}
+				}
+			}
+			d_UpdatedMap.put(l_ID,d_StoreNeighbors);
+		}	
+		return d_UpdatedMap;	
+	}
+	public ValidateMap(ArrayList<Country> p_CountryObjects,ArrayList<Continent> d_ContinentObjects)throws Exception{
+		if(checkCountryAndContinent(p_CountryObjects,d_ContinentObjects))
+		{
+		HashMap<Integer,ArrayList<Integer>> p_HMap;
+		p_HMap=updateCount(p_CountryObjects);
+		System.out.println("printing hashmap"+p_HMap);
 		d_vertexCount = p_HMap.size();
 		d_vertexList = new ArrayList<>(d_vertexCount);
 		for(int i=0;i<d_vertexCount;i++) {
@@ -23,7 +73,12 @@ public class ValidateMap {
 		}
 		assignBorders(p_HMap);
 	}
-	
+		else
+		{
+			throw new Exception("There should be atleast one country for a continent");
+			//System.out.println("There should be atleast one country for a continent");
+		}
+	}
 	public void assignBorders(HashMap<Integer, ArrayList<Integer>> p_HMap) {
 		System.out.println("Printing Map " + p_HMap);
 		try {
@@ -60,9 +115,9 @@ public class ValidateMap {
 		ValidateMap l_tempMap = getTranspose(this.d_vertexList);
 		boolean b2 = l_tempMap.runDFS(0);
 		if(b1 && b2) {
-			return "Graph is Valid";
+			return "Map is Valid";
 		}
-		return "Graph is not valid";
+		return "Map is not Valid";
 	}
 	public void showMap() {
 		for(int i=0;i<d_vertexList.size();i++) {

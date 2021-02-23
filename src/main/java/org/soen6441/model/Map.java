@@ -62,8 +62,9 @@ public class Map {
 	 * @param p_Filename
 	 * @throws FileNotFoundException 
 	 */
-	public String  loadMap(String p_FileName) throws FileNotFoundException
+	public String  loadMap(String p_FileName) throws Exception
 	{
+		
 		reset();
 		String l_Path="resource\\",l_Result;
 		int l_ControlValue,l_ContinentID=1,l_PreviousID,l_NewID,l_NewNeighborID;
@@ -128,6 +129,13 @@ public class Map {
 			}
 		}
 		l_Sc.close();
+		String l_Result1=validateMap();
+		if(l_Result1.equals("Map is not Valid"))
+		{
+			reset();
+			return l_Result1;
+		}
+		
 		l_Result="The Map is loaded with "+this.d_ContinentObjects.size()+" Continents and "+this.d_CountryObjects.size()+" Countries";
 		return l_Result;
 	}
@@ -138,6 +146,11 @@ public class Map {
 	 */
 	public String saveMap(String p_FileName) throws Exception
 	{
+		String l_Result=validateMap();
+		if(l_Result.equals("Map is not Valid"))
+		{
+			return l_Result;
+		}
 		String l_Path="resource\\";
 		ArrayList<String> l_Borders= new ArrayList<>();
 		File l_File=new File(l_Path+p_FileName);
@@ -394,6 +407,16 @@ public class Map {
 		{
 			throw new Exception("Country does not exists!");
 		}
+		for(Country l_C: this.getCountryList())
+		{
+			if(l_C.getCountryName().equals(p_CountryName))
+			{
+				if(l_C.getBorder().contains(p_NeighborName))
+				{
+					throw new Exception("Neighbor Already Exist");
+				}
+			}
+		}
 		int l_NeighborId=0;
 		int l_CountryId=0;
 		for(Country l_TempCountry :  this.getCountryList()) {
@@ -423,9 +446,19 @@ public class Map {
 	 * @param p_CountryName Name of the source country
 	 * @param p_NeighbourName Name of the target country
 	 */
-	public void removeBorder(String p_CountryName, String p_NeighbourName) {
+	public void removeBorder(String p_CountryName, String p_NeighbourName) throws Exception {
 		int l_NeighborId=0;
 		int l_CountryId=0;
+		for(Country l_C: this.getCountryList())
+		{
+			if(l_C.getCountryName().equals(p_CountryName))
+			{
+				if(!l_C.getBorder().contains(p_NeighbourName))
+				{
+					throw new Exception("Neighbor Does not Exist");
+				}
+			}
+		}
 		for(Country l_TempCountry :  this.getCountryList()) {
 			if(l_TempCountry.getCountryName().equals(p_NeighbourName)) {
 				l_NeighborId = l_TempCountry.getCountryID();
@@ -493,8 +526,8 @@ public class Map {
 	 * 
 	 * @return It returns the string to inform if map is valid or not. 
 	 */
-	public String validateMap() {
-		ValidateMap l_VMap = new ValidateMap(this.d_Neighbors);
+	public String validateMap()throws Exception {
+		ValidateMap l_VMap = new ValidateMap(this.d_CountryObjects,this.d_ContinentObjects);
 		return l_VMap.isValid();
 		//return "";
 	}

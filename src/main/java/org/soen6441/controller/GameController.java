@@ -126,7 +126,11 @@ public class GameController {
 					break;
 					
 				case "validatemap":
+					try {
 					d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
+					}catch(Exception e) {
+						d_CpView.setCommandAcknowledgement(e.getMessage() +"\n");
+					}
 					break;
 					
 				case "loadmap": 
