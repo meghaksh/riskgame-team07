@@ -6,14 +6,14 @@ import java.util.ArrayList;
  * Class for all the Continents  of the Map
  */
 public class Continent {
-	private static int d_COUNT=0;
+	private static int D_Count=0;
 	private int d_ID;
 	private String d_Name;
 	private int d_ContinentControlValue;
 	private ArrayList<Country> d_CountryList;
 
 	public Continent(String p_Name, int p_ContinentControlValue) {
-		setContinentID(++d_COUNT);
+		setContinentID(++D_Count);
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
 		d_CountryList = new ArrayList<Country>();
@@ -21,7 +21,7 @@ public class Continent {
 	
 	public static void setCount(int p_count)
 	{
-		d_COUNT=p_count;
+		D_Count=p_count;
 	}
 	
 	/**
