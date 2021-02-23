@@ -11,19 +11,21 @@ public class Continent {
 	private String d_Name;
 	private int d_ContinentControlValue;
 	private ArrayList<Country> d_CountryList;
-	
+
 	/**
 	 * This is the Constructor of the class which stores the ID  Name and ContinentControl Value to that Continent Object
 	 * It also initializes the CountryList which later stores all the countries belonging to that particular continent
 	 * @param p_Name Name of the Continent
 	 * @param p_ContinentControlValue Integer representing the ContinentControl Value
 	 */
+
 	public Continent(String p_Name, int p_ContinentControlValue) {
 		setContinentID(++D_Count);
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
 		d_CountryList = new ArrayList<Country>();
 	}
+
 	/**
 	 * This is the setter method to set the value of Id
 	 * @param p_count Integer that has the value to set in the ID
@@ -31,6 +33,7 @@ public class Continent {
 	public static void setCount(int p_count) {
 		D_Count=p_count;
 	}
+
 	/**
 	 * Method to return the Continent Name
 	 * @return d_Name  Name of the Continent 
@@ -38,7 +41,7 @@ public class Continent {
 	public String getContinentName() {
 		return this.d_Name;
 	}
-	
+
 	/**
 	 * Method to get Continent Control Value
 	 * @return d_ContinentControlValue  continent control value of that continent
@@ -46,7 +49,7 @@ public class Continent {
 	public int getContinentControlValue() {
 		return d_ContinentControlValue;
 	}
-	
+
 	/**
 	 * Method to get Continent ID
 	 * @return ContinentID  ID of the continent
@@ -54,10 +57,9 @@ public class Continent {
 	public int getContinentID() {
 		return d_ID;
 	}
-	
+
 	/**
 	 * Method to set Continent ID
-	 * 
 	 * @param p_ContinentID ID of the continent
 	 */
 	public void setContinentID(int p_ContinentID) {
@@ -65,10 +67,11 @@ public class Continent {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * Compares the present Continent object with other Continent object and returns true
 	 * If the Continent object parameter is empty then it returns false
-	 * 
 	 * @param p_Continent Continent Object
+	 * 
 	 */
 	@Override
 	public boolean equals(Object p_Continent) {
@@ -89,7 +92,7 @@ public class Continent {
 	public void addCountry(Country p_country) {
 		this.d_CountryList.add(p_country);
 	}
-	
+
 	/**
 	 * Method to return the arraylist of all the countries in the continent
 	 * @return d_CountryList Arraylist of all countries
@@ -98,5 +101,3 @@ public class Continent {
 		return this.d_CountryList;
 	}
 }
-
-

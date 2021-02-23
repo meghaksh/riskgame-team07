@@ -9,7 +9,7 @@ import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 public class ValidateMap {
 	int d_VertexCount;
 	ArrayList<ArrayList<Integer>> d_VertexList;
-	
+
 	/**
 	 * This constructor of a class initialize the adjacency list representation of graph. 
 	 * 
@@ -22,7 +22,7 @@ public class ValidateMap {
 			d_VertexList.add(new ArrayList<Integer>());
 		}
 	}
-	
+
 	/**
 	 * This constructor receives country and continent objects and use them to add into adjacency list of graph. 
 	 * 
@@ -46,7 +46,7 @@ public class ValidateMap {
 			throw new Exception("There should be atleast one country for a continent");
 		}
 	}
-	
+
 	/**
 	 * This method checks if every continent has at least one country
 	 *  
@@ -62,7 +62,7 @@ public class ValidateMap {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * This method takes the arraylist of country objects and creates a new hashmap which is then returned to validation method
 	 * All the updation in countryid and their respective borders after addition/removal is taken care for the sake of validation.
@@ -116,7 +116,7 @@ public class ValidateMap {
 			System.out.println("Exception while assigning borders in validate map : " + l_E.getMessage());
 		}
 	}
-	
+
 	/**
 	 * This method add the border 'p_V' at the index position 'p_U'
 	 * 
@@ -126,7 +126,7 @@ public class ValidateMap {
 	public void addBorder(int p_U, int p_V) {
 		d_VertexList.get(p_U).add(p_V);
 	}
-	
+
 	/**
 	 * This method returns true if graph is connected. 
 	 * DFS starts from one index and try to reach every other index from there. 
@@ -146,7 +146,7 @@ public class ValidateMap {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * This method is called from DFS function which sets the visited flag to true.
 	 * Also this method is called recursively for all the countries that are connected from the starting point. 
@@ -163,7 +163,7 @@ public class ValidateMap {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method takes the transpose of the graph. 
 	 * For Example : If there is a border between country 1 --> 2, it will become 2 ---> 1 
@@ -180,7 +180,7 @@ public class ValidateMap {
 		}
 		return l_TempMap;
 	}
-	
+
 	/**
 	 * This method calls DFS for original graph and transposed graph. 
 	 * 
