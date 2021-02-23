@@ -103,6 +103,20 @@ public class GameModelTest {
 		String l_Result1=c1.getResult();
 		assertEquals(l_expected1,l_Result1);
 		
+		String l_command2="deploy india 2";
+		String l_expected2="\norder deploy india 2 added to list of raj";
+		c1.setPlayerArmies(3);
+		c1.setOrder(l_command2);
+		c1.issue_order();
+		String l_Result2=c1.getResult();
+		assertEquals(l_expected2,l_Result2);
 		
+		String l_command3="deploy india 4";
+		String l_expected3="\nraj ; you have only 3 number of armies!";
+		c1.setPlayerArmies(3);
+		c1.setOrder(l_command3);
+		c1.issue_order();
+		String l_Result3=c1.getResult();
+		assertEquals(l_expected3,l_Result3);
 	}
 	}
