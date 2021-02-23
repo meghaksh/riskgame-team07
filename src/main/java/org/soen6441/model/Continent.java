@@ -3,7 +3,7 @@ package org.soen6441.model;
 import java.util.ArrayList;
 
 /**
- * Class for all the Continents  of the Map
+ * This Class is for all the Continents  of the Map
  */
 public class Continent {
 	private static int D_Count=0;
@@ -11,54 +11,64 @@ public class Continent {
 	private String d_Name;
 	private int d_ContinentControlValue;
 	private ArrayList<Country> d_CountryList;
-
+	
+	/**
+	 * This is the Constructor of the class which stores the ID  Name and ContinentControl Value to that Continent Object
+	 * It also initializes the CountryList which later stores all the countries belonging to that particular continent
+	 * @param p_Name Name of the Continent
+	 * @param p_ContinentControlValue Integer representing the ContinentControl Value
+	 */
 	public Continent(String p_Name, int p_ContinentControlValue) {
 		setContinentID(++D_Count);
 		this.d_Name=p_Name;
 		this.d_ContinentControlValue=p_ContinentControlValue;
 		d_CountryList = new ArrayList<Country>();
 	}
-	
-	public static void setCount(int p_count)
-	{
+	/**
+	 * This is the setter method to set the value of Id
+	 * @param p_count Integer that has the value to set in the ID
+	 */
+	public static void setCount(int p_count) {
 		D_Count=p_count;
 	}
-	
 	/**
-	 * Method to return continent name
-	 * */
+	 * Method to return the Continent Name
+	 * @return d_Name  Name of the Continent 
+	 */
 	public String getContinentName() {
 		return this.d_Name;
 	}
 	
 	/**
-	 * To get Continent Control Value
-	 * @return
+	 * Method to get Continent Control Value
+	 * @return d_ContinentControlValue  continent control value of that continent
 	 */
 	public int getContinentControlValue() {
 		return d_ContinentControlValue;
 	}
 	
 	/**
-	 * To get Continent ID
-	 * 
-	 * @return ContinentID
+	 * Method to get Continent ID
+	 * @return ContinentID  ID of the continent
 	 */
 	public int getContinentID() {
 		return d_ID;
 	}
 	
 	/**
-	 * To set Continent ID
+	 * Method to set Continent ID
 	 * 
-	 * @param p_ContinentID
+	 * @param p_ContinentID ID of the continent
 	 */
 	public void setContinentID(int p_ContinentID) {
 		d_ID = p_ContinentID;
 	}
 
 	/**
+	 * Compares the present Continent object with other Continent object and returns true
+	 * If the Continent object parameter is empty then it returns false
 	 * 
+	 * @param p_Continent Continent Object
 	 */
 	@Override
 	public boolean equals(Object p_Continent) {
@@ -73,16 +83,16 @@ public class Continent {
 	}
 
 	/**
-	 * To add Country to the Continent
-	 * @param p_country
+	 * Method to add Country to the Continent
+	 * @param p_country Country object
 	 */
 	public void addCountry(Country p_country) {
 		this.d_CountryList.add(p_country);
 	}
 	
 	/**
-	 * To return the arraylist of all the countries in the continent
-	 * @return
+	 * Method to return the arraylist of all the countries in the continent
+	 * @return d_CountryList Arraylist of all countries
 	 */
 	public ArrayList<Country> getCountryList(){
 		return this.d_CountryList;
