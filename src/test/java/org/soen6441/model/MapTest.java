@@ -50,6 +50,10 @@ public class MapTest {
 		l_map.addCountry("japan","asia");
 		l_map.addCountry("kenya","africa");
 		l_map.addCountry("egypt","africa");
+		l_map.addBorder("egypt", "kenya");
+		l_map.addBorder("kenya", "japan");
+		l_map.addBorder("japan", "china");
+		l_map.addBorder("china", "india");
 	}
 
 
@@ -89,46 +93,6 @@ public class MapTest {
 
 	}
 
-
-
-	//		l_map.AddCountry(l_country, l_continent);
-	//		l_map.AddCountry("china", l_continent);
-
-
-
-	// to check if country has been added to the list or not
-	//		for(Country c: l_map.getCountryList()){
-	//			if(c.getCountryName().contains(l_country)) {
-	//				flag=true;
-	//			}
-	//		}
-
-
-	//Boolean flag2=false;
-	//to check if the country has been added to the correct continent or not
-	//		for (Continent co: l_map.getContinentList()){
-	//			if (co.getContinentName().equals(l_continent)){
-	//				for(Country c1: co.getCountryList()){
-	//					if(c1.getCountryName().contains(l_country)) {
-	//						flag2=true;
-	//					}
-	//				}
-	//			}
-	//			
-	//		}
-	//		
-	//assertTrue(flag);
-	//assertTrue(flag2);
-
-	//		try {
-	//			l_map.AddCountry(l_country, l_continent);
-	//			l_map.AddCountry(l_country, l_continent);
-	//		} catch (Exception e) {
-	//			// TODO Auto-generated catch block
-	//			message = e.getMessage();
-	//			System.out.println(message);
-	//			assertFalse(message.contains(("Country Already Exist")));
-	//		}
 
 	@Test
 	public void testAddContinent() throws Exception{
@@ -174,9 +138,18 @@ public class MapTest {
 			}
 		}
 		assertEquals(0,flag);
-		//assertEquals(check,l_map.getCountryList());
 	}
-	
+	@Test
+	public void testValidateMap() throws Exception
+	{
+		String l_Result = l_map.validateMap();
+		assertEquals("Map is not Valid",l_Result);
+		
+		l_map.addBorder("india", "egypt");
+		
+		String l_Result1 = l_map.validateMap();
+		assertEquals("Map is Valid",l_Result1);
+	}
 
 
 
