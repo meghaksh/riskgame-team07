@@ -32,9 +32,9 @@ public class ValidateMap {
 	 */
 	public ValidateMap(ArrayList<Country> p_CountryObjects,ArrayList<Continent> p_ContinentObjects) throws Exception{
 		if(checkCountryAndContinent(p_CountryObjects,p_ContinentObjects)){
+			checkContinentIsConnectedSubgraph(p_ContinentObjects);
 			HashMap<Integer,ArrayList<Integer>> l_HMap;
 			l_HMap = updateCount(p_CountryObjects);
-			System.out.println("printing hashmap"+l_HMap);
 			d_VertexCount = l_HMap.size();
 			d_VertexList = new ArrayList<>(d_VertexCount);
 			for(int i=0;i<d_VertexCount;i++) {
@@ -46,7 +46,7 @@ public class ValidateMap {
 			throw new Exception("There should be atleast one country for a continent");
 		}
 	}
-
+	
 	/**
 	 * This method checks if every continent has at least one country
 	 *  
@@ -102,7 +102,6 @@ public class ValidateMap {
 	 * @param p_HMap This parameter is the updated hash map created in updateCount method
 	 */
 	public void assignBorders(HashMap<Integer,ArrayList<Integer>> p_HMap) {
-		System.out.println("Printing Map " + p_HMap);
 		try {
 			for(int l_I=1;l_I<p_HMap.size()+1;l_I++) {
 				if(p_HMap.get(l_I)!=null) {
@@ -137,9 +136,7 @@ public class ValidateMap {
 	 */
 	public boolean runDFS(int p_Start) {
 		boolean[] l_NodeVisited = new boolean[d_VertexCount];
-		System.out.print("DFS of Graph : ");
 		markVisited(p_Start, l_NodeVisited);
-		System.out.println();
 		for(boolean l_B: l_NodeVisited) {
 			if(!l_B)
 				return false;
@@ -156,7 +153,6 @@ public class ValidateMap {
 	 */
 	private void markVisited(int p_Start, boolean[] p_NodeVisited) {
 		p_NodeVisited[p_Start] = true;
-		System.out.print(p_Start + " ");
 		for(int l_I: d_VertexList.get(p_Start)) {
 			if(!p_NodeVisited[l_I]){
 				markVisited(l_I, p_NodeVisited);
@@ -195,4 +191,29 @@ public class ValidateMap {
 		}
 		return "Map is not Valid";
 	}
+	public void checkContinentIsConnectedSubgraph(ArrayList<Continent> p_ContinentObjects)throws Exception{
+		
+		HashMap<Integer,ArrayList<Integer>> l_CountryMapForEachContinent =new HashMap<Integer,ArrayList<Integer>>();
+	
+	for(Continent l_C : p_ContinentObjects)
+	{
+		ArrayList<Country> l_Country=l_C.getCountryList();
+		l_CountryMapForEachContinent=updateCount(l_Country);
+		d_VertexCount = l_CountryMapForEachContinent.size();
+		d_VertexList = new ArrayList<>(d_VertexCount);
+		for(int i=0;i<d_VertexCount;i++) {
+			d_VertexList.add(new ArrayList<Integer>());
+		}
+		assignBorders(l_CountryMapForEachContinent);
+		String l_Return =isValid();
+		if(l_Return.equals("Map is not Valid"))
+		{
+			throw new Exception("The countries inside "+l_C.getContinentName()+" is not internally Connected");
+		}
+	}
+		
+	}
+		
 }
+
+
