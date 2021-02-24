@@ -30,17 +30,17 @@ public class ValidateMap {
 	 * @param d_ContinentObjects List of continent objects stored in the map model. 
 	 * @throws Exception If any continent doesn't have a country, it notifies the user. 
 	 */
-	public ValidateMap(ArrayList<Country> p_CountryObjects,ArrayList<Continent> d_ContinentObjects) throws Exception{
-		if(checkCountryAndContinent(p_CountryObjects,d_ContinentObjects)){
-			HashMap<Integer,ArrayList<Integer>> p_HMap;
-			p_HMap = updateCount(p_CountryObjects);
-			System.out.println("printing hashmap"+p_HMap);
-			d_VertexCount = p_HMap.size();
+	public ValidateMap(ArrayList<Country> p_CountryObjects,ArrayList<Continent> p_ContinentObjects) throws Exception{
+		if(checkCountryAndContinent(p_CountryObjects,p_ContinentObjects)){
+			HashMap<Integer,ArrayList<Integer>> l_HMap;
+			l_HMap = updateCount(p_CountryObjects);
+			System.out.println("printing hashmap"+l_HMap);
+			d_VertexCount = l_HMap.size();
 			d_VertexList = new ArrayList<>(d_VertexCount);
 			for(int i=0;i<d_VertexCount;i++) {
 				d_VertexList.add(new ArrayList<Integer>());
 			}
-			assignBorders(p_HMap);
+			assignBorders(l_HMap);
 		}
 		else{
 			throw new Exception("There should be atleast one country for a continent");
@@ -71,29 +71,29 @@ public class ValidateMap {
 	 */
 	public HashMap<Integer,ArrayList<Integer>> updateCount(ArrayList<Country> p_CountryObjects ){
 		int l_Sequence=0,l_ID;
-		ArrayList<String>d_UpdatedNeighbors=new ArrayList<String>();
-		ArrayList<Country> d_NCountryObjects=p_CountryObjects;
-		HashMap<Integer,Integer> d_UpdatedIDCount=new HashMap<Integer,Integer>();
-		HashMap<Integer,ArrayList<Integer>> d_UpdatedMap=new HashMap<Integer,ArrayList<Integer>>();
-		for(Country l_C: d_NCountryObjects){
+		ArrayList<String>l_UpdatedNeighbors=new ArrayList<String>();
+		ArrayList<Country> l_NCountryObjects=p_CountryObjects;
+		HashMap<Integer,Integer> l_UpdatedIDCount=new HashMap<Integer,Integer>();
+		HashMap<Integer,ArrayList<Integer>> l_UpdatedMap=new HashMap<Integer,ArrayList<Integer>>();
+		for(Country l_C: l_NCountryObjects){
 			l_Sequence++;
-			d_UpdatedIDCount.put(l_C.getCountryID(),l_Sequence);
+			l_UpdatedIDCount.put(l_C.getCountryID(),l_Sequence);
 		}
-		for(Country l_C: d_NCountryObjects){
-			ArrayList<Integer>d_StoreNeighbors=new ArrayList<Integer>();
-			l_ID=d_UpdatedIDCount.get(l_C.getCountryID());
-			d_UpdatedNeighbors=l_C.getBorder();
-			for(String l_S: d_UpdatedNeighbors){
-				for(Country l_C2: d_NCountryObjects){
+		for(Country l_C: l_NCountryObjects){
+			ArrayList<Integer>l_StoreNeighbors=new ArrayList<Integer>();
+			l_ID=l_UpdatedIDCount.get(l_C.getCountryID());
+			l_UpdatedNeighbors=l_C.getBorder();
+			for(String l_S: l_UpdatedNeighbors){
+				for(Country l_C2: l_NCountryObjects){
 					if(l_C2.getCountryName().equals(l_S)){
-						int l_NewNeighborID=d_UpdatedIDCount.get(l_C2.getCountryID());
-						d_StoreNeighbors.add(l_NewNeighborID);	
+						int l_NewNeighborID=l_UpdatedIDCount.get(l_C2.getCountryID());
+						l_StoreNeighbors.add(l_NewNeighborID);	
 					}
 				}
 			}
-			d_UpdatedMap.put(l_ID,d_StoreNeighbors);
+			l_UpdatedMap.put(l_ID,l_StoreNeighbors);
 		}	
-		return d_UpdatedMap;	
+		return l_UpdatedMap;	
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class ValidateMap {
 	/**
 	 * This method calls DFS for original graph and transposed graph. 
 	 * 
-	 * @return true if both DFS are passed, false otherwise. 
+	 * @return String "Map is Valid" if dfs is passed else "Map is not Valid"
 	 */
 	public String isValid() {
 		boolean l_B1 = runDFS(0);
