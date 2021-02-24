@@ -2,14 +2,14 @@ package org.soen6441.controller;
 
 import org.soen6441.model.Map;
 /**
- * This class update the MapModel. Also receives the acknowledgement for the update and pass it back to the parent GameController.
+ * This class update the MapModel. Also receives the acknowledgement for the update and pass it back to the parent GameEngine.
  */
 public class MapController {
 	private Map d_mapModel;
 	
 	/**
 	 * This is a constructor which receives Map object as parameter which is used throughout the class
-	 * @param p_map This is a reference of Map object (within GameModel) passed from parent GameController
+	 * @param p_map This is a reference of Map object (within GameModel) passed from parent GameEngine.
 	 */
 	public MapController(Map p_map) {
 		d_mapModel = p_map;
@@ -23,6 +23,10 @@ public class MapController {
 	 */
 	public String saveMap(String p_Str)throws Exception {
 		String[] l_CommandArray = p_Str.split(" ");
+		if(l_CommandArray.length<2)
+		{
+			throw new Exception("Please Enter valid Filename to save the map");
+		}
 		String l_Result=d_mapModel.saveMap(l_CommandArray[1]);
 		return l_Result;
 	}
@@ -62,11 +66,18 @@ public class MapController {
 	
 	/**
 	 * This method calls the Validate map method from the mapmodel class	
+	 * @throws Exception if there is no map created
 	 */
 	public String validateMap() throws Exception {
+		if(d_mapModel.getContinentList().size()>0)
+		{
 		return d_mapModel.validateMap();
+		}
+		else
+		{
+			throw new Exception("There is no map created");
+		}
 	}
-	
 	/**
 	 * This method takes the keyword and entire command from the CommandPrompt and then checks it with all the cases.
 	 * After checking it performs the specific functionality and returns the feedback accordingly

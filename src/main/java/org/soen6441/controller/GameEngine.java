@@ -105,7 +105,7 @@ public class GameEngine {
 						String l_Result=d_MapController.saveMap(l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception exp) {
-						d_CpView.setCommandAcknowledgement(exp.getMessage());
+						d_CpView.setCommandAcknowledgement(exp.getMessage()+"\n");
 					}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Save Map In This Phase"+"\n");
@@ -127,10 +127,14 @@ public class GameEngine {
 					break;
 					
 				case "validatemap":
+					if(d_MapDone==false) {
 					try {
 					d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
 					}catch(Exception e) {
 						d_CpView.setCommandAcknowledgement(e.getMessage() +"\n");
+					}
+					}else {
+						d_CpView.setCommandAcknowledgement("Cant validate Map In This Phase"+"\n");
 					}
 					break;
 					
@@ -140,7 +144,7 @@ public class GameEngine {
 						this.d_MapDone = true;
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception exp) {
-						d_CpView.setCommandAcknowledgement(exp.getMessage());
+						d_CpView.setCommandAcknowledgement(exp.getMessage()+"\n");
 					}
 					break;
 					
@@ -150,7 +154,7 @@ public class GameEngine {
 						String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
 					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
 						d_CpView.setCommandAcknowledgement("\n");
 					}
 					}else{
