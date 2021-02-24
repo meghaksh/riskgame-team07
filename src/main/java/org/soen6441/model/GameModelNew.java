@@ -135,7 +135,7 @@ public class GameModelNew {
 			}
 		}
 		if (l_PlayerFound == false) {
-			throw new Exception("\"This Player not found");
+			throw new Exception("This Player does not exists");
 		}
 	}
 	/**
@@ -192,9 +192,9 @@ public class GameModelNew {
 			AssignReinforcementArmies();
 		} else {
 			if(getAllPlayers().size()==0) {
-				throw new Exception ("\"Please enter players using gameplayer add command");
+				throw new Exception ("Please enter players using gameplayer add command");
 			} else {
-				throw new Exception ("\"One Player Found. Please enter more players using gameplayer add command");
+				throw new Exception ("One Player Found. Please enter more players using gameplayer add command");
 			}
 		}
 	}

@@ -366,35 +366,26 @@ public class Map {
 	 */
 	public void addBorder(String p_CountryName, String p_NeighborName) throws Exception {
 		int l_Flag=0;
-		for(Country c : this.getCountryList())
-		{
-			if(c.getCountryName().equals(p_NeighborName))
-			{
+		for(Country c : this.getCountryList()) {
+			if(c.getCountryName().equals(p_NeighborName)) {
 				l_Flag=1;break;
 			}
 		}
-		if(l_Flag==0)
-		{
+		if(l_Flag==0) {
 			throw new Exception("Neighbour Country does not exists!");
 		}
 		int l_Flag1=0;
-		for(Country c : this.getCountryList())
-		{
-			if(c.getCountryName().equals(p_CountryName))
-			{
+		for(Country c : this.getCountryList()) {
+			if(c.getCountryName().equals(p_CountryName)) {
 				l_Flag1=1;break;
 			}
 		}
-		if(l_Flag1==0)
-		{
+		if(l_Flag1==0) {
 			throw new Exception("Country does not exists!");
 		}
-		for(Country l_C: this.getCountryList())
-		{
-			if(l_C.getCountryName().equals(p_CountryName))
-			{
-				if(l_C.getBorder().contains(p_NeighborName))
-				{
+		for(Country l_C: this.getCountryList()) {
+			if(l_C.getCountryName().equals(p_CountryName)) {
+				if(l_C.getBorder().contains(p_NeighborName)) {
 					throw new Exception("Neighbor Already Exist");
 				}
 			}
@@ -427,15 +418,22 @@ public class Map {
 	public void removeBorder(String p_CountryName, String p_NeighbourName) throws Exception {
 		int l_NeighborId=0;
 		int l_CountryId=0;
-		for(Country l_C: this.getCountryList())
-		{
-			if(l_C.getCountryName().equals(p_CountryName))
-			{
-				if(!l_C.getBorder().contains(p_NeighbourName))
-				{
-					throw new Exception("Neighbor Does not Exist");
-				}
+		int l_Flag=0,l_Flag1=0;
+		for(Country c : this.getCountryList()) {
+			if(c.getCountryName().equals(p_CountryName)) {
+				l_Flag=1;break;
 			}
+		}
+		if(l_Flag==0) {
+			throw new Exception("Country does not exists!");
+		}
+		for(Country c : this.getCountryList()) {
+			if(c.getCountryName().equals(p_NeighbourName)) {
+				l_Flag1=1;break;
+			}
+		}
+		if(l_Flag1==0) {
+			throw new Exception("Neighbour Country does not exists!");
 		}
 		for(Country l_TempCountry :  this.getCountryList()) {
 			if(l_TempCountry.getCountryName().equals(p_NeighbourName)) {
@@ -466,7 +464,7 @@ public class Map {
 	 * 
 	 * @return ArrayList of continents
 	 */
-	public ArrayList<Continent> getContinentList(){
+	public ArrayList<Continent> getContinentList() {
 		return this.d_ContinentObjects;
 	}
 

@@ -20,6 +20,7 @@ public class GameModelTest {
 		d_Map.addContinent("asia","1");
 		d_Map.addCountry("india","asia");
 		d_Map.addCountry("china","asia");
+		d_Map.addCountry("japan","asia");
 		d_Game = new GameModelNew(d_Map);
 		d_Game.addPlayer("raj");
 		d_Game.addPlayer("kumar");
@@ -34,7 +35,6 @@ public class GameModelTest {
 	 * @throws Exception
 	 */
 	@Test 
-	//	(expected= Exception.class)
 	public void testAddPlayer() throws Exception {
 		for(Player l:d_Check) {
 			l_Names.add(l.getPlayerName());
@@ -45,12 +45,38 @@ public class GameModelTest {
 		assertEquals(l_d_CheckNames,l_Names);
 	}
 	
+	@Test 
+	public void testAddPlayerAlreadyExist() {
+		String l_ExpectedMessage="Please enter a differnt Player name as this name already exists";
+		String l_ActualMessage = "";
+		try {
+			d_Game.addPlayer("raj");
+		} catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage,l_ActualMessage);
+	}
+	
+	@Test 
+	public void testAddPlayerReachedMax() {
+		String l_ExpectedMessage="Reached Max Number of Players can be added to the game";
+		String l_ActualMessage = "";
+		try {
+			d_Game.addPlayer("zeal");
+			d_Game.addPlayer("alpha");
+			
+		} catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage,l_ActualMessage);
+	}
+	
+	
 	/**
 	 * This test case d_Check the functionality of RemovePlayer method
 	 * @throws Exception
 	 */
 	@Test 
-	//	(expected= Exception.class)
 	public void testRemovePlayer() throws Exception {
 		d_Game.removePlayer("raj");
 		for(Player l:d_Check) {
@@ -62,12 +88,23 @@ public class GameModelTest {
 		assertFalse(l_d_CheckNames.equals(l_Names));
 	}
 	
+	@Test 
+	public void testRemovePlayerNotExists() {
+		String l_ExpectedMessage="This Player does not exists";
+		String l_ActualMessage = "";
+		try {
+			d_Game.removePlayer("shilpa");
+		}catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage,l_ActualMessage);
+	}
+	
 	/**
 	 * This test case d_Check the functionality of AssignReinforcements method
 	 * @throws Exception
 	 */
 	@Test 
-	////	(expected= Exception.class)
 	public void testAssignReinforcements() throws Exception {
 		d_Game.startUpPhase();
 		for(Player l:d_Game.getAllPlayers()) {
