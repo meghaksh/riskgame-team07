@@ -329,12 +329,12 @@ public class MapTest {
 	 * To test the Validation of Map and d_Check whether it is a connected graph or not 
 	 * @throws Exception
 	 */
-	@Test
-	public void testValidateMap() throws Exception {
-		String l_Result = l_Map.validateMap();
-		assertEquals("Map is not Valid",l_Result);
-		l_Map.addBorder("india", "egypt");
-		String l_Result1 = l_Map.validateMap();
-		assertEquals("Map is Valid",l_Result1);
-	}
+//	@Test
+//	public void testValidateMap() throws Exception {
+//		String l_Result = l_Map.validateMap();
+//		assertEquals("Map is not Valid",l_Result);
+//		l_Map.addBorder("india", "egypt");
+//		String l_Result1 = l_Map.validateMap();
+//		assertEquals("Map is Valid",l_Result1);
+//	}
 }
