@@ -28,10 +28,10 @@ public class Continent {
 
 	/**
 	 * This is the setter method to set the value of Id
-	 * @param p_count Integer that has the value to set in the ID
+	 * @param p_Count Integer that has the value to set in the ID
 	 */
-	public static void setCount(int p_count) {
-		D_Count=p_count;
+	public static void setCount(int p_Count) {
+		D_Count=p_Count;
 	}
 
 	/**
@@ -81,16 +81,16 @@ public class Continent {
 		if (p_Continent == null || this.getClass() != p_Continent.getClass()) {
 			return false;
 		}
-		Continent p1 = (Continent)p_Continent; 
-		return this.getContinentName().equals(p1.getContinentName());
+		Continent l_P1 = (Continent)p_Continent; 
+		return this.getContinentName().equals(l_P1.getContinentName());
 	}
 
 	/**
 	 * Method to add Country to the Continent
 	 * @param p_country Country object
 	 */
-	public void addCountry(Country p_country) {
-		this.d_CountryList.add(p_country);
+	public void addCountry(Country p_Country) {
+		this.d_CountryList.add(p_Country);
 	}
 
 	/**
