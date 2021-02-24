@@ -191,6 +191,11 @@ public class GameController {
 					}
 					break;
 					
+				case "reset":
+					d_MapController.reset();
+					d_CpView.setCommandAcknowledgement("The Map is Reset"+"\n");
+					break;
+					
 				default:
 					d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
 					break;

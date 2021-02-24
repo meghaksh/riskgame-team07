@@ -49,10 +49,20 @@ public class MapController {
 			return l_Result;
 		}
 		
+	
+	}
+	
+	/**
+	 * This method will call the reset method of mapmodel class
+	 */
+	public void reset()
+	{
+		d_mapModel.reset();
+	}
+	
 	/**
 	 * This method calls the Validate map method from the mapmodel class	
 	 */
-	}
 	public String validateMap() throws Exception {
 		return d_mapModel.validateMap();
 	}
