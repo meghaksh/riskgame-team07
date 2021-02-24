@@ -48,51 +48,64 @@ public class PlayerController {
 		System.out.println("in player issue order");
 		ArrayList <Player> l_Players = d_Players;
 		ArrayList <Player> l_PlayersClone = (ArrayList<Player>) d_Players.clone();
+		int l_PlayerListSize = l_Players.size();
+		System.out.println(l_PlayerListSize);
 		for(Player p:d_Players) {
 			System.out.println(p.getPlayerName());
 		}
 
-		while(!l_PlayersClone.isEmpty()) {
-			int l_Flag =0;
-			ArrayList<Player> l_RemovePlayerList = new ArrayList<Player>();
+	
+		int l_Flag =0;
+		ArrayList<Player> l_RemovePlayerList = new ArrayList<Player>();
+		while(l_PlayerListSize>0)	{
 			for(Player l_TempPlayer : l_Players) {
-				d_OrderAcknowledgment = "\n"+l_TempPlayer.getPlayerName()+" Enter deploy order";
-				d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 
-				String l_StringOrder = JOptionPane.showInputDialog(l_TempPlayer.getPlayerName()+" : Please Enter Your Deploy Order");
-				l_TempPlayer.setOrder(l_StringOrder);
-				l_TempPlayer.issue_order();
-				String l_Result = l_TempPlayer.getResult();
-				int l_ResultInteger = l_TempPlayer.getResultInteger();
+				if(l_TempPlayer.getPlayerArmies()>0)
+				{
 
-				if(l_ResultInteger==2) {
-					d_OrderAcknowledgment=l_Result;
+					d_OrderAcknowledgment = "\n"+l_TempPlayer.getPlayerName()+" Enter deploy order";
 					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					l_Flag=1;l_RemovePlayerList.add(l_TempPlayer);
-					System.out.println(l_TempPlayer.getPlayerName()+"'s armies have become zero");
-				} else if(l_ResultInteger==3) {
-					System.out.println(l_Result);
-					d_OrderAcknowledgment = l_Result;
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					System.out.println("\nThis country does not belong to "+l_TempPlayer.getPlayerName());
-				} else if(l_ResultInteger==4) {
-					d_OrderAcknowledgment = l_Result+"\n Please enter the next order accordingly";
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					System.out.println(d_OrderAcknowledgment);
-				} else if(l_ResultInteger==1){
-					d_OrderAcknowledgment = l_Result;
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					System.out.println("\norder successfully added to "+l_TempPlayer.getPlayerName()+"'s order list");
+
+					String l_StringOrder = JOptionPane.showInputDialog(l_TempPlayer.getPlayerName()+" : Please Enter Your Deploy Order");
+					l_TempPlayer.setOrder(l_StringOrder);
+					l_TempPlayer.issue_order();
+					String l_Result = l_TempPlayer.getResult();
+					int l_ResultInteger = l_TempPlayer.getResultInteger();
+
+					if(l_ResultInteger==2) {
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						l_Flag=1;l_RemovePlayerList.add(l_TempPlayer);
+						System.out.println(l_TempPlayer.getPlayerName()+"'s armies have become zero");
+					} else if(l_ResultInteger==3) {
+						System.out.println(l_Result);
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						System.out.println("\nThis country does not belong to "+l_TempPlayer.getPlayerName());
+					} else if(l_ResultInteger==4) {
+						d_OrderAcknowledgment = l_Result+"\n Please enter the next order accordingly";
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						System.out.println(d_OrderAcknowledgment);
+					} else if(l_ResultInteger==1){
+						d_OrderAcknowledgment = l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						System.out.println("\norder successfully added to "+l_TempPlayer.getPlayerName()+"'s order list");
+					}
+				}
+				else
+				{
+					--l_PlayerListSize;
 				}
 
 			}
-			if(l_Flag==1) {
+		}
+		/*	if(l_Flag==1) {
 				for(Player l_TempRemovePlayer : l_RemovePlayerList) {
 					
 					l_PlayersClone.remove(l_TempRemovePlayer);
 				}
-			}
-		}
+			}*/
+		
 
 	}
 	/**

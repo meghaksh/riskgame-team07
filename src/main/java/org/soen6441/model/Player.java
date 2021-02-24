@@ -204,7 +204,7 @@ public class Player {
 		int l_Flag = 0;
 		d_ResultInteger = 0;
 		String[] l_StringList = d_StringOrder.split(" ");
-		if(Integer.parseInt(l_StringList[2]) <= d_TempArmies)
+		if(Integer.parseInt(l_StringList[2]) <= d_Armies)
 		{
 			Iterator l_It = d_Countries.iterator();
 			while(l_It.hasNext()) {
@@ -215,11 +215,11 @@ public class Player {
 				}
 			}
 			if(l_Flag==1) {
-				d_TempArmies-= Integer.parseInt(l_StringList[2]);
+				d_Armies-= Integer.parseInt(l_StringList[2]);
 				d_Order.add(new Order(d_StringOrder,d_GameModelNew));
 				d_ResultInteger = 1;
 				setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);
-				if(d_TempArmies==0) {
+				if(d_Armies==0) {
 					d_ResultInteger = 2;
 					setResult("\n"+d_PlayerName+" : Your armies have become zero now!!. You will not be able to issue an order");
 				}
