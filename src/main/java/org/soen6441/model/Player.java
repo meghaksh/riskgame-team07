@@ -204,32 +204,39 @@ public class Player {
 		int l_Flag = 0;
 		d_ResultInteger = 0;
 		String[] l_StringList = d_StringOrder.split(" ");
-		if(Integer.parseInt(l_StringList[2]) <= d_Armies)
-		{
-			Iterator l_It = d_Countries.iterator();
-			while(l_It.hasNext()) {
-				Country l_TempCountry = (Country)l_It.next() ;
-				if(l_StringList[1].equals(l_TempCountry.getCountryName())) {
-					l_Flag=1;
-					break;
+		if(l_StringList[0].equals("deploy")) {
+			if(Integer.parseInt(l_StringList[2]) <= d_Armies)
+			{
+				Iterator l_It = d_Countries.iterator();
+				while(l_It.hasNext()) {
+					Country l_TempCountry = (Country)l_It.next() ;
+					if(l_StringList[1].equals(l_TempCountry.getCountryName())) {
+						l_Flag=1;
+						break;
+					}
 				}
-			}
-			if(l_Flag==1) {
-				d_Armies-= Integer.parseInt(l_StringList[2]);
-				d_Order.add(new Order(d_StringOrder,d_GameModelNew));
-				d_ResultInteger = 1;
-				setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);
-				if(d_Armies==0) {
-					d_ResultInteger = 2;
-					setResult("\n"+d_PlayerName+" : Your armies have become zero now!!. You will not be able to issue an order");
+				if(l_Flag==1) {
+					d_Armies-= Integer.parseInt(l_StringList[2]);
+					d_Order.add(new Order(d_StringOrder,d_GameModelNew));
+					d_ResultInteger = 1;
+					setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);
+					if(d_Armies==0) {
+						d_ResultInteger = 2;
+						setResult("\n"+d_PlayerName+" : Your armies have become zero now!!. You will not be able to issue an order");
+					}
+				} else {
+					d_ResultInteger = 3;
+					setResult("\nThis country "+l_StringList[1]+" doesnot belongs to "+d_PlayerName);
 				}
 			} else {
-				d_ResultInteger = 3;
-				setResult("\nThis country "+l_StringList[1]+" doesnot belongs to "+d_PlayerName);
+				d_ResultInteger = 4;
+				setResult("\n"+d_PlayerName+" ; you have only "+d_Armies+" number of armies!");
 			}
-		} else {
-			d_ResultInteger = 4;
-			setResult("\n"+d_PlayerName+" ; you have only "+d_Armies+" number of armies!");
+		}
+		else
+		{
+			d_ResultInteger = 5;
+			setResult("\n"+d_PlayerName+"Please enter Valid Command next time!");
 		}
 	}
 	/**

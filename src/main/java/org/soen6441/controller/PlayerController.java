@@ -56,8 +56,13 @@ public class PlayerController {
 					l_TempPlayer.issue_order();
 					String l_Result = l_TempPlayer.getResult();
 					int l_ResultInteger = l_TempPlayer.getResultInteger();
-
-					if(l_ResultInteger==2) {
+					
+					
+					if(l_ResultInteger==5) {
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					}
+					else if(l_ResultInteger==2) {
 						d_OrderAcknowledgment=l_Result;
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						l_Flag=1;l_RemovePlayerList.add(l_TempPlayer);
