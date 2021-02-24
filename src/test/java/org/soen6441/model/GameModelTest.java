@@ -124,45 +124,70 @@ public class GameModelTest {
 	}
 	
 	/**
-	 * This test case d_Check the functionality of whether player contains a particular country where he is deploying
-	 * This a test case in IssueOrder Method
+	 * This test case is to check functionality of whether player has deployed all the armies that are assigned to player
 	 * @throws Exception
 	 */
 	@Test 
 	////(expected= Exception.class)
 	public void testIssueOrder() throws Exception {
-		String l_command="deploy india 3";
-		String l_expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
-		c1.setOrder(l_command);
+		String l_Command="deploy india 3";
+		String l_Expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
+		c1.setOrder(l_Command);
 		c1.setPlayerArmies(3);
 		c1.addCountry(d_Map.getCountryList().get(0));
 		c1.issue_order();
 		String l_Result=c1.getResult();
-		System.out.println(l_Result);
-		assertEquals(l_expected,l_Result);
+		assertEquals(l_Expected,l_Result);
+	}
+	/**
+	 * This test cases is to check whether player holds that country that he is trying to deploy
+	 * @throws Exception
+	 */
+	@Test 
+	////(expected= Exception.class)
+	public void testIssueOrder1() throws Exception {
 		
-		String l_command1="deploy kenya 3";
-		String l_expected1="\nThis country kenya doesnot belongs to raj";
+		String l_Command1="deploy kenya 3";
+		String l_Expected1="\nThis country kenya doesnot belongs to raj";
 		c1.setPlayerArmies(3);
-		c1.setOrder(l_command1);
+		c1.addCountry(d_Map.getCountryList().get(0));
+		c1.setOrder(l_Command1);
 		c1.issue_order();
 		String l_Result1=c1.getResult();
-		assertEquals(l_expected1,l_Result1);
+		assertEquals(l_Expected1,l_Result1);
+	}
+	/**
+	 * This test cases is to check whether no of armies deployed less than the player has
+	 * @throws Exception
+	 */
+	@Test 
+	////(expected= Exception.class)
+	public void testIssueOrder2() throws Exception {
 		
-		String l_command2="deploy india 2";
-		String l_expected2="\norder deploy india 2 added to list of raj";
+		String l_Command2="deploy india 2";
+		String l_Expected2="\norder deploy india 2 added to list of raj";
 		c1.setPlayerArmies(3);
-		c1.setOrder(l_command2);
+		c1.addCountry(d_Map.getCountryList().get(0));
+		c1.setOrder(l_Command2);
 		c1.issue_order();
 		String l_Result2=c1.getResult();
-		assertEquals(l_expected2,l_Result2);
+		assertEquals(l_Expected2,l_Result2);
+	}
+	/**
+	 * This test cases is to check whether no of armies deployed more than the player has
+	 * @throws Exception
+	 */
+	@Test 
+	////(expected= Exception.class)
+	public void testIssueOrderArmySize() throws Exception {
 		
-		String l_command3="deploy india 4";
-		String l_expected3="\nraj ; you have only 3 number of armies!";
+		String l_Command3="deploy india 4";
+		String l_Expected3="\nraj ; you have only 3 number of armies!";
 		c1.setPlayerArmies(3);
-		c1.setOrder(l_command3);
+		c1.addCountry(d_Map.getCountryList().get(0));
+		c1.setOrder(l_Command3);
 		c1.issue_order();
 		String l_Result3=c1.getResult();
-		assertEquals(l_expected3,l_Result3);
+		assertEquals(l_Expected3,l_Result3);
 	}
 	}

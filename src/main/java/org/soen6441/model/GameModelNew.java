@@ -15,7 +15,6 @@ public class GameModelNew {
 	private Map d_Map;
 	private Player d_PlayerID;
 	private ArrayList<Player> d_PlayerList;
-	private int d_PlayerCount;
 	private Queue<Player> d_PlayerQueue= new LinkedList<Player>();
 
 	/**
@@ -29,8 +28,8 @@ public class GameModelNew {
 	 * This is parameterized constructor which takes Map parameter 
 	 * @param p_map parameter of map
 	 */
-	public GameModelNew(Map p_map) {
-		this.d_Map = p_map;
+	public GameModelNew(Map p_Map) {
+		this.d_Map = p_Map;
 		this.d_PlayerList=new ArrayList<Player>();
 	}
 
@@ -41,12 +40,10 @@ public class GameModelNew {
 	public Map getMap() {
 		return this.d_Map;
 	}
-	
+
 	public void setMap(Map p_Map) {
 		this.d_Map = p_Map;
 	}
-
-
 	/**
 	 * get Method for PlayerID 
 	 * @return returns PlayerID
@@ -62,7 +59,7 @@ public class GameModelNew {
 	public void setPlayerId(Player d_PlayerID) {
 		this.d_PlayerID = d_PlayerID;
 	}
-	
+
 	/**
 	 * this method will get all the players from the ArrayList
 	 * 
@@ -71,15 +68,6 @@ public class GameModelNew {
 	public ArrayList<Player> getAllPlayers() {
 		return this.d_PlayerList;
 	}
-
-	/**
-	 * set Method for player count based on d_PlayerList size
-	 *
-	 */
-	public void setplayerCount() {
-		this.d_PlayerCount=this.d_PlayerList.size();
-	}
-
 	/**
 	 * This method gets selected map.
 	 *
@@ -95,10 +83,9 @@ public class GameModelNew {
 	 * @throws Exception if player size is more that country size or if player already exists
 	 */
 	public void addPlayer(String p_PlayerName)throws Exception {
-		if ((d_PlayerList.size() >= getSelectedMap().getCountryList().size())) 
-					{
-						throw new Exception("Reached Max Number of Players can be added to the game");
-					}
+		if ((d_PlayerList.size() >= getSelectedMap().getCountryList().size())) {
+			throw new Exception("Reached Max Number of Players can be added to the game");
+		}
 		if (existDuplicatePlayer(p_PlayerName)) {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 		} else {
@@ -154,8 +141,7 @@ public class GameModelNew {
 	 * @param p_count count the assigned army count 
 	 */
 	public void setPlayerArmies(int p_Count) {
-		for (Player l_Player : getAllPlayers()) 
-		{
+		for (Player l_Player : getAllPlayers()) {
 			l_Player.setPlayerArmies(p_Count);
 		}
 	}
@@ -174,19 +160,18 @@ public class GameModelNew {
 	 * @throws Exception if there are no players in the list
 	 *
 	 */
-	public void startUpPhase() throws Exception 
-	{
+	public void startUpPhase() throws Exception {
 		if(getAllPlayers().size()>1) {
 			d_PlayerQueue.addAll(getAllPlayers());
 			List<Country> l_CountryList = new ArrayList<>();
 			l_CountryList  = (List<Country>) getSelectedMap().getCountryList().clone();		
 			while (l_CountryList.size() > 0) {	
 				Random l_Random = new Random();
-				int l_index = l_Random.nextInt(l_CountryList.size());
+				int l_Index = l_Random.nextInt(l_CountryList.size());
 				setPlayerId(d_PlayerQueue.remove());
-				getPlayerId1().addCountry(l_CountryList.get(l_index));
+				getPlayerId1().addCountry(l_CountryList.get(l_Index));
 				d_PlayerQueue.add(d_PlayerID);
-				l_CountryList.remove(l_index);
+				l_CountryList.remove(l_Index);
 			}
 
 			AssignReinforcementArmies();
@@ -216,8 +201,7 @@ public class GameModelNew {
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
 				int l_ArmyCount = ((l_Player.getCountriesSize())/3);
-				for(Continent l_Continent:l_Player.getContinentList()) 
-				{
+				for(Continent l_Continent:l_Player.getContinentList()) {
 					l_ArmyCount += l_Continent.getContinentControlValue();
 				}
 				l_ArmyCount= Math.max(l_ArmyCount, 3);
