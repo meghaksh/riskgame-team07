@@ -62,7 +62,8 @@ public class Order {
 		for(Country l_Country : d_GameModelNew.getSelectedMap().getCountryList()) {
 			if(l_Country.getCountryName().equals(d_CountryName)) {
 				l_flag = 1;
-				l_Country.setNoOfArmies(d_NoOfArmies);
+				int l_Armies = l_Country.getNoOfArmies();
+				l_Country.setNoOfArmies(d_NoOfArmies+l_Armies);
 				setExecuteResult("\n"+"The armies are succesfully deployed on "+d_CountryName);
 			}
 		}
