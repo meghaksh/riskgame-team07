@@ -160,7 +160,7 @@ public class GameController {
 				case "assigncountries":
 					if(d_MapDone==true) {
 					try {	
-					AssignCountries();
+					assignCountries();
 					}
 					catch(Exception p_Exception) {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
@@ -209,7 +209,7 @@ public class GameController {
 	 * 
 	 * @param p_Command this is command entered by the player
 	 * @param p_Str  this is name entered by the player in the command prompt
-	 * @return returns string acknowledgement based on the added or removed players
+	 * @return l_ReturnString returns string acknowledgement based on the added or removed players
 	 * @throws Exception this is user defined exception based on the add player or remove player method
 	 */
 	public String editPlayer(String p_Command,String p_Str) throws Exception {
@@ -247,7 +247,7 @@ public class GameController {
 	 * then it will throw an exception
 	 * 
 	 */
-	public void AssignCountries() throws Exception {
+	public void assignCountries() throws Exception {
 		d_GameModelNew.startUpPhase();
 	}
 
