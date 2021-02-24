@@ -1,6 +1,6 @@
 package org.soen6441.view;
 
-import org.soen6441.controller.GameController;	import org.soen6441.model.GameModelNew;
+import org.soen6441.controller.GameEngine;	import org.soen6441.model.GameModelNew;
 
 /**
  * Driver class for the game. It consist a single method main which is an entry point to the game.
@@ -18,6 +18,6 @@ public class StartGame {
 	public static void main(String[] p_Args) {
 		GameModelNew l_GameModel = new GameModelNew();
 		CommandPrompt l_CpView =  new CommandPrompt();
-		new GameController(l_CpView, l_GameModel);
+		new GameEngine(l_CpView, l_GameModel);
 	}
 }
