@@ -29,8 +29,8 @@ public class Country {
 	 * Method to set the static id of the country
 	 * @param p_count Integer that is set for Id
 	 */
-	public static void setCount(int p_count){
-		D_Count=p_count;
+	public static void setCount(int p_Count){
+		D_Count=p_Count;
 	}
 
 	/**
@@ -76,8 +76,8 @@ public class Country {
 	 * Method to set the id of the country
 	 * @param p_id Country ID
 	 */
-	public void setCountryID(int p_id) {
-		d_ID = p_id;
+	public void setCountryID(int p_Id) {
+		d_ID = p_Id;
 	}
 
 	/**

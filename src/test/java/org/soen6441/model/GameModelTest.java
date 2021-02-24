@@ -44,7 +44,9 @@ public class GameModelTest {
 		}
 		assertEquals(l_d_CheckNames,l_Names);
 	}
-	
+	/**
+	 * To test addPlayer() and check if player already exists or not
+	 */
 	@Test 
 	public void testAddPlayerAlreadyExist() {
 		String l_ExpectedMessage="Please enter a differnt Player name as this name already exists";
@@ -57,6 +59,9 @@ public class GameModelTest {
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
 	
+	/**
+	 * To test addPlayer() to see if maximum players have been reached or not
+	 */
 	@Test 
 	public void testAddPlayerReachedMax() {
 		String l_ExpectedMessage="Reached Max Number of Players can be added to the game";
@@ -88,6 +93,9 @@ public class GameModelTest {
 		assertFalse(l_d_CheckNames.equals(l_Names));
 	}
 	
+	/**
+	 * To test removePlayer() and check if Player exists or not
+	 */
 	@Test 
 	public void testRemovePlayerNotExists() {
 		String l_ExpectedMessage="This Player does not exists";
@@ -98,6 +106,7 @@ public class GameModelTest {
 			l_ActualMessage = e.getMessage();
 		}
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
+
 	}
 	
 	/**

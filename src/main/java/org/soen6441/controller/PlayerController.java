@@ -2,9 +2,7 @@ package org.soen6441.controller;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import javax.swing.JOptionPane;
-
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
@@ -12,15 +10,15 @@ import org.soen6441.view.CommandPrompt;
 
 /**
  * The Player Controller class controls the activities of all the players at once.
- * @author Zeal
+ * 
  *
  */
 public class PlayerController {
 	private ArrayList <Player> d_Players;
-	private String d_OrderString=null;
 	private String d_OrderAcknowledgment="";
 	private CommandPrompt d_CpView;
 	private GameModelNew d_GameModelNew;
+	private String d_OrderString=null;
 	/**
 	 * Constructor of Player controller
 	 * @param p_Players list of players 
@@ -32,13 +30,11 @@ public class PlayerController {
 		d_Players = d_GameModelNew.getAllPlayers();
 		d_CpView=p_CpView;
 	}
-	/**
-	 * Set method to set the Order from GameController written in Command Prompt.
-	 * @param p_OrderString Order written by the player
-	 */
+	
 	public void setOrderString(String p_OrderString) {
-		this.d_OrderString=p_OrderString;
+		this.d_OrderString = p_OrderString;
 	}
+
 	/**
 	 * The player_issue_order method asks each player to issue an order in a round robin fashion.
 	 * The loop terminates when all the players are removed from the list.
@@ -47,25 +43,14 @@ public class PlayerController {
 	public void player_issue_order() {
 		System.out.println("in player issue order");
 		ArrayList <Player> l_Players = d_Players;
-		ArrayList <Player> l_PlayersClone = (ArrayList<Player>) d_Players.clone();
-		int l_PlayerListSize = l_Players.size();
-		System.out.println(l_PlayerListSize);
-		for(Player p:d_Players) {
-			System.out.println(p.getPlayerName());
-		}
-
-	
+		int l_PlayerListSize = l_Players.size();	
 		int l_Flag =0;
 		ArrayList<Player> l_RemovePlayerList = new ArrayList<Player>();
 		while(l_PlayerListSize>0)	{
 			for(Player l_TempPlayer : l_Players) {
-
-				if(l_TempPlayer.getPlayerArmies()>0)
-				{
-
+				if(l_TempPlayer.getPlayerArmies()>0) {
 					d_OrderAcknowledgment = "\n"+l_TempPlayer.getPlayerName()+" Enter deploy order";
 					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-
 					String l_StringOrder = JOptionPane.showInputDialog(l_TempPlayer.getPlayerName()+" : Please Enter Your Deploy Order");
 					l_TempPlayer.setOrder(l_StringOrder);
 					l_TempPlayer.issue_order();
@@ -91,22 +76,11 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						System.out.println("\norder successfully added to "+l_TempPlayer.getPlayerName()+"'s order list");
 					}
-				}
-				else
-				{
+				} else {
 					--l_PlayerListSize;
 				}
-
 			}
 		}
-		/*	if(l_Flag==1) {
-				for(Player l_TempRemovePlayer : l_RemovePlayerList) {
-					
-					l_PlayersClone.remove(l_TempRemovePlayer);
-				}
-			}*/
-		
-
 	}
 	/**
 	 * This method iterates till the player list doesn't becomes empty. This means all the orders of all the players are executed.
