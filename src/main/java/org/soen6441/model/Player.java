@@ -1,9 +1,9 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;		import java.util.Iterator;
-import java.util.LinkedList;	import java.util.Queue;
-import java.util.Scanner;
-
+import java.util.ArrayList;		
+import java.util.Iterator;
+import java.util.LinkedList;	
+import java.util.Queue;
 
 
 /**
@@ -114,14 +114,7 @@ public class Player {
 	public int getPlayerArmies() {
 		return this.d_Armies;
 	}
-	/**
-	 * set GameModelNew object to get the map.
-	 * @param p_GameModelNew game model object 
-	 */
-	public void setGameModelNew(GameModelNew p_GameModelNew) {
-		this.d_GameModelNew = p_GameModelNew;
-		System.out.println("Game Model New: "+d_GameModelNew.getSelectedMap().getCountryList().size());
-	}
+	
 	/**
 	 * set Continent list for the player. It consists of only those continent objects whose all countries belong to this player.
 	 */
@@ -223,7 +216,6 @@ public class Player {
 			}
 			if(l_Flag==1) {
 				d_TempArmies-= Integer.parseInt(l_StringList[2]);
-				System.out.println("issue order game model new"+ d_GameModelNew.getSelectedMap().getCountryList().size());
 				d_Order.add(new Order(d_StringOrder,d_GameModelNew));
 				d_ResultInteger = 1;
 				setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);

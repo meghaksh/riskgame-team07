@@ -59,7 +59,7 @@ public class PlayerController {
 				d_OrderAcknowledgment = "\n"+l_TempPlayer.getPlayerName()+" Enter deploy order";
 				d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 
-				String l_StringOrder = JOptionPane.showInputDialog("Please Enter Your Deploy Order");
+				String l_StringOrder = JOptionPane.showInputDialog(l_TempPlayer.getPlayerName()+" : Please Enter Your Deploy Order");
 				l_TempPlayer.setOrder(l_StringOrder);
 				l_TempPlayer.issue_order();
 				String l_Result = l_TempPlayer.getResult();
@@ -103,7 +103,6 @@ public class PlayerController {
 	public void player_next_order() {
 		ArrayList <Player> l_Players = d_Players;
 		ArrayList <Player> l_PlayersClone = (ArrayList<Player>) d_Players.clone();
-		System.out.println(d_Players.size());
 		while(!l_PlayersClone.isEmpty()) {
 			Iterator l_It = l_Players.iterator();
 			int l_Flag =0;
