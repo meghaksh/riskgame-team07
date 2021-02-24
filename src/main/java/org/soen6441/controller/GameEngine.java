@@ -104,8 +104,8 @@ public class GameEngine {
 					try {
 						String l_Result=d_MapController.saveMap(l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
-					}catch(Exception exp) {
-						d_CpView.setCommandAcknowledgement(exp.getMessage()+"\n");
+					}catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
 					}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Save Map In This Phase"+"\n");
@@ -117,7 +117,7 @@ public class GameEngine {
 					try {
 						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
-					}catch(Exception exp) {
+					}catch(Exception p_Exception) {
 						d_CpView.setCommandAcknowledgement("The Mapfile Doesnt Exist. Please Create A New Map" +"\n");
 						
 					}
@@ -130,8 +130,8 @@ public class GameEngine {
 					if(d_MapDone==false) {
 					try {
 					d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
-					}catch(Exception e) {
-						d_CpView.setCommandAcknowledgement(e.getMessage() +"\n");
+					}catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage() +"\n");
 					}
 					}else {
 						d_CpView.setCommandAcknowledgement("Cant validate Map In This Phase"+"\n");
@@ -143,8 +143,8 @@ public class GameEngine {
 						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
 						this.d_MapDone = true;
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
-					}catch(Exception exp) {
-						d_CpView.setCommandAcknowledgement(exp.getMessage()+"\n");
+					}catch(Exception p_Exception) {
+						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
 					}
 					break;
 					
@@ -275,11 +275,11 @@ public class GameEngine {
 	 */
 	public void showAllPlayerWithArmies() {
 		d_PlayerList=d_GameModelNew.getAllPlayers();
-		for(Player player:d_PlayerList){
-			d_CpView.setCommandAcknowledgement("\n"+player.getPlayerName()+"-->"+"armies assigned:"+player.getPlayerArmies());
+		for(Player l_Player:d_PlayerList){
+			d_CpView.setCommandAcknowledgement("\n"+l_Player.getPlayerName()+"-->"+"armies assigned:"+l_Player.getPlayerArmies());
 			d_CpView.setCommandAcknowledgement("\n"+"Countries Assigned: ");
-			for(Country l_country:player.getCountryList()) {
-				d_CpView.setCommandAcknowledgement(l_country.getCountryName()+ ",");
+			for(Country l_Country:l_Player.getCountryList()) {
+				d_CpView.setCommandAcknowledgement(l_Country.getCountryName()+ ",");
 			}
 		}
 	}
