@@ -2,6 +2,12 @@ package org.soen6441.model;
 import org.soen6441.model.*;			import static org.junit.Assert.assertEquals;											
 import java.util.ArrayList;				import java.util.List;import static org.junit.Assert.*;
 import org.junit.Before;				import org.junit.Test;
+
+/**
+ * 
+ * This is a class to test the methods of GameModel class
+ *
+ */
 public class GameModelTest {
 	GameModelNew d_Game = new GameModelNew();
 	ArrayList<Player> d_Check;
@@ -10,6 +16,10 @@ public class GameModelTest {
 	List<String> l_d_CheckNames;
 	Player c1,c2;
 	private Map d_Map;
+	/**
+	 * To set up the context for test cases
+	 * @throws Exception
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 
@@ -29,7 +39,7 @@ public class GameModelTest {
 		d_Check.add(c1);
 		d_Check.add(c2);
 	}
-	
+
 	/**
 	 * This test case d_Check the functionality of addplayer method
 	 * @throws Exception
@@ -58,7 +68,7 @@ public class GameModelTest {
 		}
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
-	
+
 	/**
 	 * To test addPlayer() to see if maximum players have been reached or not
 	 */
@@ -69,14 +79,14 @@ public class GameModelTest {
 		try {
 			d_Game.addPlayer("zeal");
 			d_Game.addPlayer("alpha");
-			
+
 		} catch (Exception e) {
 			l_ActualMessage = e.getMessage();
 		}
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
-	
-	
+
+
 	/**
 	 * This test case d_Check the functionality of RemovePlayer method
 	 * @throws Exception
@@ -92,7 +102,7 @@ public class GameModelTest {
 		}
 		assertFalse(l_d_CheckNames.equals(l_Names));
 	}
-	
+
 	/**
 	 * To test removePlayer() and check if Player exists or not
 	 */
@@ -108,7 +118,7 @@ public class GameModelTest {
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 
 	}
-	
+
 	/**
 	 * This test case d_Check the functionality of AssignReinforcements method
 	 * @throws Exception
@@ -119,16 +129,15 @@ public class GameModelTest {
 		for(Player l:d_Game.getAllPlayers()) {
 			int value=l.getPlayerArmies();
 			assertTrue(3<=value);
-			
+
 		}
 	}
-	
+
 	/**
 	 * This test case is to check functionality of whether player has deployed all the armies that are assigned to player
 	 * @throws Exception
 	 */
 	@Test 
-	////(expected= Exception.class)
 	public void testIssueOrder() throws Exception {
 		String l_Command="deploy india 3";
 		String l_Expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
@@ -144,9 +153,8 @@ public class GameModelTest {
 	 * @throws Exception
 	 */
 	@Test 
-	////(expected= Exception.class)
 	public void testIssueOrder1() throws Exception {
-		
+
 		String l_Command1="deploy kenya 3";
 		String l_Expected1="\nThis country kenya doesnot belongs to raj";
 		c1.setPlayerArmies(3);
@@ -161,9 +169,8 @@ public class GameModelTest {
 	 * @throws Exception
 	 */
 	@Test 
-	////(expected= Exception.class)
 	public void testIssueOrder2() throws Exception {
-		
+
 		String l_Command2="deploy india 2";
 		String l_Expected2="\norder deploy india 2 added to list of raj";
 		c1.setPlayerArmies(3);
@@ -178,9 +185,8 @@ public class GameModelTest {
 	 * @throws Exception
 	 */
 	@Test 
-	////(expected= Exception.class)
 	public void testIssueOrderArmySize() throws Exception {
-		
+
 		String l_Command3="deploy india 4";
 		String l_Expected3="\nraj ; you have only 3 number of armies!";
 		c1.setPlayerArmies(3);
@@ -190,4 +196,4 @@ public class GameModelTest {
 		String l_Result3=c1.getResult();
 		assertEquals(l_Expected3,l_Result3);
 	}
-	}
+}
