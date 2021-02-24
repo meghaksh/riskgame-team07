@@ -16,7 +16,6 @@ public class Map {
 	private ArrayList<Continent> d_ContinentObjects;
 	private HashMap<Integer,ArrayList<Integer>> d_Neighbors;
 	private HashMap<Integer,Integer>d_PreviousSave;
-	//private HashMap<String, ArrayList<String>> d_NeighborsName;
 
 	/**
 	 * This is the default constructor of the class. 
@@ -28,7 +27,6 @@ public class Map {
 		d_ContinentObjects=new ArrayList<Continent>();
 		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
 		d_PreviousSave=new HashMap<Integer,Integer>();
-		//d_NeighborsName = new HashMap<String, ArrayList<String>>();
 	}
 
 	/**
@@ -51,7 +49,6 @@ public class Map {
 		this.d_ContinentObjects.clear();
 		this.d_CountryObjects.clear();
 		this.d_Neighbors.clear();
-		//this.d_NeighborsName.clear();
 		this.d_PreviousSave.clear();
 		Country.setCount(0);
 		Continent.setCount(0);
@@ -62,16 +59,13 @@ public class Map {
 	 * @param p_Filename
 	 * @throws FileNotFoundException 
 	 */
-	public String  loadMap(String p_FileName) throws Exception
-	{
-		
+	public String  loadMap(String p_FileName) throws Exception {
 		reset();
 		String l_Path="resource\\",l_Result;
-		int l_ControlValue,l_ContinentID=1,l_PreviousID,l_NewID,l_NewNeighborID;
+		int l_ControlValue,l_ContinentID=1;
 		File l_File =new File(l_Path+p_FileName);
 		Scanner l_Sc = new Scanner(l_File);
-		while(l_Sc.hasNextLine())
-		{
+		while(l_Sc.hasNextLine()){
 			String l_Line=l_Sc.nextLine();
 			if(l_Line.contains("continent")){	
 				l_Line=l_Sc.nextLine();
@@ -83,7 +77,6 @@ public class Map {
 				}
 			}
 			if(l_Line.contains("countries")){
-				
 				l_Line=l_Sc.nextLine();
 				while(!l_Line.equals("") && l_Sc.hasNextLine()){
 					String[] l_Arr1=l_Line.split(" ",4);
@@ -103,7 +96,6 @@ public class Map {
 					}
 					l_Line=l_Sc.nextLine();
 				}
-
 			}
 			if(l_Line.contains("borders")){
 				while(!l_Line.equals("") && l_Sc.hasNextLine()){
@@ -121,7 +113,6 @@ public class Map {
 								l_Borders.add(Integer.parseInt(l_Arr2[l_K]));
 							}
 							d_Neighbors.put(Integer.parseInt(l_Arr2[0]),l_Borders);
-							//d_NeighborsName.put(l_Tempcountry.getCountryName(), l_Tempcountry.getBorder());
 							break;
 						}
 					}
@@ -130,12 +121,10 @@ public class Map {
 		}
 		l_Sc.close();
 		String l_Result1=validateMap();
-		if(l_Result1.equals("Map is not Valid"))
-		{
+		if(l_Result1.equals("Map is not Valid")){
 			reset();
 			return l_Result1;
 		}
-		
 		l_Result="The Map is loaded with "+this.d_ContinentObjects.size()+" Continents and "+this.d_CountryObjects.size()+" Countries";
 		return l_Result;
 	}
@@ -144,11 +133,9 @@ public class Map {
 	 * @param p_Filename 
 	 * @throws IOException 
 	 */
-	public String saveMap(String p_FileName) throws Exception
-	{
+	public String saveMap(String p_FileName) throws Exception{
 		String l_Result=validateMap();
-		if(l_Result.equals("Map is not Valid"))
-		{
+		if(l_Result.equals("Map is not Valid")){
 			return l_Result;
 		}
 		String l_Path="resource\\";
@@ -212,11 +199,9 @@ public class Map {
 	 * @throws Exception In case of continent already exists, it throws an exception
 	 */
 	public void addContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
-		if(p_ContinentControlValue.equals("0"))
-		{
+		if(p_ContinentControlValue.equals("0")){
 			throw new Exception("Continent control value cannot be 0");
 		}
-			
 		for(Continent l_Contient:this.d_ContinentObjects) {
 			if(l_Contient.getContinentName().equalsIgnoreCase(p_ContinentName)) {
 				throw new Exception("Continent Already Exists");
@@ -256,17 +241,14 @@ public class Map {
 	 * @throws Exception In case country already exists, it throws an exception
 	 */
 	public void addCountry(String p_CountryName, String p_ContinentName)throws Exception {
-		int l_flag =0;
-		for(Continent c: this.getContinentList())
-		{
-			if(c.getContinentName().equals(p_ContinentName))
-			{
-				l_flag=1;
+		int l_Flag = 0;
+		for(Continent l_C: this.getContinentList()){
+			if(l_C.getContinentName().equals(p_ContinentName)){
+				l_Flag=1;
 				break;
 			}
 		}
-		if(l_flag==0)
-		{
+		if(l_Flag==0){
 			throw new Exception("Continent Doesn't Exist to add a Country");
 		}
 		Country l_TempCountry = new Country(p_CountryName, p_ContinentName);
@@ -311,7 +293,7 @@ public class Map {
 				}
 				for(Country l_Country : d_CountryObjects) {
 					ArrayList<String> l_CountryNeighbors = l_Country.getBorder();
-					Iterator l_NeighborIterator = l_CountryNeighbors.iterator();
+					Iterator<String> l_NeighborIterator = l_CountryNeighbors.iterator();
 					while(l_NeighborIterator.hasNext()) {
 						String l_NeighborName = l_NeighborIterator.next().toString();
 						if(l_NeighborName.equalsIgnoreCase(p_CountryName)) {
@@ -320,9 +302,9 @@ public class Map {
 					}
 				}
 				//Here we have to remove from the hashmap. 
-				for(int i=1;i<=d_Neighbors.size();i++) {
-					if(d_Neighbors.get(i)!=null) {
-						ArrayList<Integer> l_TempCountryIdList = d_Neighbors.get(i);
+				for(int l_I=1;l_I<=d_Neighbors.size();l_I++) {
+					if(d_Neighbors.get(l_I)!=null) {
+						ArrayList<Integer> l_TempCountryIdList = d_Neighbors.get(l_I);
 						Iterator<Integer> l_TempCountryNeighborIterator = l_TempCountryIdList.iterator();
 						while(l_TempCountryNeighborIterator.hasNext()) {
 							if(l_TempCountryNeighborIterator.next()==l_TempCountryIdOfCountryToBeRemoved) {
@@ -330,7 +312,7 @@ public class Map {
 							}
 						}
 					}
-					if(i==l_TempCountryIdOfCountryToBeRemoved) {
+					if(l_I==l_TempCountryIdOfCountryToBeRemoved) {
 						d_Neighbors.remove(l_TempCountryIdOfCountryToBeRemoved);
 					}
 				}
@@ -347,13 +329,13 @@ public class Map {
 	 * This method is called to remove specific country from the country list of continent
 	 * 
 	 * @param p_CountryName Name of the country to be removed
-	 * @param d_CountryList	List of all countries of the parent continent where this country belongs
+	 * @param d_CountryListOfSpecificContinent	List of all countries of the parent continent where this country belongs
 	 */
-	public void removeCountryFromContinent(String p_CountryName, ArrayList<Country> d_CountryList) {
-		Iterator<Country> l_Iterator = d_CountryList.iterator();
+	public void removeCountryFromContinent(String p_CountryName, ArrayList<Country> p_CountryListOfSpecificContinent) {
+		Iterator<Country> l_Iterator = p_CountryListOfSpecificContinent.iterator();
 		while(l_Iterator.hasNext()) {
-			Country l_tempCountry = l_Iterator.next();
-			if(l_tempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
+			Country l_TempCountry = l_Iterator.next();
+			if(l_TempCountry.getCountryName().equalsIgnoreCase(p_CountryName)) {
 				l_Iterator.remove();
 			}
 		}
@@ -383,27 +365,27 @@ public class Map {
 	 * @throws Exception 
 	 */
 	public void addBorder(String p_CountryName, String p_NeighborName) throws Exception {
-		int l_flag=0;
+		int l_Flag=0;
 		for(Country c : this.getCountryList())
 		{
 			if(c.getCountryName().equals(p_NeighborName))
 			{
-				l_flag=1;break;
+				l_Flag=1;break;
 			}
 		}
-		if(l_flag==0)
+		if(l_Flag==0)
 		{
 			throw new Exception("Neighbour Country does not exists!");
 		}
-		int l_flag1=0;
+		int l_Flag1=0;
 		for(Country c : this.getCountryList())
 		{
 			if(c.getCountryName().equals(p_CountryName))
 			{
-				l_flag1=1;break;
+				l_Flag1=1;break;
 			}
 		}
-		if(l_flag1==0)
+		if(l_Flag1==0)
 		{
 			throw new Exception("Country does not exists!");
 		}
@@ -433,11 +415,7 @@ public class Map {
 		if(d_Neighbors.get(l_CountryId)==null) {
 			d_Neighbors.put(l_CountryId, new ArrayList<>());
 		}
-//		if(d_NeighborsName.get(p_CountryName)==null) {
-//			d_NeighborsName.put(p_CountryName, new ArrayList<>());
-//		}
 		d_Neighbors.get(l_CountryId).add(l_NeighborId);
-		//d_NeighborsName.get(p_CountryName).add(p_NeighborName);
 	}
 
 	/**
@@ -481,16 +459,6 @@ public class Map {
 				}
 			}
 		}	
-		
-//		if(d_NeighborsName.get(p_CountryName).contains(p_NeighbourName)) {
-//			ArrayList<String> l_TempList = d_NeighborsName.get(p_CountryName);
-//			Iterator<String> l_Iterator = l_TempList.iterator();
-//			while(l_Iterator.hasNext()) {
-//				if(l_Iterator.next().toString().equalsIgnoreCase(p_NeighbourName)) {
-//					l_Iterator.remove();
-//				}
-//			}
-//		}
 	}
 
 	/**
@@ -529,7 +497,6 @@ public class Map {
 	public String validateMap()throws Exception {
 		ValidateMap l_VMap = new ValidateMap(this.d_CountryObjects,this.d_ContinentObjects);
 		return l_VMap.isValid();
-		//return "";
 	}
 }
 
