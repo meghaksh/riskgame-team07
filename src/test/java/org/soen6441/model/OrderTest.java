@@ -5,35 +5,38 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * This is a class to test the methods of Order class
+ *
+ */
 public class OrderTest {
+	String d_OrderString = "deploy india 3";
+	Order d_Order;
+	Map d_Map;
+	private GameModelNew d_GameModelNew;
 	
-
-	String order = "deploy india 3";
-	Order o;
-	Map l_map;
-	private GameModelNew GameModelNew;
+	/**
+	 * To set up the context for test cases
+	 * @throws Exception
+	 */
 	@Before
-	public void setContextOfOrder() throws Exception
-	{
-
-		l_map = new Map();
-		l_map.addContinent("asia", "1");
-		l_map.addCountry("india","asia");
-		GameModelNew = new GameModelNew(l_map);
-		o =  new Order(order,GameModelNew);
-		
-		
-	}
-	@Test
-	public void testOrderExecute()
-	{
-		o.execute();
-		for(Country c : l_map.getCountryList())
-		{
-			assertEquals(3,c.getNoOfArmies());
-		}
-		
+	public void setContextOfOrder() throws Exception {
+		d_Map = new Map();
+		d_Map.addContinent("asia", "1");
+		d_Map.addCountry("india","asia");
+		d_GameModelNew = new GameModelNew(d_Map);
+		d_Order =  new Order(d_OrderString,d_GameModelNew);
 	}
 	
-
+	/**
+	 * To test the execute() method of Order class
+	 */
+	@Test
+	public void testOrderExecute() {
+		d_Order.execute();
+		for(Country l_Country : d_Map.getCountryList()) {
+			assertEquals(3,l_Country.getNoOfArmies());
+		}
+	}
 }

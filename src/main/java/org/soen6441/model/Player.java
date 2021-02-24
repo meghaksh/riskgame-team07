@@ -8,7 +8,7 @@ import java.util.Queue;
 
 /**
  * The Player class represents the actual player participating in the game.
- * @author Zeal
+ * 
  *
  */
 public class Player {

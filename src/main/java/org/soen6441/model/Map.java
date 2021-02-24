@@ -347,7 +347,7 @@ public class Map {
 	 * @param p_TempContinent Reference of continent object for which all countries are to be removed. 
 	 * @throws Exception throws exception in case of error
 	 */
-	public void removeAllCountryInContinent(Continent p_TempContinent)throws Exception {
+	public void removeAllCountryInContinent(Continent p_TempContinent) throws Exception {
 		ArrayList<Country> l_TempCountryList = p_TempContinent.getCountryList();
 		Iterator<Country> l_CountriesOfContinent = l_TempCountryList.iterator();
 		while(l_CountriesOfContinent.hasNext()) {
