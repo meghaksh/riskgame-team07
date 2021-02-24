@@ -188,7 +188,7 @@ public class GameModelTest {
 	public void testIssueOrderArmySize() throws Exception {
 
 		String l_Command3="deploy india 4";
-		String l_Expected3="\nraj ; you have only 3 number of armies!";
+		String l_Expected3="\nraj ; you have only 3 number of armies! Please enter the next order accordingly";
 		c1.setPlayerArmies(3);
 		c1.addCountry(d_Map.getCountryList().get(0));
 		c1.setOrder(l_Command3);

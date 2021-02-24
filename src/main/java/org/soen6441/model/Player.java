@@ -199,6 +199,13 @@ public class Player {
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
 	 * and whether it has sufficient armies and it sets the result accordingly. 
 	 * If the country is in the country list and if the player has sufficient armies than the order is added to its order list.
+	 * There are 5 cases 
+	 * <ul><li>when the result integer is 1 - The number of armies asked to deploy on a country in the list of the player is less than the number of armies with the players.The order is added into the Order List and the armies are subtracted from the armies of the player.
+	 * <li>when the result integer is 2 - When the number of armies after successfully adding the order in the list becomes zero. The order is added to the Order list and the armies are subtracted from the armies of the player.
+	 * <li>when the result integer is 3 - When the country asked to deploy armies doesn't belongs to the player.The order is not added to the order list.
+	 * <li>when the result integer is 4 - When the number of armies asked to deploy is more than the number of armies with the player.The order is not added to the order list. 
+	 * <li>when the result integer is 5 - When incorrect command is entered.The order is not added to the order list.
+	 * </ul>
 	 */
 	public void issue_order() {
 		int l_Flag = 0;
@@ -230,7 +237,7 @@ public class Player {
 				}
 			} else {
 				d_ResultInteger = 4;
-				setResult("\n"+d_PlayerName+" ; you have only "+d_Armies+" number of armies!");
+				setResult("\n"+d_PlayerName+" ; you have only "+d_Armies+" number of armies! Please enter the next order accordingly");
 			}
 		}
 		else

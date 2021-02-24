@@ -30,57 +30,39 @@ public class PlayerController {
 		d_Players = d_GameModelNew.getAllPlayers();
 		d_CpView=p_CpView;
 	}
-	
+	/**
+	 * This method is used to set the order string that has been entered by the player.
+	 * @param p_OrderString order to be executed.
+	 */
 	public void setOrderString(String p_OrderString) {
 		this.d_OrderString = p_OrderString;
 	}
 
 	/**
 	 * The player_issue_order method asks each player to issue an order in a round robin fashion.
-	 * The loop terminates when all the players are removed from the list.
-	 * A player is removed from the list when all its armies are exhausted which is indicated from the result fetched from getResult method in Player class.
+	 * The loop terminates when the armies of all the players are exhausted.
+	 * The acknowledgement are passed on to the view.
 	 */
 	public void player_issue_order() {
 		System.out.println("in player issue order");
 		ArrayList <Player> l_Players = d_Players;
 		int l_PlayerListSize = l_Players.size();	
-		int l_Flag =0;
-		ArrayList<Player> l_RemovePlayerList = new ArrayList<Player>();
 		while(l_PlayerListSize>0)	{
-			for(Player l_TempPlayer : l_Players) {
-				if(l_TempPlayer.getPlayerArmies()>0) {
-					d_OrderAcknowledgment = "\n"+l_TempPlayer.getPlayerName()+" Enter deploy order";
+
+			Iterator l_It = l_Players.iterator();
+			while(l_It.hasNext()) {
+				Player l_Player = (Player)l_It.next(); 
+				if(l_Player.getPlayerArmies()>0) {
+					d_OrderAcknowledgment = "\n"+l_Player.getPlayerName()+" Enter deploy order";
 					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					String l_StringOrder = JOptionPane.showInputDialog(l_TempPlayer.getPlayerName()+" : Please Enter Your Deploy Order");
-					l_TempPlayer.setOrder(l_StringOrder);
-					l_TempPlayer.issue_order();
-					String l_Result = l_TempPlayer.getResult();
-					int l_ResultInteger = l_TempPlayer.getResultInteger();
-					
-					
-					if(l_ResultInteger==5) {
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					}
-					else if(l_ResultInteger==2) {
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						l_Flag=1;l_RemovePlayerList.add(l_TempPlayer);
-						System.out.println(l_TempPlayer.getPlayerName()+"'s armies have become zero");
-					} else if(l_ResultInteger==3) {
-						System.out.println(l_Result);
-						d_OrderAcknowledgment = l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						System.out.println("\nThis country does not belong to "+l_TempPlayer.getPlayerName());
-					} else if(l_ResultInteger==4) {
-						d_OrderAcknowledgment = l_Result+"\n Please enter the next order accordingly";
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						System.out.println(d_OrderAcknowledgment);
-					} else if(l_ResultInteger==1){
-						d_OrderAcknowledgment = l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						System.out.println("\norder successfully added to "+l_TempPlayer.getPlayerName()+"'s order list");
-					}
+					String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Deploy Order");
+					l_Player.setOrder(l_StringOrder);
+					l_Player.issue_order();
+					String l_Result = l_Player.getResult();
+					int l_ResultInteger = l_Player.getResultInteger();
+					d_OrderAcknowledgment=l_Result;
+					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+
 				} else {
 					--l_PlayerListSize;
 				}
@@ -118,5 +100,7 @@ public class PlayerController {
 				}
 			}
 		}
+		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
+
 	}
 }
