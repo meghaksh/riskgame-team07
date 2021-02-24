@@ -87,7 +87,7 @@ public class Continent {
 
 	/**
 	 * Method to add Country to the Continent
-	 * @param p_country Country object
+	 * @param p_Country Country object
 	 */
 	public void addCountry(Country p_Country) {
 		this.d_CountryList.add(p_Country);

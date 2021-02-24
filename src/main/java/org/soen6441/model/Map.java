@@ -56,10 +56,11 @@ public class Map {
 
 	/**
 	 * This method loads a map file given by the user
-	 * @param p_Filename
-	 * @throws FileNotFoundException 
+	 * @param p_FileName Name of the file to Load
+	 * @return Map is loaded or not
+	 * @throws FileNotFoundException File not Found to Load 
 	 */
-	public String  loadMap(String p_FileName) throws Exception {
+	public String loadMap(String p_FileName) throws Exception {
 		reset();
 		String l_Path="resource\\",l_Result;
 		int l_ControlValue,l_ContinentID=1;
@@ -130,8 +131,9 @@ public class Map {
 	}
 	/**
 	 * It saves the user edited map
-	 * @param p_Filename 
-	 * @throws IOException 
+	 * @param p_FileName File name to save the map
+	 * @return If Map is saved successfully or not
+	 * @throws Exception No continent to save
 	 */
 	public String saveMap(String p_FileName) throws Exception{
 		String l_Result=validateMap();
@@ -329,7 +331,7 @@ public class Map {
 	 * This method is called to remove specific country from the country list of continent
 	 * 
 	 * @param p_CountryName Name of the country to be removed
-	 * @param d_CountryListOfSpecificContinent	List of all countries of the parent continent where this country belongs
+	 * @param p_CountryListOfSpecificContinent	List of all countries of the parent continent where this country belongs
 	 */
 	public void removeCountryFromContinent(String p_CountryName, ArrayList<Country> p_CountryListOfSpecificContinent) {
 		Iterator<Country> l_Iterator = p_CountryListOfSpecificContinent.iterator();
@@ -362,7 +364,7 @@ public class Map {
 	 * 
 	 * @param p_CountryName Name of the source country
 	 * @param p_NeighborName Name of the target country
-	 * @throws Exception 
+	 * @throws Exception Neighbor, Country not exists
 	 */
 	public void addBorder(String p_CountryName, String p_NeighborName) throws Exception {
 		int l_Flag=0;
@@ -414,6 +416,7 @@ public class Map {
 	 * 
 	 * @param p_CountryName Name of the source country
 	 * @param p_NeighbourName Name of the target country
+	 * @throws Exception Country, Neighbor not exists
 	 */
 	public void removeBorder(String p_CountryName, String p_NeighbourName) throws Exception {
 		int l_NeighborId=0;
@@ -491,8 +494,9 @@ public class Map {
 	 * It creates an object of validate map and pass the neighbors hashmap to it. 
 	 * 
 	 * @return It returns the string to inform if map is valid or not. 
+	 * @throws Exception The countries are not internally connected
 	 */
-	public String validateMap()throws Exception {
+	public String validateMap() throws Exception {
 		ValidateMap l_VMap = new ValidateMap(this.d_CountryObjects,this.d_ContinentObjects);
 		return l_VMap.isValid();
 	}

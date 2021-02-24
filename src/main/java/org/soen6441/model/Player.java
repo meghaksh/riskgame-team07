@@ -57,7 +57,7 @@ public class Player {
 	}
 	/**
 	 * removeCountry removes the given country from the player's country list
-	 * @param country object
+	 * @param l_Country Name of the country to be removed
 	 */
 	public void removeCountry(Country l_Country) {
 		d_Countries.remove(l_Country);
@@ -160,7 +160,7 @@ public class Player {
 	}
 	/**
 	 * The setOrder method gets the order in string format for that player.
-	 * @param p_order Order entered by the player
+	 * @param p_Order Order entered by the player
 	 */
 	public void setOrder(String p_Order) {
 		this.d_StringOrder = p_Order;

@@ -49,7 +49,7 @@ public class CommandPrompt {
 	/**
 	 * This method is to append acknowledgement messages on the window.
 	 * 
-	 * @param p_str string which is passed to the append method of the text area which displays information.
+	 * @param p_Str string which is passed to the append method of the text area which displays information.
 	 */
 	public void setCommandAcknowledgement(String p_Str) {
 		this.d_CommandAcknowledgeArea.append(p_Str);

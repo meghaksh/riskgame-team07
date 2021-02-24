@@ -27,7 +27,7 @@ public class ValidateMap {
 	 * This constructor receives country and continent objects and use them to add into adjacency list of graph. 
 	 * 
 	 * @param p_CountryObjects List of country objects stored in the map model. 
-	 * @param d_ContinentObjects List of continent objects stored in the map model. 
+	 * @param p_ContinentObjects List of continent objects stored in the map model. 
 	 * @throws Exception If any continent doesn't have a country, it notifies the user. 
 	 */
 	public ValidateMap(ArrayList<Country> p_CountryObjects,ArrayList<Continent> p_ContinentObjects) throws Exception{
@@ -162,10 +162,10 @@ public class ValidateMap {
 
 	/**
 	 * This method takes the transpose of the graph. 
-	 * For Example : If there is a border between country 1 --> 2, it will become 2 ---> 1 
+	 * For Example : If there is a border between country 1 to 2, it will become 2 to 1 
 	 * 
 	 * @param p_VertexList list of vertices in the graph. (list of countries and their borders)
-	 * @return new validate map object which holds the transposed vertext list. 
+	 * @return new validate map object which holds the transposed vertex list. 
 	 */
 	public ValidateMap getTranspose(ArrayList<ArrayList<Integer>> p_VertexList) {
 		ValidateMap l_TempMap = new ValidateMap(p_VertexList.size());

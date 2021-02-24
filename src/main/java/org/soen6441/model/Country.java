@@ -27,7 +27,7 @@ public class Country {
 
 	/**
 	 * Method to set the static id of the country
-	 * @param p_count Integer that is set for Id
+	 * @param p_Count Integer that is set for Id
 	 */
 	public static void setCount(int p_Count){
 		D_Count=p_Count;
@@ -43,7 +43,7 @@ public class Country {
 
 	/**
 	 * Method to set the borders of neighboring Countries
-	 * @param borders Name of neighboring country
+	 * @param p_Border Name of neighboring country
 	 */
 	public  void setBorder(String p_Border){
 		this.d_Neighbors.add(p_Border);
@@ -74,7 +74,7 @@ public class Country {
 
 	/**
 	 * Method to set the id of the country
-	 * @param p_id Country ID
+	 * @param p_Id Country ID
 	 */
 	public void setCountryID(int p_Id) {
 		d_ID = p_Id;
@@ -121,7 +121,7 @@ public class Country {
 
 	/**
 	 * Method to set number of armies
-	 * @param p_NoOfArmies
+	 * @param p_NoOfArmies pass the number of armies to set
 	 */
 	public void setNoOfArmies(int p_NoOfArmies) {
 		d_NoOfArmies = p_NoOfArmies;

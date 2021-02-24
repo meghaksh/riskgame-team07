@@ -27,7 +27,7 @@ public class Order {
 	}
 	/**
 	 * This method is used to set the result after the execution of the execute method.
-	 * @param p_ExecuteResult
+	 * @param p_ExecuteResult String to set the executed result
 	 */
 	public void setExecuteResult(String p_ExecuteResult) {
 		this.d_ExecuteResult = p_ExecuteResult;

@@ -18,7 +18,7 @@ public class OrderTest {
 	
 	/**
 	 * To set up the context for test cases
-	 * @throws Exception
+	 * @throws Exception relevant for the map creation phase
 	 */
 	@Before
 	public void setContextOfOrder() throws Exception {

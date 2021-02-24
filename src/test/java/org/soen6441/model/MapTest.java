@@ -19,7 +19,7 @@ public class MapTest {
 	
 	/**
 	 * To set the context before each test case
-	 * @throws Exception
+	 * @throws Exception relevant for the map creation phase
 	 */
 	@Before
 	public void setTestContext() throws Exception {
@@ -55,10 +55,10 @@ public class MapTest {
 	
 	/**
 	 * This test d_Checks the functionality of addCountry()
-	 * @throws Exception
+	 * 
 	 */
 	@Test 
-	public void testAddCountry() throws Exception {
+	public void testAddCountry() {
 		assertTrue(l_Map.getCountryList().contains(d_Country5));
 	}
 	
@@ -94,7 +94,7 @@ public class MapTest {
 
 	/**
 	 * This test d_Checks the functionality of removeCountry()
-	 * @throws Exception
+	 * @throws Exception If country does not exists
 	 */
 	@Test
 	public void testRemoveCountry() throws Exception {
@@ -184,7 +184,7 @@ public class MapTest {
 	
 	/**
 	 * to test the functionality of removeBorder()
-	 * @throws Exception
+	 * @throws Exception If border does not exists, or country does not exists
 	 */
 	@Test
 	public void testRemoveBorder() throws Exception {
@@ -230,10 +230,10 @@ public class MapTest {
 
 	/**
 	 * To d_Check the functionality of addContinent
-	 * @throws Exception
+	 * 
 	 */
 	@Test
-	public void testAddContinent() throws Exception{
+	public void testAddContinent() {
 		assertTrue(l_Map.getContinentList().contains(d_C0));
 	}
 	

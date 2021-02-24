@@ -36,7 +36,7 @@ public class GameEngine {
 	 * This class implements the ActionListener and override the actionPerformed method.
 	 * This class is responsible for passing data from view to models/child controllers.
 	 */
-	class CommandListener implements ActionListener{
+	public class CommandListener implements ActionListener{
 		private boolean d_MapDone = false;
 		private boolean d_StartUpDone = false;
 		private boolean d_AssignCountriesDone = false;
@@ -271,7 +271,7 @@ public class GameEngine {
 
 	/**
 	 * This is a method to show all player details like  PlayerNames,armies,Countriesowned  
-	 * @return this returns a list with all player details
+	 * 
 	 */
 	public void showAllPlayerWithArmies() {
 		d_PlayerList=d_GameModelNew.getAllPlayers();

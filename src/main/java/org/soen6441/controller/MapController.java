@@ -17,7 +17,7 @@ public class MapController {
 	
 	/**
 	 * This method calls the savemap method of the mapmodel to save the map in file.
-	 * @param p_str the command given by user to save map
+	 * @param p_Str the command given by user to save map
 	 * @return l_Result a feedback message on success or error of save function.
 	 * @throws Exception throws exception when there is any error during savemap
 	 */
@@ -65,8 +65,10 @@ public class MapController {
 	}
 	
 	/**
-	 * This method calls the Validate map method from the mapmodel class	
+	 * This method calls the Validate map method from the mapmodel class
+	 * @return Map is valid or not	
 	 * @throws Exception if there is no map created
+	 * 
 	 */
 	public String validateMap() throws Exception {
 		if(d_mapModel.getContinentList().size()>0)

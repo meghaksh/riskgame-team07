@@ -26,7 +26,7 @@ public class GameModelNew {
 	}
 	/**
 	 * This is parameterized constructor which takes Map parameter 
-	 * @param p_map parameter of map
+	 * @param p_Map parameter of map
 	 */
 	public GameModelNew(Map p_Map) {
 		this.d_Map = p_Map;
@@ -138,7 +138,7 @@ public class GameModelNew {
 	/**
 	 * This method sets army count to all players.
 	 *
-	 * @param p_count count the assigned army count 
+	 * @param p_Count count the assigned army count 
 	 */
 	public void setPlayerArmies(int p_Count) {
 		for (Player l_Player : getAllPlayers()) {
@@ -149,7 +149,7 @@ public class GameModelNew {
 	/**
 	 * <p>
 	 * This Method is the startup Phase method
-	 * <p>
+	 * </p>
 	 * <ul>
 	 * <li>This Method will take all the players in a queue
 	 * <li>Then it will check for all the countries available in a map 
@@ -198,14 +198,15 @@ public class GameModelNew {
 	 * 
 	 */
 	public void AssignReinforcementArmies() throws Exception {	
+		int l_ContinentValue=0;
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
 				int l_ArmyCount = ((l_Player.getCountriesSize())/3);
 				for(Continent l_Continent:l_Player.getContinentList()) {
-					l_ArmyCount += l_Continent.getContinentControlValue();
+					l_ContinentValue =  l_Continent.getContinentControlValue();
 				}
 				l_ArmyCount= Math.max(l_ArmyCount, 3);
-				l_Player.setPlayerArmies(l_ArmyCount);
+				l_Player.setPlayerArmies(l_ArmyCount+ l_ContinentValue);
 			}
 		} else {
 			throw new Exception ("\"Please enter players using gameplayer add command");

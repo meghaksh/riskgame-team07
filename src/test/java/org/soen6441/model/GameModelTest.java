@@ -18,7 +18,7 @@ public class GameModelTest {
 	private Map d_Map;
 	/**
 	 * To set up the context for test cases
-	 * @throws Exception
+	 * @throws Exception relevant for the map creation phase
 	 */
 	@Before
 	public void setTestContext() throws Exception {
@@ -42,10 +42,10 @@ public class GameModelTest {
 
 	/**
 	 * This test case d_Check the functionality of addplayer method
-	 * @throws Exception
+	 * 
 	 */
 	@Test 
-	public void testAddPlayer() throws Exception {
+	public void testAddPlayer() {
 		for(Player l:d_Check) {
 			l_Names.add(l.getPlayerName());
 		}
@@ -89,7 +89,7 @@ public class GameModelTest {
 
 	/**
 	 * This test case d_Check the functionality of RemovePlayer method
-	 * @throws Exception
+	 * @throws Exception Player to be removed does not exist
 	 */
 	@Test 
 	public void testRemovePlayer() throws Exception {
@@ -121,7 +121,7 @@ public class GameModelTest {
 
 	/**
 	 * This test case d_Check the functionality of AssignReinforcements method
-	 * @throws Exception
+	 * @throws Exception To check if the number of players is less than number of countries or not
 	 */
 	@Test 
 	public void testAssignReinforcements() throws Exception {
@@ -135,10 +135,10 @@ public class GameModelTest {
 
 	/**
 	 * This test case is to check functionality of whether player has deployed all the armies that are assigned to player
-	 * @throws Exception
+	 * 
 	 */
 	@Test 
-	public void testIssueOrder() throws Exception {
+	public void testIssueOrder() {
 		String l_Command="deploy india 3";
 		String l_Expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
 		c1.setOrder(l_Command);
@@ -150,10 +150,10 @@ public class GameModelTest {
 	}
 	/**
 	 * This test cases is to check whether player holds that country that he is trying to deploy
-	 * @throws Exception
+	 * 
 	 */
 	@Test 
-	public void testIssueOrder1() throws Exception {
+	public void testIssueOrder1() {
 
 		String l_Command1="deploy kenya 3";
 		String l_Expected1="\nThis country kenya doesnot belongs to raj";
@@ -166,10 +166,10 @@ public class GameModelTest {
 	}
 	/**
 	 * This test cases is to check whether no of armies deployed less than the player has
-	 * @throws Exception
+	 * 
 	 */
 	@Test 
-	public void testIssueOrder2() throws Exception {
+	public void testIssueOrder2() {
 
 		String l_Command2="deploy india 2";
 		String l_Expected2="\norder deploy india 2 added to list of raj";
@@ -182,10 +182,10 @@ public class GameModelTest {
 	}
 	/**
 	 * This test cases is to check whether no of armies deployed more than the player has
-	 * @throws Exception
+	 * 
 	 */
 	@Test 
-	public void testIssueOrderArmySize() throws Exception {
+	public void testIssueOrderArmySize() {
 
 		String l_Command3="deploy india 4";
 		String l_Expected3="\nraj ; you have only 3 number of armies! Please enter the next order accordingly";
