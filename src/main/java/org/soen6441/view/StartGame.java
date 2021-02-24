@@ -1,6 +1,7 @@
 package org.soen6441.view;
 
 import org.soen6441.controller.GameEngine;	import org.soen6441.model.GameModelNew;
+
 /**
  * Driver class for the game. It consist a single method main which is an entry point to the game.
  *  

@@ -181,7 +181,7 @@ public class GameEngine {
 					} else 
 					{
 						if(d_MapDone==false)
-							d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Assign Countries"+"\n");
+							d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Assign Countries "+"\n");
 						if(d_AssignCountriesDone==true)
 							d_CpView.setCommandAcknowledgement("\n"+"StartUp Phase is already completed "+"\n");
 					}
