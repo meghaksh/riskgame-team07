@@ -96,6 +96,8 @@ public class MapController {
 		int l_AddBorderCounter=0;
 		int l_RemoveBorderCounter=0;
 		String l_ReturnString = "";
+		if(l_CommandArray.length<=1)
+			throw new Exception("Please enter valid Parameters!");
 		while(l_Counter<l_CommandArray.length) {
 			if(l_CommandArray[l_Counter].equals("-add")) {
 				switch(p_command) {
