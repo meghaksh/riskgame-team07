@@ -10,7 +10,7 @@ public class StartGame {
 
 	/**
 	 * This main method is an entry point for the game. 
-	 * It initialize the GameModel, GameView (i.e. CommandPrompt) and GameController. 
+	 * It initialize the GameModel, GameView (i.e. CommandPrompt) and GameEngine. 
 	 * Passes view and model in controller.
 	 * 
 	 * @param p_Args default parameter for the main method which is not used anywhere in the game. 
