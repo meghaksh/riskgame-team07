@@ -173,6 +173,9 @@ public class GameModelNew {
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_Index);
 			}
+			for (Player l_Player : getAllPlayers()) {
+				 l_Player.setContinentsList();
+			}
 
 			AssignReinforcementArmies();
 		} else {

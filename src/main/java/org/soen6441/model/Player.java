@@ -119,12 +119,11 @@ public class Player {
 	 * set Continent list for the player. It consists of only those continent objects whose all countries belong to this player.
 	 */
 	public void setContinentsList() {
-		ArrayList <Continent> l_MapContinents = d_GameModelNew.getMap().getContinentList();
+		ArrayList <Continent> l_MapContinents = d_GameModelNew.getSelectedMap().getContinentList();
 		for(Continent MapContinent : l_MapContinents) {
-			ArrayList<Country> l_CountryOfContinent = MapContinent.getCountryList();
 			int l_Flag=0;
 			outerloop:
-				for(Country CountryOfContinent : l_CountryOfContinent) {
+				for(Country CountryOfContinent : MapContinent.getCountryList()) {
 					for(Country CountryOfPlayer: d_Countries) {
 						if(!(CountryOfPlayer==CountryOfContinent)) {
 							l_Flag =1;break outerloop;
