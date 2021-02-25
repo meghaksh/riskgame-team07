@@ -6,16 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
  * This is a class to test the methods of Order class
- *
  */
 public class OrderTest {
 	String d_OrderString = "deploy india 3";
 	Order d_Order;
 	Map d_Map;
 	private GameModelNew d_GameModelNew;
-	
+
 	/**
 	 * To set up the context for test cases
 	 * @throws Exception relevant for the map creation phase
@@ -28,7 +26,7 @@ public class OrderTest {
 		d_GameModelNew = new GameModelNew(d_Map);
 		d_Order =  new Order(d_OrderString,d_GameModelNew);
 	}
-	
+
 	/**
 	 * To test the execute() method of Order class
 	 */
