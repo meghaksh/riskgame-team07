@@ -94,8 +94,8 @@ public class Country {
 		if (p_Country == null || this.getClass() != p_Country.getClass()) {
 			return false;
 		}
-		Country p1 = (Country)p_Country; 
-		return this.getCountryName().equals(p1.getCountryName());
+		Country l_P1 = (Country)p_Country; 
+		return this.getCountryName().equals(l_P1.getCountryName());
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class Country {
 	 * @param p_Border Neighbor name
 	 */
 	public void removeBorder(String p_Border) {
-		Iterator l_Iterator = this.d_Neighbors.iterator();
+		Iterator<String>l_Iterator = this.d_Neighbors.iterator();
 		while(l_Iterator.hasNext()) {
 			if(l_Iterator.next().toString().equals(p_Border)) {
 				l_Iterator.remove();
