@@ -236,6 +236,8 @@ public class GameEngine {
 		int l_AddCounter = 0;
 		int l_RemoveCounter = 0;
 		String l_ReturnString = "";
+		if(l_CommandArray.length < 3)
+			throw new Exception("Please provide valid Parameters to add player");
 		while(l_Counter<l_CommandArray.length) {
 			if(l_CommandArray[l_Counter].equals("-add")) {
 				d_GameModelNew.addPlayer(l_CommandArray[l_Counter+1]);
@@ -332,7 +334,7 @@ public class GameEngine {
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
 					d_CpView.setCommandAcknowledgement("Countries:"+"\n");
 					for(Country l_Country:l_CountryList) {
-						d_CpView.setCommandAcknowledgement(l_Country.getCountryName() + ", ");
+						d_CpView.setCommandAcknowledgement(l_Country.getCountryName());
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						if(l_NeighborList.size()>0) {
 							d_CpView.setCommandAcknowledgement("--> Borders : ");
