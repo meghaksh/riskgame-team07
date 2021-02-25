@@ -1,10 +1,10 @@
 package org.soen6441.model;
 
 import java.io.File;			import java.io.FileNotFoundException;
-import java.io.FileWriter;		import java.io.IOException;
+import java.io.FileWriter;		import org.soen6441.controller.ValidateMap;
 import java.io.PrintWriter;		import java.util.ArrayList;
 import java.util.HashMap;		import java.util.Iterator;
-import java.util.Scanner;		import org.soen6441.controller.ValidateMap;
+import java.util.Scanner;		
 
 /**
  * This is the model class for the Map used in the game. 
@@ -21,8 +21,7 @@ public class Map {
 	 * This is the default constructor of the class. 
 	 * When the map object is created, this class initializes Continent, Countries and Neighbour containers
 	 */
-	public Map()
-	{
+	public Map(){
 		d_CountryObjects=new ArrayList<Country>();
 		d_ContinentObjects=new ArrayList<Continent>();
 		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
@@ -34,8 +33,7 @@ public class Map {
 	 * 
 	 * @return ArrayList of CountryObjects
 	 */
-	public ArrayList<Country> getCountryList()
-	{
+	public ArrayList<Country> getCountryList(){
 		return this.d_CountryObjects;
 	}
 
@@ -44,8 +42,7 @@ public class Map {
 	 * This method clears Continent, Country and Neighbor containers. 
 	 * This method also set the static IDs of Country and Continents back to zero. 
 	 */
-	public void reset()
-	{
+	public void reset() {
 		this.d_ContinentObjects.clear();
 		this.d_CountryObjects.clear();
 		this.d_Neighbors.clear();
@@ -55,7 +52,12 @@ public class Map {
 	}
 
 	/**
-	 * This method loads a map file given by the user
+	 * This method loads a map file given by the user.
+	 * <ul>
+	 * 	<li>This method checks for the input and decides if it is a loadmap or editmap functionality.</li>
+	 *  <li>It gets the data from file and loads the map object in respective continent, countries and neighbors.</li>
+	 *  <li>Before loading or editing any file, it resets the game model so that it doesn't conflict with the existing data in map model.</li>
+	 * </ul>
 	 * @param p_FileName Name of the file to Load
 	 * @return Map is loaded or not
 	 * @throws FileNotFoundException File not Found to Load 
@@ -68,6 +70,7 @@ public class Map {
 		Scanner l_Sc = new Scanner(l_File);
 		while(l_Sc.hasNextLine()){
 			String l_Line=l_Sc.nextLine();
+			//searching for the continent keyword in file and loading all continents into continent object list
 			if(l_Line.contains("continent")){	
 				l_Line=l_Sc.nextLine();
 				while(!l_Line.equals("") && l_Sc.hasNextLine()){
@@ -77,6 +80,7 @@ public class Map {
 					l_Line=l_Sc.nextLine();
 				}
 			}
+			//searching for countries keyword and loading all countries from file to map's country object list
 			if(l_Line.contains("countries")){
 				l_Line=l_Sc.nextLine();
 				while(!l_Line.equals("") && l_Sc.hasNextLine()){
@@ -98,6 +102,7 @@ public class Map {
 					l_Line=l_Sc.nextLine();
 				}
 			}
+			//searching for borders keyword and loading all neighbors from file to map's country object list
 			if(l_Line.contains("borders")){
 				while(!l_Line.equals("") && l_Sc.hasNextLine()){
 					l_Line=l_Sc.nextLine();
@@ -130,7 +135,7 @@ public class Map {
 		return l_Result;
 	}
 	/**
-	 * It saves the user edited map
+	 * It saves the user edited map. It checks for the validation of the map object and then only it saves into the file.
 	 * @param p_FileName File name to save the map
 	 * @return If Map is saved successfully or not
 	 * @throws Exception No continent to save
@@ -151,20 +156,22 @@ public class Map {
 			l_Pr.close();
 			throw new Exception("No Continent to Save");
 		}
+		//adding all the continents in the file
 		for(Continent l_Co: this.d_ContinentObjects){
 			l_Pr.println(l_Co.getContinentName()+" "+l_Co.getContinentControlValue());
 		}
 		l_Pr.println("");
 		l_Pr.println("countries");
 		int l_CountryOrder=0;
+		//adding all countries in the file
 		for(Country l_C: this.d_CountryObjects){
 			l_CountryOrder++;
 			String l_ContinentName = l_C.getContinentName();
 			int l_ContinentId=0;
 			int l_ContinentOrder=0;
-			for(Continent ct:this.d_ContinentObjects) {
+			for(Continent l_Ct:this.d_ContinentObjects) {
 				l_ContinentOrder+=1;
-				if(ct.getContinentName().equals(l_ContinentName)) {
+				if(l_Ct.getContinentName().equals(l_ContinentName)) {
 					l_ContinentId = l_ContinentOrder;
 				}
 			}
@@ -173,6 +180,7 @@ public class Map {
 		}
 		l_Pr.println("");
 		l_Pr.println("borders");
+		//adding all the borders in the file.
 		for(Country l_C: d_CountryObjects){
 			int l_New=this.d_PreviousSave.get(l_C.d_ID);
 			l_Borders=l_C.getBorder();
@@ -201,7 +209,7 @@ public class Map {
 	 * @throws Exception In case of continent already exists, it throws an exception
 	 */
 	public void addContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
-		
+
 		if(p_ContinentControlValue.equals("0")){
 			throw new Exception("Continent control value cannot be 0");
 		}
@@ -212,8 +220,7 @@ public class Map {
 		}
 		try{
 			this.d_ContinentObjects.add(new Continent(p_ContinentName, Integer.parseInt(p_ContinentControlValue)));
-		}catch(Exception l_E)
-		{
+		}catch(Exception l_E){
 			throw new Exception("Please enter a valid Integer for Continent Control Value");
 		}
 	}
@@ -294,8 +301,8 @@ public class Map {
 					String l_OwnerContinent = l_TempCountry.getContinentName();
 					for(Continent l_TempContinent : d_ContinentObjects) {
 						if(l_TempContinent.getContinentName().equals(l_OwnerContinent)) {
-							ArrayList<Country> d_CountryListOfOwnerContinent = l_TempContinent.getCountryList();
-							removeCountryFromContinent(p_CountryName, d_CountryListOfOwnerContinent);
+							ArrayList<Country> l_CountryListOfOwnerContinent = l_TempContinent.getCountryList();
+							removeCountryFromContinent(p_CountryName, l_CountryListOfOwnerContinent);
 						}
 					}
 				}
@@ -374,18 +381,20 @@ public class Map {
 	 */
 	public void addBorder(String p_CountryName, String p_NeighborName) throws Exception {
 		int l_Flag=0;
-		for(Country c : this.getCountryList()) {
-			if(c.getCountryName().equals(p_NeighborName)) {
-				l_Flag=1;break;
+		for(Country l_C : this.getCountryList()) {
+			if(l_C.getCountryName().equals(p_NeighborName)) {
+				l_Flag=1;
+				break;
 			}
 		}
 		if(l_Flag==0) {
 			throw new Exception("Neighbour Country does not exists!");
 		}
 		int l_Flag1=0;
-		for(Country c : this.getCountryList()) {
-			if(c.getCountryName().equals(p_CountryName)) {
-				l_Flag1=1;break;
+		for(Country l_C : this.getCountryList()) {
+			if(l_C.getCountryName().equals(p_CountryName)) {
+				l_Flag1=1;
+				break;
 			}
 		}
 		if(l_Flag1==0) {
@@ -428,16 +437,16 @@ public class Map {
 		int l_NeighborId=0;
 		int l_CountryId=0;
 		int l_Flag=0,l_Flag1=0;
-		for(Country c : this.getCountryList()) {
-			if(c.getCountryName().equals(p_CountryName)) {
+		for(Country l_C : this.getCountryList()) {
+			if(l_C.getCountryName().equals(p_CountryName)) {
 				l_Flag=1;break;
 			}
 		}
 		if(l_Flag==0) {
 			throw new Exception("Country does not exists!");
 		}
-		for(Country c : this.getCountryList()) {
-			if(c.getCountryName().equals(p_NeighbourName)) {
+		for(Country l_C : this.getCountryList()) {
+			if(l_C.getCountryName().equals(p_NeighbourName)) {
 				l_Flag1=1;break;
 			}
 		}
@@ -507,5 +516,3 @@ public class Map {
 		return l_VMap.isValid();
 	}
 }
-
-
