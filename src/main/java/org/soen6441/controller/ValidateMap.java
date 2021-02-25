@@ -208,7 +208,7 @@ public class ValidateMap {
 		String l_Return =isValid();
 		if(l_Return.equals("Map is not Valid"))
 		{
-			throw new Exception("The countries inside "+l_C.getContinentName()+" is not internally Connected");
+			throw new Exception("The countries inside "+l_C.getContinentName()+" are not internally Connected");
 		}
 	}
 		
