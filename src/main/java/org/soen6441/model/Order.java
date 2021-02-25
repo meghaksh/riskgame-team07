@@ -1,5 +1,4 @@
 package org.soen6441.model;
-import java.util.Scanner;
 
 /**
  * 
@@ -13,8 +12,8 @@ public class Order {
 	private GameModelNew d_GameModelNew;
 	private String d_ExecuteResult="";
 	
-	public Order(String order, GameModelNew p_GameModelNew) {
-		this.d_Order = order;
+	public Order(String p_Order, GameModelNew p_GameModelNew) {
+		this.d_Order = p_Order;
 		this.d_GameModelNew = p_GameModelNew;
 		deploy();
 	}
@@ -37,10 +36,10 @@ public class Order {
 	 * Method to check if the command issued is correct or not and set country name and the armies
 	 */
 	public void deploy() {
-		String[] splitted = d_Order.split(" ");
-		if(splitted[0].equals("deploy")) {
-			this.d_CountryName = splitted[1];
-			this.d_NoOfArmies = Integer.parseInt(splitted[2]);
+		String[] l_Splitted = d_Order.split(" ");
+		if(l_Splitted[0].equals("deploy")) {
+			this.d_CountryName = l_Splitted[1];
+			this.d_NoOfArmies = Integer.parseInt(l_Splitted[2]);
 		}
 		else {
 			System.out.println("Invalid command");
@@ -58,16 +57,16 @@ public class Order {
 	 * This method is used to execute the orders issued by the players.
 	 */
 	public void execute() {
-		int l_flag=0;
+		int l_Flag=0;
 		for(Country l_Country : d_GameModelNew.getSelectedMap().getCountryList()) {
 			if(l_Country.getCountryName().equals(d_CountryName)) {
-				l_flag = 1;
+				l_Flag = 1;
 				int l_Armies = l_Country.getNoOfArmies();
 				l_Country.setNoOfArmies(d_NoOfArmies+l_Armies);
 				setExecuteResult("\n"+"The armies are succesfully deployed on "+d_CountryName);
 			}
 		}
-		if(l_flag==0) {
+		if(l_Flag==0) {
 			setExecuteResult("\n"+"The armies are  not succesfully deployed on "+d_CountryName);
 		}
 	}

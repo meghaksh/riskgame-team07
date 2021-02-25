@@ -1,15 +1,10 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;		
-import java.util.Iterator;
-import java.util.LinkedList;	
-import java.util.Queue;
-
+import java.util.ArrayList;			import java.util.Iterator;
+import java.util.LinkedList;		import java.util.Queue;
 
 /**
  * The Player class represents the actual player participating in the game.
- * 
- *
  */
 public class Player {
 	private String d_PlayerName="";
@@ -52,15 +47,15 @@ public class Player {
 	 * addCountry method adds the given country to the player's country list.
 	 * @param l_Country country object
 	 */
-	public void addCountry(Country l_Country) {
-		d_Countries.add(l_Country);
+	public void addCountry(Country p_Country) {
+		d_Countries.add(p_Country);
 	}
 	/**
 	 * removeCountry removes the given country from the player's country list
 	 * @param l_Country Name of the country to be removed
 	 */
-	public void removeCountry(Country l_Country) {
-		d_Countries.remove(l_Country);
+	public void removeCountry(Country p_Country) {
+		d_Countries.remove(p_Country);
 	}
 	/**
 	 * get method for player name
@@ -120,18 +115,18 @@ public class Player {
 	 */
 	public void setContinentsList() {
 		ArrayList <Continent> l_MapContinents = d_GameModelNew.getSelectedMap().getContinentList();
-		for(Continent MapContinent : l_MapContinents) {
+		for(Continent l_MapContinent : l_MapContinents) {
 			int l_Flag=0;
 			outerloop:
-				for(Country CountryOfContinent : MapContinent.getCountryList()) {
-					for(Country CountryOfPlayer: d_Countries) {
-						if(!(CountryOfPlayer==CountryOfContinent)) {
+				for(Country l_CountryOfContinent : l_MapContinent.getCountryList()) {
+					for(Country l_CountryOfPlayer: d_Countries) {
+						if(!(l_CountryOfPlayer==l_CountryOfContinent)) {
 							l_Flag =1;break outerloop;
 						}
 					}
 				}
 			if(l_Flag==0) {
-				d_Continents.add(MapContinent);
+				d_Continents.add(l_MapContinent);
 			}
 		}
 	}
@@ -211,9 +206,8 @@ public class Player {
 		d_ResultInteger = 0;
 		String[] l_StringList = d_StringOrder.split(" ");
 		if(l_StringList[0].equals("deploy")) {
-			if(Integer.parseInt(l_StringList[2]) <= d_Armies)
-			{
-				Iterator l_It = d_Countries.iterator();
+			if(Integer.parseInt(l_StringList[2]) <= d_Armies){
+				Iterator<Country>l_It = d_Countries.iterator();
 				while(l_It.hasNext()) {
 					Country l_TempCountry = (Country)l_It.next() ;
 					if(l_StringList[1].equals(l_TempCountry.getCountryName())) {
