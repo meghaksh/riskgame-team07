@@ -1,10 +1,10 @@
 package org.soen6441.controller;
 
-import java.util.ArrayList;						import java.util.List;
+import java.util.ArrayList;						import org.soen6441.view.CommandPrompt;
 import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
 import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
-import org.soen6441.view.CommandPrompt;
+
 
 /**
  * This is the main controller class of MVC model. 
@@ -30,7 +30,7 @@ public class GameEngine {
 		d_MapController = new MapController(this.d_GameModelNew.getMap());
 		d_CpView.commandSendButtonListener(new CommandListener());
 	}
-	
+
 	/**
 	 * This is a child class of the GameEngine which listens to the actions performed by button in view. 
 	 * This class implements the ActionListener and override the actionPerformed method.
@@ -40,11 +40,17 @@ public class GameEngine {
 		private boolean d_MapDone = false;
 		private boolean d_StartUpDone = false;
 		private boolean d_AssignCountriesDone = false;
-		
+
 		/**
 		 * {@inheritDoc}
 		 * On click of the button in view, this method gets the string which user entered. 
-		 * Based on the type of the command, it will call the method of specific controllers. 
+		 * Based on the type of the command, it will call the method of specific controllers.
+		 * <ul>
+		 * <li>editcontinent, editcountry, editneighbor commands are handled by the map controller's editmap method.</li>
+		 * <li>savemap, loadmap, editmap, validatemap commands are also handled by the map controller's respective methods.</li>
+		 * <li>gameplayer, showmap commands are handled by the GameEngine's respective methods.</li>
+		 * <li>For all the methods called from the various cases here, feedback is shown on the view.</li>
+		 * </ul>  
 		 */
 		@Override
 		public void actionPerformed(ActionEvent l_E) {
@@ -53,90 +59,88 @@ public class GameEngine {
 				switch(l_CommandStringFromInput.split(" ")[0]){
 				case "editcontinent" : 
 					if(d_MapDone==false) {
-					try {
-						String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
-						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-						d_CpView.setCommandAcknowledgement("\n");
-					}
-					}else {
-						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
-					}
-					break;
-					
-				case "editcountry" :
-					if(d_MapDone==false) {
-					try {
-						String l_AckMsg = d_MapController.editMap("editcountry", l_CommandStringFromInput);
-						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-						d_CpView.setCommandAcknowledgement("\n");
-					}
-					}else {
-						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
-					}
-					break;
-					
-				case "editneighbor" :
-					if(d_MapDone==false) {
 						try {
-					String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+							String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
+							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
 						}catch(Exception p_Exception) {
 							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
 							d_CpView.setCommandAcknowledgement("\n");
 						}
-					}
-					else {
+					}else {
 						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
 					}
 					break;
-					
+
+				case "editcountry" :
+					if(d_MapDone==false) {
+						try {
+							String l_AckMsg = d_MapController.editMap("editcountry", l_CommandStringFromInput);
+							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+							d_CpView.setCommandAcknowledgement("\n");
+						}
+					}else {
+						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
+					}
+					break;
+
+				case "editneighbor" :
+					if(d_MapDone==false) {
+						try {
+							String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
+							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+							d_CpView.setCommandAcknowledgement("\n");
+						}
+					} else {
+						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
+					}
+					break;
+
 				case "showmap": 
 					showMap(d_MapDone);
 					break;
-					
+
 				case "savemap":
 					if(d_MapDone==false) {
-					try {
-						String l_Result=d_MapController.saveMap(l_CommandStringFromInput);
-						d_CpView.setCommandAcknowledgement(l_Result+"\n");
-					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
-					}
+						try {
+							String l_Result=d_MapController.saveMap(l_CommandStringFromInput);
+							d_CpView.setCommandAcknowledgement(l_Result+"\n");
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
+						}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Save Map In This Phase"+"\n");
 					}
 					break;
-					
+
 				case "editmap":
 					if(d_MapDone==false) {
-					try {
-						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
-						d_CpView.setCommandAcknowledgement(l_Result+"\n");
-					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement("The Mapfile Doesnt Exist. Please Create A New Map" +"\n");
-						
-					}
+						try {
+							String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
+							d_CpView.setCommandAcknowledgement(l_Result+"\n");
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement("The Mapfile Doesnt Exist. Please Create A New Map" +"\n");
+						}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Edit Another Map In This Phase"+"\n");
 					}
 					break;
-					
+
 				case "validatemap":
 					if(d_MapDone==false) {
-					try {
-					d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
-					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage() +"\n");
-					}
+						try {
+							d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage() +"\n");
+						}
 					}else {
 						d_CpView.setCommandAcknowledgement("Cant validate Map In This Phase"+"\n");
 					}
 					break;
-					
+
 				case "loadmap": 
 					try {
 						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
@@ -146,16 +150,16 @@ public class GameEngine {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
 					}
 					break;
-					
+
 				case "gameplayer":
 					if(d_MapDone==true & d_StartUpDone==false) {
-					try {
-						String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
-						d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
-					}catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
-						d_CpView.setCommandAcknowledgement("\n");
-					}
+						try {
+							String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
+							d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
+						}catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
+							d_CpView.setCommandAcknowledgement("\n");
+						}
 					}else{
 						if(d_MapDone==false)
 							d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Players "+"\n");
@@ -163,24 +167,24 @@ public class GameEngine {
 							d_CpView.setCommandAcknowledgement("\n"+"You are trying to remove or add players after the startup phase"+"\n");
 					}
 					break;
-					
+
 				case "assigncountries":
 					if(d_MapDone==true & d_AssignCountriesDone==false) {
-					try {	
-					assignCountries();
-					}
-					catch(Exception p_Exception) {
-						d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+						try {	
+							assignCountries();
+						}
+						catch(Exception p_Exception) {
+							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+							d_CpView.setCommandAcknowledgement("\n");
+							break;
+						}
+						d_AssignCountriesDone=true;
+						d_StartUpDone=true;
+						showAllPlayerWithArmies();
 						d_CpView.setCommandAcknowledgement("\n");
-						break;
-					}
-					d_AssignCountriesDone=true;
-					d_StartUpDone=true;
-					showAllPlayerWithArmies();
-					d_CpView.setCommandAcknowledgement("\n");
-					d_PlayerController = new PlayerController(d_GameModelNew,d_CpView);
-					d_PlayerController.player_issue_order();
-					d_PlayerController.player_next_order();
+						d_PlayerController = new PlayerController(d_GameModelNew,d_CpView);
+						d_PlayerController.player_issue_order();
+						d_PlayerController.player_next_order();
 					} else 
 					{
 						if(d_MapDone==false)
@@ -189,25 +193,25 @@ public class GameEngine {
 							d_CpView.setCommandAcknowledgement("\n"+"StartUp Phase is already completed "+"\n");
 					}
 					break;
-					
+
 				case "deploy":
 					d_PlayerController.setOrderString(l_CommandStringFromInput);
 					break;
-					
+
 				case "show":
 					if(d_MapDone==true) {
-					showAllPlayerWithArmies();
-					d_CpView.setCommandAcknowledgement("\n");
+						showAllPlayerWithArmies();
+						d_CpView.setCommandAcknowledgement("\n");
 					}else{
 						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Perform Show Operation"+"\n");
 					}
 					break;
-					
+
 				case "reset":
 					d_MapController.reset();
 					d_CpView.setCommandAcknowledgement("The Map is Reset"+"\n");
 					break;
-					
+
 				default:
 					d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
 					break;
@@ -218,7 +222,7 @@ public class GameEngine {
 			}
 		}
 	}
-	
+
 	/**
 	 * <p>
 	 * this Method will take inputs from the user and will add or remove player according
@@ -284,9 +288,13 @@ public class GameEngine {
 			}
 		}
 	}
-	
+
 	/**
 	 * This is a method to show all countries and continents, armies on each country, ownership, and connectivity
+	 * <ul>
+	 * <li>Map Phase : For Each Continent in Continent List, For each country in that continent, For each neighbor in that country</li>
+	 * <li>Game Phase : Apart from continent, country and neighbors, it also shows player, thier ownership and their number of armies. </li>
+	 * </ul>
 	 * 
 	 * @param p_BooleanForGamePhaseStarted takes boolean value to show map for map phase or game phase
 	 */
@@ -323,12 +331,10 @@ public class GameEngine {
 				}
 			}
 		} else {
-			System.out.println("Normal showmap");
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
 				d_CpView.setCommandAcknowledgement("\n");
 				for(Continent l_Continent:l_ContinentList) {
-					
 					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
 					d_CpView.setCommandAcknowledgement("Countries:"+"\n");
