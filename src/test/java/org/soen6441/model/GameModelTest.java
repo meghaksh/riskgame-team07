@@ -1,20 +1,17 @@
-package org.soen6441.model;
-import org.soen6441.model.*;			import static org.junit.Assert.assertEquals;											
+package org.soen6441.model;				import static org.junit.Assert.assertEquals;											
 import java.util.ArrayList;				import java.util.List;import static org.junit.Assert.*;
 import org.junit.Before;				import org.junit.Test;
 
 /**
- * 
  * This is a class to test the methods of GameModel class
- *
  */
 public class GameModelTest {
 	GameModelNew d_Game = new GameModelNew();
 	ArrayList<Player> d_Check;
-	List<String> l_Names;
+	List<String> d_Names;
 	ArrayList<Player> d_List;
-	List<String> l_d_CheckNames;
-	Player c1,c2;
+	List<String> d_CheckNames;
+	Player d_C1,d_C2;
 	private Map d_Map;
 	/**
 	 * To set up the context for test cases
@@ -24,8 +21,8 @@ public class GameModelTest {
 	public void setTestContext() throws Exception {
 
 		d_Check =  new ArrayList<Player>();
-		l_Names = new ArrayList<>();
-		l_d_CheckNames = new ArrayList<>();
+		d_Names = new ArrayList<>();
+		d_CheckNames = new ArrayList<>();
 		d_Map = new Map();
 		d_Map.addContinent("asia","1");
 		d_Map.addCountry("india","asia");
@@ -34,10 +31,10 @@ public class GameModelTest {
 		d_Game = new GameModelNew(d_Map);
 		d_Game.addPlayer("raj");
 		d_Game.addPlayer("kumar");
-		c1 = new Player("raj",d_Game);
-		c2 = new Player("kumar",d_Game);
-		d_Check.add(c1);
-		d_Check.add(c2);
+		d_C1 = new Player("raj",d_Game);
+		d_C2 = new Player("kumar",d_Game);
+		d_Check.add(d_C1);
+		d_Check.add(d_C2);
 	}
 
 	/**
@@ -46,13 +43,13 @@ public class GameModelTest {
 	 */
 	@Test 
 	public void testAddPlayer() {
-		for(Player l:d_Check) {
-			l_Names.add(l.getPlayerName());
+		for(Player l_Player:d_Check) {
+			d_Names.add(l_Player.getPlayerName());
 		}
-		for(Player l:d_Game.getAllPlayers()) {
-			l_d_CheckNames.add(l.getPlayerName());
+		for(Player l_Player:d_Game.getAllPlayers()) {
+			d_CheckNames.add(l_Player.getPlayerName());
 		}
-		assertEquals(l_d_CheckNames,l_Names);
+		assertEquals(d_CheckNames,d_Names);
 	}
 	/**
 	 * To test addPlayer() and check if player already exists or not
@@ -63,8 +60,8 @@ public class GameModelTest {
 		String l_ActualMessage = "";
 		try {
 			d_Game.addPlayer("raj");
-		} catch (Exception e) {
-			l_ActualMessage = e.getMessage();
+		} catch (Exception p_E) {
+			l_ActualMessage = p_E.getMessage();
 		}
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
@@ -80,8 +77,8 @@ public class GameModelTest {
 			d_Game.addPlayer("zeal");
 			d_Game.addPlayer("alpha");
 
-		} catch (Exception e) {
-			l_ActualMessage = e.getMessage();
+		} catch (Exception p_E) {
+			l_ActualMessage = p_E.getMessage();
 		}
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
@@ -94,13 +91,13 @@ public class GameModelTest {
 	@Test 
 	public void testRemovePlayer() throws Exception {
 		d_Game.removePlayer("raj");
-		for(Player l:d_Check) {
-			l_Names.add(l.getPlayerName());
+		for(Player l_Player:d_Check) {
+			d_Names.add(l_Player.getPlayerName());
 		}
-		for(Player l:d_Game.getAllPlayers()) {
-			l_d_CheckNames.add(l.getPlayerName());
+		for(Player l_Player:d_Game.getAllPlayers()) {
+			d_CheckNames.add(l_Player.getPlayerName());
 		}
-		assertFalse(l_d_CheckNames.equals(l_Names));
+		assertFalse(d_CheckNames.equals(d_Names));
 	}
 
 	/**
@@ -112,8 +109,8 @@ public class GameModelTest {
 		String l_ActualMessage = "";
 		try {
 			d_Game.removePlayer("shilpa");
-		}catch (Exception e) {
-			l_ActualMessage = e.getMessage();
+		}catch (Exception p_E) {
+			l_ActualMessage = p_E.getMessage();
 		}
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 
@@ -126,9 +123,9 @@ public class GameModelTest {
 	@Test 
 	public void testAssignReinforcements() throws Exception {
 		d_Game.startUpPhase();
-		for(Player l:d_Game.getAllPlayers()) {
-			int value=l.getPlayerArmies();
-			assertTrue(3<=value);
+		for(Player l_Player:d_Game.getAllPlayers()) {
+			int l_Value=l_Player.getPlayerArmies();
+			assertTrue(3<=l_Value);
 
 		}
 	}
@@ -141,11 +138,11 @@ public class GameModelTest {
 	public void testIssueOrder() {
 		String l_Command="deploy india 3";
 		String l_Expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
-		c1.setOrder(l_Command);
-		c1.setPlayerArmies(3);
-		c1.addCountry(d_Map.getCountryList().get(0));
-		c1.issue_order();
-		String l_Result=c1.getResult();
+		d_C1.setOrder(l_Command);
+		d_C1.setPlayerArmies(3);
+		d_C1.addCountry(d_Map.getCountryList().get(0));
+		d_C1.issue_order();
+		String l_Result=d_C1.getResult();
 		assertEquals(l_Expected,l_Result);
 	}
 	/**
@@ -157,11 +154,11 @@ public class GameModelTest {
 
 		String l_Command1="deploy kenya 3";
 		String l_Expected1="\nThis country kenya doesnot belongs to raj";
-		c1.setPlayerArmies(3);
-		c1.addCountry(d_Map.getCountryList().get(0));
-		c1.setOrder(l_Command1);
-		c1.issue_order();
-		String l_Result1=c1.getResult();
+		d_C1.setPlayerArmies(3);
+		d_C1.addCountry(d_Map.getCountryList().get(0));
+		d_C1.setOrder(l_Command1);
+		d_C1.issue_order();
+		String l_Result1=d_C1.getResult();
 		assertEquals(l_Expected1,l_Result1);
 	}
 	/**
@@ -173,11 +170,11 @@ public class GameModelTest {
 
 		String l_Command2="deploy india 2";
 		String l_Expected2="\norder deploy india 2 added to list of raj";
-		c1.setPlayerArmies(3);
-		c1.addCountry(d_Map.getCountryList().get(0));
-		c1.setOrder(l_Command2);
-		c1.issue_order();
-		String l_Result2=c1.getResult();
+		d_C1.setPlayerArmies(3);
+		d_C1.addCountry(d_Map.getCountryList().get(0));
+		d_C1.setOrder(l_Command2);
+		d_C1.issue_order();
+		String l_Result2=d_C1.getResult();
 		assertEquals(l_Expected2,l_Result2);
 	}
 	/**
@@ -189,11 +186,11 @@ public class GameModelTest {
 
 		String l_Command3="deploy india 4";
 		String l_Expected3="\nraj ; you have only 3 number of armies! Please enter the next order accordingly";
-		c1.setPlayerArmies(3);
-		c1.addCountry(d_Map.getCountryList().get(0));
-		c1.setOrder(l_Command3);
-		c1.issue_order();
-		String l_Result3=c1.getResult();
+		d_C1.setPlayerArmies(3);
+		d_C1.addCountry(d_Map.getCountryList().get(0));
+		d_C1.setOrder(l_Command3);
+		d_C1.issue_order();
+		String l_Result3=d_C1.getResult();
 		assertEquals(l_Expected3,l_Result3);
 	}
 }
