@@ -37,7 +37,7 @@ public class ValidateMap {
 			l_HMap = updateCount(p_CountryObjects);
 			d_VertexCount = l_HMap.size();
 			d_VertexList = new ArrayList<>(d_VertexCount);
-			for(int i=0;i<d_VertexCount;i++) {
+			for(int l_I=0;l_I<d_VertexCount;l_I++) {
 				d_VertexList.add(new ArrayList<Integer>());
 			}
 			assignBorders(l_HMap);
@@ -46,7 +46,7 @@ public class ValidateMap {
 			throw new Exception("There should be atleast one country for a continent");
 		}
 	}
-	
+
 	/**
 	 * This method checks if every continent has at least one country
 	 *  
@@ -66,6 +66,7 @@ public class ValidateMap {
 	/**
 	 * This method takes the arraylist of country objects and creates a new hashmap which is then returned to validation method
 	 * All the updation in countryid and their respective borders after addition/removal is taken care for the sake of validation.
+	 * 
 	 * @param p_CountryObjects List of country objects
 	 * @return d_UpdatedMap Hashmap which contains the updated ID and their respective borders of each country 
 	 */
@@ -191,29 +192,28 @@ public class ValidateMap {
 		}
 		return "Map is not Valid";
 	}
-	public void checkContinentIsConnectedSubgraph(ArrayList<Continent> p_ContinentObjects)throws Exception{
-		
-		HashMap<Integer,ArrayList<Integer>> l_CountryMapForEachContinent =new HashMap<Integer,ArrayList<Integer>>();
 	
-	for(Continent l_C : p_ContinentObjects)
-	{
-		ArrayList<Country> l_Country=l_C.getCountryList();
-		l_CountryMapForEachContinent=updateCount(l_Country);
-		d_VertexCount = l_CountryMapForEachContinent.size();
-		d_VertexList = new ArrayList<>(d_VertexCount);
-		for(int i=0;i<d_VertexCount;i++) {
-			d_VertexList.add(new ArrayList<Integer>());
-		}
-		assignBorders(l_CountryMapForEachContinent);
-		String l_Return =isValid();
-		if(l_Return.equals("Map is not Valid"))
-		{
-			throw new Exception("The countries inside "+l_C.getContinentName()+" are not internally Connected");
+	/**
+	 * This method takes list of continents as a parameter and check if all the countries within that continent is internally connected.
+	 *  
+	 * @param p_ContinentObjects List of continents objects 
+	 * @throws Exception throws custom exception when all countries within particular continent are not connected. 
+	 */
+	public void checkContinentIsConnectedSubgraph(ArrayList<Continent> p_ContinentObjects)throws Exception{
+		HashMap<Integer,ArrayList<Integer>> l_CountryMapForEachContinent =new HashMap<Integer,ArrayList<Integer>>();
+		for(Continent l_C : p_ContinentObjects){
+			ArrayList<Country> l_Country=l_C.getCountryList();
+			l_CountryMapForEachContinent=updateCount(l_Country);
+			d_VertexCount = l_CountryMapForEachContinent.size();
+			d_VertexList = new ArrayList<>(d_VertexCount);
+			for(int l_I=0;l_I<d_VertexCount;l_I++) {
+				d_VertexList.add(new ArrayList<Integer>());
+			}
+			assignBorders(l_CountryMapForEachContinent);
+			String l_Return = isValid();
+			if(l_Return.equals("Map is not Valid")){
+				throw new Exception("The countries inside "+l_C.getContinentName()+" are not internally Connected");
+			}
 		}
 	}
-		
-	}
-		
 }
-
-
