@@ -195,7 +195,6 @@ public class GameEngine {
 					break;
 
 				case "deploy":
-					d_PlayerController.setOrderString(l_CommandStringFromInput);
 					break;
 
 				case "show":
