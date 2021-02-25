@@ -30,7 +30,7 @@ public class PlayerController {
 	 * The loop terminates when the armies of all the players are exhausted.
 	 * The acknowledgement are passed on to the view.
 	 */
-	public void player_issue_order() {
+	public void playerIssueOrder() {
 		ArrayList <Player> l_Players = d_Players;
 		HashMap <Player,Boolean> l_CheckArmies = new HashMap<>();
 		for(Player l_TempPlayer:l_Players) {
@@ -69,7 +69,7 @@ public class PlayerController {
 	 * It works in a round robin fashion. All the players execute there orders one by one.
 	 * The player who's all orders are executed is removed from the list.
 	 */
-	public void player_next_order() {
+	public void playerNextOrder() {
 		ArrayList <Player> l_Players = d_Players;
 		ArrayList <Player> l_PlayersClone = (ArrayList<Player>) d_Players.clone();
 		while(!l_PlayersClone.isEmpty()) {
