@@ -162,7 +162,7 @@ public class MapController {
 					break;
 				}
 			}else {
-				throw new Exception("Please Enter a Valid Command");
+				throw new Exception("Please Enter a Valid Command. \n If you have added multiple add/remove commands, use showmap command to check the map state.");
 			}
 		}
 		if(l_AddContinentCounter>0) {
