@@ -1,9 +1,7 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.ArrayList;					import java.util.LinkedList;
+import java.util.List;						import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -89,8 +87,8 @@ public class GameModelNew {
 		if (existDuplicatePlayer(p_PlayerName)) {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 		} else {
-			Player l_Player_Object = new Player(p_PlayerName, this);
-			d_PlayerList.add(l_Player_Object);
+			Player l_PlayerObject = new Player(p_PlayerName, this);
+			d_PlayerList.add(l_PlayerObject);
 		}
 	}
 
@@ -101,8 +99,8 @@ public class GameModelNew {
 	 * @return boolean this returns boolean value based if player already exists or not
 	 */
 	public boolean existDuplicatePlayer(String p_PlayerName) {
-		for (Player Player : d_PlayerList )
-			if (Player .getPlayerName().equalsIgnoreCase(p_PlayerName))
+		for (Player l_Player : d_PlayerList )
+			if (l_Player.getPlayerName().equalsIgnoreCase(p_PlayerName))
 				return true;
 		return false;
 	}
@@ -174,10 +172,10 @@ public class GameModelNew {
 				l_CountryList.remove(l_Index);
 			}
 			for (Player l_Player : getAllPlayers()) {
-				 l_Player.setContinentsList();
+				l_Player.setContinentsList();
 			}
 
-			AssignReinforcementArmies();
+			assignReinforcementArmies();
 		} else {
 			if(getAllPlayers().size()==0) {
 				throw new Exception ("Please enter players using gameplayer add command");
@@ -200,7 +198,7 @@ public class GameModelNew {
 	 * @throws Exception this Method will throw an Exception if player size is less than 0
 	 * 
 	 */
-	public void AssignReinforcementArmies() throws Exception {	
+	public void assignReinforcementArmies() throws Exception {	
 		int l_ContinentValue=0;
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
