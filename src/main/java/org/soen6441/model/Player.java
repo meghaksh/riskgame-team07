@@ -45,14 +45,14 @@ public class Player {
 	}
 	/**
 	 * addCountry method adds the given country to the player's country list.
-	 * @param l_Country country object
+	 * @param p_Country country object
 	 */
 	public void addCountry(Country p_Country) {
 		d_Countries.add(p_Country);
 	}
 	/**
 	 * removeCountry removes the given country from the player's country list
-	 * @param l_Country Name of the country to be removed
+	 * @param p_Country Name of the country to be removed
 	 */
 	public void removeCountry(Country p_Country) {
 		d_Countries.remove(p_Country);

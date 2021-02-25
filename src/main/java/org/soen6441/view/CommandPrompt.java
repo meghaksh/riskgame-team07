@@ -75,10 +75,13 @@ public class CommandPrompt {
 		d_CommandAcknowledgeArea.setFont(d_Font);
 		d_Caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		d_CommandAcknowledgeArea.append("Welcome to RISK DOMINATION !!\n\n");
-		d_CommandAcknowledgeArea.append("Below are the list of commands you can use : \n");
+		d_CommandAcknowledgeArea.append("Below are the list of commands you can use in map edit phase : \n");
 		d_CommandAcknowledgeArea.append("editcontinent -add continentID continentvalue -remove continentID \n"
 				+ "editcountry -add countryID continentID -remove countryID \n"
 				+ "editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID \n");
+		d_CommandAcknowledgeArea.append("savemap filename \neditmap filename \nvalidatemap \nshowmap \n");
+		d_CommandAcknowledgeArea.append("Below are the list of commands you can use in game phase : \n");
+		d_CommandAcknowledgeArea.append("loadmap filename \ngameplayer -add playername -remove playername \nassigncountries \nshowmap \n");
 		d_CommandPromptPanel.add(d_CommandInput);
 		d_CommandPromptPanel.add(d_CommandSendButton);
 		d_CommandPromptWindow.add(d_AckAreaScrollPane, BorderLayout.PAGE_START);
