@@ -54,7 +54,6 @@ public class GameEngine {
 				case "editcontinent" : 
 					if(d_MapDone==false) {
 					try {
-						System.out.println("Inside GameEngine");
 						String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
 						d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
 					}catch(Exception p_Exception) {

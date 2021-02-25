@@ -104,6 +104,9 @@ public class MapController {
 			if(l_CommandArray[l_Counter].equals("-add")) {
 				switch(p_command) {
 					case "editcontinent":
+						if(l_CommandArray.length<3) {
+							throw new Exception ("Please add the name of continent and a control value");
+						}
 						if(l_CommandArray.length<4) {
 							throw new Exception ("Please add control value for the continent");
 						}

@@ -201,6 +201,7 @@ public class Map {
 	 * @throws Exception In case of continent already exists, it throws an exception
 	 */
 	public void addContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
+		
 		if(p_ContinentControlValue.equals("0")){
 			throw new Exception("Continent control value cannot be 0");
 		}
@@ -209,7 +210,12 @@ public class Map {
 				throw new Exception("Continent Already Exists");
 			}
 		}
-		this.d_ContinentObjects.add(new Continent(p_ContinentName, Integer.parseInt(p_ContinentControlValue)));
+		try{
+			this.d_ContinentObjects.add(new Continent(p_ContinentName, Integer.parseInt(p_ContinentControlValue)));
+		}catch(Exception l_E)
+		{
+			throw new Exception("Please enter a valid Integer for Continent Control Value");
+		}
 	}
 
 	/**
