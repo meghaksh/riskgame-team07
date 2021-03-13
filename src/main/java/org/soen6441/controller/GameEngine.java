@@ -1,9 +1,13 @@
 package org.soen6441.controller;
 
 import java.util.ArrayList;						import org.soen6441.view.CommandPrompt;
+
+
 import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
 import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
+import org.soen6441.utility.state.Edit;
+import org.soen6441.utility.state.Phase;
 
 
 /**
@@ -17,7 +21,14 @@ public class GameEngine {
 	private MapController d_MapController;
 	private ArrayList<Player> d_PlayerList;
 	private PlayerController d_PlayerController;
-
+	private Phase gamePhase;
+	
+	public MapController getMapController() {
+		return this.d_MapController;
+	}
+	public	CommandPrompt getViewObject() {
+		return this.d_CpView;
+	}
 	/**
 	 * This controller takes view and model as arguments and use throughout the game. 
 	 * 
@@ -29,6 +40,11 @@ public class GameEngine {
 		d_CpView = p_CpView;
 		d_MapController = new MapController(this.d_GameModelNew.getMap());
 		d_CpView.commandSendButtonListener(new CommandListener());
+		setPhase(new Edit(this,getViewObject()));
+	}
+	public void setPhase(Phase p_phase) {
+		gamePhase = p_phase;
+		System.out.println("new phase: " + p_phase.getClass().getSimpleName());
 	}
 
 	/**
@@ -40,7 +56,7 @@ public class GameEngine {
 		private boolean d_MapDone = false;
 		private boolean d_StartUpDone = false;
 		private boolean d_AssignCountriesDone = false;
-
+		
 		/**
 		 * {@inheritDoc}
 		 * On click of the button in view, this method gets the string which user entered. 
@@ -57,22 +73,24 @@ public class GameEngine {
 			try {
 				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
 				switch(l_CommandStringFromInput.split(" ")[0]){
-				case "editcontinent" : 
-					if(d_MapDone==false) {
-						try {
-							String l_AckMsg = d_MapController.editMap("editcontinent", l_CommandStringFromInput);
-							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
-						}catch(Exception p_Exception) {
-							d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
-							d_CpView.setCommandAcknowledgement("\n");
-						}
-					}else {
-						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
-					}
+				case "editcontinent" :
+					d_CpView.setCommandAcknowledgement(gamePhase.editContinent("editcontinent",l_CommandStringFromInput));
+						
+					/*
+					 * if(d_MapDone==false) { try { String l_AckMsg
+					 * =d_MapController.editMap("editcontinent", l_CommandStringFromInput);
+					 * 
+					 * d_CpView.setCommandAcknowledgement(l_AckMsg + "\n"); }catch(Exception
+					 * p_Exception){ d_CpView.setCommandAcknowledgement(p_Exception.getMessage());
+					 * d_CpView.setCommandAcknowledgement("\n"); } }else {
+					 * d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n"); }
+					 */
+					 
 					break;
 
 				case "editcountry" :
-					if(d_MapDone==false) {
+					d_CpView.setCommandAcknowledgement(gamePhase.editCountry("editcountry",l_CommandStringFromInput));
+					/*if(d_MapDone==false) {
 						try {
 							String l_AckMsg = d_MapController.editMap("editcountry", l_CommandStringFromInput);
 							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
@@ -82,11 +100,12 @@ public class GameEngine {
 						}
 					}else {
 						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
-					}
+					}*/
 					break;
 
 				case "editneighbor" :
-					if(d_MapDone==false) {
+					d_CpView.setCommandAcknowledgement(gamePhase.editCountry("editneighbor",l_CommandStringFromInput));
+					/*if(d_MapDone==false) {
 						try {
 							String l_AckMsg = d_MapController.editMap("editneighbor", l_CommandStringFromInput);
 							d_CpView.setCommandAcknowledgement(l_AckMsg + "\n");
@@ -96,7 +115,7 @@ public class GameEngine {
 						}
 					} else {
 						d_CpView.setCommandAcknowledgement("Cant Edit Map In This Phase"+"\n");
-					}
+					}*/
 					break;
 
 				case "showmap": 
@@ -104,7 +123,8 @@ public class GameEngine {
 					break;
 
 				case "savemap":
-					if(d_MapDone==false) {
+					d_CpView.setCommandAcknowledgement(gamePhase.saveMap(l_CommandStringFromInput));
+					/*if(d_MapDone==false) {
 						try {
 							String l_Result=d_MapController.saveMap(l_CommandStringFromInput);
 							d_CpView.setCommandAcknowledgement(l_Result+"\n");
@@ -113,10 +133,12 @@ public class GameEngine {
 						}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Save Map In This Phase"+"\n");
-					}
+					}*/
 					break;
 
 				case "editmap":
+					d_CpView.setCommandAcknowledgement(gamePhase.editMap(l_CommandStringFromInput));
+					/*
 					if(d_MapDone==false) {
 						try {
 							String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
@@ -126,11 +148,12 @@ public class GameEngine {
 						}
 					}else{
 						d_CpView.setCommandAcknowledgement("Cant Edit Another Map In This Phase"+"\n");
-					}
+					}*/
 					break;
 
 				case "validatemap":
-					if(d_MapDone==false) {
+					d_CpView.setCommandAcknowledgement(gamePhase.validateMap());
+					/*if(d_MapDone==false) {
 						try {
 							d_CpView.setCommandAcknowledgement(d_MapController.validateMap());
 						}catch(Exception p_Exception) {
@@ -138,17 +161,18 @@ public class GameEngine {
 						}
 					}else {
 						d_CpView.setCommandAcknowledgement("Cant validate Map In This Phase"+"\n");
-					}
+					}*/
 					break;
 
-				case "loadmap": 
-					try {
+				case "loadmap":
+					d_CpView.setCommandAcknowledgement(gamePhase.loadMap(l_CommandStringFromInput));
+					/*try {
 						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
 						this.d_MapDone = true;
 						d_CpView.setCommandAcknowledgement(l_Result+"\n");
 					}catch(Exception p_Exception) {
 						d_CpView.setCommandAcknowledgement(p_Exception.getMessage()+"\n");
-					}
+					}*/
 					break;
 
 				case "gameplayer":
