@@ -11,10 +11,11 @@ public class Startup extends Phase {
 	}
 	
 	public void showMap() {
-		//call showmap function
+		ge.showMap(this);
 	}
 
 	public String loadMap(String s) {
+		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		//throws exception 
 		System.out.println("map has been already been loaded");
 		return null;
@@ -30,10 +31,24 @@ public class Startup extends Phase {
 		return null;
 	}
 
-	public void addPlayers() {
-		 // call the addplayer function and get to next phase
-		ge.setPhase(new IssueOrder(ge,vw));
+	public String addPlayers(String s, String s1) {
+		
+		System.out.println("entering add players ");
+		String l_AckMsg;
+		try {  l_AckMsg =ge.editPlayer(s, s1);
+		  	
+		  	}catch(Exception p_Exception)
+			{
+		  		l_AckMsg=p_Exception.getMessage();
+		  	}
+		
+		return l_AckMsg;
+//		ge.setPhase(new IssueOrder(ge,vw));
 	}
+		 // call the addplayer function and get to next phase
+		
+	
+	
 	
 	public String editMap(String s) {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
@@ -52,7 +67,17 @@ public class Startup extends Phase {
 	}
 	
 	public void assignCountries() {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );// CANNOT ASSIGN COUNTRIES IN THIS PHASE BEFORE ADDING PLAYERS
+
+		System.out.println("entering assigncountries ");
+		try {  ge.assignCountries();
+			  
+		  	}catch(Exception p_Exception)
+			{
+		  		vw.setCommandAcknowledgement(p_Exception.getMessage());
+		  	}
+		
+		ge.setPhase(new Reinforcement(ge,vw));
+		
 	}
 	
 	public String validateMap() {

@@ -23,7 +23,7 @@ public abstract class Phase {
 		
 		//these are commands for startup phase 
 		abstract public String loadMap(String s);
-		abstract public void addPlayers();
+		abstract public String  addPlayers(String s, String s1);
 		abstract public void assignCountries();
 
 		
@@ -34,8 +34,7 @@ public abstract class Phase {
 		// end command
 		abstract public void endGame();
 
-		// go to next phase
-		abstract public void next();
+		
 		
 		/**
 		 *  Common method to all States. 

@@ -1,6 +1,8 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;					import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;						import java.util.Queue;
 import java.util.Random;
 
@@ -110,7 +112,23 @@ public class GameModelNew {
 	 * @throws Exception if player is not found
 	 */
 	public void removePlayer(String p_PlayerName) throws Exception {
-		Player l_CurrentPlayer;
+		Iterator<Player> l_Iterator = this.d_PlayerList.iterator();
+		boolean l_PlayerFound = false;
+		while(l_Iterator.hasNext()) {
+			Player l_TempPlayer = l_Iterator.next();
+			if(l_TempPlayer.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
+				l_PlayerFound = true;
+				l_Iterator.remove();
+				
+			}
+		}
+		if (l_PlayerFound == false) {
+			throw new Exception("This Player does not exists");
+		}
+		
+		
+		
+	/*	Player l_CurrentPlayer;
 		boolean l_PlayerFound = false;
 		for (Player l_Player:d_PlayerList) {
 			l_CurrentPlayer = l_Player;
@@ -121,7 +139,7 @@ public class GameModelNew {
 		}
 		if (l_PlayerFound == false) {
 			throw new Exception("This Player does not exists");
-		}
+		}*/
 	}
 	/**
 	 * This method sets the player queue
@@ -175,7 +193,7 @@ public class GameModelNew {
 				l_Player.setContinentsList();
 			}
 
-			assignReinforcementArmies();
+			//assignReinforcementArmies();
 		} else {
 			if(getAllPlayers().size()==0) {
 				throw new Exception ("Please enter players using gameplayer add command");

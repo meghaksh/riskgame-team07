@@ -47,8 +47,9 @@ public   class Edit extends Phase {
 		return l_AckMsg;
 	}
 	
-	public void addPlayers() {
+	public String addPlayers(String s, String s1) {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" ); 
+		return null;
 	}
 	
 	public String editMap(String s) {
@@ -102,10 +103,11 @@ public   class Edit extends Phase {
 	
 	public void assignCountries() {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName() +"\n");  
+		
 	}
 	
 	public void showMap() {
-		// shows the edited map
+		ge.showMap(this);
 	}
 	
 	public void endGame() {
@@ -113,8 +115,5 @@ public   class Edit extends Phase {
 
 	}
 	
-	public void next() {
-		// as the game flow doesn't depend on user and phases change internally i don't think this will be needed maybe?
-		System.out.println("must load map a valid map to start the game ");
-	}
+	
 }

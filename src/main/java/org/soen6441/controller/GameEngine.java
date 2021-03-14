@@ -10,6 +10,7 @@ import org.soen6441.utility.state.Edit;
 import org.soen6441.utility.state.Phase;
 
 
+
 /**
  * This is the main controller class of MVC model. 
  * This class has a references of View, Models and various child controllers. 
@@ -29,6 +30,13 @@ public class GameEngine {
 	public	CommandPrompt getViewObject() {
 		return this.d_CpView;
 	}
+	public PlayerController getPlayerController() {
+		return this.d_PlayerController;
+	}
+	public GameModelNew getGameModel() {
+		return this.d_GameModelNew;
+	}
+	
 	/**
 	 * This controller takes view and model as arguments and use throughout the game. 
 	 * 
@@ -39,12 +47,13 @@ public class GameEngine {
 		d_GameModelNew = p_GameModel;
 		d_CpView = p_CpView;
 		d_MapController = new MapController(this.d_GameModelNew.getMap());
+		d_PlayerController = new PlayerController(d_GameModelNew,d_CpView);
 		d_CpView.commandSendButtonListener(new CommandListener());
 		setPhase(new Edit(this,getViewObject()));
 	}
 	public void setPhase(Phase p_phase) {
 		gamePhase = p_phase;
-		System.out.println("new phase: " + p_phase.getClass().getSimpleName());
+	
 	}
 
 	/**
@@ -119,7 +128,7 @@ public class GameEngine {
 					break;
 
 				case "showmap": 
-					showMap(d_MapDone);
+					gamePhase.showMap();
 					break;
 
 				case "savemap":
@@ -176,7 +185,8 @@ public class GameEngine {
 					break;
 
 				case "gameplayer":
-					if(d_MapDone==true & d_StartUpDone==false) {
+					d_CpView.setCommandAcknowledgement(gamePhase.addPlayers("GamePlayer",l_CommandStringFromInput));
+					/*if(d_MapDone==true & d_StartUpDone==false) {
 						try {
 							String l_AckMsg1 = editPlayer("GamePlayer", l_CommandStringFromInput);
 							d_CpView.setCommandAcknowledgement(l_AckMsg1 + "\n");
@@ -189,11 +199,12 @@ public class GameEngine {
 							d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Players "+"\n");
 						if(d_StartUpDone==true)
 							d_CpView.setCommandAcknowledgement("\n"+"You are trying to remove or add players after the startup phase"+"\n");
-					}
+					}*/
 					break;
 
 				case "assigncountries":
-					if(d_MapDone==true & d_AssignCountriesDone==false) {
+					gamePhase.assignCountries();
+					/*if(d_MapDone==true & d_AssignCountriesDone==false) {
 						try {	
 							assignCountries();
 						}
@@ -215,7 +226,7 @@ public class GameEngine {
 							d_CpView.setCommandAcknowledgement("\n"+"The Map is Not Loaded Yet to Add Assign Countries "+"\n");
 						if(d_AssignCountriesDone==true)
 							d_CpView.setCommandAcknowledgement("\n"+"StartUp Phase is already completed "+"\n");
-					}
+					}*/
 					break;
 
 				case "deploy":
@@ -270,7 +281,8 @@ public class GameEngine {
 				l_Counter+=2;
 				l_AddCounter+=1;
 			} else if(l_CommandArray[l_Counter].equals("-remove")){
-				d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
+					d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
+				
 				l_Counter+=2;
 				l_RemoveCounter+=1;
 			} else {
@@ -321,8 +333,9 @@ public class GameEngine {
 	 * 
 	 * @param p_BooleanForGamePhaseStarted takes boolean value to show map for map phase or game phase
 	 */
-	public void showMap(Boolean p_BooleanForGamePhaseStarted) {
-		if(p_BooleanForGamePhaseStarted) {
+	public void showMap(Phase gamePhase) {
+		if(!gamePhase.getClass().getSimpleName().equals("Edit")) {
+			System.out.println("reaching if");
 			d_PlayerList = d_GameModelNew.getAllPlayers();
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
@@ -354,6 +367,7 @@ public class GameEngine {
 				}
 			}
 		} else {
+			System.out.println("reaching else");
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
 				d_CpView.setCommandAcknowledgement("\n");
