@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Map {
 	private ArrayList<Country> d_CountryObjects; 
 	private ArrayList<Continent> d_ContinentObjects;
-	private HashMap<Integer,ArrayList<Integer>> d_Neighbors;
+	//private HashMap<Integer,ArrayList<Integer>> d_Neighbors;
 	private HashMap<Integer,Integer>d_PreviousSave;
 
 	/**
@@ -24,7 +24,7 @@ public class Map {
 	public Map(){
 		d_CountryObjects=new ArrayList<Country>();
 		d_ContinentObjects=new ArrayList<Continent>();
-		d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
+		//d_Neighbors=new HashMap<Integer,ArrayList<Integer>>();
 		d_PreviousSave=new HashMap<Integer,Integer>();
 	}
 
@@ -45,7 +45,7 @@ public class Map {
 	public void reset() {
 		this.d_ContinentObjects.clear();
 		this.d_CountryObjects.clear();
-		this.d_Neighbors.clear();
+		//this.d_Neighbors.clear();
 		this.d_PreviousSave.clear();
 		Country.setCount(0);
 		Continent.setCount(0);
@@ -118,7 +118,7 @@ public class Map {
 								}
 								l_Borders.add(Integer.parseInt(l_Arr2[l_K]));
 							}
-							d_Neighbors.put(Integer.parseInt(l_Arr2[0]),l_Borders);
+							//d_Neighbors.put(Integer.parseInt(l_Arr2[0]),l_Borders);
 							break;
 						}
 					}
@@ -317,20 +317,20 @@ public class Map {
 					}
 				}
 				//Here we have to remove from the hashmap. 
-				for(int l_I=1;l_I<=d_Neighbors.size();l_I++) {
-					if(d_Neighbors.get(l_I)!=null) {
-						ArrayList<Integer> l_TempCountryIdList = d_Neighbors.get(l_I);
-						Iterator<Integer> l_TempCountryNeighborIterator = l_TempCountryIdList.iterator();
-						while(l_TempCountryNeighborIterator.hasNext()) {
-							if(l_TempCountryNeighborIterator.next()==l_TempCountryIdOfCountryToBeRemoved) {
-								l_TempCountryNeighborIterator.remove();
-							}
-						}
-					}
-					if(l_I==l_TempCountryIdOfCountryToBeRemoved) {
-						d_Neighbors.remove(l_TempCountryIdOfCountryToBeRemoved);
-					}
-				}
+//				for(int l_I=1;l_I<=d_Neighbors.size();l_I++) {
+//					if(d_Neighbors.get(l_I)!=null) {
+//						ArrayList<Integer> l_TempCountryIdList = d_Neighbors.get(l_I);
+//						Iterator<Integer> l_TempCountryNeighborIterator = l_TempCountryIdList.iterator();
+//						while(l_TempCountryNeighborIterator.hasNext()) {
+//							if(l_TempCountryNeighborIterator.next()==l_TempCountryIdOfCountryToBeRemoved) {
+//								l_TempCountryNeighborIterator.remove();
+//							}
+//						}
+//					}
+//					if(l_I==l_TempCountryIdOfCountryToBeRemoved) {
+//						d_Neighbors.remove(l_TempCountryIdOfCountryToBeRemoved);
+//					}
+//				}
 				l_Iterator.remove();
 				l_RemovedFlag = true;
 			}
@@ -420,10 +420,10 @@ public class Map {
 				l_TempCountry.setBorder(p_NeighborName);
 			}
 		}
-		if(d_Neighbors.get(l_CountryId)==null) {
-			d_Neighbors.put(l_CountryId, new ArrayList<>());
-		}
-		d_Neighbors.get(l_CountryId).add(l_NeighborId);
+//		if(d_Neighbors.get(l_CountryId)==null) {
+//			d_Neighbors.put(l_CountryId, new ArrayList<>());
+//		}
+//		d_Neighbors.get(l_CountryId).add(l_NeighborId);
 	}
 
 	/**
@@ -465,16 +465,16 @@ public class Map {
 			}
 		}
 		//removing it from all the countries in hasmap
-		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
-			System.out.println("Country ID in neighbor : " + l_CountryId + " NeighborID : " + l_NeighborId);
-			ArrayList<Integer> l_ListOfNeighbors = d_Neighbors.get(l_CountryId);
-			Iterator<Integer> l_NeighborListIterator = l_ListOfNeighbors.iterator();
-			while(l_NeighborListIterator.hasNext()) {
-				if(l_NeighborListIterator.next()==l_NeighborId) {
-					l_NeighborListIterator.remove();
-				}
-			}
-		}	
+//		if(d_Neighbors.get(l_CountryId).contains(l_NeighborId)) {
+//			System.out.println("Country ID in neighbor : " + l_CountryId + " NeighborID : " + l_NeighborId);
+//			ArrayList<Integer> l_ListOfNeighbors = d_Neighbors.get(l_CountryId);
+//			Iterator<Integer> l_NeighborListIterator = l_ListOfNeighbors.iterator();
+//			while(l_NeighborListIterator.hasNext()) {
+//				if(l_NeighborListIterator.next()==l_NeighborId) {
+//					l_NeighborListIterator.remove();
+//				}
+//			}
+//		}	
 	}
 
 	/**
