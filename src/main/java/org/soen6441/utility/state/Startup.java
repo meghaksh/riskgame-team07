@@ -8,6 +8,7 @@ import org.soen6441.view.CommandPrompt;
 public class Startup extends Phase {
 	public Startup(GameEngine p_ge,CommandPrompt p_vw) {
 		super(p_ge, p_vw);
+		System.out.println("startup phase");
 	}
 	
 	public void showMap() {
@@ -74,6 +75,8 @@ public class Startup extends Phase {
 		  	}catch(Exception p_Exception)
 			{
 		  		vw.setCommandAcknowledgement(p_Exception.getMessage());
+		  		ge.setPhase(new Startup(ge,vw));
+		  		return;
 		  	}
 		
 		ge.setPhase(new Reinforcement(ge,vw));
