@@ -120,15 +120,15 @@ public class GameModelTest {
 	 * This test case d_Check the functionality of AssignReinforcements method
 	 * @throws Exception To check if the number of players is less than number of countries or not
 	 */
-/*	@Test 
+	@Test 
 	public void testAssignReinforcements() throws Exception {
-		d_Game.startUpPhase();
+		d_Game.assignReinforcementArmies();
 		for(Player l_Player:d_Game.getAllPlayers()) {
 			int l_Value=l_Player.getPlayerArmies();
 			assertTrue(3<=l_Value);
 
 		}
-	}*/
+	}
 
 	/**
 	 * This test case is to check functionality of whether player has deployed all the armies that are assigned to player
