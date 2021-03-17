@@ -1,6 +1,7 @@
 package org.soen6441.utility.state;
 
 import org.soen6441.controller.GameEngine;
+import org.soen6441.observerpattern.Observable;
 import org.soen6441.view.CommandPrompt;
 public abstract class Phase {
 	
@@ -19,6 +20,7 @@ public abstract class Phase {
 		abstract public String editNeighbor(String s, String s1);
 		abstract public String saveMap(String s);
 		abstract public String validateMap();
+	
 		
 		
 		//these are commands for startup phase 

@@ -1,0 +1,11 @@
+
+editmap map5
+The Map is loaded with 3 Continents and 6 Countries You Can Now Edit IT
+showmap
+validatemap
+Map is Valid
+loadmap map5
+The Map is loaded with 3 Continents and 6 Countries You Can Now Proceed To Add Players
+gameplayer -add a -add b
+Number of Players Added : 2
+

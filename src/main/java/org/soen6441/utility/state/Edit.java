@@ -1,11 +1,14 @@
 package org.soen6441.utility.state;
 
 import org.soen6441.controller.GameEngine;
+import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 
 public   class Edit extends Phase {
+	LogEntryBuffer leb;
 	public Edit(GameEngine p_ge,CommandPrompt p_vw) {
 		super(p_ge,p_vw);
+		leb=new LogEntryBuffer();
 	}
 	public String loadMap(String s) {
 		System.out.println("entering edit map  ");
@@ -15,7 +18,7 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		
 		ge.setPhase(new Startup(ge,vw));
 		System.out.println("map has been loaded and phase has been changed");
@@ -31,7 +34,7 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
@@ -43,12 +46,13 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
 	public String addPlayers(String s, String s1) {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" ); 
+		leb.setResult("Invalid command in state ");
 		return null;
 	}
 	
@@ -60,7 +64,7 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
@@ -72,7 +76,7 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
@@ -84,7 +88,7 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
@@ -96,13 +100,14 @@ public   class Edit extends Phase {
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		
+		leb.setResult(l_AckMsg);
 		return l_AckMsg;
 		
 	}
 	
 	public void assignCountries() {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName() +"\n");  
+		leb.setResult("Invalid command in state ");
 		
 	}
 	

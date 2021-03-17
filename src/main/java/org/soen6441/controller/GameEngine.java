@@ -6,6 +6,9 @@ import java.util.ArrayList;						import org.soen6441.view.CommandPrompt;
 import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
 import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
+import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.observerpattern.Logger;
+import org.soen6441.observerpattern.Observable;
 import org.soen6441.utility.state.Edit;
 import org.soen6441.utility.state.Phase;
 
@@ -16,13 +19,14 @@ import org.soen6441.utility.state.Phase;
  * This class has a references of View, Models and various child controllers. 
  * This class acts as an intermediary between models/controllers and view.
  */
-public class GameEngine {
+public class GameEngine  {
 	private GameModelNew d_GameModelNew;
 	private CommandPrompt d_CpView;
 	private MapController d_MapController;
 	private ArrayList<Player> d_PlayerList;
 	private PlayerController d_PlayerController;
 	private Phase gamePhase;
+	private LogEntryBuffer d_LEB;
 	
 	public MapController getMapController() {
 		return this.d_MapController;
@@ -37,6 +41,7 @@ public class GameEngine {
 		return this.d_GameModelNew;
 	}
 	
+	
 	/**
 	 * This controller takes view and model as arguments and use throughout the game. 
 	 * 
@@ -50,9 +55,14 @@ public class GameEngine {
 		d_PlayerController = new PlayerController(d_GameModelNew,d_CpView);
 		d_CpView.commandSendButtonListener(new CommandListener());
 		setPhase(new Edit(this,getViewObject()));
+		d_LEB=new LogEntryBuffer();
 	}
 	public void setPhase(Phase p_phase) {
 		gamePhase = p_phase;
+	
+	}
+	public Phase getPhase() {
+		return this.gamePhase;
 	
 	}
 
@@ -61,10 +71,19 @@ public class GameEngine {
 	 * This class implements the ActionListener and override the actionPerformed method.
 	 * This class is responsible for passing data from view to models/child controllers.
 	 */
-	public class CommandListener implements ActionListener{
+	public class CommandListener  implements ActionListener {
 		private boolean d_MapDone = false;
 		private boolean d_StartUpDone = false;
 		private boolean d_AssignCountriesDone = false;
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		/**
 		 * {@inheritDoc}
@@ -83,6 +102,8 @@ public class GameEngine {
 				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
 				switch(l_CommandStringFromInput.split(" ")[0]){
 				case "editcontinent" :
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.editContinent("editcontinent",l_CommandStringFromInput));
 						
 					/*
@@ -98,6 +119,8 @@ public class GameEngine {
 					break;
 
 				case "editcountry" :
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.editCountry("editcountry",l_CommandStringFromInput));
 					/*if(d_MapDone==false) {
 						try {
@@ -113,6 +136,8 @@ public class GameEngine {
 					break;
 
 				case "editneighbor" :
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.editCountry("editneighbor",l_CommandStringFromInput));
 					/*if(d_MapDone==false) {
 						try {
@@ -128,10 +153,14 @@ public class GameEngine {
 					break;
 
 				case "showmap": 
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					gamePhase.showMap();
 					break;
 
 				case "savemap":
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.saveMap(l_CommandStringFromInput));
 					/*if(d_MapDone==false) {
 						try {
@@ -146,6 +175,8 @@ public class GameEngine {
 					break;
 
 				case "editmap":
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.editMap(l_CommandStringFromInput));
 					/*
 					if(d_MapDone==false) {
@@ -161,6 +192,8 @@ public class GameEngine {
 					break;
 
 				case "validatemap":
+					
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.validateMap());
 					/*if(d_MapDone==false) {
 						try {
@@ -174,6 +207,7 @@ public class GameEngine {
 					break;
 
 				case "loadmap":
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.loadMap(l_CommandStringFromInput));
 					/*try {
 						String l_Result=d_MapController.loadMap(l_CommandStringFromInput);
@@ -185,6 +219,7 @@ public class GameEngine {
 					break;
 
 				case "gameplayer":
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(gamePhase.addPlayers("GamePlayer",l_CommandStringFromInput));
 					/*if(d_MapDone==true & d_StartUpDone==false) {
 						try {
@@ -203,6 +238,7 @@ public class GameEngine {
 					break;
 
 				case "assigncountries":
+					d_LEB.setResult(l_CommandStringFromInput);
 					gamePhase.assignCountries();
 					/*if(d_MapDone==true & d_AssignCountriesDone==false) {
 						try {	
@@ -242,12 +278,15 @@ public class GameEngine {
 					break;
 
 				case "reset":
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_MapController.reset();
 					d_CpView.setCommandAcknowledgement("The Map is Reset"+"\n");
 					break;
 
 				default:
+					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
+					d_LEB.setResult("Invalid Command. Please try again.\n");
 					break;
 				}
 				d_CpView.setCommandInput("");
