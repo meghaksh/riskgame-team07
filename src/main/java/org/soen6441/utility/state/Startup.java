@@ -42,7 +42,7 @@ public class Startup extends Phase {
 		
 		System.out.println("entering add players ");
 		String l_AckMsg;
-		try {  l_AckMsg =ge.editPlayer(s, s1);
+		try {  l_AckMsg =ge.getPlayerController().editPlayer(s, s1);
 		  	
 		  	}catch(Exception p_Exception)
 			{

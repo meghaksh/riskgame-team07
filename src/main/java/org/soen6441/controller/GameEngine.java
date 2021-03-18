@@ -296,46 +296,7 @@ public class GameEngine  {
 		}
 	}
 
-	/**
-	 * <p>
-	 * this Method will take inputs from the user and will add or remove player according
-	 * to the inputs provided by the user
-	 * 
-	 * @param p_Command this is command entered by the player
-	 * @param p_Str  this is name entered by the player in the command prompt
-	 * @return l_ReturnString returns string acknowledgement based on the added or removed players
-	 * @throws Exception this is user defined exception based on the add player or remove player method
-	 */
-	public String editPlayer(String p_Command,String p_Str) throws Exception {
-		String[] l_CommandArray = p_Str.split(" ");
-		int l_Counter = 1;
-		int l_AddCounter = 0;
-		int l_RemoveCounter = 0;
-		String l_ReturnString = "";
-		if(l_CommandArray.length < 3)
-			throw new Exception("Please provide valid Parameters to add player");
-		while(l_Counter<l_CommandArray.length) {
-			if(l_CommandArray[l_Counter].equals("-add")) {
-				d_GameModelNew.addPlayer(l_CommandArray[l_Counter+1]);
-				l_Counter+=2;
-				l_AddCounter+=1;
-			} else if(l_CommandArray[l_Counter].equals("-remove")){
-					d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
-				
-				l_Counter+=2;
-				l_RemoveCounter+=1;
-			} else {
-				break;
-			}
-		}
-		if(l_AddCounter>0) {
-			l_ReturnString += "Number of Players Added : " + l_AddCounter + "\n";
-		}
-		if(l_RemoveCounter>0) {
-			l_ReturnString += "Number of Players Removed : " + l_RemoveCounter + "\n";
-		}
-		return l_ReturnString;
-	}
+	
 
 	/**
 	 * This Method will take assign countries from command prompt and will do 
