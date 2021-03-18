@@ -54,6 +54,10 @@ public class CommandPrompt {
 	public void setCommandAcknowledgement(String p_Str) {
 		this.d_CommandAcknowledgeArea.append(p_Str);
 	}
+	
+	public String getCommandAcknowledgement() {
+		return this.d_CommandAcknowledgeArea.getText();
+	}
 
 	/**
 	 * This method sets the input to the text field where user is giving commands

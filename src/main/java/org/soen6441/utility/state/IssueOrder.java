@@ -16,42 +16,42 @@ public class IssueOrder extends Phase {
 	}
 	
 	public String editMap(String s) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 	public String editCountry(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 
 	public String editContinent(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 
 	public String editNeighbor(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 
 	public String saveMap(String s) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 	
 	public String loadMap(String s) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 	
 	public String addPlayers(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 	
 	public void assignCountries() {
 		
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n" + "Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 	
 
 	}
@@ -69,7 +69,7 @@ public class IssueOrder extends Phase {
 	}
 
 	public String validateMap() {	
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		vw.setCommandAcknowledgement("/n"+"Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
 	public String getPhaseName()
