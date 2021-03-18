@@ -48,4 +48,13 @@ public class EditTest {
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
+	
+	@Test
+	public void testAddPlayers() {
+		String l_ExpectedMessage="Invalid command in state ";
+		String l_ActualMessage = "";
+		ed.addPlayers("zeal", "raj");
+		l_ActualMessage=ed.leb.getResult();
+		assertEquals(l_ExpectedMessage,l_ActualMessage);
+	}
 }
