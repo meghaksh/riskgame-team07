@@ -211,16 +211,16 @@ public class Player {
 		switch(l_OrderType) {
 		
 		case "deploy":
-			Country l_Country = null;
 			int l_NumArmies = Integer.parseInt(l_StringList[2]);
-			for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
 				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 				{
-					 l_Country = l_TempCountry; 
+					 d_Order.add(new Deploy(this,l_TempCountry,l_NumArmies));
+					 break;
 				}
 			}
-			d_Order.add(new Deploy(this,l_Country,l_NumArmies));
+			
 		
 		}
 			

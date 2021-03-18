@@ -25,6 +25,7 @@ public class Deploy implements Order{
 		if(isValid())
 		{
 			d_Player.setPlayerArmies(d_Player.getPlayerArmies() - d_NumArmies);
+			d_Country.setNoOfArmies(d_Country.getNoOfArmies()+d_NumArmies);
 		}
 		
 		
