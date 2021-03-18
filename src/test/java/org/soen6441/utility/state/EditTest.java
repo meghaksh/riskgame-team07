@@ -57,4 +57,4 @@ public class EditTest {
 		l_ActualMessage=ed.leb.getResult();
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
-}
+	}
