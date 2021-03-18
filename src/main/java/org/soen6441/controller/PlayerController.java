@@ -41,23 +41,23 @@ public class PlayerController {
 			Iterator<Player>l_It = l_Players.iterator();
 			while(l_It.hasNext()) {
 				Player l_Player = (Player)l_It.next(); 
-				if(l_Player.getPlayerArmies()>0) {
-					d_OrderAcknowledgment = "\n"+l_Player.getPlayerName()+" Enter deploy order";
+				if(l_CheckArmies.get(l_Player)==false)
+				{
+					d_OrderAcknowledgment = "\n"+l_Player.getPlayerName()+" Enter order";
 					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Deploy Order");
-					l_Player.setOrder(l_StringOrder);
-					l_Player.issue_order();
-					String l_Result = l_Player.getResult();
-					int l_ResultInteger = l_Player.getResultInteger();
-					d_OrderAcknowledgment=l_Result;
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-				} else {
-					Set<Entry<Player,Boolean>> l_Check = l_CheckArmies.entrySet();
-					for(Entry<Player,Boolean> l_E :l_Check){
-						if(l_E.getKey().getPlayerArmies()==0 && l_E.getValue()==false){
-							--l_PlayerListSize;
-							l_E.setValue(true);
-						}
+					String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
+					if(l_StringOrder.equalsIgnoreCase("quit"))
+					{
+						l_CheckArmies.put(l_Player, true);
+						--l_PlayerListSize;
+					}
+					else
+					{
+						l_Player.setOrder(l_StringOrder);
+						l_Player.issue_order();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 					}
 				}
 			}

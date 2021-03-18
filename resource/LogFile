@@ -1,11 +1,13 @@
 
-editmap map5
-The Map is loaded with 3 Continents and 6 Countries You Can Now Edit IT
-showmap
-validatemap
-Map is Valid
 loadmap map5
 The Map is loaded with 3 Continents and 6 Countries You Can Now Proceed To Add Players
-gameplayer -add a -add b
+assigncountries
+Please enter players using gameplayer add command
+gameplayer -add zeal -add raj
 Number of Players Added : 2
 
+showmap
+gameplayer -add zeal -add raj
+Please enter a differnt Player name as this name already exists
+assigncountries
+showmap
