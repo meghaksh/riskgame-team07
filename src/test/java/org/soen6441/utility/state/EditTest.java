@@ -37,6 +37,7 @@ public class EditTest {
 		l_ActualMessage=p.getPhaseName();
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
+	
 	@Test
 	public void testAssignCountries() {
 		String l_ExpectedMessage="Invalid command in state ";
