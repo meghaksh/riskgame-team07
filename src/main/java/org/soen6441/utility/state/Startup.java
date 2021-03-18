@@ -106,4 +106,9 @@ public class Startup extends Phase {
 	public void next() {
 		// please add players before proceeding to next phase 
 	}
+	public String getPhaseName()
+	{
+		return "Startup";
+	}
+	
 }

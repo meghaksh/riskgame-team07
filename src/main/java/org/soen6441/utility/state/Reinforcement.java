@@ -100,5 +100,9 @@ public class Reinforcement extends Phase {
 		
 		
 	}
+	public String getPhaseName()
+	{
+		return "ReinforcementPhase";
+	}
 
 }

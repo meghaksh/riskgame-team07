@@ -119,6 +119,10 @@ public   class Edit extends Phase {
 		// terminates the game and goes to last
 
 	}
+	public String getPhaseName()
+	{
+		return "EditPhase";
+	}
 	
 	
 }

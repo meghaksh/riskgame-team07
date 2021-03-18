@@ -76,5 +76,9 @@ public class ExecuteOrder extends Phase {
 		leb.setResult("Invalid command in state ");
 		return null;
 	}
+	public String getPhaseName()
+	{
+		return "ExecutePhase";
+	}
 
 }

@@ -35,6 +35,7 @@ public abstract class Phase {
 		
 		// end command
 		abstract public void endGame();
+		abstract public String getPhaseName();
 
 		
 		

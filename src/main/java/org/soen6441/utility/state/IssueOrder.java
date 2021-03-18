@@ -72,6 +72,10 @@ public class IssueOrder extends Phase {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		return null;
 	}
+	public String getPhaseName()
+	{
+		return "Issueorder";
+	}
 
 	
 	
