@@ -3,6 +3,8 @@ package org.soen6441.model;
 import java.util.ArrayList;			import java.util.Iterator;
 import java.util.LinkedList;		import java.util.Queue;
 
+import org.soen6441.model.orders.Deploy;
+
 /**
  * The Player class represents the actual player participating in the game.
  */
@@ -205,39 +207,23 @@ public class Player {
 		int l_Flag = 0;
 		d_ResultInteger = 0;
 		String[] l_StringList = d_StringOrder.split(" ");
-		if(l_StringList[0].equals("deploy")) {
-			if(Integer.parseInt(l_StringList[2]) <= d_Armies){
-				Iterator<Country>l_It = d_Countries.iterator();
-				while(l_It.hasNext()) {
-					Country l_TempCountry = (Country)l_It.next() ;
-					if(l_StringList[1].equals(l_TempCountry.getCountryName())) {
-						l_Flag=1;
-						break;
-					}
+		String l_OrderType = l_StringList[0];
+		switch(l_OrderType) {
+		
+		case "deploy":
+			Country l_Country = null;
+			int l_NumArmies = Integer.parseInt(l_StringList[2]);
+			for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					 l_Country = l_TempCountry; 
 				}
-				if(l_Flag==1) {
-					d_Armies-= Integer.parseInt(l_StringList[2]);
-					d_Order.add(new Order(d_StringOrder,d_GameModelNew));
-					d_ResultInteger = 1;
-					setResult("\norder "+d_StringOrder+" added to list of "+d_PlayerName);
-					if(d_Armies==0) {
-						d_ResultInteger = 2;
-						setResult("\n"+d_PlayerName+" : Your armies have become zero now!!. You will not be able to issue an order");
-					}
-				} else {
-					d_ResultInteger = 3;
-					setResult("\nThis country "+l_StringList[1]+" doesnot belongs to "+d_PlayerName);
-				}
-			} else {
-				d_ResultInteger = 4;
-				setResult("\n"+d_PlayerName+" ; you have only "+d_Armies+" number of armies! Please enter the next order accordingly");
 			}
+			d_Order.add(new Deploy(this,l_Country,l_NumArmies));
+		
 		}
-		else
-		{
-			d_ResultInteger = 5;
-			setResult("\n"+d_PlayerName+"Please enter Valid Command next time!");
-		}
+			
 	}
 	/**
 	 * This method removes the first order in the queue Order list

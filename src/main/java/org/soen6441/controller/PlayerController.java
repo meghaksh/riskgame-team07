@@ -119,11 +119,11 @@ public class PlayerController {
 				Player l_Player = (Player)l_It.next(); 
 				if(l_Player.getOrderSize()!=0) {
 					Order l_Order = l_Player.next_order();
-					System.out.println(l_Order.getOrder());
+					//System.out.println(l_Order.getOrder());
 					l_Order.execute();
-					String l_Result = l_Order.getExecuteResult();
-					d_OrderAcknowledgment = l_Result;
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					//String l_Result = l_Order.getExecuteResult();
+					//d_OrderAcknowledgment = l_Result;
+					//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 				} else {
 					l_Flag = 1; l_RemovePlayerList.add(l_Player);
 				}

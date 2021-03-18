@@ -134,7 +134,7 @@ public class GameModelTest {
 	 * This test case is to check functionality of whether player has deployed all the armies that are assigned to player
 	 * 
 	 */
-	@Test 
+	/*@Test 
 	public void testIssueOrder() {
 		String l_Command="deploy india 3";
 		String l_Expected="\nraj : Your armies have become zero now!!. You will not be able to issue an order";
@@ -144,12 +144,12 @@ public class GameModelTest {
 		d_C1.issue_order();
 		String l_Result=d_C1.getResult();
 		assertEquals(l_Expected,l_Result);
-	}
+	}*/
 	/**
 	 * This test cases is to check whether player holds that country that he is trying to deploy
 	 * 
 	 */
-	@Test 
+/*	@Test 
 	public void testIssueOrder1() {
 
 		String l_Command1="deploy kenya 3";
@@ -160,12 +160,12 @@ public class GameModelTest {
 		d_C1.issue_order();
 		String l_Result1=d_C1.getResult();
 		assertEquals(l_Expected1,l_Result1);
-	}
+	}*/
 	/**
 	 * This test cases is to check whether no of armies deployed less than the player has
 	 * 
 	 */
-	@Test 
+/*	@Test 
 	public void testIssueOrder2() {
 
 		String l_Command2="deploy india 2";
@@ -176,12 +176,12 @@ public class GameModelTest {
 		d_C1.issue_order();
 		String l_Result2=d_C1.getResult();
 		assertEquals(l_Expected2,l_Result2);
-	}
+	}*/
 	/**
 	 * This test cases is to check whether no of armies deployed more than the player has
 	 * 
 	 */
-	@Test 
+/*	@Test 
 	public void testIssueOrderArmySize() {
 
 		String l_Command3="deploy india 4";
@@ -192,5 +192,5 @@ public class GameModelTest {
 		d_C1.issue_order();
 		String l_Result3=d_C1.getResult();
 		assertEquals(l_Expected3,l_Result3);
-	}
+	}*/
 }
