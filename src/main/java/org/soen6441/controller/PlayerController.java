@@ -9,8 +9,12 @@ import javax.swing.JOptionPane;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
+import org.soen6441.model.orders.Advance;
+import org.soen6441.model.orders.Airlift;
 import org.soen6441.model.orders.Blockade;
+import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
+import org.soen6441.model.orders.Negotiate;
 import org.soen6441.view.CommandPrompt;
 
 /**
@@ -129,10 +133,28 @@ public class PlayerController {
 					if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Deploy")) {
 						Deploy l_DeployOrder = (Deploy) l_Order;
 						l_DeployOrder.execute();
-					}else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
-						Blockade l_DeployOrder = (Blockade) l_Order;
-						l_DeployOrder.execute();
 					}
+					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Advance")) {
+						Advance l_AdvanceOrder = (Advance) l_Order;
+						l_AdvanceOrder.execute();
+					}
+					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
+						Blockade l_BlockadeOrder = (Blockade) l_Order;
+						l_BlockadeOrder.execute();
+					}
+					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Bomb")) {
+						Bomb l_BombOrder = (Bomb) l_Order;
+						l_BombOrder.execute();
+					}
+					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Airlift")) {
+						Airlift l_AirliftOrder = (Airlift) l_Order;
+						l_AirliftOrder.execute();
+					}
+					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Negotiate")) {
+						Negotiate l_NegotiateOrder = (Negotiate) l_Order;
+						l_NegotiateOrder.execute();
+					}
+					
 					
 					//System.out.println(l_Order.getOrder());
 					

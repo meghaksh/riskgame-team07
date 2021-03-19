@@ -1,13 +1,8 @@
 
 loadmap map5
 The Map is loaded with 3 Continents and 6 Countries You Can Now Proceed To Add Players
-assigncountries
-Please enter players using gameplayer add command
-gameplayer -add zeal -add raj
+gameplayer -add raj -add zeal
 Number of Players Added : 2
 
-showmap
-gameplayer -add zeal -add raj
-Please enter a differnt Player name as this name already exists
 assigncountries
 showmap
