@@ -346,14 +346,17 @@ public class GameEngine  {
 					d_CpView.setCommandAcknowledgement("\n");
 					for(Country l_Country:l_CountryList) {
 						d_CpView.setCommandAcknowledgement("Country: "+ l_Country.getCountryName());
-						if(this.d_PlayerList!=null) {
-							for(Player l_Player: d_PlayerList) {
-								if(l_Player.getCountryList().contains(l_Country)) {
-									d_CpView.setCommandAcknowledgement("\n"+"-->Owner: "+l_Player.getPlayerName() );
-									d_CpView.setCommandAcknowledgement("\n"+"-->Armies deployed: "+l_Country.getNoOfArmies());
-								}
-							}
-						}
+//						if(this.d_PlayerList!=null) {
+//							for(Player l_Player: d_PlayerList) {
+//								if(l_Player.getCountryList().contains(l_Country)) {
+//									d_CpView.setCommandAcknowledgement("\n"+"-->Owner: "+l_Player.getPlayerName() );
+//									d_CpView.setCommandAcknowledgement("\n"+"-->Armies deployed: "+l_Country.getNoOfArmies());
+//								}
+//							}
+//						}
+						d_CpView.setCommandAcknowledgement("Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
+						
+						d_CpView.setCommandAcknowledgement("Armies deployed: "+ l_Country.getNoOfArmies());
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						if(l_NeighborList.size()>0) {
 							d_CpView.setCommandAcknowledgement("\n"+"--> Borders : ");
