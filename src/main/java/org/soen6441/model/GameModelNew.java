@@ -186,6 +186,8 @@ public class GameModelNew {
 				int l_Index = l_Random.nextInt(l_CountryList.size());
 				setPlayerId(d_PlayerQueue.remove());
 				getPlayerId1().addCountry(l_CountryList.get(l_Index));
+				l_CountryList.get(l_Index).setCountryOwnerPlayer(getPlayerId1());
+//				System.out.println(l_CountryList.get(l_Index).getCountryOwnerPlayer());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_Index);
 			}
@@ -225,7 +227,7 @@ public class GameModelNew {
 					l_ContinentValue =  l_Continent.getContinentControlValue();
 				}
 				l_ArmyCount= Math.max(l_ArmyCount, 3);
-				l_Player.setPlayerArmies(l_ArmyCount+ l_ContinentValue);
+				l_Player.setPlayerArmies(l_ArmyCount+ l_ContinentValue+l_Player.getPlayerArmies());
 			}
 		} else {
 			throw new Exception ("\"Please enter players using gameplayer add command");
