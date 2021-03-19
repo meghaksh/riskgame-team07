@@ -5,6 +5,7 @@ import java.util.LinkedList;		import java.util.Queue;
 
 import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
+import org.soen6441.model.orders.Blockade;
 
 /**
  * The Player class represents the actual player participating in the game.
@@ -228,6 +229,15 @@ public class Player {
 				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 				{
 					 d_Order.add(new Bomb(this,l_TempCountry));
+					 break;
+				}
+			}
+		case "blockade":
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					 d_Order.add(new Blockade(this,l_TempCountry));
 					 break;
 				}
 			}
