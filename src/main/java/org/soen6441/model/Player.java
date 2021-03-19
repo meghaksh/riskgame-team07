@@ -3,6 +3,7 @@ package org.soen6441.model;
 import java.util.ArrayList;			import java.util.Iterator;
 import java.util.LinkedList;		import java.util.Queue;
 
+import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 
 /**
@@ -221,7 +222,15 @@ public class Player {
 				}
 			}
 			
-		
+		case "bomb":
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					 d_Order.add(new Bomb(this,l_TempCountry));
+					 break;
+				}
+			}
 		}
 			
 	}
