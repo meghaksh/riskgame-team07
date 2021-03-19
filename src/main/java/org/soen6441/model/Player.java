@@ -114,6 +114,10 @@ public class Player {
 		return this.d_Armies;
 	}
 	
+	public GameModelNew getGameModel() {
+		return this.d_GameModelNew;
+	}
+	
 	/**
 	 * set Continent list for the player. It consists of only those continent objects whose all countries belong to this player.
 	 */
