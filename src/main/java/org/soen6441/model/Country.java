@@ -11,6 +11,7 @@ public class Country {
 	String d_ContinentName;
 	ArrayList<String> d_Neighbors;
 	int d_NoOfArmies;
+	private Player d_Owner;
 
 	/**
 	 * This is the constructor of the class with stores the name of country and its respective continent name
@@ -125,5 +126,21 @@ public class Country {
 	 */
 	public void setNoOfArmies(int p_NoOfArmies) {
 		d_NoOfArmies = p_NoOfArmies;
+	}
+	
+	/**
+	 * Method to get the owner player of the country
+	 * @return Player object who owns the country
+	 */
+	public Player getCountryOwnerPlayer() {
+		return this.d_Owner;
+	}
+	
+	/**
+	 * Method to set the owner player of the country
+	 * @param p_OwnerPlayer	Player object to be assigned to the owner player of the country
+	 */
+	public void setCountryOwnerPlayer(Player p_OwnerPlayer) {
+		this.d_Owner = p_OwnerPlayer;
 	}
 }
