@@ -226,6 +226,9 @@ public class Player {
 					 break;
 				}
 			}
+		case "end":
+			
+			break;
 			
 		case "bomb":
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )

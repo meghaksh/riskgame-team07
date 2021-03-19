@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
+import org.soen6441.model.orders.Blockade;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.view.CommandPrompt;
 
@@ -127,6 +128,9 @@ public class PlayerController {
 					Order l_Order = l_Player.next_order();
 					if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Deploy")) {
 						Deploy l_DeployOrder = (Deploy) l_Order;
+						l_DeployOrder.execute();
+					}else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
+						Blockade l_DeployOrder = (Blockade) l_Order;
 						l_DeployOrder.execute();
 					}
 					

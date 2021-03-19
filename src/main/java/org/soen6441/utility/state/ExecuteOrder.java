@@ -11,6 +11,8 @@ public class ExecuteOrder extends Phase {
 		leb=new LogEntryBuffer();
 		System.out.println("execute order phase");
 		ge.getPlayerController().playerNextOrder();
+		ge.showMap(this);
+		ge.setPhase(new Reinforcement(ge,vw));
 	}
 	public String editMap(String s) {
 		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
