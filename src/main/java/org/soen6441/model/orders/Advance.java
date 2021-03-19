@@ -4,6 +4,13 @@ import org.soen6441.model.Order;
 
 public class Advance implements Order {
 	public Advance() {
+		
+		
+		/*Source should not be equal to target
+		 * Source and target should be neighbors
+		 * Source should have at least one army present after move/attack 
+		 * win happens only when number of armies of defender is zero. and then only card is issued.
+		 * Attack with the lesser number of armies than the player owns. */
 		/*Player Reference who is issuing advance command. 
 		 * From & To countries
 		 * Number of Armies 
