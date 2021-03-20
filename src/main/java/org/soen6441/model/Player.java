@@ -1,11 +1,15 @@
 package org.soen6441.model;
 
-import java.util.ArrayList;			import java.util.Iterator;
-import java.util.LinkedList;		import java.util.Queue;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
+import org.soen6441.model.orders.Advance;
+import org.soen6441.model.orders.Airlift;
+import org.soen6441.model.orders.Blockade;
 import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
-import org.soen6441.model.orders.Blockade;
+import org.soen6441.model.orders.Negotiate;
 
 /**
  * The Player class represents the actual player participating in the game.
@@ -218,6 +222,8 @@ public class Player {
 		
 		case "deploy":
 			int l_NumArmies = Integer.parseInt(l_StringList[2]);
+			//Country l_SourceCountry = (Country)filter(e -> e.getCountryName().equals(l_StringList[1])).forEach(e : d_GameModelNew.getSelectedMap().getCountryList());
+			//System.out.println("inside deploy switch case "+l_SourceCountry.getCountryName());
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
 				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
@@ -229,6 +235,27 @@ public class Player {
 		case "end":
 			
 			break;
+		case "advance" :
+			int l_NumArmies1 = Integer.parseInt(l_StringList[2]);
+			Country l_SourceCountry = null, l_TargetCountry = null;
+			//Country l_SourceCountry = (Country) d_GameModelNew.getSelectedMap().getCountryList().stream().filter(e -> e.getCountryName().equals(l_StringList[1]));
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					 l_SourceCountry = l_TempCountry;
+					 break;
+				}
+			}
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					l_TargetCountry = l_TempCountry;
+					 break;
+				}
+			}
+			d_Order.add(new Advance(this,l_SourceCountry,l_TargetCountry,l_NumArmies1));
 			
 		case "bomb":
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
@@ -248,6 +275,33 @@ public class Player {
 					 break;
 				}
 			}
+			
+		case "airlift":
+			int l_NumArmies2 = Integer.parseInt(l_StringList[2]);
+			Country l_SourceCountry1 = null, l_TargetCountry1 = null;
+			//Country l_SourceCountry = (Country) d_GameModelNew.getSelectedMap().getCountryList().stream().filter(e -> e.getCountryName().equals(l_StringList[1]));
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					 l_SourceCountry1 = l_TempCountry;
+					 break;
+				}
+			}
+			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+			{
+				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				{
+					l_TargetCountry1 = l_TempCountry;
+					 break;
+				}
+			}
+			d_Order.add(new Airlift(this,l_SourceCountry1,l_TargetCountry1,l_NumArmies2));
+			
+		case "negotiate":
+			d_Order.add(new Negotiate(this));
+			
+			
 		}
 			
 	}
