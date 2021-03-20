@@ -50,7 +50,71 @@ public class Advance implements Order {
 	@Override
 	public void execute()
 	{
+		int l_flag = isValid();
+		if(l_flag == 1)
+		{
+			d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
+			d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()+d_NumArmies);
+		}
+		if(l_flag==2)
+		{
+			HashMap <Integer,Integer> l_AttackerArmies = new HashMap<>(); 
+			HashMap <Integer,Integer> l_DefenderArmies = new HashMap<>(); 
+			HashMap <Integer,Integer> l_AttackerArmiesinHand = new HashMap<>();
+			HashMap <Integer,Integer> l_DefenderArmiesinHand = new HashMap<>();
+			Random l_rand = new Random();
+			for(int i=0;i<d_NumArmies;i++)
+			{
+				l_AttackerArmies.put(i, l_rand.nextInt(6));
+			}
+			for(int i=0;i<d_TargetCountry.getNoOfArmies();i++)
+			{
+				l_AttackerArmies.put(i, l_rand.nextInt(7));
+			}
+			int l_SizeDiff = l_AttackerArmies.size() - l_DefenderArmies.size(); 
 		
+		HashMap<Integer, Integer> returnedHashMap = ArmiestoFight(l_SizeDiff,l_AttackerArmies,l_DefenderArmies);
+		if(l_SizeDiff>0)
+		{
+			l_AttackerArmiesinHand = returnedHashMap;
+		}
+		else if(l_SizeDiff<0)
+		{
+			l_DefenderArmiesinHand = returnedHashMap;
+		}
+		else
+		{
+			l_AttackerArmiesinHand = l_AttackerArmies;
+			l_DefenderArmiesinHand = l_DefenderArmies;
+		}
+		//now attack
+		Iterator<Map.Entry<Integer,Integer>> itr_Attacker = l_AttackerArmiesinHand.entrySet().iterator();
+		Iterator<Map.Entry<Integer,Integer>> itr_Defender = l_DefenderArmiesinHand.entrySet().iterator();
+		int l_attackWin=0,l_defendWin=0;
+		for(int i=0;i<l_AttackerArmiesinHand.size();i++)
+		{
+			Map.Entry<Integer,Integer> entry_Attack = itr_Attacker.next(); 
+			Map.Entry<Integer,Integer> entry_Defend = itr_Defender.next(); 
+			if(entry_Attack.getValue()>=entry_Defend.getValue())
+			{
+				l_attackWin++;
+			}
+			else
+			{
+				l_defendWin++;
+			}
+		}
+		if(l_attackWin>=l_defendWin)
+		{
+			d_TargetCountry.setCountryOwnerPlayer(d_Player);
+			d_Player.addCountry(d_TargetCountry);
+			d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
+		}
+		else
+		{
+			d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Failure!!");
+		}
+	}
 		
 	}
 	HashMap<Integer,Integer> ArmiestoFight(int sizeDiff, HashMap <Integer,Integer> l_AttackerArmies,HashMap <Integer,Integer> l_DefenderArmies)
