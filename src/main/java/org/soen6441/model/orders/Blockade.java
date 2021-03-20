@@ -37,13 +37,13 @@ public class Blockade implements Order {
 			d_Player.getCountryList().remove(d_Country);
 			for(Player l_Player : d_gameobj.getAllPlayers()) {
 				if(l_Player.getPlayerName()=="NeutralPlayer")
-					System.out.println("play"+l_Player);
+//					System.out.println("play"+l_Player);
 					d_Country.setCountryOwnerPlayer(l_Player);
 					l_Player.addCountry(d_Country);
 			}
 
 		}
-		
+		System.out.println("outside blockade");
 	}
 	
 	public boolean isValid()
