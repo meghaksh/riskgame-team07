@@ -1,6 +1,7 @@
 package org.soen6441.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -27,6 +28,7 @@ public class Player {
 	private String d_Result="";
 	private String d_StringOrder="";
 	private GameModelNew d_GameModelNew;
+	private ArrayList<String> d_Cards = new ArrayList<String>();
 
 	/**
 	 * default constructor of Player class	
@@ -200,6 +202,35 @@ public class Player {
 	public int getResultInteger() {
 		return this.d_ResultInteger;
 	}
+	/**
+	 * get method for the card if the player owns it or not.
+	 * @param l_TypeOfCard the string that indicates the type of card
+	 * @return true if the card type exists in the list of player.
+	 */
+	public boolean getCard(String l_TypeOfCard)
+	{
+		return d_Cards.contains(l_TypeOfCard);
+		/*Order l_returnCard = null;
+		for(Order l_tempCard : d_Cards)
+		{
+			if(l_tempCard.getClass().getName().equals(l_TypeOfCard))
+			{
+				l_returnCard = l_tempCard;
+				break;
+			}
+		}
+		d_Cards.remove(l_returnCard);
+		return l_returnCard;*/
+	}
+	/**
+	 * set method for adding the card to the card list belonging to the player
+	 * @param l_Card the Card object that belongs to the player
+	 */
+	public void setCard(String l_Card)
+	{
+		d_Cards.add(l_Card);
+	}
+	
 
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not

@@ -18,7 +18,7 @@ public class Advance implements Order {
 	Country d_SourceCountry,d_TargetCountry;
 	Player d_Player;
 	int d_NumArmies;
-	
+	HashMap<Integer, String> d_Cards = new HashMap<>();	
 	public Advance() {
 		
 		
@@ -45,11 +45,17 @@ public class Advance implements Order {
 		d_SourceCountry = l_SourceCountry;
 		d_TargetCountry = l_TargetCountry;
 		d_NumArmies = l_NumArmies1;
+		int i=0;
+		d_Cards.put(i++, "Bomb");
+		d_Cards.put(i++, "Blockade");
+		d_Cards.put(i++, "Negotiate");
+		d_Cards.put(i++,"Airlift");
 		
 	}
 	@Override
 	public void execute()
 	{
+		Random l_rand = new Random();
 		int l_flag = isValid();
 		if(l_flag == 1)
 		{
@@ -62,7 +68,7 @@ public class Advance implements Order {
 			HashMap <Integer,Integer> l_DefenderArmies = new HashMap<>(); 
 			HashMap <Integer,Integer> l_AttackerArmiesinHand = new HashMap<>();
 			HashMap <Integer,Integer> l_DefenderArmiesinHand = new HashMap<>();
-			Random l_rand = new Random();
+			
 			for(int i=0;i<d_NumArmies;i++)
 			{
 				l_AttackerArmies.put(i, l_rand.nextInt(6));
@@ -108,6 +114,10 @@ public class Advance implements Order {
 		{
 			d_TargetCountry.setCountryOwnerPlayer(d_Player);
 			d_Player.addCountry(d_TargetCountry);
+			int l_cardInteger = l_rand.nextInt(4);
+			
+			d_Player.setCard(d_Cards.get(l_cardInteger));
+			
 			d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
 		}
 		else
