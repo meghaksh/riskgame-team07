@@ -53,6 +53,59 @@ public class Advance implements Order {
 		
 		
 	}
+	HashMap<Integer,Integer> ArmiestoFight(int sizeDiff, HashMap <Integer,Integer> l_AttackerArmies,HashMap <Integer,Integer> l_DefenderArmies)
+	{
+		HashMap<Integer,Integer> returnHashMap = null;
+		if(sizeDiff>0)
+		{
+			List<Entry<Integer, Integer>> list = new LinkedList<Entry<Integer, Integer>>(l_AttackerArmies.entrySet()); 
+			Collections.sort(list, new Comparator<Entry<Integer, Integer>>()   
+			{  
+			public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2)   
+			{   
+				return o2.getValue().compareTo(o1.getValue());  
+			}  
+			});
+			HashMap <Integer,Integer> l_SortedAttackerArmies = new HashMap<>(); 
+			for (Entry<Integer, Integer> entry : list)   
+			{  
+				l_SortedAttackerArmies.put(entry.getKey(), entry.getValue());  
+			}
+			HashMap <Integer,Integer> l_AttackerArmiesinHand = new HashMap<>(); 
+			Iterator<Map.Entry<Integer,Integer>> itr = l_SortedAttackerArmies.entrySet().iterator();
+			for(int i=0;i<sizeDiff;i++)
+			{
+				Map.Entry<Integer,Integer> entry = itr.next(); 
+				l_AttackerArmiesinHand.put(entry.getKey(),entry.getValue());
+			}
+			 returnHashMap = l_AttackerArmiesinHand;
+		}
+		else if(sizeDiff<0)
+		{
+			List<Entry<Integer, Integer>> list = new LinkedList<Entry<Integer, Integer>>(l_DefenderArmies.entrySet()); 
+			Collections.sort(list, new Comparator<Entry<Integer, Integer>>()   
+			{  
+			public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2)   
+			{   
+				return o2.getValue().compareTo(o1.getValue());  
+			}  
+			});
+			HashMap <Integer,Integer> l_SortedDefenderArmies = new HashMap<>(); 
+			for (Entry<Integer, Integer> entry : list)   
+			{  
+				l_SortedDefenderArmies.put(entry.getKey(), entry.getValue());  
+			}
+			HashMap <Integer,Integer> l_DefenderArmiesinHand = new HashMap<>(); 
+			Iterator<Map.Entry<Integer,Integer>> itr = l_SortedDefenderArmies.entrySet().iterator();
+			for(int i=0;i<sizeDiff;i++)
+			{
+				Map.Entry<Integer,Integer> entry = itr.next(); 
+				l_DefenderArmiesinHand.put(entry.getKey(),entry.getValue());
+			}
+			returnHashMap =  l_DefenderArmiesinHand;
+		}
+		return returnHashMap;
+	}
 	public int isValid()
 	{
 		if(d_SourceCountry==d_TargetCountry)
