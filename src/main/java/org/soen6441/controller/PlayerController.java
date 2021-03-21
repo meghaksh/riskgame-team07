@@ -15,6 +15,7 @@ import org.soen6441.model.orders.Blockade;
 import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
+import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 
 /**
@@ -25,6 +26,7 @@ public class PlayerController {
 	private String d_OrderAcknowledgment="";
 	private CommandPrompt d_CpView;
 	private GameModelNew d_GameModelNew;
+	private LogEntryBuffer d_LEB;
 	/**
 	 * Constructor of Player controller
 	 * @param p_Players list of players 
@@ -34,6 +36,7 @@ public class PlayerController {
 		d_GameModelNew = p_GameModelNew;
 		d_Players = d_GameModelNew.getAllPlayers();
 		d_CpView=p_CpView;
+		d_LEB=new LogEntryBuffer();
 	}
 
 	/**
@@ -56,7 +59,9 @@ public class PlayerController {
 				{
 					d_OrderAcknowledgment = "\n"+l_Player.getPlayerName()+" Enter order";
 					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+					d_LEB.setResult(d_OrderAcknowledgment);
 					String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
+					d_LEB.setResult(l_StringOrder);
 					if(l_StringOrder.equalsIgnoreCase("quit"))
 					{
 						l_CheckArmies.put(l_Player, true);
@@ -66,9 +71,7 @@ public class PlayerController {
 					{
 						l_Player.setOrder(l_StringOrder);
 						l_Player.issue_order();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						
 					}
 				}
 			}
@@ -133,26 +136,50 @@ public class PlayerController {
 					if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Deploy")) {
 						Deploy l_DeployOrder = (Deploy) l_Order;
 						l_DeployOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Advance")) {
 						Advance l_AdvanceOrder = (Advance) l_Order;
 						l_AdvanceOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
 						Blockade l_BlockadeOrder = (Blockade) l_Order;
 						l_BlockadeOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Bomb")) {
 						Bomb l_BombOrder = (Bomb) l_Order;
 						l_BombOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Airlift")) {
 						Airlift l_AirliftOrder = (Airlift) l_Order;
 						l_AirliftOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Negotiate")) {
 						Negotiate l_NegotiateOrder = (Negotiate) l_Order;
 						l_NegotiateOrder.execute();
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					
 					
@@ -172,5 +199,6 @@ public class PlayerController {
 			}
 		}
 		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
+		d_LEB.setResult("\nOrders are Succesfully Executed!!");
 	}
 }
