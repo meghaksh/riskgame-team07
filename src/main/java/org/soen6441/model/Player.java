@@ -277,7 +277,7 @@ public class Player {
 			
 			break;
 		case "advance" :
-			int l_NumArmies1 = Integer.parseInt(l_StringList[2]);
+			int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
 			Country l_SourceCountry = null, l_TargetCountry = null;
 			//Country l_SourceCountry = (Country) d_GameModelNew.getSelectedMap().getCountryList().stream().filter(e -> e.getCountryName().equals(l_StringList[1]));
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
@@ -290,7 +290,7 @@ public class Player {
 			}
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				if(l_TempCountry.getCountryName().equals(l_StringList[2]))
 				{
 					l_TargetCountry = l_TempCountry;
 					 break;
@@ -318,7 +318,7 @@ public class Player {
 			}
 			break;
 		case "airlift":
-			int l_NumArmies2 = Integer.parseInt(l_StringList[2]);
+			int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
 			Country l_SourceCountry1 = null, l_TargetCountry1 = null;
 			//Country l_SourceCountry = (Country) d_GameModelNew.getSelectedMap().getCountryList().stream().filter(e -> e.getCountryName().equals(l_StringList[1]));
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
@@ -331,7 +331,7 @@ public class Player {
 			}
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+				if(l_TempCountry.getCountryName().equals(l_StringList[2]))
 				{
 					l_TargetCountry1 = l_TempCountry;
 					 break;
