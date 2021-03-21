@@ -263,6 +263,7 @@ public class Player {
 					 break;
 				}
 			}
+			break;
 		case "end":
 			
 			break;
@@ -287,7 +288,7 @@ public class Player {
 				}
 			}
 			d_Order.add(new Advance(this,l_SourceCountry,l_TargetCountry,l_NumArmies1));
-			
+			break;
 		case "bomb":
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
@@ -296,7 +297,7 @@ public class Player {
 					 d_Order.add(new Bomb(this,l_TempCountry));
 					 break;
 				}
-			}
+			}break;
 		case "blockade":
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
@@ -306,7 +307,7 @@ public class Player {
 					 break;
 				}
 			}
-			
+			break;
 		case "airlift":
 			int l_NumArmies2 = Integer.parseInt(l_StringList[2]);
 			Country l_SourceCountry1 = null, l_TargetCountry1 = null;
@@ -328,10 +329,10 @@ public class Player {
 				}
 			}
 			d_Order.add(new Airlift(this,l_SourceCountry1,l_TargetCountry1,l_NumArmies2));
-			
+			break;
 		case "negotiate":
 			d_Order.add(new Negotiate(this));
-			
+			break;
 			
 		}
 			
