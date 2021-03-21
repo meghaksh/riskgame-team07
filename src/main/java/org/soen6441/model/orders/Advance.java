@@ -198,7 +198,17 @@ public class Advance implements Order {
 	public int isValid()
 	{
 		int l_ReturnInt=0;
-		if(d_SourceCountry==d_TargetCountry)
+		if(d_Player.getNegotiatedPlayerList().contains(d_TargetCountry.getCountryOwnerPlayer()))
+		{
+			d_Player.setResult("The targeted country "+d_TargetCountry+" belongs to "+d_TargetCountry.getCountryOwnerPlayer()+" which is negotiated player!");
+			l_ReturnInt=0;
+		}
+		if(d_TargetCountry.getCountryOwnerPlayer().getPlayerName().equals("Neutral Player"))
+		{
+			d_Player.setResult("The targeted country "+d_TargetCountry+" belongs to Neutral Player!");
+			l_ReturnInt=0;
+		}
+		else if(d_SourceCountry==d_TargetCountry)
 		{
 			d_Player.setResult("The source country and target country cannot be same!");
 			l_ReturnInt= 0;

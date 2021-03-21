@@ -29,6 +29,7 @@ public class Player {
 	private String d_StringOrder="";
 	private GameModelNew d_GameModelNew;
 	private ArrayList<String> d_Cards = new ArrayList<String>();
+	private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
 
 	/**
 	 * default constructor of Player class	
@@ -239,7 +240,18 @@ public class Player {
 	{
 	return d_Cards;
 	}
-	
+	public void addNegotiatedPlayer(Player l_NegotiatedPlayer)
+	{
+		d_NegotiatedPlayers.add(l_NegotiatedPlayer);
+	}
+	public ArrayList<Player> getNegotiatedPlayerList()
+	{
+		return d_NegotiatedPlayers;
+	}
+	public void removeNegotiatedPlayer(Player l_NegotiatedPlayer)
+	{
+		d_NegotiatedPlayers.remove(l_NegotiatedPlayer);
+	}
 
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
