@@ -64,6 +64,19 @@ public class Advance implements Order {
 		}
 		if(l_flag==2)
 		{
+			if(d_TargetCountry.getNoOfArmies()==0)
+			{
+				d_TargetCountry.setCountryOwnerPlayer(d_Player);
+				d_TargetCountry.setNoOfArmies(d_NumArmies);
+				d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
+				d_Player.addCountry(d_TargetCountry);
+				int l_cardInteger = l_rand.nextInt(4);
+				
+				d_Player.setCard(d_Cards.get(l_cardInteger));
+				
+				d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
+				return;
+			}
 			HashMap <Integer,Integer> l_AttackerArmies = new HashMap<>(); 
 			HashMap <Integer,Integer> l_DefenderArmies = new HashMap<>(); 
 			HashMap <Integer,Integer> l_AttackerArmiesinHand = new HashMap<>();
@@ -184,33 +197,36 @@ public class Advance implements Order {
 	}
 	public int isValid()
 	{
+		int l_ReturnInt=0;
 		if(d_SourceCountry==d_TargetCountry)
 		{
 			d_Player.setResult("The source country and target country cannot be same!");
-			return 0;
+			l_ReturnInt= 0;
 		}
-		if(!d_SourceCountry.getBorder().contains(d_TargetCountry))
+		else if(!d_SourceCountry.getBorder().contains(d_TargetCountry))
 		{
 			d_Player.setResult("The source country and target country are not neighbours!");
-			return 0;
+			l_ReturnInt= 0;
 		}
-		if(d_SourceCountry.getNoOfArmies()-d_NumArmies < 1)
+		else if(d_SourceCountry.getNoOfArmies()-d_NumArmies < 1)
 		{
 			d_Player.setResult("The source country should be left with atleast one army!");
-			return 0;
+			l_ReturnInt= 0;
 		}
 		else
 		{
 			if(d_Player.getCountryList().contains(d_SourceCountry) && d_Player.getCountryList().contains(d_TargetCountry))
 			{
 				d_Player.setResult("The source country and target country belong to the same player");
-				return 1;
+				l_ReturnInt= 1;
 			}
-			else
+			else if(d_Player.getCountryList().contains(d_SourceCountry) && !d_Player.getCountryList().contains(d_TargetCountry))
 			{
-				return 2;
+				l_ReturnInt= 2;
 			}
+			
 		}
+		return l_ReturnInt;
 		
 	}
 }
