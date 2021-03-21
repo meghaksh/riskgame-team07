@@ -55,23 +55,26 @@ public class PlayerController {
 			Iterator<Player>l_It = l_Players.iterator();
 			while(l_It.hasNext()) {
 				Player l_Player = (Player)l_It.next(); 
-				if(l_CheckArmies.get(l_Player)==false)
-				{
-					d_OrderAcknowledgment = "\n"+l_Player.getPlayerName()+" Enter order";
-					d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-					d_LEB.setResult(d_OrderAcknowledgment);
-					String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
-					d_LEB.setResult(l_StringOrder);
-					if(l_StringOrder.equalsIgnoreCase("quit"))
+				if(!l_Player.getPlayerName().equals("Neutral Player")){
+					if(l_CheckArmies.get(l_Player)==false)
 					{
-						l_CheckArmies.put(l_Player, true);
-						--l_PlayerListSize;
-					}
-					else
-					{
-						l_Player.setOrder(l_StringOrder);
-						l_Player.issue_order();
-						
+
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
+
+						String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
+						d_LEB.setResult(l_StringOrder);
+						if(l_StringOrder.equalsIgnoreCase("quit"))
+						{
+							l_CheckArmies.put(l_Player, true);
+							--l_PlayerListSize;
+						}
+						else
+						{
+							l_Player.setOrder(l_StringOrder);
+							l_Player.issue_order();
+
+						}
 					}
 				}
 			}
@@ -101,8 +104,8 @@ public class PlayerController {
 				l_Counter+=2;
 				l_AddCounter+=1;
 			} else if(l_CommandArray[l_Counter].equals("-remove")){
-					d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
-				
+				d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
+
 				l_Counter+=2;
 				l_RemoveCounter+=1;
 			} else {
@@ -152,10 +155,11 @@ public class PlayerController {
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
 						Blockade l_BlockadeOrder = (Blockade) l_Order;
 						l_BlockadeOrder.execute();
-						String l_Result = l_Player.getResult();
-						d_OrderAcknowledgment=l_Result;
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
+						System.out.println("blockade done");
+						//String l_Result = l_Player.getResult();
+						//d_OrderAcknowledgment=l_Result;
+						//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						//d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Bomb")) {
 						Bomb l_BombOrder = (Bomb) l_Order;
@@ -181,23 +185,26 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
-					
-					
+
+
 					//System.out.println(l_Order.getOrder());
-					
+
 					//String l_Result = l_Order.getExecuteResult();
 					//d_OrderAcknowledgment = l_Result;
 					//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 				} else {
 					l_Flag = 1; l_RemovePlayerList.add(l_Player);
 				}
+				System.out.println("end inner while");
 			}
 			if(l_Flag == 1) {
 				for(Player l_TempRemovePlayer : l_RemovePlayerList) {
 					l_PlayersClone.remove(l_TempRemovePlayer);
 				}
 			}
+			System.out.println("end outer while");
 		}
+		System.out.println("command ack");
 		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
 		d_LEB.setResult("\nOrders are Succesfully Executed!!");
 	}

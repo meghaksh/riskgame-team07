@@ -28,12 +28,7 @@ public class Blockade implements Order {
 		if(isValid())
 		{
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()*3);
-			try {
-				d_gameobj.addPlayer("NeutralPlayer");
-			} catch (Exception e) {
-	
-				e.printStackTrace();
-			}
+			
 			d_Player.getCountryList().remove(d_Country);
 			for(Player l_Player : d_gameobj.getAllPlayers()) {
 				if(l_Player.getPlayerName()=="NeutralPlayer")
