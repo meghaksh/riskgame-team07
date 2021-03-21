@@ -26,6 +26,7 @@ public class Deploy implements Order{
 		{
 			d_Player.setPlayerArmies(d_Player.getPlayerArmies() - d_NumArmies);
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()+d_NumArmies);
+			//d_Player.setResult("\norder deploy "+d_Country.getCountryName()+" "+d_NumArmies+" added to list of "+d_Player.getPlayerName());
 		}
 		
 		

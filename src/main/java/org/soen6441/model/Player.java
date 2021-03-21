@@ -252,7 +252,6 @@ public class Player {
 	{
 		d_NegotiatedPlayers.remove(l_NegotiatedPlayer);
 	}
-
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
 	 * and whether it has sufficient armies and it sets the result accordingly. 

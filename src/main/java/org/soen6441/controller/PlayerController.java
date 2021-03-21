@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import javax.swing.JOptionPane;
 
+import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
@@ -205,7 +206,46 @@ public class PlayerController {
 			System.out.println("end outer while");
 		}
 		System.out.println("command ack");
+		
+		clearNegotiatedPlayerList();
+		checkTheWinner();
+		
 		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
 		d_LEB.setResult("\nOrders are Succesfully Executed!!");
+	}
+	
+	public void clearNegotiatedPlayerList()
+	{
+		for(Player l_TempPlayer: d_Players)
+		{
+			for(Player l_TempNegotiated: l_TempPlayer.getNegotiatedPlayerList())
+			{
+				l_TempPlayer.removeNegotiatedPlayer(l_TempNegotiated);
+			}
+		}
+	}
+	public void checkTheWinner()
+	{
+		HashMap<Country, Player> l_countryOwner = new HashMap<>();
+		ArrayList <Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
+		Iterator itr = l_CountryList.iterator();
+		Player l_CheckPlayer = (Player)((Country) itr.next()).getCountryOwnerPlayer();
+		int l_flag= 0;
+		while(itr.hasNext())
+		{
+			if(!((Player)((Country) itr.next()).getCountryOwnerPlayer()==l_CheckPlayer))
+			{
+				l_flag=1;
+				break;
+			}
+		}
+		if(l_flag==0)
+		{
+			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer+" is the winner of the game!");
+		}
+		for(Country l_TempCountry : d_GameModelNew.getMap().getCountryList())
+		{
+			l_countryOwner.put(l_TempCountry, l_TempCountry.getCountryOwnerPlayer());
+		}
 	}
 }
