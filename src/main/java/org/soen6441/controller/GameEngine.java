@@ -354,9 +354,10 @@ public class GameEngine  {
 //								}
 //							}
 //						}
-						d_CpView.setCommandAcknowledgement("Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
+						if(l_Country.getCountryOwnerPlayer()!=null)
+							d_CpView.setCommandAcknowledgement("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
 						
-						d_CpView.setCommandAcknowledgement("Armies deployed: "+ l_Country.getNoOfArmies());
+							d_CpView.setCommandAcknowledgement("-->Armies deployed: "+ l_Country.getNoOfArmies());
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						if(l_NeighborList.size()>0) {
 							d_CpView.setCommandAcknowledgement("\n"+"--> Borders : ");

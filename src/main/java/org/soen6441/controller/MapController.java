@@ -25,7 +25,7 @@ public class MapController {
 	public String saveMap(String p_Str)throws Exception {
 		String[] l_CommandArray = p_Str.split(" ");
 		if(l_CommandArray.length<2){
-			throw new Exception("Please Enter valid Filename to save the map");
+			throw new Exception("\nPlease Enter valid Filename to save the map");
 		}
 		String l_Result=d_MapModel.saveMap(l_CommandArray[1]);
 		return l_Result;
@@ -42,14 +42,14 @@ public class MapController {
 		String[] l_CommandArray = p_Str.split(" ");
 		if(l_CommandArray[0].equals("editmap")) {
 			String l_Result=d_MapModel.loadMap(l_CommandArray[1]);
-			l_Result=l_Result+" You Can Now Edit IT";
+			l_Result=l_Result+"\n"+" You Can Now Edit IT";
 			return l_Result;
 		}else {
 			if(l_CommandArray.length<2){
-				throw new Exception("Please Enter valid Filename");
+				throw new Exception("\nPlease Enter valid Filename");
 			}
 			String l_Result=d_MapModel.loadMap(l_CommandArray[1]);
-			l_Result=l_Result+" You Can Now Proceed To Add Players";
+			l_Result=l_Result+"\nYou Can Now Proceed To Add Players";
 			return l_Result;
 		}
 	}
@@ -71,7 +71,7 @@ public class MapController {
 		if(d_MapModel.getContinentList().size()>0) {
 			return d_MapModel.validateMap();
 		} else {
-			throw new Exception("There is no map created");
+			throw new Exception("\nThere is no map created");
 		}
 	}
 
