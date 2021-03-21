@@ -231,6 +231,15 @@ public class Player {
 		d_Cards.add(l_Card);
 	}
 	
+	public void removeCard(String l_Card)
+	{
+	d_Cards.remove(l_Card);
+	}
+	public ArrayList getCardList()
+	{
+	return d_Cards;
+	}
+	
 
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not

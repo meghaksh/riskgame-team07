@@ -113,6 +113,8 @@ public class Advance implements Order {
 		if(l_attackWin>=l_defendWin)
 		{
 			d_TargetCountry.setCountryOwnerPlayer(d_Player);
+			d_TargetCountry.setNoOfArmies(l_attackWin);
+			d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
 			d_Player.addCountry(d_TargetCountry);
 			int l_cardInteger = l_rand.nextInt(4);
 			
