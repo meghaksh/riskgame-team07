@@ -38,6 +38,7 @@ public class Blockade implements Order {
 			}
 
 		}
+		d_Player.removeCard("Blockade");
 		System.out.println("outside blockade");
 	}
 	

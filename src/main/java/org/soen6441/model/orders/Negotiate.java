@@ -4,9 +4,11 @@ import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 
 public class Negotiate implements Order {
+	Player d_SourcePlayer,d_TargetPlayer;
 
 	public Negotiate(Player player) {
 		// TODO Auto-generated constructor stub
+		d_SourcePlayer.removeCard("Negotiate");
 	}
 
 	@Override
