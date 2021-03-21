@@ -351,7 +351,13 @@ public class Player {
 			d_Order.add(new Airlift(this,l_SourceCountry1,l_TargetCountry1,l_NumArmies2));
 			break;
 		case "negotiate":
-			d_Order.add(new Negotiate(this));
+			for(Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
+				if(l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
+					d_Order.add(new Negotiate(this, l_TempPlayer));
+					break;
+				}
+			}
+			
 			break;
 			
 		}
