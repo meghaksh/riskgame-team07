@@ -18,6 +18,7 @@ public class Negotiate implements Order {
 		/*If Player has negotiate card, then it will add target player to negotiatedPlayerList and then remove that card*/
 		if(this.d_SourcePlayer.getCardList().contains("Negotiate")) {
 			this.d_SourcePlayer.getNegotiatedPlayerList().add(d_TargetPlayer);
+			this.d_TargetPlayer.getNegotiatedPlayerList().add(d_SourcePlayer);
 			d_SourcePlayer.removeCard("Negotiate");
 		}
 		
