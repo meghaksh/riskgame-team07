@@ -10,12 +10,17 @@ public class Negotiate implements Order {
 		System.out.println("Negotiate Created : " + p_SourcePlayer.getPlayerName() + " : " + p_TargetPlayer.getPlayerName());
 		d_SourcePlayer = p_SourcePlayer;
 		d_TargetPlayer = p_TargetPlayer;
-		d_SourcePlayer.removeCard("Negotiate");
+		
 	}
 
 	@Override
 	public void execute() {
-		this.d_SourcePlayer.getNegotiatedPlayerList().add(d_TargetPlayer);
+		/*If Player has negotiate card, then it will add target player to negotiatedPlayerList and then remove that card*/
+		if(this.d_SourcePlayer.getCardList().contains("Negotiate")) {
+			this.d_SourcePlayer.getNegotiatedPlayerList().add(d_TargetPlayer);
+			d_SourcePlayer.removeCard("Negotiate");
+		}
+		
 	}
 	
 
