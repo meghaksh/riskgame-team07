@@ -4,27 +4,19 @@ import java.util.ArrayList;
 
 
 public class Observable {
-ArrayList<Observer> observers= new ArrayList<Observer>();
-	
-	public void attach(Observer o)
-	{
-		
-		this.observers.add(o);
+	ArrayList<Observer> d_Observers= new ArrayList<Observer>();
+
+	public void attach(Observer p_Observer){
+		this.d_Observers.add(p_Observer);
 	}
-	public void detach(Observer o)
-	{
-		if(this.observers.size()!=0)
-		{
-		this.observers.remove(o);
+	public void detach(Observer p_Observer){
+		if(this.d_Observers.size()!=0){
+			this.d_Observers.remove(p_Observer);
 		}
 	}
-	public void Log(Observable obs)
-	{
-		
-		
-		for(Observer ob: observers)
-		{
-			ob.update(obs);
+	public void log(Observable p_Observable){
+		for(Observer l_Observer: d_Observers){
+			l_Observer.update(p_Observable);
 		}
 	}
 }
