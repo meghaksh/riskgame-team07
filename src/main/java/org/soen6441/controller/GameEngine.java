@@ -318,8 +318,18 @@ public class GameEngine  {
 		for(Player l_Player:d_PlayerList){
 			d_CpView.setCommandAcknowledgement("\n"+l_Player.getPlayerName()+"-->"+"armies assigned:"+l_Player.getPlayerArmies());
 			d_CpView.setCommandAcknowledgement("\n"+"Countries Assigned: ");
+			
 			for(Country l_Country:l_Player.getCountryList()) {
 				d_CpView.setCommandAcknowledgement(l_Country.getCountryName()+ ",");
+			}
+			if(l_Player.getCardList().size()>0)
+			{
+				d_CpView.setCommandAcknowledgement("\n"+"Cards Assigned: ");
+				ArrayList<String> l_CardList =l_Player.getCardList();
+				for(String l_Str:l_CardList)
+				{
+					d_CpView.setCommandAcknowledgement(l_Str+ ",");
+				}
 			}
 		}
 	}
