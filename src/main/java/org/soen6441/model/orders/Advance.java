@@ -66,6 +66,7 @@ public class Advance implements Order {
 		{
 			if(d_TargetCountry.getNoOfArmies()==0)
 			{
+				d_TargetCountry.getCountryOwnerPlayer().removeCountry(d_TargetCountry);
 				d_TargetCountry.setCountryOwnerPlayer(d_Player);
 				d_TargetCountry.setNoOfArmies(d_NumArmies);
 				d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
@@ -125,6 +126,7 @@ public class Advance implements Order {
 		}
 		if(l_attackWin>=l_defendWin)
 		{
+			d_TargetCountry.getCountryOwnerPlayer().removeCountry(d_TargetCountry);
 			d_TargetCountry.setCountryOwnerPlayer(d_Player);
 			d_TargetCountry.setNoOfArmies(l_attackWin);
 			d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
@@ -197,6 +199,7 @@ public class Advance implements Order {
 	}
 	public int isValid()
 	{
+		
 		int l_ReturnInt=0;
 		if(d_Player.getNegotiatedPlayerList().contains(d_TargetCountry.getCountryOwnerPlayer()))
 		{
@@ -213,7 +216,7 @@ public class Advance implements Order {
 			d_Player.setResult("The source country and target country cannot be same!");
 			l_ReturnInt= 0;
 		}
-		else if(!d_SourceCountry.getBorder().contains(d_TargetCountry))
+		else if(!d_SourceCountry.getBorder().contains(d_TargetCountry.getCountryName()))
 		{
 			d_Player.setResult("The source country and target country are not neighbours!");
 			l_ReturnInt= 0;
