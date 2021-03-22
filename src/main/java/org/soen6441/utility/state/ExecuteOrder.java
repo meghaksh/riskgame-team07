@@ -5,66 +5,62 @@ import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 
 public class ExecuteOrder extends Phase {
-	LogEntryBuffer leb;
-	public ExecuteOrder(GameEngine p_ge, CommandPrompt p_vw) {
-		super(p_ge, p_vw);
-		leb=new LogEntryBuffer();
-		System.out.println("execute order phase");
-		ge.getPlayerController().playerNextOrder();
-		ge.showMap(this);
-		ge.setPhase(new Reinforcement(ge,vw));
+	LogEntryBuffer d_Leb;
+	public ExecuteOrder(GameEngine p_Ge, CommandPrompt p_Vw) {
+		super(p_Ge, p_Vw);
+		d_Ge.getPlayerController().playerNextOrder();
+		d_Ge.showMap(this);
+		d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));
+		d_Leb=new LogEntryBuffer();
 	}
-	public String editMap(String s) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+	public String editMap(String p_S) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
-	public String editCountry(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
-		return null;
-	}
-
-	public String editContinent(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+	public String editCountry(String p_S, String p_S1) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 
-	public String editNeighbor(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+	public String editContinent(String p_S, String p_S1) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 
-	public String saveMap(String s) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+	public String editNeighbor(String p_S, String p_S1) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
+		return null;
+	}
+
+	public String saveMap(String p_S) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 	
-	public String loadMap(String s) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+	public String loadMap(String p_S) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 	
-	public String addPlayers(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+	public String addPlayers(String p_S, String p_S1) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 	
 	public void assignCountries() {
-		
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
-	
-
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 	}
 	
 	public void showMap() {
-		ge.showMap(this);
+		d_Ge.showMap(this);
 	}
 	
 	public void endGame() {
@@ -74,8 +70,8 @@ public class ExecuteOrder extends Phase {
 	
 
 	public String validateMap() {	
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
-		leb.setResult("Invalid command in state ");
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 	public String getPhaseName()

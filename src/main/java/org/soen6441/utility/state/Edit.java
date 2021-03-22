@@ -1,118 +1,110 @@
 package org.soen6441.utility.state;
 
-import org.soen6441.controller.GameEngine;
-import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.controller.GameEngine;     import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 
-public   class Edit extends Phase {
-	LogEntryBuffer leb;
-	public Edit(GameEngine p_ge,CommandPrompt p_vw) {
-		super(p_ge,p_vw);
-		leb=new LogEntryBuffer();
+public class Edit extends Phase {
+	LogEntryBuffer d_Leb;
+	public Edit(GameEngine p_Ge,CommandPrompt p_Vw) {
+		super(p_Ge,p_Vw);
+		d_Leb=new LogEntryBuffer();
 	}
-	public String loadMap(String s) {
-		System.out.println("entering edit map  ");
+	public String loadMap(String p_S) {
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().loadMap(s);
+		try {  l_AckMsg =d_Ge.getMapController().loadMap(p_S);
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		
-		ge.setPhase(new Startup(ge,vw));
-		System.out.println("map has been loaded and phase has been changed");
+		d_Ge.setPhase(new Startup(d_Ge,d_Vw));
 		return l_AckMsg;
 	}
 
-	public String editCountry(String s, String s1) {
-		System.out.println("entering edit country  ");
+	public String editCountry(String p_S, String p_S1) {
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().editMap(s, s1);
+		try {  l_AckMsg =d_Ge.getMapController().editMap(p_S,p_S1);
 		  	
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
-	public String saveMap(String s) {	 
-		System.out.println("entering save map ");
+	public String saveMap(String p_S) {	 
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().saveMap(s);
+		try {  l_AckMsg =d_Ge.getMapController().saveMap(p_S);
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
-	public String addPlayers(String s, String s1) {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" ); 
-		leb.setResult("Invalid command in state ");
+	public String addPlayers(String p_S, String p_S1) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" ); 
+		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 	
-	public String editMap(String s) {
+	public String editMap(String p_S) {
 		System.out.println("entering edit map  ");
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().loadMap(s);
+		try {  l_AckMsg =d_Ge.getMapController().loadMap(p_S);
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
-	public String editContinent(String s, String s1) {
-		System.out.println("entering edit continent  ");
+	public String editContinent(String p_S, String p_S1) {
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().editMap(s, s1);
+		try {  l_AckMsg =d_Ge.getMapController().editMap(p_S,p_S1);
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
-	public String editNeighbor(String s, String s1) {
-		System.out.println("entering edit neighbor  ");
+	public String editNeighbor(String p_S, String p_S1) {
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().editMap(s, s1);
+		try {  l_AckMsg =d_Ge.getMapController().editMap(p_S,p_S1);
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		return l_AckMsg;
 	}
 	
 	public String validateMap() {
-		System.out.println("entering validatemap ");
 		String l_AckMsg;
-		try {  l_AckMsg =ge.getMapController().validateMap();
+		try {  l_AckMsg =d_Ge.getMapController().validateMap();
 		  	}catch(Exception p_Exception)
 			{
 		  		l_AckMsg=p_Exception.getMessage();
 		  	}
-		leb.setResult(l_AckMsg);
+		d_Leb.setResult(l_AckMsg);
 		return l_AckMsg;
 		
 	}
 	
 	public void assignCountries() {
-		vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName() +"\n");  
-		leb.setResult("Invalid command in state ");
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName() +"\n");  
+		d_Leb.setResult("Invalid command in state ");
 		
 	}
 	
 	public void showMap() {
-		ge.showMap(this);
+		d_Ge.showMap(this);
 	}
 	
 	public void endGame() {
