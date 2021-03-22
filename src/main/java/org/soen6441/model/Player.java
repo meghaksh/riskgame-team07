@@ -236,7 +236,7 @@ public class Player {
 	{
 	d_Cards.remove(l_Card);
 	}
-	public ArrayList getCardList()
+	public ArrayList<String> getCardList()
 	{
 	return d_Cards;
 	}
