@@ -52,7 +52,7 @@ public class PlayerController {
 			l_CheckArmies.put(l_TempPlayer,false);
 		}
 		int l_PlayerListSize = l_Players.size();	
-		while(l_PlayerListSize>0)	{
+		while(l_PlayerListSize>1){
 			Iterator<Player>l_It = l_Players.iterator();
 			while(l_It.hasNext()) {
 				Player l_Player = (Player)l_It.next(); 
