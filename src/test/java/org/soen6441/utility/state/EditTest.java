@@ -2,39 +2,35 @@ package org.soen6441.utility.state;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.soen6441.controller.GameEngine;
 import org.soen6441.model.GameModelNew;
-import org.soen6441.model.Map;
-import org.soen6441.model.Player;
-import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 
 public class EditTest {
-	CommandPrompt l_CpView;
-	GameModelNew l_GameModel;
-	GameEngine p_ge;
-	Edit ed;
-	Phase p;
+	CommandPrompt d_CpView;
+	GameModelNew d_GameModel;
+	GameEngine d_Ge;
+	Edit d_Ed;
+	Phase d_P;
 	
 	@Before
 	public void setTestContext() throws Exception {
-		l_CpView= new CommandPrompt();
-		l_GameModel=new GameModelNew();
-		p_ge= new GameEngine(l_CpView,l_GameModel);
-		ed= new Edit(p_ge,l_CpView);
+		d_CpView= new CommandPrompt();
+		d_GameModel=new GameModelNew();
+		d_Ge= new GameEngine(d_CpView,d_GameModel);
+		d_Ed= new Edit(d_Ge,d_CpView);
 		
 	}
 	@Test
 	public void testLoadMap() {
 		String l_ExpectedMessage="Startup";
 		String l_ActualMessage = "";
-		ed.loadMap("map5");
-		p=p_ge.getPhase();
-		l_ActualMessage=p.getPhaseName();
+		d_Ed.loadMap("map5");
+		d_P=d_Ge.getPhase();
+		l_ActualMessage=d_P.getPhaseName();
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
 	
@@ -42,9 +38,9 @@ public class EditTest {
 	public void testAssignCountries() {
 		String l_ExpectedMessage="Invalid command in state ";
 		String l_ActualMessage = "";
-		ed.assignCountries();
-		p=p_ge.getPhase();
-		l_ActualMessage=ed.leb.getResult();
+		d_Ed.assignCountries();
+		d_P=d_Ge.getPhase();
+		l_ActualMessage=d_Ed.d_Leb.getResult();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
@@ -53,8 +49,8 @@ public class EditTest {
 	public void testAddPlayers() {
 		String l_ExpectedMessage="Invalid command in state ";
 		String l_ActualMessage = "";
-		ed.addPlayers("zeal", "raj");
-		l_ActualMessage=ed.leb.getResult();
+		d_Ed.addPlayers("zeal", "raj");
+		l_ActualMessage=d_Ed.d_Leb.getResult();
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
 	}

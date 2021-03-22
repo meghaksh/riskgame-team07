@@ -10,27 +10,27 @@ import org.soen6441.view.CommandPrompt;
 
 public class IssueOrderTest {
 	
-	CommandPrompt l_CpView;
-	GameModelNew l_GameModel;
-	GameEngine p_ge;
-	IssueOrder io;
-	Phase p;
+	CommandPrompt d_CpView;
+	GameModelNew d_GameModel;
+	GameEngine d_Ge;
+	IssueOrder d_Io;
+	Phase d_P;
 	
 	@Before
 	public void setTestContext() throws Exception {
 		
-		l_CpView= new CommandPrompt();
-		l_GameModel=new GameModelNew();
-		p_ge= new GameEngine(l_CpView,l_GameModel);
-		io= new IssueOrder(p_ge,l_CpView);
+		d_CpView= new CommandPrompt();
+		d_GameModel=new GameModelNew();
+		d_Ge= new GameEngine(d_CpView,d_GameModel);
+		d_Io= new IssueOrder(d_Ge,d_CpView);
 	}
 
 	@Test
 	public void testEditMap() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.editMap("map5");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.editMap("map5");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -40,8 +40,8 @@ public class IssueOrderTest {
 	public void testEditCountry() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.editCountry("india","asia");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.editCountry("india","asia");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -51,8 +51,8 @@ public class IssueOrderTest {
 	public void testEditContinent() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.editContinent("asia", "1");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.editContinent("asia", "1");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -62,8 +62,8 @@ public class IssueOrderTest {
 	public void testEditNeighbor() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.editNeighbor("india", "china");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.editNeighbor("india", "china");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -73,8 +73,8 @@ public class IssueOrderTest {
 	public void testSaveMap() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.saveMap("map");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.saveMap("map");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -84,8 +84,8 @@ public class IssueOrderTest {
 	public void testLoadMap() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.loadMap("map");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.loadMap("map");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -95,8 +95,8 @@ public class IssueOrderTest {
 	public void testAddPlayers() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.addPlayers("zeal", "raj");
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.addPlayers("zeal", "raj");
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -106,8 +106,8 @@ public class IssueOrderTest {
 	public void testAssignCountries() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.assignCountries();
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.assignCountries();
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
@@ -117,8 +117,8 @@ public class IssueOrderTest {
 	public void testValidateMap() {
 		String l_ExpectedMessage="Invalid command in state IssueOrder";
 		String l_ActualMessage = "";
-		io.validateMap();
-		String [] l_ActualMessageArray=io.vw.getCommandAcknowledgement().split("/n");
+		d_Io.validateMap();
+		String [] l_ActualMessageArray=d_Io.d_Vw.getCommandAcknowledgement().split("/n");
 		l_ActualMessage = l_ActualMessageArray[l_ActualMessageArray.length -1].trim();
 		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
