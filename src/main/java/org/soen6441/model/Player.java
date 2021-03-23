@@ -142,18 +142,13 @@ public class Player {
 	public void setContinentsList() {
 		ArrayList <Continent> l_MapContinents = d_GameModelNew.getSelectedMap().getContinentList();
 		for(Continent l_MapContinent : l_MapContinents) {
-			int l_Flag=0;
-			outerloop:
-				for(Country l_CountryOfContinent : l_MapContinent.getCountryList()) {
-					for(Country l_CountryOfPlayer: d_Countries) {
-						if(!(l_CountryOfPlayer==l_CountryOfContinent)) {
-							l_Flag =1;break outerloop;
-						}
-					}
+			int l_Flag = 0;
+				for(Country l_Country : l_MapContinent.getCountryList()) {
+					if(!d_Countries.contains(l_Country))
+						l_Flag=1;						
 				}
-			if(l_Flag==0) {
-				d_Continents.add(l_MapContinent);
-			}
+				if(l_Flag==0)
+					d_Continents.add(l_MapContinent);
 		}
 	}
 	/**
