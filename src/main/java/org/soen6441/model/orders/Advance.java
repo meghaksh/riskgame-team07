@@ -18,7 +18,7 @@ public class Advance implements Order {
 	Country d_SourceCountry,d_TargetCountry;
 	Player d_Player;
 	int d_NumArmies;
-	HashMap<Integer, String> d_Cards = new HashMap<>();	
+//	HashMap<Integer, String> d_Cards = new HashMap<>();	
 	public Advance() {
 		
 		
@@ -45,11 +45,11 @@ public class Advance implements Order {
 		d_SourceCountry = l_SourceCountry;
 		d_TargetCountry = l_TargetCountry;
 		d_NumArmies = l_NumArmies1;
-		int i=0;
-		d_Cards.put(i++, "Bomb");
-		d_Cards.put(i++, "Blockade");
-		d_Cards.put(i++, "Negotiate");
-		d_Cards.put(i++,"Airlift");
+	//	int i=0;
+	//	d_Cards.put(i++, "Bomb");
+	//	d_Cards.put(i++, "Blockade");
+	//	d_Cards.put(i++, "Negotiate");
+	//	d_Cards.put(i++,"Airlift");
 		
 	}
 	@Override
@@ -71,11 +71,12 @@ public class Advance implements Order {
 				d_TargetCountry.setNoOfArmies(d_NumArmies);
 				d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
 				d_Player.addCountry(d_TargetCountry);
-				int l_cardInteger = l_rand.nextInt(4);
+				d_Player.setAtleastOneBattleWon(true);
+		//		int l_cardInteger = l_rand.nextInt(4);
 				
-				d_Player.setCard(d_Cards.get(l_cardInteger));
+			//	d_Player.setCard(d_Cards.get(l_cardInteger));
 				
-				d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
+				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
 				return;
 			}
 			HashMap <Integer,Integer> l_AttackerArmies = new HashMap<>(); 
@@ -131,15 +132,17 @@ public class Advance implements Order {
 			d_TargetCountry.setNoOfArmies(l_attackWin);
 			d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
 			d_Player.addCountry(d_TargetCountry);
-			int l_cardInteger = l_rand.nextInt(4);
+			d_Player.setAtleastOneBattleWon(true);
 			
-			d_Player.setCard(d_Cards.get(l_cardInteger));
+	//		int l_cardInteger = l_rand.nextInt(4);
 			
-			d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
+	//		d_Player.setCard(d_Cards.get(l_cardInteger));
+			
+			d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
 		}
 		else
 		{
-			d_Player.setResult(d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Failure!!");
+			d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Failure!!");
 		}
 	}
 		
@@ -203,34 +206,34 @@ public class Advance implements Order {
 		int l_ReturnInt=0;
 		if(d_Player.getNegotiatedPlayerList().contains(d_TargetCountry.getCountryOwnerPlayer()))
 		{
-			d_Player.setResult("The targeted country "+d_TargetCountry+" belongs to "+d_TargetCountry.getCountryOwnerPlayer()+" which is negotiated player!");
+			d_Player.setResult("\nThe targeted country "+d_TargetCountry+" belongs to "+d_TargetCountry.getCountryOwnerPlayer()+" which is negotiated player!");
 			l_ReturnInt=0;
 		}
 		if(d_TargetCountry.getCountryOwnerPlayer().getPlayerName().equals("Neutral Player"))
 		{
-			d_Player.setResult("The targeted country "+d_TargetCountry+" belongs to Neutral Player!");
+			d_Player.setResult("\nThe targeted country "+d_TargetCountry+" belongs to Neutral Player!");
 			l_ReturnInt=0;
 		}
 		else if(d_SourceCountry==d_TargetCountry)
 		{
-			d_Player.setResult("The source country and target country cannot be same!");
+			d_Player.setResult("\nThe source country and target country cannot be same!");
 			l_ReturnInt= 0;
 		}
 		else if(!d_SourceCountry.getBorder().contains(d_TargetCountry.getCountryName()))
 		{
-			d_Player.setResult("The source country and target country are not neighbours!");
+			d_Player.setResult("\nThe source country and target country are not neighbours!");
 			l_ReturnInt= 0;
 		}
 		else if(d_SourceCountry.getNoOfArmies()-d_NumArmies < 1)
 		{
-			d_Player.setResult("The source country should be left with atleast one army!");
+			d_Player.setResult("\nThe source country should be left with atleast one army!");
 			l_ReturnInt= 0;
 		}
 		else
 		{
 			if(d_Player.getCountryList().contains(d_SourceCountry) && d_Player.getCountryList().contains(d_TargetCountry))
 			{
-				d_Player.setResult("The source country and target country belong to the same player");
+				d_Player.setResult("\nThe source country and target country belong to the same player");
 				l_ReturnInt= 1;
 			}
 			else if(d_Player.getCountryList().contains(d_SourceCountry) && !d_Player.getCountryList().contains(d_TargetCountry))

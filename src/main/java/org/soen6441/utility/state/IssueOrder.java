@@ -6,8 +6,10 @@ public class IssueOrder extends Phase {
 
 	public IssueOrder(GameEngine p_Ge,CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
+		try {
 		d_Ge.getPlayerController().playerIssueOrder();
 		d_Ge.setPhase(new ExecuteOrder(p_Ge,p_Vw));
+		}catch(Exception p_E) {}
 	}
 	
 	public String editMap(String p_S) {

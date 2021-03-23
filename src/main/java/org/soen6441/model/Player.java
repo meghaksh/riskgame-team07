@@ -30,6 +30,7 @@ public class Player {
 	private GameModelNew d_GameModelNew;
 	private ArrayList<String> d_Cards = new ArrayList<String>();
 	private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
+	private boolean d_AtleastOneBattleWon=false;
 
 	/**
 	 * default constructor of Player class	
@@ -123,6 +124,16 @@ public class Player {
 	
 	public GameModelNew getGameModel() {
 		return this.d_GameModelNew;
+	}
+	
+	public void setAtleastOneBattleWon(boolean p_B)
+	{
+		this.d_AtleastOneBattleWon=p_B;
+	}
+	
+	public boolean getAtleastOneBattleWon()
+	{
+		return this.d_AtleastOneBattleWon;
 	}
 	
 	/**

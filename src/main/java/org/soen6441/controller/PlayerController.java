@@ -3,6 +3,7 @@ package org.soen6441.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -28,6 +29,8 @@ public class PlayerController {
 	private CommandPrompt d_CpView;
 	private GameModelNew d_GameModelNew;
 	private LogEntryBuffer d_LEB;
+	private HashMap<Integer, String> d_AllCards;
+	private Random l_rand;
 	/**
 	 * Constructor of Player controller
 	 * @param p_Players list of players 
@@ -38,6 +41,13 @@ public class PlayerController {
 		d_Players = d_GameModelNew.getAllPlayers();
 		d_CpView=p_CpView;
 		d_LEB=new LogEntryBuffer();
+		d_AllCards= new HashMap<>();
+		int i=0;
+		d_AllCards.put(i++, "Bomb");
+		d_AllCards.put(i++, "Blockade");
+		d_AllCards.put(i++, "Negotiate");
+		d_AllCards.put(i++,"Airlift");
+		l_rand = new Random();
 	}
 
 	/**
@@ -60,8 +70,8 @@ public class PlayerController {
 					if(l_CheckArmies.get(l_Player)==false)
 					{
 
-						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						d_LEB.setResult(d_OrderAcknowledgment);
+						//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						//d_LEB.setResult(d_OrderAcknowledgment);
 
 						String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
 						d_LEB.setResult(l_StringOrder);
@@ -196,17 +206,22 @@ public class PlayerController {
 				} else {
 					l_Flag = 1; l_RemovePlayerList.add(l_Player);
 				}
-				System.out.println("end inner while");
 			}
 			if(l_Flag == 1) {
 				for(Player l_TempRemovePlayer : l_RemovePlayerList) {
 					l_PlayersClone.remove(l_TempRemovePlayer);
 				}
 			}
-			System.out.println("end outer while");
 		}
-		System.out.println("command ack");
-		
+		for(Player l_TempPlayer : d_Players)
+		{
+			if(l_TempPlayer.getAtleastOneBattleWon())
+			{
+				int l_cardInteger = l_rand.nextInt(4);
+				l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
+				l_TempPlayer.setAtleastOneBattleWon(false);
+			}
+		}
 		clearNegotiatedPlayerList();
 		checkTheWinner();
 		

@@ -8,10 +8,13 @@ public class ExecuteOrder extends Phase {
 	LogEntryBuffer d_Leb;
 	public ExecuteOrder(GameEngine p_Ge, CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
+		try {
+			
 		d_Ge.getPlayerController().playerNextOrder();
 		d_Ge.showMap(this);
 		d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));
 		d_Leb=new LogEntryBuffer();
+		}catch(Exception p_E) {}
 	}
 	public String editMap(String p_S) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
