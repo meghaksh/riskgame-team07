@@ -39,6 +39,10 @@ public class Bomb implements Order {
 	
 	public boolean isValid()
 	{
+		if(!d_Player.getCardList().contains("Bomb")) {
+			System.out.println("Player does not have a bomb card");
+			return false;
+		}
 
 		if(d_Player.getCountryList().contains(d_Country)) {
 			System.out.println("Player cannot bomb its own country");
