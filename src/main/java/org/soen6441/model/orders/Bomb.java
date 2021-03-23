@@ -1,12 +1,11 @@
 package org.soen6441.model.orders;
 
-import java.util.Iterator;
 import org.soen6441.model.Country;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 
 public class Bomb implements Order {
-	
+
 	private Player d_Player;
 	private Player d_PlayerBombed;
 	private Country d_Country;
@@ -17,7 +16,7 @@ public class Bomb implements Order {
 		this.d_Country = p_TempCountry;
 		setBombedPlayer();
 	}
-	
+
 	private void setBombedPlayer() {
 		this.d_PlayerBombed = d_Country.getCountryOwnerPlayer();
 		System.out.println("The country owner of "+d_Country.getCountryName() + "is "+d_PlayerBombed.getPlayerName());
@@ -28,15 +27,15 @@ public class Bomb implements Order {
 		System.out.println("Inside bomb execute");
 		if(isValid())
 		{
-				d_NoOfArmies = d_Country.getNoOfArmies()/2;
-				int l_NoOfArmiesReduced = d_Country.getNoOfArmies() - d_NoOfArmies;
-				d_Country.setNoOfArmies(d_Country.getNoOfArmies() - d_NoOfArmies);
-				d_PlayerBombed.setPlayerArmies(d_PlayerBombed.getPlayerArmies() - l_NoOfArmiesReduced);
+			d_NoOfArmies = d_Country.getNoOfArmies()/2;
+			int l_NoOfArmiesReduced = d_Country.getNoOfArmies() - d_NoOfArmies;
+			d_Country.setNoOfArmies(d_Country.getNoOfArmies() - d_NoOfArmies);
+			d_PlayerBombed.setPlayerArmies(d_PlayerBombed.getPlayerArmies() - l_NoOfArmiesReduced);
 		}
 		d_Player.removeCard("Bomb");
-	
+
 	}
-	
+
 	public boolean isValid()
 	{
 		if(!d_Player.getCardList().contains("Bomb")) {
