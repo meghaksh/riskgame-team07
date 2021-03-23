@@ -138,12 +138,12 @@ public class Advance implements Order {
 					d_Player.addCountry(d_TargetCountry);
 					d_Player.setAtleastOneBattleWon(true);
 
-
+					
 					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Success!!");
 				}
 				else
 				{
-					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
+					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-l_MinArmies+l_attackWin);
 					d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()-d_NumArmies+l_defendWin);
 					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Failure!!");
 				}

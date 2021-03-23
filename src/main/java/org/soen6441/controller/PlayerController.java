@@ -43,10 +43,10 @@ public class PlayerController {
 		d_LEB=new LogEntryBuffer();
 		d_AllCards= new HashMap<>();
 		int i=0;
-		d_AllCards.put(i++, "Bomb");
+		//d_AllCards.put(i++, "Bomb");
 		d_AllCards.put(i++, "Blockade");
-		d_AllCards.put(i++, "Negotiate");
-		d_AllCards.put(i++,"Airlift");
+		//d_AllCards.put(i++, "Negotiate");
+		//d_AllCards.put(i++,"Airlift");
 		l_rand = new Random();
 	}
 
@@ -217,7 +217,7 @@ public class PlayerController {
 		{
 			if(l_TempPlayer.getAtleastOneBattleWon())
 			{
-				int l_cardInteger = l_rand.nextInt(4);
+				int l_cardInteger = l_rand.nextInt(0);
 				l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
 				l_TempPlayer.setAtleastOneBattleWon(false);
 			}
@@ -243,7 +243,7 @@ public class PlayerController {
 	
 	public void checkTheWinner()
 	{
-		HashMap<Country, Player> l_countryOwner = new HashMap<>();
+		//HashMap<Country, Player> l_countryOwner = new HashMap<>();
 		ArrayList <Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
 		Iterator itr = l_CountryList.iterator();
 		Player l_CheckPlayer = (Player)((Country) itr.next()).getCountryOwnerPlayer();
@@ -260,9 +260,9 @@ public class PlayerController {
 		{
 			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer+" is the winner of the game!");
 		}
-		for(Country l_TempCountry : d_GameModelNew.getMap().getCountryList())
+		/*for(Country l_TempCountry : d_GameModelNew.getMap().getCountryList())
 		{
 			l_countryOwner.put(l_TempCountry, l_TempCountry.getCountryOwnerPlayer());
-		}
+		}*/
 	}
 }
