@@ -39,17 +39,17 @@ public class Bomb implements Order {
 	public boolean isValid()
 	{
 		if(!d_Player.getCardList().contains("Bomb")) {
-			System.out.println("Player does not have a bomb card");
+			d_Player.setResult("Player does not have a bomb card");
 			return false;
 		}
 
 		if(d_Player.getCountryList().contains(d_Country)) {
-			System.out.println("Player cannot bomb its own country");
+			d_Player.setResult("Player cannot bomb its own country");
 			return false;
 		}
 		for(Country l_Country : d_Player.getCountryList()) {
 			if(!l_Country.getBorder().contains(d_Country.getCountryName())) {
-				System.out.println("The bombing country is not a neighbour of player");
+				d_Player.setResult("The bombing country is not a neighbour of player");
 				return false;				
 			}
 		}

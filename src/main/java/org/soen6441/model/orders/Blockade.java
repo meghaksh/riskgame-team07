@@ -2,7 +2,6 @@ package org.soen6441.model.orders;
 
 import java.util.Iterator;
 
-import org.soen6441.controller.PlayerController;
 import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
@@ -27,22 +26,19 @@ public class Blockade implements Order {
 			d_Player.getCountryList().remove(d_Country);
 			for(Player l_Player : d_gameobj.getAllPlayers()) {
 				if(l_Player.getPlayerName()=="Neutral Player") {
-					//System.out.println("play"+l_Player);
 					d_Country.setCountryOwnerPlayer(l_Player);
 					l_Player.setPlayerArmies(d_Country.getNoOfArmies());
 					l_Player.addCountry(d_Country);
-					//System.out.println("inside blockade");
 				}
 			}
 		}
 		d_Player.removeCard("Blockade");
-		//System.out.println("outside blockade");
 	}
 
 	public boolean isValid() {
 		int l_Flag=0;
 		if(!d_Player.getCardList().contains("Blockade")) {
-			System.out.println("Player does not have a blockade card");
+			d_Player.setResult("Player does not have a blockade card");
 			return false;
 		}
 		Iterator<Country>l_It = d_Player.getCountryList().iterator();

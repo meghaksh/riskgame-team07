@@ -28,7 +28,7 @@ public class Airlift implements Order {
 	public boolean isValid() {
 		
 		if(!d_Player.getCardList().contains("Airlift")) {
-			System.out.println("Player does not have a Airlift card");
+			d_Player.setResult("Player does not have a Airlift card");
 			return false;
 		}
 		if(d_SourceCountry==d_TargetCountry) {
