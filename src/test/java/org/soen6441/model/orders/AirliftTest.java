@@ -21,7 +21,6 @@ public class AirliftTest {
 
 	Player d_P1,d_P2;
 	Map d_Map;
-	Advance d_adv;
 	Airlift d_Air;
 
 	@Before
@@ -112,6 +111,38 @@ public class AirliftTest {
 		d_P1.setCard("Airlift");
 		String l_Actual="", l_Expected="The source country should be left with atleast one army!";
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country3, 3);
+		d_Air.execute();
+		l_Actual = d_Air.d_Player.getResult();
+		assertEquals(l_Expected,l_Actual);
+
+	}
+	@Test
+	public void testSourceTargetsame() {
+		d_P1.setCard("Airlift");
+		String l_Actual="", l_Expected="The source country and target country belong to the same player";
+		d_Air = new Airlift(d_P1,  d_Country1, d_Country3, 2);
+		d_Air.execute();
+		l_Actual = d_Air.d_Player.getResult();
+		assertEquals(l_Expected,l_Actual);
+
+	}
+	@Test
+	public void testOtherPlayerCountry() {
+		d_P1.setCard("Airlift");
+		String l_Actual="";
+		String l_Expected="You can only airlift armies to your own countries. egypt does not belongs to raj";
+		d_Air = new Airlift(d_P1,  d_Country1, d_Country5, 2);
+		d_Air.execute();
+		l_Actual = d_Air.d_Player.getResult();
+		assertEquals(l_Expected,l_Actual);
+
+	}
+	@Test
+	public void testAirliftAgain() {
+		d_P1.setCard("Airlift");
+		String l_Actual="", l_Expected="Player does not have a Airlift card";
+		d_Air = new Airlift(d_P1,  d_Country1, d_Country3, 2);
+		d_Air.execute();
 		d_Air.execute();
 		l_Actual = d_Air.d_Player.getResult();
 		assertEquals(l_Expected,l_Actual);
