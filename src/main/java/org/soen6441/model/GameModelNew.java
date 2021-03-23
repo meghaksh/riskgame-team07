@@ -120,16 +120,16 @@ public class GameModelNew {
 			if(l_TempPlayer.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
 				l_PlayerFound = true;
 				l_Iterator.remove();
-				
+
 			}
 		}
 		if (l_PlayerFound == false) {
 			throw new Exception("This Player does not exists");
 		}
-		
-		
-		
-	/*	Player l_CurrentPlayer;
+
+
+
+		/*	Player l_CurrentPlayer;
 		boolean l_PlayerFound = false;
 		for (Player l_Player:d_PlayerList) {
 			l_CurrentPlayer = l_Player;
@@ -150,7 +150,7 @@ public class GameModelNew {
 	 */
 	public  void setplayerQueue(Queue<Player> d_PlayerQueue) {
 		this.d_PlayerQueue=d_PlayerQueue;
-		
+
 
 	}
 	/**
@@ -181,7 +181,7 @@ public class GameModelNew {
 	public void startUpPhase() throws Exception {
 		if(getAllPlayers().size()>1) {
 			d_PlayerQueue.addAll(getAllPlayers());
-			
+
 			List<Country> l_CountryList = new ArrayList<>();
 			l_CountryList  = (List<Country>) getSelectedMap().getCountryList().clone();		
 			while (l_CountryList.size() > 0) {	
@@ -190,13 +190,11 @@ public class GameModelNew {
 				setPlayerId(d_PlayerQueue.remove());
 				getPlayerId1().addCountry(l_CountryList.get(l_Index));
 				l_CountryList.get(l_Index).setCountryOwnerPlayer(getPlayerId1());
-//				System.out.println(l_CountryList.get(l_Index).getCountryOwnerPlayer());
+				//				System.out.println(l_CountryList.get(l_Index).getCountryOwnerPlayer());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_Index);
 			}
-			for (Player l_Player : getAllPlayers()) {
-				l_Player.setContinentsList();
-			}
+
 		} else {
 			if(getAllPlayers().size()==0) {
 				throw new Exception ("Please enter players using gameplayer add command");
@@ -222,6 +220,9 @@ public class GameModelNew {
 	 */
 	public void assignReinforcementArmies() throws Exception {	
 		int l_ContinentValue=0;
+		for (Player l_Player : getAllPlayers()) {
+			l_Player.setContinentsList();			
+		}
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
 				if(!l_Player.getPlayerName().equals("Neutral Player")) { 
