@@ -45,7 +45,7 @@ public class Airlift implements Order {
 				return true;
 			}
 			else {
-				d_Player.setResult("You can only airlift armies to your own countries. "+d_TargetCountry+"does not belongs to "+d_Player);
+				d_Player.setResult("You can only airlift armies to your own countries. "+d_TargetCountry.getCountryName()+" does not belongs to "+d_Player.getPlayerName());
 				return false;
 			}
 		}
