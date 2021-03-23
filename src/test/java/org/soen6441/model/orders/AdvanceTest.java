@@ -67,7 +67,8 @@ public class AdvanceTest {
 		d_Map.addBorder("india", "kenya");
 		d_Map.addBorder("kenya", "egypt");
 		d_Map.addBorder("india", "japan");
-
+		d_Map.addBorder("kenya", "india");
+		d_Map.addBorder("japan", "india");
 		d_GameModel = new GameModelNew(d_Map);
 		d_Ge= new GameEngine(d_CpView,d_GameModel);
 		d_GameModel.addPlayer("raj");
@@ -77,15 +78,20 @@ public class AdvanceTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P1.addCountry(d_Country4);
-		d_P2.addCountry(d_Country3);
+//		d_P2.addCountry(d_Country3);
+		d_P1.addCountry(d_Country3);
+		
 		d_P2.addCountry(d_Country2);
 		d_P2.addCountry(d_Country5);
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-		d_Country3.setCountryOwnerPlayer(d_P2);
+//		d_Country3.setCountryOwnerPlayer(d_P2);
+		d_Country3.setCountryOwnerPlayer(d_P1);
+		
 		d_Country4.setCountryOwnerPlayer(d_P1);
 		d_Country5.setCountryOwnerPlayer(d_P2);
+		
 
 		d_P1.setPlayerArmies(3);
 		d_P2.setPlayerArmies(3);
@@ -110,4 +116,32 @@ public class AdvanceTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+//	@Test
+//	public void testTransferAdjacentTerritory() {
+//		String l_Actual="", l_Expected="\nThe source country and target country belong to the same player";
+//		d_adv = new Advance(d_P1,  d_Country1, d_Country3, 2);
+//		d_adv.execute();
+//		l_Actual = d_adv.d_Player.getResult();
+//		assertEquals(l_Expected,l_Actual);
+//
+//	}
+	@Test
+	public void testSourceTargetTerritory() {
+		String l_Actual="", l_Expected="\nThe source country and target country cannot be same!";
+		d_adv = new Advance(d_P1,  d_Country1, d_Country1, 2);
+		d_adv.execute();
+		l_Actual = d_adv.d_Player.getResult();
+		assertEquals(l_Expected,l_Actual);
+
+	}
+	@Test
+	public void testSourceTargetNeighbours() {
+		String l_Actual="", l_Expected="\nThe source country and target country are not neighbours!";
+		d_adv = new Advance(d_P1,  d_Country1, d_Country3, 2);
+		d_adv.execute();
+		l_Actual = d_adv.d_Player.getResult();
+		assertEquals(l_Expected,l_Actual);
+
+	}
+	
 }
