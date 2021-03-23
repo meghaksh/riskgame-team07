@@ -12,7 +12,7 @@ public class Bomb implements Order {
 	private int d_NoOfArmies;
 
 	public Bomb(Player p_player, Country p_TempCountry) {
-		this.d_Player = p_player;
+		this.set_Player(p_player);
 		this.d_Country = p_TempCountry;
 		setBombedPlayer();
 	}
@@ -32,29 +32,37 @@ public class Bomb implements Order {
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies() - d_NoOfArmies);
 			d_PlayerBombed.setPlayerArmies(d_PlayerBombed.getPlayerArmies() - l_NoOfArmiesReduced);
 		}
-		d_Player.removeCard("Bomb");
+		get_Player().removeCard("Bomb");
 
 	}
 
 	public boolean isValid()
 	{
-		if(!d_Player.getCardList().contains("Bomb")) {
-			d_Player.setResult("Player does not have a bomb card");
+		if(!get_Player().getCardList().contains("Bomb")) {
+			get_Player().setResult("Player does not have a bomb card");
 			return false;
 		}
 
-		if(d_Player.getCountryList().contains(d_Country)) {
-			d_Player.setResult("Player cannot bomb its own country");
+		if(get_Player().getCountryList().contains(d_Country)) {
+			get_Player().setResult("Player cannot bomb its own country");
 			return false;
 		}
-		for(Country l_Country : d_Player.getCountryList()) {
+		for(Country l_Country : get_Player().getCountryList()) {
 			if(!l_Country.getBorder().contains(d_Country.getCountryName())) {
-				d_Player.setResult("The bombing country is not a neighbour of player");
+				get_Player().setResult("The bombing country is not a neighbour of player");
 				return false;				
 			}
 		}
 		System.out.println("The order is valid");
 		return true;
 
+	}
+
+	public Player get_Player() {
+		return d_Player;
+	}
+
+	public void set_Player(Player d_Player) {
+		this.d_Player = d_Player;
 	}
 }
