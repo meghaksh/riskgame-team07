@@ -14,7 +14,7 @@ public class Deploy implements Order{
 
 	public Deploy(Player p_Player, Country p_Country, int p_NumArmies) {
 		// TODO Auto-generated constructor stub
-		d_Player = p_Player;
+		set_Player(p_Player);
 		d_Country = p_Country;
 		d_NumArmies = p_NumArmies;
 	}
@@ -24,7 +24,7 @@ public class Deploy implements Order{
 		// TODO Auto-generated method stub
 		if(isValid())
 		{
-			d_Player.setPlayerArmies(d_Player.getPlayerArmies() - d_NumArmies);
+			get_Player().setPlayerArmies(get_Player().getPlayerArmies() - d_NumArmies);
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()+d_NumArmies);
 		}
 
@@ -33,8 +33,8 @@ public class Deploy implements Order{
 	public boolean isValid()
 	{
 		int l_Flag=0;
-		if(d_NumArmies <= d_Player.getPlayerArmies()){
-			Iterator<Country>l_It = d_Player.getCountryList().iterator();
+		if(d_NumArmies <= get_Player().getPlayerArmies()){
+			Iterator<Country>l_It = get_Player().getCountryList().iterator();
 			while(l_It.hasNext()) {
 				Country l_TempCountry = (Country)l_It.next() ;
 				if(d_Country==l_TempCountry) {
@@ -43,18 +43,26 @@ public class Deploy implements Order{
 				}
 			}
 			if(l_Flag==1) {
-				d_Player.setResult("\norder deploy "+d_Country.getCountryName()+" "+d_NumArmies+" added to list of "+d_Player.getPlayerName());
+				get_Player().setResult("\norder deploy "+d_Country.getCountryName()+" "+d_NumArmies+" added to list of "+get_Player().getPlayerName());
 				return true;
 			} else {
-				d_Player.setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+d_Player.getPlayerName());
+				get_Player().setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+get_Player().getPlayerName());
 				return false;
 			}
 		} else {
-			d_Player.setResult("\n"+d_Player.getPlayerName()+" ; you have only "+d_Player.getPlayerArmies()+" number of armies! Please enter the next order accordingly");
+			get_Player().setResult("\n"+get_Player().getPlayerName()+" ; you have only "+get_Player().getPlayerArmies()+" number of armies! Please enter the next order accordingly");
 			return false;
 		}
 
 
+	}
+
+	public Player get_Player() {
+		return d_Player;
+	}
+
+	public void set_Player(Player d_Player) {
+		this.d_Player = d_Player;
 	}
 
 }
