@@ -24,7 +24,6 @@ public class Blockade implements Order {
 
 	@Override
 	public void execute() {
-		System.out.println("inside blockade");
 		if(isValid())
 		{
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()*3);
@@ -35,16 +34,22 @@ public class Blockade implements Order {
 //					System.out.println("play"+l_Player);
 					d_Country.setCountryOwnerPlayer(l_Player);
 					l_Player.addCountry(d_Country);
+//					System.out.println("inside blockade");
 			}
 
 		}
 		d_Player.removeCard("Blockade");
-		System.out.println("outside blockade");
+//		System.out.println("outside blockade");
 	}
 	
 	public boolean isValid()
 	{
 		int l_Flag=0;
+		
+		if(!d_Player.getCardList().contains("Blockade")) {
+			System.out.println("Player does not have a blockade card");
+			return false;
+		}
 
 			Iterator<Country>l_It = d_Player.getCountryList().iterator();
 			while(l_It.hasNext()) {
