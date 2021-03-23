@@ -10,7 +10,7 @@ public class Negotiate implements Order {
 		System.out.println("Negotiate Created : " + p_SourcePlayer.getPlayerName() + " : " + p_TargetPlayer.getPlayerName());
 		d_SourcePlayer = p_SourcePlayer;
 		d_TargetPlayer = p_TargetPlayer;
-		
+
 	}
 
 	@Override
@@ -25,8 +25,8 @@ public class Negotiate implements Order {
 		{
 			d_SourcePlayer.setResult("\n"+d_SourcePlayer.getPlayerName()+" does not own Negotiate Card for Diplomacy with "+d_TargetPlayer.getPlayerName());
 		}
-		
+
 	}
-	
+
 
 }
