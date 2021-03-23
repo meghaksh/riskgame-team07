@@ -30,11 +30,14 @@ public class Blockade implements Order {
 			
 			d_Player.getCountryList().remove(d_Country);
 			for(Player l_Player : d_gameobj.getAllPlayers()) {
-				if(l_Player.getPlayerName()=="NeutralPlayer")
+				if(l_Player.getPlayerName()=="Neutral Player")
+				{
 //					System.out.println("play"+l_Player);
 					d_Country.setCountryOwnerPlayer(l_Player);
+					l_Player.setPlayerArmies(d_Country.getNoOfArmies());
 					l_Player.addCountry(d_Country);
 //					System.out.println("inside blockade");
+				}
 			}
 
 		}
