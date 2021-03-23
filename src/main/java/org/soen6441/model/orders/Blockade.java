@@ -14,16 +14,16 @@ public class Blockade implements Order {
 	private GameModelNew d_gameobj;
 
 	public Blockade(Player p_player, Country p_TempCountry) {
-		d_Player = p_player;
+		set_Player(p_player);
 		d_Country = p_TempCountry;
-		this.d_gameobj = d_Player.getGameModel();
+		this.d_gameobj = get_Player().getGameModel();
 	}
 
 	@Override
 	public void execute() {
 		if(isValid()) {
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()*3);
-			d_Player.getCountryList().remove(d_Country);
+			get_Player().getCountryList().remove(d_Country);
 			for(Player l_Player : d_gameobj.getAllPlayers()) {
 				if(l_Player.getPlayerName()=="Neutral Player") {
 					d_Country.setCountryOwnerPlayer(l_Player);
@@ -32,16 +32,16 @@ public class Blockade implements Order {
 				}
 			}
 		}
-		d_Player.removeCard("Blockade");
+		get_Player().removeCard("Blockade");
 	}
 
 	public boolean isValid() {
 		int l_Flag=0;
-		if(!d_Player.getCardList().contains("Blockade")) {
-			d_Player.setResult("Player does not have a blockade card");
+		if(!get_Player().getCardList().contains("Blockade")) {
+			get_Player().setResult("Player does not have a blockade card");
 			return false;
 		}
-		Iterator<Country>l_It = d_Player.getCountryList().iterator();
+		Iterator<Country>l_It = get_Player().getCountryList().iterator();
 		while(l_It.hasNext()) {
 			Country l_TempCountry = (Country)l_It.next() ;
 			if(d_Country==l_TempCountry) {
@@ -52,8 +52,16 @@ public class Blockade implements Order {
 		if(l_Flag==1) {
 			return true;
 		} else {
-			d_Player.setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+d_Player.getPlayerName());
+			get_Player().setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+get_Player().getPlayerName());
 			return false;
 		}	
+	}
+
+	public Player get_Player() {
+		return d_Player;
+	}
+
+	public void set_Player(Player d_Player) {
+		this.d_Player = d_Player;
 	}
 }
