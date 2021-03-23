@@ -11,12 +11,12 @@ public class Deploy implements Order{
 	private Player d_Player;
 	private Country d_Country;
 	private int d_NumArmies;
-	
-	public Deploy(Player l_Player, Country l_Country, int l_NumArmies) {
+
+	public Deploy(Player p_Player, Country p_Country, int p_NumArmies) {
 		// TODO Auto-generated constructor stub
-		d_Player = l_Player;
-		d_Country = l_Country;
-		d_NumArmies = l_NumArmies;
+		d_Player = p_Player;
+		d_Country = p_Country;
+		d_NumArmies = p_NumArmies;
 	}
 
 	@Override
@@ -26,10 +26,9 @@ public class Deploy implements Order{
 		{
 			d_Player.setPlayerArmies(d_Player.getPlayerArmies() - d_NumArmies);
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()+d_NumArmies);
-			//d_Player.setResult("\norder deploy "+d_Country.getCountryName()+" "+d_NumArmies+" added to list of "+d_Player.getPlayerName());
 		}
-		
-		
+
+
 	}
 	public boolean isValid()
 	{
@@ -54,8 +53,8 @@ public class Deploy implements Order{
 			d_Player.setResult("\n"+d_Player.getPlayerName()+" ; you have only "+d_Player.getPlayerArmies()+" number of armies! Please enter the next order accordingly");
 			return false;
 		}
-		
-		
+
+
 	}
 
 }
