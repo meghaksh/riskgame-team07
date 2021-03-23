@@ -40,7 +40,7 @@ public class Player {
 	 * constructor of Player class with only player name as the parameters
 	 * @param p_PlayerName  Name of the player
 	 */
-	Player(String p_PlayerName, GameModelNew p_GameModelNew) {
+	public Player(String p_PlayerName, GameModelNew p_GameModelNew) {
 		this.d_PlayerName = p_PlayerName;
 		this.d_GameModelNew = p_GameModelNew;
 	}
