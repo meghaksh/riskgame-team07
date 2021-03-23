@@ -129,21 +129,23 @@ public class Advance implements Order {
 						l_defendWin++;
 					}
 				}
-				if(l_attackWin>=l_defendWin)
+				if(l_attackWin>l_defendWin)
 				{
 					d_TargetCountry.getCountryOwnerPlayer().removeCountry(d_TargetCountry);
 					d_TargetCountry.setCountryOwnerPlayer(d_Player);
-					d_TargetCountry.setNoOfArmies(l_attackWin);
+					d_TargetCountry.setNoOfArmies(d_NumArmies-l_MinArmies+l_attackWin);
 					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
 					d_Player.addCountry(d_TargetCountry);
 					d_Player.setAtleastOneBattleWon(true);
 
 
-					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry.getCountryName()+" was a Success!!");
+					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Success!!");
 				}
 				else
 				{
-					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry.getCountryName()+" was a Failure!!");
+					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
+					d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()-d_NumArmies+l_defendWin);
+					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Failure!!");
 				}
 			}catch(Exception p_E) {p_E.printStackTrace();}
 			}
@@ -211,6 +213,10 @@ public class Advance implements Order {
 				}
 				System.out.println("l_DefenderArmiesinHand"+l_DefenderArmiesinHand);
 				returnHashMap =  l_DefenderArmiesinHand;
+			}
+			else
+			{
+				returnHashMap = l_AttackerArmies;
 			}
 			System.out.println("in armies to fight"+returnHashMap);
 			return returnHashMap;
