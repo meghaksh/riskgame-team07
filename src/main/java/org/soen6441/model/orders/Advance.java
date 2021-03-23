@@ -76,7 +76,7 @@ public class Advance implements Order {
 				
 			//	d_Player.setCard(d_Cards.get(l_cardInteger));
 				
-				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
+				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry.getCountryName()+" was a Success!!");
 				return;
 			}
 			HashMap <Integer,Integer> l_AttackerArmies = new HashMap<>(); 
@@ -138,11 +138,11 @@ public class Advance implements Order {
 			
 	//		d_Player.setCard(d_Cards.get(l_cardInteger));
 			
-			d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Success!!");
+			d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry.getCountryName()+" was a Success!!");
 		}
 		else
 		{
-			d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry+" was a Failure!!");
+			d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry.getCountryName()+" was a Failure!!");
 		}
 	}
 		
@@ -206,12 +206,12 @@ public class Advance implements Order {
 		int l_ReturnInt=0;
 		if(d_Player.getNegotiatedPlayerList().contains(d_TargetCountry.getCountryOwnerPlayer()))
 		{
-			d_Player.setResult("\nThe targeted country "+d_TargetCountry+" belongs to "+d_TargetCountry.getCountryOwnerPlayer()+" which is negotiated player!");
+			d_Player.setResult("\nThe targeted country "+d_TargetCountry.getCountryName()+" belongs to "+d_TargetCountry.getCountryOwnerPlayer().getPlayerName()+" which is negotiated player!");
 			l_ReturnInt=0;
 		}
-		if(d_TargetCountry.getCountryOwnerPlayer().getPlayerName().equals("Neutral Player"))
+		else if(d_TargetCountry.getCountryOwnerPlayer().getPlayerName().equals("Neutral Player"))
 		{
-			d_Player.setResult("\nThe targeted country "+d_TargetCountry+" belongs to Neutral Player!");
+			d_Player.setResult("\nThe targeted country "+d_TargetCountry.getCountryName()+" belongs to Neutral Player!");
 			l_ReturnInt=0;
 		}
 		else if(d_SourceCountry==d_TargetCountry)

@@ -21,6 +21,10 @@ public class Negotiate implements Order {
 			this.d_TargetPlayer.getNegotiatedPlayerList().add(d_SourcePlayer);
 			d_SourcePlayer.removeCard("Negotiate");
 		}
+		else
+		{
+			d_SourcePlayer.setResult("\n"+d_SourcePlayer.getPlayerName()+" does not own Negotiate Card for Diplomacy with "+d_TargetPlayer.getPlayerName());
+		}
 		
 	}
 	

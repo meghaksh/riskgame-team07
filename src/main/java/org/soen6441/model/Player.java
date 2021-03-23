@@ -254,9 +254,10 @@ public class Player {
 	{
 		return d_NegotiatedPlayers;
 	}
-	public void removeNegotiatedPlayer(Player l_NegotiatedPlayer)
+	public void removeNegotiatedPlayer()
 	{
-		d_NegotiatedPlayers.remove(l_NegotiatedPlayer);
+		if(d_NegotiatedPlayers.size()>0)
+		d_NegotiatedPlayers.clear();
 	}
 	/**
 	 * The issue order method checks the order issued by the player whether the country it is asking for is in its country list or not
@@ -278,6 +279,10 @@ public class Player {
 		switch(l_OrderType) {
 		
 		case "deploy":
+			if(l_StringList.length != 3)
+			{
+				break;
+			}
 			int l_NumArmies = Integer.parseInt(l_StringList[2]);
 			//Country l_SourceCountry = (Country)filter(e -> e.getCountryName().equals(l_StringList[1])).forEach(e : d_GameModelNew.getSelectedMap().getCountryList());
 			//System.out.println("inside deploy switch case "+l_SourceCountry.getCountryName());
@@ -294,6 +299,10 @@ public class Player {
 			
 			break;
 		case "advance" :
+			if(l_StringList.length != 4)
+			{
+				break;
+			}
 			int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
 			Country l_SourceCountry = null, l_TargetCountry = null;
 			//Country l_SourceCountry = (Country) d_GameModelNew.getSelectedMap().getCountryList().stream().filter(e -> e.getCountryName().equals(l_StringList[1]));
@@ -316,6 +325,10 @@ public class Player {
 			d_Order.add(new Advance(this,l_SourceCountry,l_TargetCountry,l_NumArmies1));
 			break;
 		case "bomb":
+			if(l_StringList.length != 2)
+			{
+				break;
+			}
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
 				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
@@ -325,6 +338,10 @@ public class Player {
 				}
 			}break;
 		case "blockade":
+			if(l_StringList.length != 2)
+			{
+				break;
+			}
 			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 			{
 				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
@@ -335,6 +352,10 @@ public class Player {
 			}
 			break;
 		case "airlift":
+			if(l_StringList.length != 4)
+			{
+				break;
+			}
 			int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
 			Country l_SourceCountry1 = null, l_TargetCountry1 = null;
 			//Country l_SourceCountry = (Country) d_GameModelNew.getSelectedMap().getCountryList().stream().filter(e -> e.getCountryName().equals(l_StringList[1]));
@@ -357,6 +378,10 @@ public class Player {
 			d_Order.add(new Airlift(this,l_SourceCountry1,l_TargetCountry1,l_NumArmies2));
 			break;
 		case "negotiate":
+			if(l_StringList.length != 2)
+			{
+				break;
+			}
 			for(Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
 				if(l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
 					d_Order.add(new Negotiate(this, l_TempPlayer));
@@ -364,6 +389,9 @@ public class Player {
 				}
 			}
 			
+			break;
+			
+		default:
 			break;
 			
 		}

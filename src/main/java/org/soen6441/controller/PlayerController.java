@@ -231,14 +231,16 @@ public class PlayerController {
 	
 	public void clearNegotiatedPlayerList()
 	{
-		for(Player l_TempPlayer: d_Players)
-		{
-			for(Player l_TempNegotiated: l_TempPlayer.getNegotiatedPlayerList())
+		
+			for(Player l_TempPlayer: d_Players)
 			{
-				l_TempPlayer.removeNegotiatedPlayer(l_TempNegotiated);
+				
+				l_TempPlayer.removeNegotiatedPlayer();
+				
 			}
-		}
+		
 	}
+	
 	public void checkTheWinner()
 	{
 		HashMap<Country, Player> l_countryOwner = new HashMap<>();
