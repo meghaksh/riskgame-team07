@@ -274,7 +274,7 @@ public class PlayerController {
 		}
 		if(l_flag==0)
 		{
-			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer+" is the winner of the game!");
+			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer.getPlayerName()+" is the winner of the game!");
 		}
 		/*for(Country l_TempCountry : d_GameModelNew.getMap().getCountryList())
 		{
