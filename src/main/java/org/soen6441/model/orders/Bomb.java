@@ -48,14 +48,23 @@ public class Bomb implements Order {
 			get_Player().setResult("Player cannot bomb its own country");
 			return false;
 		}
+		int l_Flag = 0;
 		for(Country l_Country : get_Player().getCountryList()) {
-			if(!l_Country.getBorder().contains(d_Country.getCountryName())) {
-				get_Player().setResult("The bombing country is not a neighbour of player");
-				return false;				
+			if(l_Country.getBorder().contains(d_Country.getCountryName())) {
+				l_Flag = 1;
 			}
+			
 		}
-		System.out.println("The order is valid");
-		return true;
+		
+		if(l_Flag==0) {
+			get_Player().setResult("The bombing country is not a neighbour of player");
+			return false;	
+		}
+		else {
+			get_Player().setResult("The country is bombed");
+			return true;
+		}
+		
 
 	}
 
