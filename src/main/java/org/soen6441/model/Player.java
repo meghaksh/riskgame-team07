@@ -39,6 +39,7 @@ public class Player {
 	/**
 	 * constructor of Player class with only player name as the parameters
 	 * @param p_PlayerName  Name of the player
+	 * @param p_GameModelNew The GameModelNew  reference to access the map 
 	 */
 	public Player(String p_PlayerName, GameModelNew p_GameModelNew) {
 		this.d_PlayerName = p_PlayerName;
@@ -85,27 +86,13 @@ public class Player {
 	}
 
 	/**
-	 * get method for player color
-	 * @return returns player color
-	 */
-	public String getPlayerColor() {
-		return this.d_PlayerColor;
-	}
-
-	/**
 	 * set method for player id 
 	 * @param p_PlayerId player id of player
 	 */
 	public void setPlayerId(int p_PlayerId) {
 		this.d_PlayerId = p_PlayerId;
 	}
-	/**
-	 * set method for player color
-	 * @param p_PlayerColor Player Color of the player
-	 */
-	public void setPlayerColor(String p_PlayerColor) {
-		this.d_PlayerColor = p_PlayerColor;
-	}
+
 	/**
 	 * set method for allocating armies to player
 	 * @param p_Armies Armies off the player
@@ -125,12 +112,18 @@ public class Player {
 	public GameModelNew getGameModel() {
 		return this.d_GameModelNew;
 	}
-
+	/**
+	 * This method sets the flag value to true if the player won a battle and false otherwise.
+	 * @param p_B a boolean value to determine if player has won a battle or not
+	 */
 	public void setAtleastOneBattleWon(boolean p_B)
 	{
 		this.d_AtleastOneBattleWon=p_B;
 	}
-
+	/**
+	 * This method returns the battle won boolean
+	 * @return the boolean value indicating if the player had won a battle or not
+	 */
 	public boolean getAtleastOneBattleWon()
 	{
 		return this.d_AtleastOneBattleWon;
@@ -201,13 +194,6 @@ public class Player {
 	 */
 	public int getOrderSize() {
 		return this.d_Order.size();
-	}
-	/**
-	 * get method for the result Integer. It is a flag which defines the result of the issue order method
-	 * @return integer set for determining the result of issue order method
-	 */
-	public int getResultInteger() {
-		return this.d_ResultInteger;
 	}
 	/**
 	 * get method for the card if the player owns it or not.
@@ -299,9 +285,6 @@ public class Player {
 					break;
 				}
 			}
-			break;
-		case "end":
-
 			break;
 		case "advance" :
 			if(l_StringList.length != 4)
