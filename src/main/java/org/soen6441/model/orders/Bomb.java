@@ -31,8 +31,9 @@ public class Bomb implements Order {
 			int l_NoOfArmiesReduced = d_Country.getNoOfArmies() - d_NoOfArmies;
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies() - d_NoOfArmies);
 			d_PlayerBombed.setPlayerArmies(d_PlayerBombed.getPlayerArmies() - l_NoOfArmiesReduced);
+			get_Player().removeCard("Bomb");
 		}
-		get_Player().removeCard("Bomb");
+		
 
 	}
 
