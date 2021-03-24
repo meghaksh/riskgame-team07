@@ -92,7 +92,7 @@ public class NegotiateTest {
 		String l_Actual="", l_Expected="\nraj does not own Negotiate Card for Diplomacy with kumar";
 		d_Nego = new Negotiate(d_P1,  d_P2);
 		d_Nego.execute();
-		l_Actual = d_Nego.get_SourcePlayer().getResult();
+		l_Actual = d_Nego.getSourcePlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 	
@@ -102,7 +102,7 @@ public class NegotiateTest {
 		String l_Actual="", l_Expected="Negotation with kumar successfull.";
 		d_Nego = new Negotiate(d_P1,  d_P2);
 		d_Nego.execute();
-		l_Actual = d_Nego.get_SourcePlayer().getResult();
+		l_Actual = d_Nego.getSourcePlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 	
@@ -113,7 +113,7 @@ public class NegotiateTest {
 		d_Nego = new Negotiate(d_P1,  d_P2);
 		d_Nego.execute();
 		d_Nego.execute();
-		l_Actual = d_Nego.get_SourcePlayer().getResult();
+		l_Actual = d_Nego.getSourcePlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 	
