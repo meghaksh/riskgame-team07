@@ -118,8 +118,9 @@ public class BombTest {
 	@Test
 	public void testBombAgain() {
 		d_P1.setCard("Bomb");
+		d_Country1.setBorder("egypt");
 		String l_Actual="", l_Expected="Player does not have a bomb card";
-		d_Bomb = new Bomb(d_P1,  d_Country1);
+		d_Bomb = new Bomb(d_P1,  d_Country5);
 		d_Bomb.execute();
 		d_Bomb.execute();
 		l_Actual = d_Bomb.get_Player().getResult();

@@ -39,6 +39,10 @@ public class Bomb implements Order {
 
 	public boolean isValid()
 	{
+		if(get_Player().getNegotiatedPlayerList().size()>0) {
+			get_Player().setResult("Player is a negotiated player");
+			return false;
+		}
 		if(!get_Player().getCardList().contains("Bomb")) {
 			get_Player().setResult("Player does not have a bomb card");
 			return false;
