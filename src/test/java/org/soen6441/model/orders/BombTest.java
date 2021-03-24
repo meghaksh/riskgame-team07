@@ -91,7 +91,7 @@ public class BombTest {
 		String l_Actual="", l_Expected="Player does not have a bomb card";
 		d_Bomb = new Bomb(d_P1,  d_Country1);
 		d_Bomb.execute();
-		l_Actual = d_Bomb.get_Player().getResult();
+		l_Actual = d_Bomb.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 
@@ -101,7 +101,7 @@ public class BombTest {
 		String l_Actual="", l_Expected="Player cannot bomb its own country";
 		d_Bomb = new Bomb(d_P1,  d_Country1);
 		d_Bomb.execute();
-		l_Actual = d_Bomb.get_Player().getResult();
+		l_Actual = d_Bomb.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 
@@ -111,7 +111,7 @@ public class BombTest {
 		String l_Actual="", l_Expected="The bombing country is not a neighbour of player";
 		d_Bomb = new Bomb(d_P1,  d_Country4);
 		d_Bomb.execute();
-		l_Actual = d_Bomb.get_Player().getResult();
+		l_Actual = d_Bomb.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 
@@ -123,7 +123,7 @@ public class BombTest {
 		d_Bomb = new Bomb(d_P1,  d_Country5);
 		d_Bomb.execute();
 		d_Bomb.execute();
-		l_Actual = d_Bomb.get_Player().getResult();
+		l_Actual = d_Bomb.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 }
