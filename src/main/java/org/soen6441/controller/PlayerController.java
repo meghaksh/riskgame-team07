@@ -43,10 +43,10 @@ public class PlayerController {
 		d_LEB=new LogEntryBuffer();
 		d_AllCards= new HashMap<>();
 		int i=0;
-		//d_AllCards.put(i++, "Bomb");
+		d_AllCards.put(i++, "Bomb");
 		d_AllCards.put(i++, "Blockade");
-		//d_AllCards.put(i++, "Negotiate");
-		//d_AllCards.put(i++,"Airlift");
+		d_AllCards.put(i++, "Negotiate");
+		d_AllCards.put(i++,"Airlift");
 		l_rand = new Random();
 	}
 
@@ -213,20 +213,36 @@ public class PlayerController {
 				}
 			}
 		}
-		for(Player l_TempPlayer : d_Players)
-		{
-			if(l_TempPlayer.getAtleastOneBattleWon())
+		try {
+			for(Player l_TempPlayer : d_Players)
 			{
-				int l_cardInteger = l_rand.nextInt(0);
-				l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
-				l_TempPlayer.setAtleastOneBattleWon(false);
+				if(l_TempPlayer.getAtleastOneBattleWon())
+				{
+					int l_cardInteger = l_rand.nextInt(3);
+					l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
+					l_TempPlayer.setAtleastOneBattleWon(false);
+				}
+			}
+			
+			clearNegotiatedPlayerList();
+			removePlayerWithNoCountry();
+			checkTheWinner();
+			
+			d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
+			d_LEB.setResult("\nOrders are Succesfully Executed!!");
+		}catch(Exception p_Exp) {
+			p_Exp.printStackTrace();
+		}
+	}
+	
+	public void removePlayerWithNoCountry() {
+		Iterator<Player> l_PlayerIterator = d_Players.iterator();
+		while(l_PlayerIterator.hasNext()) {
+			Player l_TempPlayer = (Player)l_PlayerIterator.next();
+			if(l_TempPlayer.getCountriesSize()<=0 && !l_TempPlayer.getPlayerName().equals("Neutral Player")) {
+				l_PlayerIterator.remove();
 			}
 		}
-		clearNegotiatedPlayerList();
-		checkTheWinner();
-		
-		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
-		d_LEB.setResult("\nOrders are Succesfully Executed!!");
 	}
 	
 	public void clearNegotiatedPlayerList()
@@ -245,7 +261,7 @@ public class PlayerController {
 	{
 		//HashMap<Country, Player> l_countryOwner = new HashMap<>();
 		ArrayList <Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
-		Iterator itr = l_CountryList.iterator();
+		Iterator<Country>itr = l_CountryList.iterator();
 		Player l_CheckPlayer = (Player)((Country) itr.next()).getCountryOwnerPlayer();
 		int l_flag= 0;
 		while(itr.hasNext())
