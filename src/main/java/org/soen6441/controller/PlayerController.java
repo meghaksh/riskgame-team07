@@ -169,11 +169,10 @@ public class PlayerController {
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
 						Blockade l_BlockadeOrder = (Blockade) l_Order;
 						l_BlockadeOrder.execute();
-						System.out.println("blockade done");
-						//String l_Result = l_Player.getResult();
-						//d_OrderAcknowledgment=l_Result;
-						//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						//d_LEB.setResult(d_OrderAcknowledgment);
+						String l_Result = l_Player.getResult();
+						d_OrderAcknowledgment=l_Result;
+						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
+						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Bomb")) {
 						Bomb l_BombOrder = (Bomb) l_Order;
