@@ -91,7 +91,7 @@ public class BlockadeTest {
 		String l_Actual="", l_Expected="Player does not have a blockade card";
 		d_Block = new Blockade(d_P1,  d_Country1);
 		d_Block.execute();
-		l_Actual = d_Block.get_Player().getResult();
+		l_Actual = d_Block.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -101,7 +101,7 @@ public class BlockadeTest {
 		String l_Actual="", l_Expected="\nThis country egypt doesnot belongs to raj";
 		d_Block = new Blockade(d_P1,  d_Country5);
 		d_Block.execute();
-		l_Actual = d_Block.get_Player().getResult();
+		l_Actual = d_Block.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -112,7 +112,7 @@ public class BlockadeTest {
 		d_Block = new Blockade(d_P1,  d_Country1);
 		d_Block.execute();
 		d_Block.execute();
-		l_Actual = d_Block.get_Player().getResult();
+		l_Actual = d_Block.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
