@@ -4,86 +4,88 @@ import org.soen6441.controller.GameEngine;
 import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 
-public class ExecuteOrder extends Phase {
+public class GameOver extends Phase {
 	LogEntryBuffer d_Leb;
-	public ExecuteOrder(GameEngine p_Ge, CommandPrompt p_Vw) {
+	public GameOver(GameEngine p_Ge, CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
-		try {
-			
-		d_Ge.getPlayerController().playerNextOrder();
-		
-		if(!d_Ge.getPhase().getPhaseName().equals("GameOver")) {
-			d_Ge.showMap(this);
-			d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));
-			d_Leb=new LogEntryBuffer();
-		}
-		
-		}catch(Exception p_E) {}
+		d_Vw.clearTextArea();
+		d_Vw.setCommandAcknowledgement("Game Over");
+		d_Leb=new LogEntryBuffer();
 	}
+
+	@Override
 	public String editMap(String p_S) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
+
+	@Override
 	public String editCountry(String p_S, String p_S1) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 
+	@Override
 	public String editContinent(String p_S, String p_S1) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 
+	@Override
 	public String editNeighbor(String p_S, String p_S1) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
 
+	@Override
 	public String saveMap(String p_S) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
-	
+
+	@Override
+	public String validateMap() {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
+		return null;
+	}
+
+	@Override
 	public String loadMap(String p_S) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
-	
+
+	@Override
 	public String addPlayers(String p_S, String p_S1) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 		return null;
 	}
-	
+
+	@Override
 	public void assignCountries() {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
 	}
-	
-	public void showMap() {
-		d_Ge.showMap(this);
-	}
-	
-	public void endGame() {
-		
-	}
-	
-	
 
-	public String validateMap() {	
+	@Override
+	public void showMap() {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
 		d_Leb.setResult("Invalid command in state ");
-		return null;
 	}
-	public String getPhaseName()
-	{
-		return "ExecutePhase";
+
+	@Override
+	public String getPhaseName() {
+		// TODO Auto-generated method stub
+		return "GameOver";
 	}
+	
 
 }

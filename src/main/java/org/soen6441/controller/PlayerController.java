@@ -18,6 +18,7 @@ import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
 import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.utility.state.GameOver;
 import org.soen6441.view.CommandPrompt;
 
 /**
@@ -30,24 +31,26 @@ public class PlayerController {
 	private GameModelNew d_GameModelNew;
 	private LogEntryBuffer d_LEB;
 	private HashMap<Integer, String> d_AllCards;
-	private Random l_rand;
+	private Random d_Rand;
+	private GameEngine d_GameEngine;
 	/**
 	 * Constructor of Player controller
 	 * @param p_Players list of players 
 	 * @param p_CpView object of command prompt for communicating with player
 	 */
-	PlayerController(GameModelNew p_GameModelNew,CommandPrompt p_CpView) {
+	PlayerController(GameModelNew p_GameModelNew,CommandPrompt p_CpView, GameEngine p_GameEngine) {
 		d_GameModelNew = p_GameModelNew;
 		d_Players = d_GameModelNew.getAllPlayers();
 		d_CpView=p_CpView;
 		d_LEB=new LogEntryBuffer();
 		d_AllCards= new HashMap<>();
+		d_GameEngine = p_GameEngine;
 		int i=0;
 		d_AllCards.put(i++, "Bomb");
 		d_AllCards.put(i++, "Blockade");
 		d_AllCards.put(i++, "Negotiate");
 		d_AllCards.put(i++,"Airlift");
-		l_rand = new Random();
+		d_Rand = new Random();
 	}
 
 	/**
@@ -213,26 +216,24 @@ public class PlayerController {
 				}
 			}
 		}
-		try {
+		//try {
 			for(Player l_TempPlayer : d_Players)
 			{
 				if(l_TempPlayer.getAtleastOneBattleWon())
 				{
-					int l_cardInteger = l_rand.nextInt(3);
+					int l_cardInteger = d_Rand.nextInt(3);
 					l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
 					l_TempPlayer.setAtleastOneBattleWon(false);
 				}
 			}
-			
-			clearNegotiatedPlayerList();
-			removePlayerWithNoCountry();
-			checkTheWinner();
-			
 			d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
 			d_LEB.setResult("\nOrders are Succesfully Executed!!");
-		}catch(Exception p_Exp) {
-			p_Exp.printStackTrace();
-		}
+			clearNegotiatedPlayerList();
+			removePlayerWithNoCountry();
+			checkTheWinner();		
+//		}catch(Exception p_Exp) {
+//			p_Exp.printStackTrace();
+//		}
 	}
 	
 	public void removePlayerWithNoCountry() {
@@ -274,6 +275,8 @@ public class PlayerController {
 		}
 		if(l_flag==0)
 		{
+			
+			d_GameEngine.setPhase(new GameOver(d_GameEngine,d_CpView));
 			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer.getPlayerName()+" is the winner of the game!");
 		}
 		/*for(Country l_TempCountry : d_GameModelNew.getMap().getCountryList())

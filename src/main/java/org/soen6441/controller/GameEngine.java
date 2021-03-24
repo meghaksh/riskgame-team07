@@ -52,7 +52,7 @@ public class GameEngine  {
 		d_GameModelNew = p_GameModel;
 		d_CpView = p_CpView;
 		d_MapController = new MapController(this.d_GameModelNew.getMap());
-		d_PlayerController = new PlayerController(d_GameModelNew,d_CpView);
+		d_PlayerController = new PlayerController(d_GameModelNew,d_CpView, this);
 		d_CpView.commandSendButtonListener(new CommandListener());
 		setPhase(new Edit(this,getViewObject()));
 		d_LEB=new LogEntryBuffer();

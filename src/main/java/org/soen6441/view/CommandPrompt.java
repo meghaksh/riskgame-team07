@@ -103,4 +103,8 @@ public class CommandPrompt {
 	public void commandSendButtonListener(ActionListener p_ListenForCommandButton) {
 		d_CommandSendButton.addActionListener(p_ListenForCommandButton);
 	}
+	
+	public void clearTextArea() {
+		this.d_CommandAcknowledgeArea.setText("");
+	}
 }
