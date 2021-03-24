@@ -50,6 +50,7 @@ public class Blockade implements Order {
 			}
 		}
 		if(l_Flag==1) {
+			get_Player().setResult("The blockade was successfull");
 			return true;
 		} else {
 			get_Player().setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+get_Player().getPlayerName());
