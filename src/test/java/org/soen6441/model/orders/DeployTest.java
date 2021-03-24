@@ -93,7 +93,7 @@ public class DeployTest {
 		String l_Expected="\nraj ; you have only 3 number of armies! Please enter the next order accordingly";
 		d_Deploy = new Deploy(d_P1,  d_Country1, 4);
 		d_Deploy.execute();
-		l_Actual = d_Deploy.get_Player().getResult();
+		l_Actual = d_Deploy.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 
@@ -103,7 +103,7 @@ public class DeployTest {
 		String l_Expected="\nThis country india doesnot belongs to kumar";
 		d_Deploy = new Deploy(d_P2,  d_Country1, 3);
 		d_Deploy.execute();
-		l_Actual = d_Deploy.get_Player().getResult();
+		l_Actual = d_Deploy.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
 	
@@ -113,7 +113,7 @@ public class DeployTest {
 		String l_Expected="\norder deploy india 2 added to list of raj";
 		d_Deploy = new Deploy(d_P1,  d_Country1, 2);
 		d_Deploy.execute();
-		l_Actual = d_Deploy.get_Player().getResult();
+		l_Actual = d_Deploy.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}	 
 }

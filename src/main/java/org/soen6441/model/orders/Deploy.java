@@ -1,40 +1,51 @@
 package org.soen6441.model.orders;
 
-import java.util.Iterator;
+import java.util.Iterator;			import org.soen6441.model.Country;
+import org.soen6441.model.Order;	import org.soen6441.model.Player;
 
-import org.soen6441.model.Country;
-import org.soen6441.model.Order;
-import org.soen6441.model.Player;
-
+/**
+ * Deploy class implements the Order interface and overrides the execute method.
+ * The object of this class is created when the player issues Deploy order. 
+ */
 public class Deploy implements Order{
 
 	private Player d_Player;
 	private Country d_Country;
 	private int d_NumArmies;
 
+	/**
+	 * Constructor which is created on creation of the object
+	 * @param p_Player Player who issues the deploy order.
+	 * @param p_Country Country on which the player issues deploy order.
+	 * @param p_NumArmies Number of armies to be deployed on the given country.
+	 */
 	public Deploy(Player p_Player, Country p_Country, int p_NumArmies) {
-		// TODO Auto-generated constructor stub
-		set_Player(p_Player);
+		setPlayer(p_Player);
 		d_Country = p_Country;
 		d_NumArmies = p_NumArmies;
 	}
 
+	/**
+	 * This method checks for the validity of Deploy order and then assigns number of armies to the country.
+	 */
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		if(isValid())
-		{
-			get_Player().setPlayerArmies(get_Player().getPlayerArmies() - d_NumArmies);
+		if(isValid()){
+			getPlayer().setPlayerArmies(getPlayer().getPlayerArmies() - d_NumArmies);
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()+d_NumArmies);
 		}
-
-
 	}
-	public boolean isValid()
-	{
+	
+	/**
+	 * This method checks if the issued deploy order is valid or not. 
+	 * If the country does not belong to the player, it returns false.
+	 * If the player does not have enough number of armies, it returns false.
+	 * @return return true if valid else false.
+	 */
+	public boolean isValid(){
 		int l_Flag=0;
-		if(d_NumArmies <= get_Player().getPlayerArmies()){
-			Iterator<Country>l_It = get_Player().getCountryList().iterator();
+		if(d_NumArmies <= getPlayer().getPlayerArmies()){
+			Iterator<Country>l_It = getPlayer().getCountryList().iterator();
 			while(l_It.hasNext()) {
 				Country l_TempCountry = (Country)l_It.next() ;
 				if(d_Country==l_TempCountry) {
@@ -43,25 +54,33 @@ public class Deploy implements Order{
 				}
 			}
 			if(l_Flag==1) {
-				get_Player().setResult("\norder deploy "+d_Country.getCountryName()+" "+d_NumArmies+" added to list of "+get_Player().getPlayerName());
+				getPlayer().setResult("\norder deploy "+d_Country.getCountryName()+" "+d_NumArmies+" added to list of "+getPlayer().getPlayerName());
 				return true;
 			} else {
-				get_Player().setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+get_Player().getPlayerName());
+				getPlayer().setResult("\nThis country "+d_Country.getCountryName()+" doesnot belongs to "+getPlayer().getPlayerName());
 				return false;
 			}
 		} else {
-			get_Player().setResult("\n"+get_Player().getPlayerName()+" ; you have only "+get_Player().getPlayerArmies()+" number of armies! Please enter the next order accordingly");
+			getPlayer().setResult("\n"+getPlayer().getPlayerName()+" ; you have only "+getPlayer().getPlayerArmies()+" number of armies! Please enter the next order accordingly");
 			return false;
 		}
 
 
 	}
 
-	public Player get_Player() {
+	/**
+	 * This method returns the player who issues Deploy order.
+	 * @return Player who issued the deploy order
+	 */
+	public Player getPlayer() {
 		return d_Player;
 	}
 
-	public void set_Player(Player d_Player) {
+	/**
+	 * This method sets the value of the player. 
+	 * @param d_Player Player who issued the Deploy order. 
+	 */
+	public void setPlayer(Player d_Player) {
 		this.d_Player = d_Player;
 	}
 
