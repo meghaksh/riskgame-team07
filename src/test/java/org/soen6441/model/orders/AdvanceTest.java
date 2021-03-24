@@ -10,33 +10,24 @@ import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
-/*
- * 1) When Advance(transfer/attack) on the non adjacent territory
- * 2) If Transfer is working properly. Source and target countries belong to same player and are adjacent
- * 3) If Attack is working properly. Source and target countries belong to different players and are adjacent
- * 4) At the end of the turn, card is assigned properly to all the players who conquer at least one country in the turn
- * 5) Player's non deployed armies in this turn is adjusted in the next turn
- * 6) Bomb command halves the number of armies on the target territory
- * 7) Bomb command on the non adjacent terittory 
- * 8) Any player that doesn't own a single country is removed from the player's list at the end of the turn (important to win the game)
- * 9) scenario when defender has more armies than attacker in the attack 
- * 10) blockade and negotiate orders working properly 
- * 11) deploy on another player's territory 
- * 12) any other command or invalid string while issuing the order 
- * 13) if player a has negotiated with b, then attack from both the player can not happen on each other. 
- * */
 
+/**
+ * This class tests the methods written in Advance order class.
+ */
 public class AdvanceTest {
 	CommandPrompt d_CpView;
 	GameModelNew d_GameModel;
 	GameEngine d_Ge;
 	Continent d_C0,d_C1;
 	Country d_Country1,d_Country2,d_Country3,d_Country4,d_Country5;
-
 	Player d_P1,d_P2;
 	Map d_Map;
-	Advance d_adv;
+	Advance d_Adv;
 
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -78,7 +69,6 @@ public class AdvanceTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P1.addCountry(d_Country4);
-//		d_P2.addCountry(d_Country3);
 		d_P1.addCountry(d_Country3);
 		
 		d_P2.addCountry(d_Country2);
@@ -86,7 +76,6 @@ public class AdvanceTest {
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-//		d_Country3.setCountryOwnerPlayer(d_P2);
 		d_Country3.setCountryOwnerPlayer(d_P1);
 		
 		d_Country4.setCountryOwnerPlayer(d_P1);
@@ -100,6 +89,10 @@ public class AdvanceTest {
 
 	}
 
+	/**
+	 * This method tests the validatemap method.
+	 * @throws Exception any exception thrown during validateMap method check.
+	 */
 	@Test
 	public void testValidateMap() throws Exception {
 		String l_Actual="", l_Expected="Map is Valid";
@@ -107,39 +100,41 @@ public class AdvanceTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 
+	/**
+	 * This method tests if the source and target countries during the advance order are non adjacent.
+	 */
 	@Test
 	public void testNonAdjacentTerritory() {
 		String l_Actual="", l_Expected="\nThe source country and target country are not neighbours!";
-		d_adv = new Advance(d_P1,  d_Country1, d_Country5, 2);
-		d_adv.execute();
-		l_Actual = d_adv.d_Player.getResult();
+		d_Adv = new Advance(d_P1,  d_Country1, d_Country5, 2);
+		d_Adv.execute();
+		l_Actual = d_Adv.d_Player.getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
-//	@Test
-//	public void testTransferAdjacentTerritory() {
-//		String l_Actual="", l_Expected="\nThe source country and target country belong to the same player";
-//		d_adv = new Advance(d_P1,  d_Country1, d_Country3, 2);
-//		d_adv.execute();
-//		l_Actual = d_adv.d_Player.getResult();
-//		assertEquals(l_Expected,l_Actual);
-//
-//	}
+
+	/**
+	 * This method tests if the source and target countries are same during the advance order. 
+	 */
 	@Test
 	public void testSourceTargetTerritory() {
 		String l_Actual="", l_Expected="\nThe source country and target country cannot be same!";
-		d_adv = new Advance(d_P1,  d_Country1, d_Country1, 2);
-		d_adv.execute();
-		l_Actual = d_adv.d_Player.getResult();
+		d_Adv = new Advance(d_P1,  d_Country1, d_Country1, 2);
+		d_Adv.execute();
+		l_Actual = d_Adv.d_Player.getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	
+	/**
+	 * This method test if source and target countries are not neighbors during advance order. 
+	 */
 	@Test
 	public void testSourceTargetNeighbours() {
 		String l_Actual="", l_Expected="\nThe source country and target country are not neighbours!";
-		d_adv = new Advance(d_P1,  d_Country1, d_Country3, 2);
-		d_adv.execute();
-		l_Actual = d_adv.d_Player.getResult();
+		d_Adv = new Advance(d_P1,  d_Country1, d_Country3, 2);
+		d_Adv.execute();
+		l_Actual = d_Adv.d_Player.getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}

@@ -12,6 +12,9 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written in Airlift order class.
+ */
 public class AirliftTest {
 	CommandPrompt d_CpView;
 	GameModelNew d_GameModel;
@@ -23,6 +26,10 @@ public class AirliftTest {
 	Map d_Map;
 	Airlift d_Air;
 
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -64,7 +71,6 @@ public class AirliftTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P1.addCountry(d_Country4);
-//		d_P2.addCountry(d_Country3);
 		d_P1.addCountry(d_Country3);
 		
 		d_P2.addCountry(d_Country2);
@@ -72,7 +78,6 @@ public class AirliftTest {
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-//		d_Country3.setCountryOwnerPlayer(d_P2);
 		d_Country3.setCountryOwnerPlayer(d_P1);
 		
 		d_Country4.setCountryOwnerPlayer(d_P1);
@@ -86,6 +91,9 @@ public class AirliftTest {
 
 	}
 
+	/**
+	 * This method tests if the player owns an airlift card
+	 */
 	@Test
 	public void testCardCheck() {
 		String l_Actual="", l_Expected="Player does not have a Airlift card";
@@ -95,6 +103,9 @@ public class AirliftTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	/**
+	 * This method tests if the source and target countries are not same
+	 */
 	@Test
 	public void testSourceTargetTerritory() {
 		d_P1.setCard("Airlift");
@@ -106,6 +117,9 @@ public class AirliftTest {
 
 	}
 	
+	/**
+	 * This method tests if after airlift source country is left with atleast one army.
+	 */
 	@Test
 	public void testPlayerArmies() {
 		d_P1.setCard("Airlift");
@@ -116,6 +130,9 @@ public class AirliftTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	/**
+	 *	This method tests if the source and target countries belong to the same player.  
+	 */
 	@Test
 	public void testSourceTargetsame() {
 		d_P1.setCard("Airlift");
@@ -126,6 +143,9 @@ public class AirliftTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	/**
+	 * This method tests if the airlift is happening between the countries of the same owner. 
+	 */
 	@Test
 	public void testOtherPlayerCountry() {
 		d_P1.setCard("Airlift");
@@ -137,6 +157,9 @@ public class AirliftTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	/**
+	 * This method tests if the player doesn't have airlift card after he has already used it. 
+	 */
 	@Test
 	public void testAirliftAgain() {
 		d_P1.setCard("Airlift");
