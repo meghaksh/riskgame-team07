@@ -23,7 +23,6 @@ public class GameModelNew {
 	public GameModelNew() {
 		this.d_Map = new Map();
 		this.d_PlayerList=new ArrayList<Player>();
-		//this.d_PlayerList.add(new Player("Neutral Player", this));
 	}
 	/**
 	 * This is parameterized constructor which takes Map parameter 
@@ -126,21 +125,6 @@ public class GameModelNew {
 		if (l_PlayerFound == false) {
 			throw new Exception("This Player does not exists");
 		}
-
-
-
-		/*	Player l_CurrentPlayer;
-		boolean l_PlayerFound = false;
-		for (Player l_Player:d_PlayerList) {
-			l_CurrentPlayer = l_Player;
-			if (l_CurrentPlayer.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
-				l_PlayerFound = true;
-				d_PlayerList.remove(d_PlayerList.indexOf(l_Player));
-			}
-		}
-		if (l_PlayerFound == false) {
-			throw new Exception("This Player does not exists");
-		}*/
 	}
 	/**
 	 * This method sets the player queue
@@ -190,7 +174,6 @@ public class GameModelNew {
 				setPlayerId(d_PlayerQueue.remove());
 				getPlayerId1().addCountry(l_CountryList.get(l_Index));
 				l_CountryList.get(l_Index).setCountryOwnerPlayer(getPlayerId1());
-				//				System.out.println(l_CountryList.get(l_Index).getCountryOwnerPlayer());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_Index);
 			}
