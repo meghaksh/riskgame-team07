@@ -314,24 +314,31 @@ public class GameEngine  {
 	 * 
 	 */
 	public void showAllPlayerWithArmies() {
+		d_LEB.setResult(":::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::");
 		d_PlayerList=d_GameModelNew.getAllPlayers();
 		for(Player l_Player:d_PlayerList){
+			d_LEB.setResult("\n"+l_Player.getPlayerName()+"-->"+"armies assigned:"+l_Player.getPlayerArmies());
 			d_CpView.setCommandAcknowledgement("\n"+l_Player.getPlayerName()+"-->"+"armies assigned:"+l_Player.getPlayerArmies());
+			d_LEB.setResult("\n"+"Countries Assigned: ");
 			d_CpView.setCommandAcknowledgement("\n"+"Countries Assigned: ");
 			
 			for(Country l_Country:l_Player.getCountryList()) {
+				d_LEB.setResult(l_Country.getCountryName()+ ",");
 				d_CpView.setCommandAcknowledgement(l_Country.getCountryName()+ ",");
 			}
 			if(l_Player.getCardList().size()>0)
 			{
+				d_LEB.setResult("\n"+"Cards Assigned: ");
 				d_CpView.setCommandAcknowledgement("\n"+"Cards Assigned: ");
 				ArrayList<String> l_CardList =l_Player.getCardList();
 				for(String l_Str:l_CardList)
 				{
+					d_LEB.setResult(l_Str+ ",");
 					d_CpView.setCommandAcknowledgement(l_Str+ ",");
 				}
 			}
 		}
+		d_LEB.setResult(":::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::");
 	}
 
 	/**
@@ -345,16 +352,20 @@ public class GameEngine  {
 	 */
 	public void showMap(Phase gamePhase) {
 		if(!gamePhase.getClass().getSimpleName().equals("Edit")) {
-			System.out.println("reaching if");
+			d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
 			d_PlayerList = d_GameModelNew.getAllPlayers();
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
+				d_LEB.setResult("\n");
 				d_CpView.setCommandAcknowledgement("\n");
 				for(Continent l_Continent:l_ContinentList) {
+					d_LEB.setResult("Continent: "+l_Continent.getContinentName() + "\n");
 					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+					d_LEB.setResult("\n");
 					d_CpView.setCommandAcknowledgement("\n");
 					for(Country l_Country:l_CountryList) {
+						d_LEB.setResult("Country: "+ l_Country.getCountryName());
 						d_CpView.setCommandAcknowledgement("Country: "+ l_Country.getCountryName());
 //						if(this.d_PlayerList!=null) {
 //							for(Player l_Player: d_PlayerList) {
@@ -364,45 +375,60 @@ public class GameEngine  {
 //								}
 //							}
 //						}
-						if(l_Country.getCountryOwnerPlayer()!=null)
+						if(l_Country.getCountryOwnerPlayer()!=null){
+							d_LEB.setResult("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
 							d_CpView.setCommandAcknowledgement("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
-						
+							d_LEB.setResult("-->Armies deployed: "+ l_Country.getNoOfArmies());
 							d_CpView.setCommandAcknowledgement("-->Armies deployed: "+ l_Country.getNoOfArmies());
+						}
+							
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						if(l_NeighborList.size()>0) {
+							d_LEB.setResult("\n"+"--> Borders : ");
 							d_CpView.setCommandAcknowledgement("\n"+"--> Borders : ");
 							for(String l_Str:l_NeighborList) {
+								d_LEB.setResult(l_Str+ ",");
 								d_CpView.setCommandAcknowledgement(l_Str+ ",");
 							}	
 						}
+						d_LEB.setResult("\n");
 						d_CpView.setCommandAcknowledgement("\n");
 					}
+					d_LEB.setResult("\n");
 					d_CpView.setCommandAcknowledgement("\n");
 				}
 			}
 		} else {
-			System.out.println("reaching else");
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
 			if(l_ContinentList.size()>0) {
+				d_LEB.setResult("\n");
 				d_CpView.setCommandAcknowledgement("\n");
 				for(Continent l_Continent:l_ContinentList) {
+					d_LEB.setResult("Continent: "+l_Continent.getContinentName() + "\n");
 					d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
 					ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+					d_LEB.setResult("Countries:"+"\n");
 					d_CpView.setCommandAcknowledgement("Countries:"+"\n");
 					for(Country l_Country:l_CountryList) {
+						d_LEB.setResult(l_Country.getCountryName());
 						d_CpView.setCommandAcknowledgement(l_Country.getCountryName());
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						if(l_NeighborList.size()>0) {
+							d_LEB.setResult("--> Borders : ");
 							d_CpView.setCommandAcknowledgement("--> Borders : ");
 							for(String l_Str:l_NeighborList) {
+								d_LEB.setResult(l_Str+ " ");
 								d_CpView.setCommandAcknowledgement(l_Str+ " ");
 							}
 						}
+						d_LEB.setResult("\n");
 						d_CpView.setCommandAcknowledgement("\n");
 					}
+					d_LEB.setResult("\n");
 					d_CpView.setCommandAcknowledgement("\n");
 				}
 			}
 		}
+		d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
 	}	
 }
