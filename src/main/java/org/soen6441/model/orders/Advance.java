@@ -194,7 +194,20 @@ public class Advance implements Order {
 
 	}
 
-
+	/**
+	 * This Method returns the armies to fight in the battle ground. If the original attacking number of armies is greater than the 
+	 * defending number of armies. Then the 1st n number of armies with greatest corresponding values are selected from the original
+	 * set of armies. Where n would be the number of defending armies. Same happens when original defending number of armies is 
+	 * greater than the attacking number of armies. Then the 1st n number of armies with greatest corresponding values are selected 
+	 * from the original set of armies. Where n would be the number of attacking armies. In the case when both are equal in number 
+	 * then it just returns the attacking armies for size reference in execute method.
+	 *  
+	 * @param p_SizeDiffint 	This integer shows which side of armies are greater in number.
+	 * @param p_MinArmies		The number of armies that will participate in the fight.
+	 * @param p_AttackerArmies  The original attacking armies with the random numbers assigned to it.
+	 * @param p_DefenderArmies  The original defending armies with the random numbers assigned to it.
+	 * @return	The armies with maximum corresponding value of attacker side or defender side depending on who has greater number of armies.
+	 */
 	
 	TreeMap<Integer,Integer> ArmiestoFight(int p_SizeDiffint,int  p_MinArmies, TreeMap <Integer,Integer> p_AttackerArmies,TreeMap <Integer,Integer> p_DefenderArmies)
 	{
@@ -264,7 +277,19 @@ public class Advance implements Order {
 		return returnHashMap;
 	}
 
-
+	/**
+	 * This method checks the validity of the order.
+	 * The cases when the order is not valid are:
+	 * <ol>
+	 * <li>When the issuing player is in negotiation with the owner of the target country</li>
+	 * <li>When the sourceCountry and the taretCountry are the same</li>
+	 * <li>When sourceCountry and the targetCountry are not neighbours</li>
+	 * <li>When the sourceCountry is left with armies less than one after the order has been issued with certain number of armies</li>
+	 * </ol>
+	 * An integer 1 is returned when both the countries belong to the issuing player.
+	 * An integer 2 is returned when the country belongs to different players.
+	 * @return integer that shows different cases of execution if the order is valid
+	 */
 	
 	public int isValid()
 	{
