@@ -6,6 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ EditTest.class, ExecuteOrderTest.class,IssueOrderTest.class  })
-public class JunitTestSuite {
+public class JunitTestSuiteState {
 
 }
