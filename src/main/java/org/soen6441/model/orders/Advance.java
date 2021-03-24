@@ -70,7 +70,7 @@ public class Advance implements Order {
 				d_Player.setAtleastOneBattleWon(true);
 				
 
-				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_SourceCountry.getCountryName()+" was a Success!!");
+				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Success!!");
 				return;
 			}
 			TreeMap <Integer,Integer> l_AttackerArmies = new TreeMap<>(); 
@@ -144,7 +144,7 @@ public class Advance implements Order {
 				else
 				{
 					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-l_MinArmies+l_attackWin);
-					d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()-d_NumArmies+l_defendWin);
+					d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()-l_MinArmies+l_defendWin);
 					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Failure!!");
 				}
 			}catch(Exception p_E) {p_E.printStackTrace();}
