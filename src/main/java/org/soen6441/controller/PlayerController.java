@@ -35,6 +35,7 @@ public class PlayerController {
 	private GameEngine d_GameEngine;
 	/**
 	 * Constructor of Player controller
+	 * @param p_GameModelNew This is the reference of the the game model which is used to access the map.
 	 * @param p_Players list of players 
 	 * @param p_CpView object of command prompt for communicating with player
 	 */
@@ -53,9 +54,10 @@ public class PlayerController {
 		d_Rand = new Random();
 	}
 
+
 	/**
-	 * The player_issue_order method asks each player to issue an order in a round robin fashion.
-	 * The loop terminates when the armies of all the players are exhausted.
+	 * The player_issue_order method asks each player to issue an order in a round robin fashion and they are added to the order list of that player.
+	 * The loop terminates when all the player enter the keyword "quit".
 	 * The acknowledgement are passed on to the view.
 	 */
 	public void playerIssueOrder() {
@@ -72,9 +74,6 @@ public class PlayerController {
 				if(!l_Player.getPlayerName().equals("Neutral Player")){
 					if(l_CheckArmies.get(l_Player)==false)
 					{
-
-						//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
-						//d_LEB.setResult(d_OrderAcknowledgment);
 
 						String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
 						d_LEB.setResult(l_StringOrder);
@@ -138,6 +137,9 @@ public class PlayerController {
 	 * This method iterates till the player list doesn't becomes empty. This means all the orders of all the players are executed.
 	 * It works in a round robin fashion. All the players execute there orders one by one.
 	 * The player who's all orders are executed is removed from the list.
+	 * The player who has won a battle in this round is assigned a card.
+	 * All the players' negotiated players list is made empty.
+	 * At the end of this round, we check if a player is declared as a winner.
 	 */
 	public void playerNextOrder() {
 		ArrayList <Player> l_Players = d_Players;
@@ -199,12 +201,6 @@ public class PlayerController {
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
 
-
-					//System.out.println(l_Order.getOrder());
-
-					//String l_Result = l_Order.getExecuteResult();
-					//d_OrderAcknowledgment = l_Result;
-					//d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 				} else {
 					l_Flag = 1; l_RemovePlayerList.add(l_Player);
 				}
@@ -215,26 +211,26 @@ public class PlayerController {
 				}
 			}
 		}
-		//try {
-			for(Player l_TempPlayer : d_Players)
+		// Assigning cards to players that have won a battle in this round.
+		for(Player l_TempPlayer : d_Players)
+		{
+			if(l_TempPlayer.getAtleastOneBattleWon())
 			{
-				if(l_TempPlayer.getAtleastOneBattleWon())
-				{
-					int l_cardInteger = d_Rand.nextInt(3);
-					l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
-					l_TempPlayer.setAtleastOneBattleWon(false);
-				}
+				int l_cardInteger = d_Rand.nextInt(4);
+				l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
+				l_TempPlayer.setAtleastOneBattleWon(false);
 			}
-			d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
-			d_LEB.setResult("\nOrders are Succesfully Executed!!");
-			clearNegotiatedPlayerList();
-			removePlayerWithNoCountry();
-			checkTheWinner();		
-//		}catch(Exception p_Exp) {
-//			p_Exp.printStackTrace();
-//		}
+		}
+		d_CpView.setCommandAcknowledgement("\nOrders are Succesfully Executed!!");
+		d_LEB.setResult("\nOrders are Succesfully Executed!!");
+		clearNegotiatedPlayerList();
+		removePlayerWithNoCountry();
+		checkTheWinner();		
+
 	}
-	
+	/**
+	 * This method is used to remove the player with no countries on its name.
+	 */
 	public void removePlayerWithNoCountry() {
 		Iterator<Player> l_PlayerIterator = d_Players.iterator();
 		while(l_PlayerIterator.hasNext()) {
@@ -244,22 +240,25 @@ public class PlayerController {
 			}
 		}
 	}
-	
+	/**
+	 * This method is used to clear all the individual players' negotiated players list after each round of issuing and execution of orders.
+	 */
 	public void clearNegotiatedPlayerList()
 	{
-		
-			for(Player l_TempPlayer: d_Players)
-			{
-				
-				l_TempPlayer.removeNegotiatedPlayer();
-				
-			}
-		
+
+		for(Player l_TempPlayer: d_Players)
+		{
+
+			l_TempPlayer.removeNegotiatedPlayer();
+
+		}
+
 	}
-	
+	/**
+	 * This method is used to check if one player owns all the countries of the map and hence can be declared as the winner of the game.
+	 */
 	public void checkTheWinner()
 	{
-		//HashMap<Country, Player> l_countryOwner = new HashMap<>();
 		ArrayList <Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
 		Iterator<Country>itr = l_CountryList.iterator();
 		Player l_CheckPlayer = (Player)((Country) itr.next()).getCountryOwnerPlayer();
@@ -274,13 +273,10 @@ public class PlayerController {
 		}
 		if(l_flag==0)
 		{
-			
+
 			d_GameEngine.setPhase(new GameOver(d_GameEngine,d_CpView));
 			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer.getPlayerName()+" is the winner of the game!");
 		}
-		/*for(Country l_TempCountry : d_GameModelNew.getMap().getCountryList())
-		{
-			l_countryOwner.put(l_TempCountry, l_TempCountry.getCountryOwnerPlayer());
-		}*/
+
 	}
 }
