@@ -28,6 +28,7 @@ public class GameEngine  {
 	private Phase gamePhase;
 	private LogEntryBuffer d_LEB;
 	
+	
 	public MapController getMapController() {
 		return this.d_MapController;
 	}
