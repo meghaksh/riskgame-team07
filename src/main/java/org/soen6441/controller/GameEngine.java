@@ -73,10 +73,18 @@ public class GameEngine  {
 		setPhase(new Edit(this,getViewObject()));
 		d_LEB=new LogEntryBuffer();
 	}
+	/**
+	 * This method sets the phase in game engine
+	 * @param p_phase object of phase to set
+	 */
 	public void setPhase(Phase p_phase) {
 		d_GamePhase = p_phase;
 	
 	}
+	/**
+	 * This method returns the current phase
+	 * @return object of current phase
+	 */
 	public Phase getPhase() {
 		return this.d_GamePhase;
 	
