@@ -204,7 +204,7 @@ public class GameModelNew {
 	public void assignReinforcementArmies() throws Exception {	
 		int l_ContinentValue=0;
 		for (Player l_Player : getAllPlayers()) {
-			l_Player.setContinentsList();			
+			l_Player.setContinentsList();
 		}
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
@@ -215,6 +215,8 @@ public class GameModelNew {
 					}
 					l_ArmyCount= Math.max(l_ArmyCount, 3);
 					l_Player.setPlayerArmies(l_ArmyCount+ l_ContinentValue+l_Player.getPlayerArmies());
+					l_ContinentValue=0;
+					
 				}
 			}
 		} else {
