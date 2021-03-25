@@ -25,7 +25,7 @@ public class GameEngine  {
 	private MapController d_MapController;
 	private ArrayList<Player> d_PlayerList;
 	private PlayerController d_PlayerController;
-	private Phase gamePhase;
+	private Phase d_GamePhase;
 	private LogEntryBuffer d_LEB;
 	
 	/**
@@ -74,11 +74,11 @@ public class GameEngine  {
 		d_LEB=new LogEntryBuffer();
 	}
 	public void setPhase(Phase p_phase) {
-		gamePhase = p_phase;
+		d_GamePhase = p_phase;
 	
 	}
 	public Phase getPhase() {
-		return this.gamePhase;
+		return this.d_GamePhase;
 	
 	}
 
@@ -112,67 +112,67 @@ public class GameEngine  {
 				case "editcontinent" :
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.editContinent("editcontinent",l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.editContinent("editcontinent",l_CommandStringFromInput));
 						
 					break;
 
 				case "editcountry" :
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.editCountry("editcountry",l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.editCountry("editcountry",l_CommandStringFromInput));
 
 					break;
 
 				case "editneighbor" :
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.editCountry("editneighbor",l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.editCountry("editneighbor",l_CommandStringFromInput));
 
 					break;
 
 				case "showmap": 
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					gamePhase.showMap();
+					d_GamePhase.showMap();
 					
 					break;
 
 				case "savemap":
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.saveMap(l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.saveMap(l_CommandStringFromInput));
 
 					break;
 
 				case "editmap":
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.editMap(l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.editMap(l_CommandStringFromInput));
 
 					break;
 
 				case "validatemap":
 					
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.validateMap());
+					d_CpView.setCommandAcknowledgement(d_GamePhase.validateMap());
 
 					break;
 
 				case "loadmap":
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.loadMap(l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.loadMap(l_CommandStringFromInput));
 
 					break;
 
 				case "gameplayer":
 					d_LEB.setResult(l_CommandStringFromInput);
-					d_CpView.setCommandAcknowledgement(gamePhase.addPlayers("GamePlayer",l_CommandStringFromInput));
+					d_CpView.setCommandAcknowledgement(d_GamePhase.addPlayers("GamePlayer",l_CommandStringFromInput));
 
 					break;
 
 				case "assigncountries":
 					d_LEB.setResult(l_CommandStringFromInput);
-					gamePhase.assignCountries();
+					d_GamePhase.assignCountries();
 
 					break;
 
@@ -258,8 +258,8 @@ public class GameEngine  {
 	 * 
 	 * @param p_BooleanForGamePhaseStarted takes boolean value to show map for map phase or game phase
 	 */
-	public void showMap(Phase gamePhase) {
-		if(!gamePhase.getClass().getSimpleName().equals("Edit")) {
+	public void showMap(Phase p_GamePhase) {
+		if(!p_GamePhase.getClass().getSimpleName().equals("Edit")) {
 			d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
 			d_PlayerList = d_GameModelNew.getAllPlayers();
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
