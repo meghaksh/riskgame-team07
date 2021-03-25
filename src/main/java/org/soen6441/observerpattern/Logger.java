@@ -3,8 +3,16 @@ package org.soen6441.observerpattern;
 import java.io.FileWriter;			import java.io.PrintWriter;
 import java.io.BufferedWriter;		import java.io.File;
 
+/**
+ * This is a concrete class which implements observer interface. 
+ * Object of this class is attached with the Observable LogEntryBuffer.
+ * On any change, the object of this class will be notified. 
+ */
 public class Logger implements Observer {
 	private static int D_Count=0;
+	/**
+	 * This method will internally update the Log file on each notification from observable.
+	 */
 	public void update(Observable p_Observable){
 		String l_Updated= ((LogEntryBuffer) p_Observable).getResult();
 		String l_Path="resource\\LogFile";
