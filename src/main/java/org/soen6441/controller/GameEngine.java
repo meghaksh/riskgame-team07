@@ -88,11 +88,6 @@ public class GameEngine  {
 	 * This class is responsible for passing data from view to models/child controllers.
 	 */
 	public class CommandListener  implements ActionListener {
-		private boolean d_MapDone = false;
-		private boolean d_StartUpDone = false;
-		private boolean d_AssignCountriesDone = false;
-		
-	
 		/**
 		 * {@inheritDoc}
 		 * On click of the button in view, this method gets the string which user entered. 
@@ -174,15 +169,6 @@ public class GameEngine  {
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_GamePhase.assignCountries();
 
-					break;
-
-				case "show":
-					if(d_MapDone==true) {
-						showAllPlayerWithArmies();
-						d_CpView.setCommandAcknowledgement("\n");
-					}else{
-						d_CpView.setCommandAcknowledgement("The Map is Not Loaded Yet to Perform Show Operation"+"\n");
-					}
 					break;
 
 				case "reset":
