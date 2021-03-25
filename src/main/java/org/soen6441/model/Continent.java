@@ -62,7 +62,7 @@ public class Continent {
 	 * Method to set Continent ID
 	 * @param p_ContinentID ID of the continent
 	 */
-	public void setContinentID(int p_ContinentID) {
+	private void setContinentID(int p_ContinentID) {
 		d_ID = p_ContinentID;
 	}
 
