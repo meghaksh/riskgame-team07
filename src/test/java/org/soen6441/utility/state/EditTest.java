@@ -43,6 +43,17 @@ public class EditTest {
 		l_ActualMessage=d_P.getPhaseName();
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
+	/**
+	 * This method tests the loading of incorrect/ invalid map. 
+	 */
+	@Test
+	public void testIncorrectLoadMap() {
+		String l_ExpectedMessage="Map is not Valid";
+		String l_ActualMessage = "";
+		l_ActualMessage=d_Ed.loadMap("loadmap incorrectmap");
+		
+		assertEquals(l_ExpectedMessage,l_ActualMessage.split("\n")[0]);
+	}
 	
 	/**
 	 * This method tests that during editmap phase assigncountries method can not be executed. 
