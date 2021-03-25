@@ -1,7 +1,6 @@
 package org.soen6441.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,10 +17,8 @@ import org.soen6441.model.orders.Negotiate;
 public class Player {
 	private String d_PlayerName="";
 	private int d_PlayerId;
-	private String d_PlayerColor = "";
 	private int d_Armies;
 	private int d_TempArmies;
-	private int d_ResultInteger;
 	private ArrayList<Country> d_Countries = new ArrayList<Country>();
 	private Queue<Order> d_Order = new LinkedList<Order>();
 	private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
@@ -44,17 +41,6 @@ public class Player {
 	public Player(String p_PlayerName, GameModelNew p_GameModelNew) {
 		this.d_PlayerName = p_PlayerName;
 		this.d_GameModelNew = p_GameModelNew;
-	}
-	/**
-	 * constructor with player name, player id, and player color as parameters 
-	 * @param p_PlayerName Name of the player
-	 * @param p_PlayerId Id of the player
-	 * @param p_PlayerColor color of the player
-	 */
-	Player(String p_PlayerName,int p_PlayerId,String p_PlayerColor) {
-		d_PlayerName = p_PlayerName;
-		d_PlayerId = p_PlayerId;
-		d_PlayerColor = p_PlayerColor;
 	}
 	/**
 	 * addCountry method adds the given country to the player's country list.
@@ -137,11 +123,13 @@ public class Player {
 		for(Continent l_MapContinent : l_MapContinents) {
 			int l_Flag = 0;
 			for(Country l_Country : l_MapContinent.getCountryList()) {
-				if(!d_Countries.contains(l_Country))
-					l_Flag=1;						
+				if(!d_Countries.contains(l_Country)){
+					l_Flag=1;	
+				}
 			}
-			if(l_Flag==0)
+			if(l_Flag==0){
 				d_Continents.add(l_MapContinent);
+			}
 		}
 	}
 	/**
@@ -265,7 +253,6 @@ public class Player {
 	 */
 	public void issue_order() {
 		int l_Flag = 0;
-		d_ResultInteger = 0;
 		String[] l_StringList = d_StringOrder.split(" ");
 		String l_OrderType = l_StringList[0];
 		switch(l_OrderType) {
