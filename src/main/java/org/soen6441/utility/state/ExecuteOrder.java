@@ -9,13 +9,14 @@ public class ExecuteOrder extends Phase {
 	public ExecuteOrder(GameEngine p_Ge, CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
 		try {
-			
-		d_Ge.getPlayerController().playerNextOrder();
+			d_Leb=new LogEntryBuffer();
+			d_Leb.setResult("This is the Execute Order Phase");
+			d_Ge.getPlayerController().playerNextOrder();
 		
 		if(!d_Ge.getPhase().getPhaseName().equals("GameOver")) {
 			d_Ge.showMap(this);
 			d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));
-			d_Leb=new LogEntryBuffer();
+			
 		}
 		
 		}catch(Exception p_E) {}

@@ -14,8 +14,10 @@ public class Edit extends Phase {
 	 * @param p_Vw obkect of view
 	 */
 	public Edit(GameEngine p_Ge,CommandPrompt p_Vw) {
+		
 		super(p_Ge,p_Vw);
 		d_Leb=new LogEntryBuffer();
+		d_Leb.setResult("This is the Edit Phase");
 	}
 
 	/**

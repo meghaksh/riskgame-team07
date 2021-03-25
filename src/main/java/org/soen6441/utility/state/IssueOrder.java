@@ -1,12 +1,16 @@
 package org.soen6441.utility.state;
 
-import org.soen6441.controller.GameEngine;				import org.soen6441.view.CommandPrompt;
+import org.soen6441.controller.GameEngine;
+import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.view.CommandPrompt;
 
 public class IssueOrder extends Phase {
-
+		LogEntryBuffer d_Leb;
 	public IssueOrder(GameEngine p_Ge,CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
 		try {
+		d_Leb=new LogEntryBuffer();
+		d_Leb.setResult("This is the Issue Order Phase");
 		d_Ge.getPlayerController().playerIssueOrder();
 		d_Ge.setPhase(new ExecuteOrder(p_Ge,p_Vw));
 		}catch(Exception p_E) {}

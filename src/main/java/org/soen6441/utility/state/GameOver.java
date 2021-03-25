@@ -11,6 +11,7 @@ public class GameOver extends Phase {
 		d_Vw.clearTextArea();
 		d_Vw.setCommandAcknowledgement("Game Over");
 		d_Leb=new LogEntryBuffer();
+		d_Leb.setResult("This is Game over phase");
 	}
 
 	@Override

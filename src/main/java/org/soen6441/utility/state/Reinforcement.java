@@ -9,6 +9,7 @@ public class Reinforcement extends Phase {
 	public Reinforcement(GameEngine p_Ge, CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
 		d_Leb=new LogEntryBuffer();
+		d_Leb.setResult("This is the Reinforcement Phase");
 		try{
 			d_Ge.getGameModel().assignReinforcementArmies();
 			d_Ge.showAllPlayerWithArmies();
