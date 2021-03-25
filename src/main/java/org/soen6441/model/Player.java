@@ -197,7 +197,7 @@ public class Player {
 	}
 	/**
 	 * get method for the card if the player owns it or not.
-	 * @param l_TypeOfCard the string that indicates the type of card
+	 * @param p_TypeOfCard the string that indicates the type of card
 	 * @return true if the card type exists in the list of player.
 	 */
 	public boolean getCard(String p_TypeOfCard)
@@ -206,7 +206,7 @@ public class Player {
 	}
 	/**
 	 * set method for adding the card to the card list belonging to the player
-	 * @param l_Card the Card object that belongs to the player
+	 * @param p_Card the Card object that belongs to the player
 	 */
 	public void setCard(String p_Card)
 	{
@@ -214,7 +214,7 @@ public class Player {
 	}
 	/**
 	 * This method removes given card name from player's card list
-	 * @param p_Card
+	 * @param p_Card The card to be removed from player card list
 	 */
 	public void removeCard(String p_Card)
 	{
@@ -230,7 +230,7 @@ public class Player {
 	}
 	/**
 	 * This method adds the player that has strike a deal with this player
-	 * @param p_NegotiatedPlayer
+	 * @param p_NegotiatedPlayer Player to be added in Negotiated player list.
 	 */
 	public void addNegotiatedPlayer(Player p_NegotiatedPlayer)
 	{

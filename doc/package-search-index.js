@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.soen6441.controller"},{"l":"org.soen6441.model"},{"l":"org.soen6441.view"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.soen6441.controller"},{"l":"org.soen6441.model"},{"l":"org.soen6441.model.orders"},{"l":"org.soen6441.observerpattern"},{"l":"org.soen6441.utility.state"},{"l":"org.soen6441.view"}]

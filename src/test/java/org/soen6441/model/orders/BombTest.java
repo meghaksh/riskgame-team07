@@ -118,7 +118,7 @@ public class BombTest {
 
 	/**
 	 * This method tests if the bombed country is the neighbor country of the player's owned country.
-	 * @throws Exception
+	 * @throws Exception It throws exception in execute method of bomb.
 	 */
 	@Test
 	public void testNeighbor() throws Exception {

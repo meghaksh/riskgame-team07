@@ -242,7 +242,7 @@ public class GameEngine  {
 	 * <li>Game Phase : Apart from continent, country and neighbors, it also shows player, thier ownership and their number of armies. </li>
 	 * </ul>
 	 * 
-	 * @param p_BooleanForGamePhaseStarted takes boolean value to show map for map phase or game phase
+	 * @param p_GamePhase takes the phase object and shows the map accordingly
 	 */
 	public void showMap(Phase p_GamePhase) {
 		if(!p_GamePhase.getClass().getSimpleName().equals("Edit")) {

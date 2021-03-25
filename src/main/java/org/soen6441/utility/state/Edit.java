@@ -11,7 +11,7 @@ public class Edit extends Phase {
 	/**
 	 * This is the constructor of Edit class which initializes Game engine object and command prompt object and assigning log entry buffer
 	 * @param p_Ge object of game engine 
-	 * @param p_Vw obkect of view
+	 * @param p_Vw object of view
 	 */
 	public Edit(GameEngine p_Ge,CommandPrompt p_Vw) {
 		
