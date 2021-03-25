@@ -16,6 +16,7 @@ public class GameModelNew {
 	private Player d_PlayerID;
 	private ArrayList<Player> d_PlayerList;
 	private Queue<Player> d_PlayerQueue= new LinkedList<Player>();
+	private final int D_MINARMIES=3;
 
 	/**
 	 * Default constructor which initializes map and player List 
@@ -213,7 +214,7 @@ public class GameModelNew {
 					for(Continent l_Continent:l_Player.getContinentList()) {
 						l_ContinentValue =  l_Continent.getContinentControlValue();
 					}
-					l_ArmyCount= Math.max(l_ArmyCount, 3);
+					l_ArmyCount= Math.max(l_ArmyCount, D_MINARMIES);
 					l_Player.setPlayerArmies(l_ArmyCount+ l_ContinentValue+l_Player.getPlayerArmies());
 					l_ContinentValue=0;
 					
