@@ -9,6 +9,9 @@ import org.soen6441.controller.GameEngine;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written in Edit phase class.
+ */
 public class EditTest {
 	CommandPrompt d_CpView;
 	GameModelNew d_GameModel;
@@ -16,6 +19,10 @@ public class EditTest {
 	Edit d_Ed;
 	Phase d_P;
 	
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -24,6 +31,9 @@ public class EditTest {
 		d_Ed= new Edit(d_Ge,d_CpView);
 		
 	}
+	/**
+	 * This method tests that after the loadmap, the game goes in the startup phase. 
+	 */
 	@Test
 	public void testLoadMap() {
 		String l_ExpectedMessage="Startup";
@@ -34,6 +44,9 @@ public class EditTest {
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
 	
+	/**
+	 * This method tests that during editmap phase assigncountries method can not be executed. 
+	 */
 	@Test
 	public void testAssignCountries() {
 		String l_ExpectedMessage="Invalid command in state ";
@@ -41,10 +54,12 @@ public class EditTest {
 		d_Ed.assignCountries();
 		d_P=d_Ge.getPhase();
 		l_ActualMessage=d_Ed.d_Leb.getResult();
-		System.out.println(l_ActualMessage);
 		assertEquals(l_ExpectedMessage,l_ActualMessage);
 	}
 	
+	/**
+	 * This method tests that during Edit phase, gameplayer command can not be executed. 
+	 */
 	@Test
 	public void testAddPlayers() {
 		String l_ExpectedMessage="Invalid command in state ";

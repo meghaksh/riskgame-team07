@@ -8,6 +8,9 @@ import org.soen6441.controller.GameEngine;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written inside ExecuteOrder phase class. 
+ */
 public class ExecuteOrderTest {
 	
 	CommandPrompt d_CpView;
@@ -16,6 +19,10 @@ public class ExecuteOrderTest {
 	ExecuteOrder d_Eo;
 	Phase d_P;
 	
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		
@@ -25,6 +32,9 @@ public class ExecuteOrderTest {
 		d_Eo= new ExecuteOrder(d_Ge,d_CpView);
 	}
 
+	/**
+	 * This method tests that editmap method is invalid for the Execute Order phase. 
+	 */
 	@Test
 	public void testEditMap() {
 		try {
@@ -33,12 +43,14 @@ public class ExecuteOrderTest {
 			d_Eo.editMap("map5");
 			d_P=d_Ge.getPhase();
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 		
 	}
 	
+	/**
+	 * This method tests that editCountry method is invalid for the execute phase. 
+	 */
 	@Test
 	public void testEditCountry() {
 		try {
@@ -46,11 +58,13 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.editCountry("india","asia");
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 	}
 	
+	/**
+	 * This method tests that editContinent method is invalid for the execute phase.
+	 */
 	@Test
 	public void testEditContinent() {
 		try {
@@ -58,11 +72,13 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.editContinent("asia", "1");
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 	}
 	
+	/**
+	 * This method tests that editNeighbor method is invalid for the execute phase.
+	 */
 	@Test
 	public void testEditNeighbor() {
 		try {
@@ -70,11 +86,12 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.editNeighbor("india", "china");
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 	}
-	
+	/**
+	 * This method tests that savemap method is invalid for the execute phase.
+	 */
 	@Test
 	public void testSaveMap() {
 		try {
@@ -82,11 +99,13 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.saveMap("map");
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 	}
 	
+	/**
+	 * This method tests that loadmap is invalid for the execute phase.
+	 */
 	@Test
 	public void testLoadMap() {
 		try {
@@ -94,11 +113,13 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.loadMap("map");
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 	}
 	
+	/**
+	 * This method tests that addPlayer method is invalid for the execute order phase.
+	 */
 	@Test
 	public void testAddPlayers() {
 		try {
@@ -110,6 +131,9 @@ public class ExecuteOrderTest {
 		}catch(Exception p_Exp) {}
 	}
 	
+	/**
+	 * This method tests that assigncountris method is invalid for the execute order phase.
+	 */
 	@Test
 	public void testAssignCountries() {
 		try {
@@ -117,11 +141,13 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.assignCountries();
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 	}
 	
+	/**
+	 * This method tests that validatemap method is invalid for the execute phase. 
+	 */
 	@Test
 	public void testValidateMap() {
 		try {
@@ -129,7 +155,6 @@ public class ExecuteOrderTest {
 			String l_ActualMessage = "";
 			d_Eo.validateMap();
 			l_ActualMessage=d_Eo.d_Leb.getResult();
-			System.out.println(l_ActualMessage);
 			assertEquals(l_ExpectedMessage,l_ActualMessage);
 		}catch(Exception p_Exp) {}
 		

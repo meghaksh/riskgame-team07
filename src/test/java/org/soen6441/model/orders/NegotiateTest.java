@@ -12,6 +12,9 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written in Negotiate order class.
+ */
 public class NegotiateTest {
 
 	CommandPrompt d_CpView;
@@ -24,6 +27,10 @@ public class NegotiateTest {
 	Map d_Map;
 	Negotiate d_Nego;
 
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -65,7 +72,6 @@ public class NegotiateTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P2.addCountry(d_Country4);
-		//		d_P2.addCountry(d_Country3);
 		d_P1.addCountry(d_Country3);
 
 		d_P2.addCountry(d_Country2);
@@ -73,7 +79,6 @@ public class NegotiateTest {
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-		//		d_Country3.setCountryOwnerPlayer(d_P2);
 		d_Country3.setCountryOwnerPlayer(d_P1);
 
 		d_Country4.setCountryOwnerPlayer(d_P2);
@@ -87,6 +92,9 @@ public class NegotiateTest {
 
 	}
 
+	/**
+	 * This method tests if the player owns negotiate card. 
+	 */
 	@Test
 	public void testCardCheck() {
 		String l_Actual="", l_Expected="\nraj does not own Negotiate Card for Diplomacy with kumar";
@@ -96,6 +104,9 @@ public class NegotiateTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 	
+	/**
+	 * This method tests the successful negotiation.
+	 */
 	@Test
 	public void testNegotiation() {
 		d_P1.setCard("Negotiate");
@@ -106,6 +117,9 @@ public class NegotiateTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 	
+	/**
+	 * This method tests that once negotiation card is used, it is removed from player's list and can't be used again.
+	 */
 	@Test
 	public void testNegotiationAgain() {
 		d_P1.setCard("Negotiate");

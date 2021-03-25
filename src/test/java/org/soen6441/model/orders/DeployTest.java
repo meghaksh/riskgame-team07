@@ -12,6 +12,9 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written in Deploy order class.
+ */
 public class DeployTest {
 
 	CommandPrompt d_CpView;
@@ -24,6 +27,10 @@ public class DeployTest {
 	Map d_Map;
 	Deploy d_Deploy;
 
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -65,7 +72,6 @@ public class DeployTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P2.addCountry(d_Country4);
-		//		d_P2.addCountry(d_Country3);
 		d_P1.addCountry(d_Country3);
 
 		d_P2.addCountry(d_Country2);
@@ -73,7 +79,6 @@ public class DeployTest {
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-		//		d_Country3.setCountryOwnerPlayer(d_P2);
 		d_Country3.setCountryOwnerPlayer(d_P1);
 
 		d_Country4.setCountryOwnerPlayer(d_P2);
@@ -87,6 +92,9 @@ public class DeployTest {
 
 	}
 
+	/**
+	 * This method tests if the player is deploying armies lesser than it owns. 
+	 */
 	@Test
 	public void testArmies() {
 		String l_Actual="";
@@ -97,6 +105,9 @@ public class DeployTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 
+	/**
+	 * This method tests if the country on which the armies to be deployed is not owned by the player. 
+	 */
 	@Test
 	public void testCountry() {
 		String l_Actual="";
@@ -107,6 +118,9 @@ public class DeployTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 	
+	/**
+	 * This method tests that number of armies are deployed on the player successfully.
+	 */
 	@Test
 	public void testDeploy() {
 		String l_Actual="";

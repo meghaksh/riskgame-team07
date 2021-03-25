@@ -12,6 +12,9 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written in Blockade order class.
+ */
 public class BlockadeTest {
 	CommandPrompt d_CpView;
 	GameModelNew d_GameModel;
@@ -23,6 +26,10 @@ public class BlockadeTest {
 	Map d_Map;
 	Blockade d_Block;
 
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -64,7 +71,6 @@ public class BlockadeTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P1.addCountry(d_Country4);
-//		d_P2.addCountry(d_Country3);
 		d_P1.addCountry(d_Country3);
 		
 		d_P2.addCountry(d_Country2);
@@ -72,7 +78,6 @@ public class BlockadeTest {
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-//		d_Country3.setCountryOwnerPlayer(d_P2);
 		d_Country3.setCountryOwnerPlayer(d_P1);
 		
 		d_Country4.setCountryOwnerPlayer(d_P1);
@@ -86,6 +91,9 @@ public class BlockadeTest {
 
 	}
 
+	/**
+	 * This method tests the scenario of player not having a blockade card and still issuing the order of it.
+	 */
 	@Test
 	public void testCardCheck() {
 		String l_Actual="", l_Expected="Player does not have a blockade card";
@@ -95,6 +103,9 @@ public class BlockadeTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	/**
+	 * This method tests if the country belongs to the same player who issued the blockade order. 
+	 */
 	@Test
 	public void testCountryCheck() {
 		d_P1.setCard("Blockade");
@@ -105,6 +116,9 @@ public class BlockadeTest {
 		assertEquals(l_Expected,l_Actual);
 
 	}
+	/**
+	 * This method tests that after using the blockade card, it is removed from the player's list and not able to use again.
+	 */
 	@Test
 	public void testBlockadeAgain() {
 		d_P1.setCard("Blockade");

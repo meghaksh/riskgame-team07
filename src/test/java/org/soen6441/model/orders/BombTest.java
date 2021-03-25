@@ -12,6 +12,9 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 import org.soen6441.view.CommandPrompt;
 
+/**
+ * This class tests the methods written in Bomb order class.
+ */
 public class BombTest {
 	CommandPrompt d_CpView;
 	GameModelNew d_GameModel;
@@ -23,6 +26,10 @@ public class BombTest {
 	Map d_Map;
 	Bomb d_Bomb;
 
+	/**
+	 * This method sets the context before each method is executed. 
+	 * @throws Exception any exception that is thrown while setting up the context. 
+	 */
 	@Before
 	public void setTestContext() throws Exception {
 		d_CpView= new CommandPrompt();
@@ -64,7 +71,6 @@ public class BombTest {
 
 		d_P1.addCountry(d_Country1);
 		d_P2.addCountry(d_Country4);
-		//		d_P2.addCountry(d_Country3);
 		d_P1.addCountry(d_Country3);
 
 		d_P2.addCountry(d_Country2);
@@ -72,7 +78,6 @@ public class BombTest {
 
 		d_Country1.setCountryOwnerPlayer(d_P1);
 		d_Country2.setCountryOwnerPlayer(d_P2);
-		//		d_Country3.setCountryOwnerPlayer(d_P2);
 		d_Country3.setCountryOwnerPlayer(d_P1);
 
 		d_Country4.setCountryOwnerPlayer(d_P2);
@@ -86,6 +91,9 @@ public class BombTest {
 
 	}
 
+	/**
+	 * This method tests if the player owns a bomb card before executing it.
+	 */
 	@Test
 	public void testCardCheck() {
 		String l_Actual="", l_Expected="Player does not have a bomb card";
@@ -95,6 +103,9 @@ public class BombTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 
+	/**
+	 * This method tests that bomb order is issued not on the territory that player owns.
+	 */
 	@Test
 	public void testCountryCheck() {
 		d_P1.setCard("Bomb");
@@ -105,6 +116,10 @@ public class BombTest {
 		assertEquals(l_Expected,l_Actual);
 	}
 
+	/**
+	 * This method tests if the bombed country is the neighbor country of the player's owned country.
+	 * @throws Exception
+	 */
 	@Test
 	public void testNeighbor() throws Exception {
 		d_P1.setCard("Bomb");
@@ -114,7 +129,10 @@ public class BombTest {
 		l_Actual = d_Bomb.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
-
+	
+	/**
+	 * This method tests that bomb card is not used again after it has been used once. 
+	 */
 	@Test
 	public void testBombAgain() {
 		d_P1.setCard("Bomb");

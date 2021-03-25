@@ -5,6 +5,9 @@ import org.soen6441.model.JUnitTestSuiteModel;
 import org.soen6441.model.orders.JUnitTestSuiteOrders;
 import org.soen6441.utility.state.JunitTestSuiteState;
 
+/**
+ * JUnit Test Suite Class to run all the test suits in each test folder. 
+ */
 @RunWith(Suite.class)
 @SuiteClasses({JUnitTestSuiteModel.class,JUnitTestSuiteOrders.class,JunitTestSuiteState.class})
 public class JUnitTestSuite {
