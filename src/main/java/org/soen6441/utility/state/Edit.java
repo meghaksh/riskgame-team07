@@ -1,6 +1,10 @@
 package org.soen6441.utility.state;
 
-import org.soen6441.controller.GameEngine;     import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.adapterpattern.Adaptee;
+import org.soen6441.adapterpattern.Adapter;
+import org.soen6441.adapterpattern.Target;
+import org.soen6441.controller.GameEngine;
+import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 /**
  *The Edit Phase extends the phase class and implements all the methods suitable for that particular phase.
@@ -28,7 +32,13 @@ public class Edit extends Phase {
 	public String loadMap(String p_S) {
 
 		String l_AckMsg;
-		try {  l_AckMsg =d_Ge.getMapController().loadMap(p_S);
+		try { 
+			Target l_TargetObject= new Target(d_Ge);
+			l_AckMsg=l_TargetObject.loadMap(p_S);
+			//l_AckMsg =d_Ge.getMapController().loadMap(p_S);
+			
+			//Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
+			//l_AckMsg=l_TargetObject.loadMap(p_S);
 		}catch(Exception p_Exception)
 		{
 			l_AckMsg=p_Exception.getMessage();
