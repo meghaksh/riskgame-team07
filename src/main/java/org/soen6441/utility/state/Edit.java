@@ -38,7 +38,7 @@ public class Edit extends Phase {
 			//l_AckMsg =d_Ge.getMapController().loadMap(p_S);
 			
 			//Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
-			//l_AckMsg=l_TargetObject.loadMap(p_S);
+			//l_AckMsg=l_TargetObject.loadMap(p_S.split(" ")[1]);
 		}catch(Exception p_Exception)
 		{
 			l_AckMsg=p_Exception.getMessage();
