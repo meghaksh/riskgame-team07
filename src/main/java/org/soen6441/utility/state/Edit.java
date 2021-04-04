@@ -1,5 +1,8 @@
 package org.soen6441.utility.state;
 
+import java.io.File;
+import java.util.Scanner;
+
 import org.soen6441.adapterpattern.Adaptee;
 import org.soen6441.adapterpattern.Adapter;
 import org.soen6441.adapterpattern.Target;
@@ -30,15 +33,34 @@ public class Edit extends Phase {
 	 */
 	@Override
 	public String loadMap(String p_S) {
-
+		boolean l_Flag=false;
 		String l_AckMsg;
-		try { 
+		try {
+			String l_Path="resource\\";
+			File l_File =new File(l_Path+p_S.split(" ")[1]);
+			Scanner l_Sc = new Scanner(l_File);
+			while(l_Sc.hasNextLine())
+			{
+				
+				String l_Line=l_Sc.nextLine();
+				if(l_Line.contains("Territories"))
+				{
+					l_Flag=true;
+					break;
+				}
+			}
+			l_Sc.close();
+			if(l_Flag)
+			{
+				Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
+				l_AckMsg=l_TargetObject.loadMap(p_S.split(" ")[1]);
+			}
+			else
+			{
 			Target l_TargetObject= new Target(d_Ge);
 			l_AckMsg=l_TargetObject.loadMap(p_S);
-			//l_AckMsg =d_Ge.getMapController().loadMap(p_S);
-			
-			//Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
-			//l_AckMsg=l_TargetObject.loadMap(p_S.split(" ")[1]);
+			}
+						
 		}catch(Exception p_Exception)
 		{
 			l_AckMsg=p_Exception.getMessage();
