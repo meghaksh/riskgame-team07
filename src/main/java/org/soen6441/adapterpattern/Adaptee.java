@@ -9,6 +9,7 @@ public class Adaptee {
 
 public String loadConquestMap(String p_S,GameEngine p_GameEngine) {
 	try {
+		p_GameEngine.getGameModel().getMap().reset();
 		String l_Path="resource\\";
 		File l_File =new File(l_Path+p_S);
 		Scanner l_Sc = new Scanner(l_File);
@@ -59,12 +60,19 @@ public String loadConquestMap(String p_S,GameEngine p_GameEngine) {
 			}
 		}
 		}
+		l_Sc.close();
+		l_Sc2.close();
+		String l_Result1=p_GameEngine.getGameModel().getMap().validateMap();
+		if(l_Result1.equals("Map is not Valid")){
+			p_GameEngine.getGameModel().getMap().reset();
+			return l_Result1;
+		}
 	}catch(Exception p_E)
 		{//System.out.println(p_E);
 		}
 		
 
-		return "success";
+		return "The Map is loaded with "+p_GameEngine.getGameModel().getMap().getContinentList().size()+" Continents and "+p_GameEngine.getGameModel().getMap().getCountryList().size()+" Countries";
 	}
 
 }
