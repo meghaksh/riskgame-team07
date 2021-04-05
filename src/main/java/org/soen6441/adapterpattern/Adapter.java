@@ -23,5 +23,10 @@ public class Adapter extends Target {
 	{
 		return this.d_Adaptee.loadConquestMap(p_S, d_GameEngine);
 
-}
+	}
+	public String saveMap(String p_S)
+	{
+		return this.d_Adaptee.saveConquestMap(p_S);
+	}
+	
 }

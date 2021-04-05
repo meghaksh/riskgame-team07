@@ -95,7 +95,10 @@ public class Edit extends Phase {
 	@Override
 	public String saveMap(String p_S) {	 
 		String l_AckMsg;
-		try {  l_AckMsg =d_Ge.getMapController().saveMap(p_S);
+		try { 
+			Target l_TargetObject= new Target(d_Ge);
+			l_AckMsg =l_TargetObject.saveMap(p_S);
+			//l_AckMsg =d_Ge.getMapController().saveMap(p_S);
 		}catch(Exception p_Exception)
 		{
 			l_AckMsg=p_Exception.getMessage();

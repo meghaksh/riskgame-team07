@@ -22,4 +22,9 @@ public class Target {
 		
 		return d_GameEngine.getMapController().loadMap(p_S);
 	}
+	
+	public String saveMap(String p_S) throws Exception
+	{
+		return d_GameEngine.getMapController().saveMap(p_S);
+	}
 }
