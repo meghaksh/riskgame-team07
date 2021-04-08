@@ -98,7 +98,7 @@ public class Adaptee {
 		}
 		System.out.println("reached");
 		String l_Path="resource\\";
-		//ArrayList<String> l_Borders= new ArrayList<>();
+		ArrayList<String> l_Borders;
 		File l_File=new File(l_Path+p_S);
 		FileWriter l_Fw = new FileWriter(l_File);
 		PrintWriter l_Pr = new PrintWriter(l_Fw);
@@ -118,8 +118,14 @@ public class Adaptee {
 		for(Country l_C: p_GameEngine.getGameModel().getMap().getCountryList()){
 			//l_CountryOrder++;
 			String l_ContinentName = l_C.getContinentName();
+			l_Borders=l_C.getBorder();
 			//this.d_PreviousSave.put(l_C.getCountryID(),l_CountryOrder);
-			l_Pr.println(l_C.getCountryName()+",0,0,"+l_ContinentName);
+			l_Pr.print(l_C.getCountryName()+",0,0,"+l_ContinentName);
+			for(String l_Co : l_Borders)
+			{
+				l_Pr.print(","+l_Co);
+			}
+			l_Pr.println("");
 		}
 		l_Pr.println("");
 		
