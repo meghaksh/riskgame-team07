@@ -98,7 +98,6 @@ public class Edit extends Phase {
 	public String saveMap(String p_S) {	 
 		String l_AckMsg;
 		try {
-			int flag=0;
 			while(true)
 			{
 			String l_StringOrder = JOptionPane.showInputDialog(" : Please Enter 1 to save as ConquestMap OR 2 for DominationMap");
@@ -118,8 +117,6 @@ public class Edit extends Phase {
 			}
 			
 			}
-			
-			//l_AckMsg =d_Ge.getMapController().saveMap(p_S);
 		}catch(Exception p_Exception)
 		{
 			l_AckMsg=p_Exception.getMessage();

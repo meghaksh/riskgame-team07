@@ -76,7 +76,6 @@ public class Adaptee {
 		{
 		}
 
-
 		return "The Map is loaded with "+p_GameEngine.getGameModel().getMap().getContinentList().size()+" Continents and "+p_GameEngine.getGameModel().getMap().getCountryList().size()+" Countries";
 	}
 	
@@ -125,7 +124,7 @@ public class Adaptee {
 		}catch(Exception p_E){
 			
 		}
-		return "success";
+		return "Map has been saved succesfully\n";
 	}
 
 }
