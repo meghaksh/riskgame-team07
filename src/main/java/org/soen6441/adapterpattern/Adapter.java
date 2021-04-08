@@ -26,7 +26,7 @@ public class Adapter extends Target {
 	}
 	public String saveMap(String p_S)
 	{
-		return this.d_Adaptee.saveConquestMap(p_S);
+		return this.d_Adaptee.saveConquestMap(p_S,d_GameEngine);
 	}
 	
 }

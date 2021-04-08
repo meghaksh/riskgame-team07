@@ -1,9 +1,14 @@
 package org.soen6441.adapterpattern;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.soen6441.controller.GameEngine;
+import org.soen6441.model.Continent;
 
 public class Adaptee {
 
@@ -76,9 +81,39 @@ public class Adaptee {
 	}
 	
 	
-	public String saveConquestMap(String p_S)
+	public String saveConquestMap(String p_S,GameEngine p_GameEngine) 
 	{
-		return null;
+		try {
+			
+		
+		String l_Result=p_GameEngine.getGameModel().getMap().validateMap();
+		if(l_Result.equals("Map is not Valid")){
+			return l_Result;
+		}
+		System.out.println("reached");
+		String l_Path="resource\\";
+		//ArrayList<String> l_Borders= new ArrayList<>();
+		File l_File=new File(l_Path+p_S);
+		FileWriter l_Fw = new FileWriter(l_File);
+		PrintWriter l_Pr = new PrintWriter(l_Fw);
+		l_Pr.println("");
+		l_Pr.println("[Continents]");
+		if(p_GameEngine.getGameModel().getMap().getContinentList().size()<=0) {
+			l_Pr.close();
+			throw new Exception("No Continent to Save");
+		}
+		//adding all the continents in the file
+		for(Continent l_Co: p_GameEngine.getGameModel().getMap().getContinentList()){
+			l_Pr.println(l_Co.getContinentName()+"="+l_Co.getContinentControlValue());
+		}
+				l_Pr.println("");
+				l_Pr.close();
+				l_Fw.close();
+		}catch(Exception p_E)
+		{
+			
+		}
+		return "success";
 	}
 
 }

@@ -98,6 +98,10 @@ public class Edit extends Phase {
 		try { 
 			Target l_TargetObject= new Target(d_Ge);
 			l_AckMsg =l_TargetObject.saveMap(p_S);
+			
+			//Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
+			//l_AckMsg=l_TargetObject.saveMap(p_S.split(" ")[1]);
+			
 			//l_AckMsg =d_Ge.getMapController().saveMap(p_S);
 		}catch(Exception p_Exception)
 		{
