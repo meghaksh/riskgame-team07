@@ -1,5 +1,7 @@
 package org.soen6441.strategypattern;
 
-public abstract class Strategy {
+import org.soen6441.model.Order;
 
+public abstract class Strategy {
+	public abstract Order createOrder();
 }
