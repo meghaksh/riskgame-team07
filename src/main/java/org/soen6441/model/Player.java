@@ -10,6 +10,7 @@ import org.soen6441.model.orders.Blockade;
 import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
+import org.soen6441.strategypattern.Strategy;
 
 /**
  * The Player class represents the actual player participating in the game.
@@ -28,7 +29,7 @@ public class Player {
 	private ArrayList<String> d_Cards = new ArrayList<String>();
 	private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
 	private boolean d_AtleastOneBattleWon=false;
-
+	private Strategy d_PlayerStrategy;
 	/**
 	 * default constructor of Player class	
 	 */
@@ -382,5 +383,13 @@ public class Player {
 	 */
 	public Order next_order() {
 		return d_Order.remove();
+	}
+	
+	public void setPlayerStrategy(Strategy p_PlayerStrategy) {
+		this.d_PlayerStrategy = p_PlayerStrategy;
+	}
+	
+	public Strategy getPlayerStrategy() {
+		return this.d_PlayerStrategy;
 	}
 }
