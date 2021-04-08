@@ -29,8 +29,8 @@ public class GameModelTest {
 		d_Map.addCountry("china","asia");
 		d_Map.addCountry("japan","asia");
 		d_Game = new GameModelNew(d_Map);
-		d_Game.addPlayer("raj");
-		d_Game.addPlayer("kumar");
+		d_Game.addPlayer("raj","human");
+		d_Game.addPlayer("kumar","human");
 		d_C1 = new Player("raj",d_Game);
 		d_C2 = new Player("kumar",d_Game);
 		d_Check.add(d_C1);
@@ -59,7 +59,7 @@ public class GameModelTest {
 		String l_ExpectedMessage="Please enter a differnt Player name as this name already exists";
 		String l_ActualMessage = "";
 		try {
-			d_Game.addPlayer("raj");
+			d_Game.addPlayer("raj","human");
 		} catch (Exception p_E) {
 			l_ActualMessage = p_E.getMessage();
 		}
@@ -74,8 +74,8 @@ public class GameModelTest {
 		String l_ExpectedMessage="Reached Max Number of Players can be added to the game";
 		String l_ActualMessage = "";
 		try {
-			d_Game.addPlayer("zeal");
-			d_Game.addPlayer("alpha");
+			d_Game.addPlayer("zeal","human");
+			d_Game.addPlayer("alpha","human");
 
 		} catch (Exception p_E) {
 			l_ActualMessage = p_E.getMessage();

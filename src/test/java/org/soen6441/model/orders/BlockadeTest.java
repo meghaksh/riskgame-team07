@@ -64,8 +64,8 @@ public class BlockadeTest {
 		d_Map.addBorder("japan", "india");
 		d_GameModel = new GameModelNew(d_Map);
 		d_Ge= new GameEngine(d_CpView,d_GameModel);
-		d_GameModel.addPlayer("raj");
-		d_GameModel.addPlayer("kumar");
+		d_GameModel.addPlayer("raj","human");
+		d_GameModel.addPlayer("kumar","human");
 		d_P1 = new Player("raj",d_GameModel);
 		d_P2 = new Player("kumar",d_GameModel);
 

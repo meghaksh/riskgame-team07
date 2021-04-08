@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;						import java.util.Queue;
 import java.util.Random;
 
+import org.soen6441.strategypattern.*;
+import org.soen6441.strategypattern.Strategy;
+
 /**
  * This is the  GameModelNew class of MVC model. 
  * This class has a references of  Models. 
@@ -83,7 +86,7 @@ public class GameModelNew {
 	 * @param p_PlayerName player name of player
 	 * @throws Exception if player size is more that country size or if player already exists
 	 */
-	public void addPlayer(String p_PlayerName)throws Exception {
+	public void addPlayer(String p_PlayerName,String strategy)throws Exception {
 		if ((d_PlayerList.size() >= getSelectedMap().getCountryList().size())) {
 			throw new Exception("Reached Max Number of Players can be added to the game");
 		}
@@ -91,7 +94,46 @@ public class GameModelNew {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 		} else {
 			Player l_PlayerObject = new Player(p_PlayerName, this);
+			switch(strategy)
+			{
+			case "aggresive" :
+				
+				l_PlayerObject.setPlayerStrategy(new AggresivePlayerStrategy());
+				
+					
+				break;
+
+			case "human" :
+				
+				l_PlayerObject.setPlayerStrategy(new HumanPlayerStrategy());
+//				System.out.println("Human.\n");
+
+				break;
+
+			case "benevolent" :
+				
+				l_PlayerObject.setPlayerStrategy(new BenevolentPlayerStrategy());
+				break;
+
+			case "Random": 
+				
+				l_PlayerObject.setPlayerStrategy(new RandomPlayerStrategy());
+//				System.out.println("Random.\n");
+				break;
+			case "cheater": 
+				
+				l_PlayerObject.setPlayerStrategy(new CheaterPlayerStrategy());
+				
+				break;
+				
+			default:
+				System.out.println("Invalid Command. Please try again.\n");
+				break;
+			}
+			System.out.println("strat"+l_PlayerObject.getPlayerStrategy());
 			d_PlayerList.add(l_PlayerObject);
+			
+		
 		}
 	}
 

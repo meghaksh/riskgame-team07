@@ -113,8 +113,8 @@ public class PlayerController {
 			throw new Exception("Please provide valid Parameters to add player");
 		while(l_Counter<l_CommandArray.length) {
 			if(l_CommandArray[l_Counter].equals("-add")) {
-				d_GameModelNew.addPlayer(l_CommandArray[l_Counter+1]);
-				l_Counter+=2;
+				d_GameModelNew.addPlayer(l_CommandArray[l_Counter+1],l_CommandArray[l_Counter+2]);
+				l_Counter+=3;
 				l_AddCounter+=1;
 			} else if(l_CommandArray[l_Counter].equals("-remove")){
 				d_GameModelNew.removePlayer(l_CommandArray[l_Counter+1]);
