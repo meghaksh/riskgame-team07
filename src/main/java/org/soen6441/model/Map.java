@@ -158,7 +158,9 @@ public class Map {
 		}
 		//adding all the continents in the file
 		for(Continent l_Co: this.d_ContinentObjects){
-			l_Pr.println(l_Co.getContinentName()+" "+l_Co.getContinentControlValue());
+			String l_Continent_Name=l_Co.getContinentName().replaceAll("\\s", "");
+			
+			l_Pr.println(l_Continent_Name+" "+l_Co.getContinentControlValue());
 		}
 		l_Pr.println("");
 		l_Pr.println("countries");
