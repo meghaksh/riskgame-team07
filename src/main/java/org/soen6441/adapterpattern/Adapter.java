@@ -13,7 +13,6 @@ public class Adapter extends Target {
 	
 	public Adapter (Adaptee p_Adaptee,GameEngine p_GameEngine)
 	{
-		//this.Adapter(p_GameEngine);
 		super(p_GameEngine);
 		this.d_Adaptee=p_Adaptee;
 		this.d_GameEngine=p_GameEngine;

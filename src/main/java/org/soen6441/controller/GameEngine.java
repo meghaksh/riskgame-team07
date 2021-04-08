@@ -7,8 +7,6 @@ import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
 import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
 import org.soen6441.observerpattern.LogEntryBuffer;
-import org.soen6441.observerpattern.Logger;
-import org.soen6441.observerpattern.Observable;
 import org.soen6441.utility.state.Edit;
 import org.soen6441.utility.state.Phase;
 
