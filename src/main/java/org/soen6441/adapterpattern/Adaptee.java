@@ -5,13 +5,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import org.soen6441.controller.GameEngine;
 import org.soen6441.model.Continent;
+import org.soen6441.model.Country;
 
 public class Adaptee {
-
+	private HashMap<Integer,Integer>d_PreviousSave;
+	
+	public Adaptee() {
+	d_PreviousSave=new HashMap<Integer,Integer>();
+	}
 	public String loadConquestMap(String p_S,GameEngine p_GameEngine) {
 		try {
 			p_GameEngine.getGameModel().getMap().reset();
@@ -106,7 +112,17 @@ public class Adaptee {
 		for(Continent l_Co: p_GameEngine.getGameModel().getMap().getContinentList()){
 			l_Pr.println(l_Co.getContinentName()+"="+l_Co.getContinentControlValue());
 		}
-				l_Pr.println("");
+		l_Pr.println("");
+		l_Pr.println("[Territories]");
+		//int l_CountryOrder=0;
+		for(Country l_C: p_GameEngine.getGameModel().getMap().getCountryList()){
+			//l_CountryOrder++;
+			String l_ContinentName = l_C.getContinentName();
+			//this.d_PreviousSave.put(l_C.getCountryID(),l_CountryOrder);
+			l_Pr.println(l_C.getCountryName()+",0,0,"+l_ContinentName);
+		}
+		l_Pr.println("");
+		
 				l_Pr.close();
 				l_Fw.close();
 		}catch(Exception p_E)
