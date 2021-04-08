@@ -3,6 +3,8 @@ package org.soen6441.utility.state;
 import java.io.File;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import org.soen6441.adapterpattern.Adaptee;
 import org.soen6441.adapterpattern.Adapter;
 import org.soen6441.adapterpattern.Target;
@@ -95,12 +97,27 @@ public class Edit extends Phase {
 	@Override
 	public String saveMap(String p_S) {	 
 		String l_AckMsg;
-		try { 
-			Target l_TargetObject= new Target(d_Ge);
-			l_AckMsg =l_TargetObject.saveMap(p_S);
+		try {
+			int flag=0;
+			while(true)
+			{
+			String l_StringOrder = JOptionPane.showInputDialog(" : Please Enter 1 to save as ConquestMap OR 2 for DominationMap");
 			
-			//Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
-			//l_AckMsg=l_TargetObject.saveMap(p_S.split(" ")[1]);
+			if(l_StringOrder.equals("1"))
+			{
+
+				Target l_TargetObject= new Adapter(new Adaptee(),d_Ge);
+				l_AckMsg=l_TargetObject.saveMap(p_S.split(" ")[1]);
+				break;
+			}
+			else if(l_StringOrder.equals("2"))
+			{
+				Target l_TargetObject= new Target(d_Ge);
+				l_AckMsg =l_TargetObject.saveMap(p_S);
+				break;
+			}
+			
+			}
 			
 			//l_AckMsg =d_Ge.getMapController().saveMap(p_S);
 		}catch(Exception p_Exception)
