@@ -93,5 +93,6 @@ public abstract class Phase {
 	 * @return String of current phase name
 	 */
 	abstract public String getPhaseName();
+	abstract public String tournament(String p_string, String p_CommandStringFromInput);
 }
 

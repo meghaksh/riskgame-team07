@@ -110,6 +110,12 @@ public class GameEngine  {
 			try {
 				String l_CommandStringFromInput = d_CpView.getCommandInput().trim();
 				switch(l_CommandStringFromInput.split(" ")[0]){
+				case "tournament":
+					d_LEB.setResult(l_CommandStringFromInput);
+					d_CpView.setCommandAcknowledgement(d_GamePhase.tournament("tournament",l_CommandStringFromInput));
+						
+					break;
+					
 				case "editcontinent" :
 					
 					d_LEB.setResult(l_CommandStringFromInput);
@@ -334,4 +340,11 @@ public class GameEngine  {
 	{
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
 	}
+	
+	public void tournament(String p_InputString) {
+		
+		
+		
+	}
+	
 }

@@ -254,5 +254,14 @@ public class Edit extends Phase {
 		return "EditPhase";
 	}
 
+	@Override
+	public String tournament(String p_string, String p_CommandStringFromInput) {
+		// TODO Auto-generated method stub
+		d_Ge.tournament(p_CommandStringFromInput);
+		return " Tournament Complete ";
+	}
+	
+	
+
 	
 }

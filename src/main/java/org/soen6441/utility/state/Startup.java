@@ -140,4 +140,11 @@ public class Startup extends Phase {
 		return "Startup";
 	}
 	
+	@Override
+	public String tournament(String p_string, String p_CommandStringFromInput) {
+		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
+		d_Leb.setResult("Invalid command in state ");
+		return null;
+	}
+	
 }
