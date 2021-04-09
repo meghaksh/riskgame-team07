@@ -25,6 +25,7 @@ import org.soen6441.view.CommandPrompt;
  */
 public class PlayerController {
 	private ArrayList <Player> d_Players;
+	private Player d_Winner;
 	private String d_OrderAcknowledgment="";
 	private CommandPrompt d_CpView;
 	private GameModelNew d_GameModelNew;
@@ -278,10 +279,19 @@ public class PlayerController {
 		}
 		if(l_flag==0)
 		{
-
+			setWinner(l_CheckPlayer);
 			d_GameEngine.setPhase(new GameOver(d_GameEngine,d_CpView));
 			d_CpView.setCommandAcknowledgement("\n"+l_CheckPlayer.getPlayerName()+" is the winner of the game!");
 		}
 
 	}
+	public Player getWinner()
+	{
+		return this.d_Winner;
+	}
+	public void setWinner(Player p_Winner)
+	{
+		this.d_Winner=p_Winner;
+	}
+	
 }

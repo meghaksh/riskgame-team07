@@ -257,7 +257,12 @@ public class Edit extends Phase {
 	@Override
 	public String tournament(String p_string, String p_CommandStringFromInput) {
 		// TODO Auto-generated method stub
-		d_Ge.tournament(p_CommandStringFromInput);
+		try {
+			d_Ge.tournament(p_CommandStringFromInput);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return " Tournament Complete ";
 	}
 	

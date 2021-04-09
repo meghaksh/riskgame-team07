@@ -1,9 +1,15 @@
 package org.soen6441.controller;
 
-import java.util.ArrayList;						import org.soen6441.view.CommandPrompt;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.soen6441.view.CommandPrompt;
 
 
 import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
+import java.io.File;
+
 import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
 import org.soen6441.observerpattern.LogEntryBuffer;
@@ -25,7 +31,7 @@ public class GameEngine  {
 	private PlayerController d_PlayerController;
 	private Phase d_GamePhase;
 	private LogEntryBuffer d_LEB;
-	
+
 	/**
 	 * This method returns the reference of the MapController
 	 * @return Mapcontroller reference
@@ -54,8 +60,8 @@ public class GameEngine  {
 	public GameModelNew getGameModel() {
 		return this.d_GameModelNew;
 	}
-	
-	
+
+
 	/**
 	 * This controller takes view and model as arguments and use throughout the game. 
 	 * 
@@ -77,7 +83,7 @@ public class GameEngine  {
 	 */
 	public void setPhase(Phase p_phase) {
 		d_GamePhase = p_phase;
-	
+
 	}
 	/**
 	 * This method returns the current phase
@@ -85,7 +91,7 @@ public class GameEngine  {
 	 */
 	public Phase getPhase() {
 		return this.d_GamePhase;
-	
+
 	}
 
 	/**
@@ -113,53 +119,53 @@ public class GameEngine  {
 				case "tournament":
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.tournament("tournament",l_CommandStringFromInput));
-						
+
 					break;
-					
+
 				case "editcontinent" :
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.editContinent("editcontinent",l_CommandStringFromInput));
-						
+
 					break;
 
 				case "editcountry" :
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.editCountry("editcountry",l_CommandStringFromInput));
 
 					break;
 
 				case "editneighbor" :
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.editCountry("editneighbor",l_CommandStringFromInput));
 
 					break;
 
 				case "showmap": 
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_GamePhase.showMap();
-					
+
 					break;
 
 				case "savemap":
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.saveMap(l_CommandStringFromInput));
 
 					break;
 
 				case "editmap":
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.editMap(l_CommandStringFromInput));
 
 					break;
 
 				case "validatemap":
-					
+
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement(d_GamePhase.validateMap());
 
@@ -188,7 +194,7 @@ public class GameEngine  {
 					d_MapController.reset();
 					d_CpView.setCommandAcknowledgement("The Map is Reset"+"\n");
 					break;
-					
+
 				case "loadgame":
 					d_LEB.setResult(l_CommandStringFromInput);
 					loadGame(l_CommandStringFromInput);
@@ -208,7 +214,7 @@ public class GameEngine  {
 		}
 	}
 
-	
+
 
 	/**
 	 * This Method will take assign countries from command prompt and will do 
@@ -233,7 +239,7 @@ public class GameEngine  {
 			d_CpView.setCommandAcknowledgement("\n"+l_Player.getPlayerName()+"-->"+"armies assigned:"+l_Player.getPlayerArmies());
 			d_LEB.setResult("\n"+"Countries Assigned: ");
 			d_CpView.setCommandAcknowledgement("\n"+"Countries Assigned: ");
-			
+
 			for(Country l_Country:l_Player.getCountryList()) {
 				d_LEB.setResult(l_Country.getCountryName()+ ",");
 				d_CpView.setCommandAcknowledgement(l_Country.getCountryName()+ ",");
@@ -286,7 +292,7 @@ public class GameEngine  {
 							d_LEB.setResult("-->Armies deployed: "+ l_Country.getNoOfArmies());
 							d_CpView.setCommandAcknowledgement("-->Armies deployed: "+ l_Country.getNoOfArmies());
 						}
-							
+
 						ArrayList<String> l_NeighborList = l_Country.getBorder();
 						if(l_NeighborList.size()>0) {
 							d_LEB.setResult("\n"+"--> Borders : ");
@@ -341,11 +347,84 @@ public class GameEngine  {
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
 		this.setPhase(new IssueOrder(this,d_CpView));
 	}
-	
-	public void tournament(String p_InputString) {
-		
-		
-		
+
+	public void tournament(String p_InputString) throws Exception {
+
+		int l_M = 0, l_P = 0, l_G = 0, l_D = 0;
+		String[] l_MapList = null;
+		String[] l_PlayerStrategyList=null;
+		ArrayList<Map> l_Maps=new ArrayList<Map>();
+		ArrayList<File> l_Files=new ArrayList<File>();
+		String l_Path="resource\\";
+		String[] l_CommandArray = p_InputString.split(" ");
+		if(l_CommandArray[1].equals("-M")){
+			l_MapList=l_CommandArray[2].split(",");
+			if(l_MapList.length>5||l_MapList.length<1)
+				System.out.println("Number of Maps are not in range");//throw exception
+			else 
+				l_M=l_MapList.length;
+			for(int i=0;i<l_M;i++) {
+				File l_F = new File(l_Path+l_MapList[i]);
+				if (!l_F.exists())
+					System.out.println("File does not Exists");//throw exception
+				else
+					l_Files.add(l_F);
+
+			}
+
+		}
+		if(l_CommandArray[3].equals("-P")){
+			l_PlayerStrategyList=l_CommandArray[4].split(",");
+			if(l_PlayerStrategyList.length>4||l_PlayerStrategyList.length<2)
+				System.out.println("Number of Player strategies are are not in range");//throw exception
+			else
+				l_P=l_PlayerStrategyList.length;
+
+		}
+		if(l_CommandArray[5].equals("-G")){
+			int l_NumGames=Integer.parseInt(l_CommandArray[6]);
+			if(l_NumGames>5||l_NumGames<1)
+				System.out.println("Number of Games are not in range");//throw exception
+			else
+				l_G=l_NumGames;
+
+
+		}
+		if(l_CommandArray[7].equals("-D")){
+			int l_MaxTurns=Integer.parseInt(l_CommandArray[8]);
+			if(l_MaxTurns>50||l_MaxTurns<10)
+				System.out.println("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");//throw exception
+			else
+				l_D=l_MaxTurns;
+
+		}
+		HashMap<String, ArrayList<String>> tournamentResult = new HashMap<>();
+		for (int i = 0; i < l_M; i++) {
+			ArrayList<String> result = new ArrayList<>();
+			for (int j = 0; j < l_G; j++) {
+				GameModelNew l_Game_obj=new GameModelNew();
+				l_Game_obj.getMap().loadMap(l_MapList[i]);
+				for(int k=0;k<l_P;k++) {
+					l_Game_obj.addPlayer("Player"+k,l_PlayerStrategyList[i]);
+
+				}
+				l_Game_obj.startUpPhase();
+				while(true)
+				{
+					l_Game_obj.assignReinforcementArmies();
+					this.getPlayerController().playerIssueOrder();
+					this.getPlayerController().playerNextOrder();
+					if(this.getPlayerController().getWinner()!=null) {
+						result.add(this.getPlayerController().getWinner().getPlayerName());
+						break;
+					}
+				}
+				
+				tournamentResult.put(l_MapList[i],result);
+			}
+
+		}
+
+
 	}
-	
-}
+	}
