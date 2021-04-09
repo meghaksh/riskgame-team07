@@ -182,6 +182,12 @@ public class GameEngine  {
 					d_MapController.reset();
 					d_CpView.setCommandAcknowledgement("The Map is Reset"+"\n");
 					break;
+					
+				case "loadgame":
+					d_LEB.setResult(l_CommandStringFromInput);
+					loadGame(l_CommandStringFromInput);
+					break;
+
 
 				default:
 					d_LEB.setResult(l_CommandStringFromInput);
@@ -323,5 +329,9 @@ public class GameEngine  {
 			}
 		}
 		d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
-	}	
+	}
+	public void loadGame(String p_Command)
+	{
+		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
+	}
 }
