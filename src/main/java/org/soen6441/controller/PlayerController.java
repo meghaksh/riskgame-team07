@@ -60,7 +60,7 @@ public class PlayerController {
 	 * The acknowledgement are passed on to the view.
 	 */
 	public void playerIssueOrder() {
-		ArrayList <Player> l_Players = d_Players;
+		ArrayList <Player> l_Players = d_GameEngine.getGameModel().getAllPlayers();
 		HashMap <Player,Boolean> l_CheckArmies = new HashMap<>();
 		for(Player l_TempPlayer:l_Players) {
 			l_CheckArmies.put(l_TempPlayer,false);
@@ -148,8 +148,8 @@ public class PlayerController {
 	 * At the end of this round, we check if a player is declared as a winner.
 	 */
 	public void playerNextOrder() {
-		ArrayList <Player> l_Players = d_Players;
-		ArrayList <Player> l_PlayersClone = (ArrayList<Player>) d_Players.clone();
+		ArrayList <Player> l_Players = d_GameEngine.getGameModel().getAllPlayers();
+		ArrayList <Player> l_PlayersClone = (ArrayList<Player>) l_Players.clone();
 		while(!l_PlayersClone.isEmpty()) {
 			Iterator<Player>l_It = l_Players.iterator();
 			int l_Flag =0;
@@ -218,7 +218,7 @@ public class PlayerController {
 			}
 		}
 		// Assigning cards to players that have won a battle in this round.
-		for(Player l_TempPlayer : d_Players)
+		for(Player l_TempPlayer : d_GameEngine.getGameModel().getAllPlayers())
 		{
 			if(l_TempPlayer.getAtleastOneBattleWon())
 			{
@@ -232,13 +232,12 @@ public class PlayerController {
 		clearNegotiatedPlayerList();
 		removePlayerWithNoCountry();
 		checkTheWinner();		
-
 	}
 	/**
 	 * This method is used to remove the player with no countries on its name.
 	 */
 	public void removePlayerWithNoCountry() {
-		Iterator<Player> l_PlayerIterator = d_Players.iterator();
+		Iterator<Player> l_PlayerIterator = d_GameEngine.getGameModel().getAllPlayers().iterator();
 		while(l_PlayerIterator.hasNext()) {
 			Player l_TempPlayer = (Player)l_PlayerIterator.next();
 			if(l_TempPlayer.getCountriesSize()<=0 && !l_TempPlayer.getPlayerName().equals("Neutral Player")) {
@@ -252,7 +251,7 @@ public class PlayerController {
 	public void clearNegotiatedPlayerList()
 	{
 
-		for(Player l_TempPlayer: d_Players)
+		for(Player l_TempPlayer: d_GameEngine.getGameModel().getAllPlayers())
 		{
 
 			l_TempPlayer.removeNegotiatedPlayer();
@@ -265,7 +264,7 @@ public class PlayerController {
 	 */
 	public void checkTheWinner()
 	{
-		ArrayList <Country> l_CountryList = d_GameModelNew.getMap().getCountryList();
+		ArrayList <Country> l_CountryList = d_GameEngine.getGameModel().getMap().getCountryList();
 		Iterator<Country>itr = l_CountryList.iterator();
 		Player l_CheckPlayer = (Player)((Country) itr.next()).getCountryOwnerPlayer();
 		int l_flag= 0;

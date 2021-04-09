@@ -9,7 +9,7 @@ import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
 import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.utility.state.Edit;
 import org.soen6441.utility.state.Phase;
-
+import org.soen6441.utility.state.IssueOrder;
 
 
 /**
@@ -339,6 +339,7 @@ public class GameEngine  {
 	public void loadGame(String p_Command)
 	{
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
+		this.setPhase(new IssueOrder(this,d_CpView));
 	}
 	
 	public void tournament(String p_InputString) {
