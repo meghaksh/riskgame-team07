@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
@@ -18,6 +16,7 @@ import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
 import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.strategypattern.HumanPlayerStrategy;
 import org.soen6441.utility.state.GameOver;
 import org.soen6441.view.CommandPrompt;
 
@@ -72,23 +71,30 @@ public class PlayerController {
 			while(l_It.hasNext()) {
 				Player l_Player = (Player)l_It.next(); 
 				if(!l_Player.getPlayerName().equals("Neutral Player")){
+					((HumanPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
+					l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
+				
 					if(l_CheckArmies.get(l_Player)==false)
 					{
 
-						String l_StringOrder = JOptionPane.showInputDialog(l_Player.getPlayerName()+" : Please Enter Your Order");
-						d_LEB.setResult(l_StringOrder);
-						if(l_StringOrder.equalsIgnoreCase("quit"))
-						{
-							l_CheckArmies.put(l_Player, true);
-							--l_PlayerListSize;
-						}
-						else
-						{
-							l_Player.setOrder(l_StringOrder);
+						
+						//d_LEB.setResult(l_StringOrder);
+						
+						
+							//l_Player.setOrder(l_StringOrder);
+						System.out.println("In playercontroller before issue order");
 							l_Player.issue_order();
+							boolean l_decreasePlayerListSize = ((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
+							if(l_decreasePlayerListSize==true)
+							{
+								System.out.println("inplayercontroller the command is quit");
+								l_PlayerListSize--;
+							}
+			
 
-						}
+						
 					}
+					
 				}
 			}
 		}
