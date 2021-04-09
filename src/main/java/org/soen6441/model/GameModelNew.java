@@ -1,6 +1,11 @@
 package org.soen6441.model;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,8 +14,11 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 
-import org.soen6441.strategypattern.*;
-import org.soen6441.strategypattern.Strategy;
+import org.soen6441.strategypattern.AggresivePlayerStrategy;
+import org.soen6441.strategypattern.BenevolentPlayerStrategy;
+import org.soen6441.strategypattern.CheaterPlayerStrategy;
+import org.soen6441.strategypattern.HumanPlayerStrategy;
+import org.soen6441.strategypattern.RandomPlayerStrategy;
 
 /**
  * This is the  GameModelNew class of MVC model. 
@@ -269,4 +277,37 @@ public class GameModelNew implements Serializable {
 			throw new Exception ("\"Please enter players using gameplayer add command");
 		}
 	}
+	public String saveGame(String p_FileName) {
+		String l_File = p_FileName;
+		System.out.println(p_FileName);
+		try {
+			FileOutputStream fileOut = new FileOutputStream("savedgames\\" + l_File);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+		return "Game Saved";
+	}
+	
+	public static GameModelNew loadGame(String p_FileName) {
+		GameModelNew game = null;
+		try {
+			System.out.println("gameTitle:" + p_FileName);
+			FileInputStream fileIn = new FileInputStream("savedgames\\" + p_FileName);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			game = (GameModelNew) in.readObject();
+			in.close();
+			fileIn.close();
+		} catch (IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException c) {
+			c.printStackTrace();
+		}
+		return game;
+	}
+
+
 }
