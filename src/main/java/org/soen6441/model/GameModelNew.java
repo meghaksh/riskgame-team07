@@ -105,7 +105,7 @@ public class GameModelNew {
 
 			case "human" :
 				
-				l_PlayerObject.setPlayerStrategy(new HumanPlayerStrategy());
+				l_PlayerObject.setPlayerStrategy(new HumanPlayerStrategy(l_PlayerObject,this));
 //				System.out.println("Human.\n");
 
 				break;
@@ -117,7 +117,7 @@ public class GameModelNew {
 
 			case "Random": 
 				
-				l_PlayerObject.setPlayerStrategy(new RandomPlayerStrategy());
+				l_PlayerObject.setPlayerStrategy(new RandomPlayerStrategy(l_PlayerObject,this));
 //				System.out.println("Random.\n");
 				break;
 			case "cheater": 
