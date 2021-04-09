@@ -65,7 +65,127 @@ public class HumanPlayerStrategy extends Strategy {
 		}
 		else
 		{
-		
+			int l_Flag = 0;
+			String[] l_StringList = l_StringOrder.split(" ");
+			String l_OrderType = l_StringList[0];
+			
+			System.out.println("in human player the command is not quit "+l_StringOrder);
+			switch(l_OrderType) {
+
+			case "deploy":
+				if(l_StringList.length != 3)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				int l_NumArmies = Integer.parseInt(l_StringList[2]);
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+					{
+						return new Deploy(d_Player,l_TempCountry,l_NumArmies);
+					}
+				}
+				break;
+			case "advance" :
+				if(l_StringList.length != 4)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
+				Country l_SourceCountry = null, l_TargetCountry = null;
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+					{
+						l_SourceCountry = l_TempCountry;
+						break;
+					}
+				}
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[2]))
+					{
+						l_TargetCountry = l_TempCountry;
+						break;
+					}
+				}
+				return new Advance(d_Player,l_SourceCountry,l_TargetCountry,l_NumArmies1);
+			case "bomb":
+				if(l_StringList.length != 2)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+					{
+						return new Bomb(d_Player,l_TempCountry);
+					}
+				}break;
+			case "blockade":
+				if(l_StringList.length != 2)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+					{
+						return new Blockade(d_Player,l_TempCountry);
+
+					}
+				}
+				break;
+			case "airlift":
+				if(l_StringList.length != 4)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
+				Country l_SourceCountry1 = null, l_TargetCountry1 = null;
+
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
+					{
+						l_SourceCountry1 = l_TempCountry;
+						break;
+					}
+				}
+				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				{
+					if(l_TempCountry.getCountryName().equals(l_StringList[2]))
+					{
+						l_TargetCountry1 = l_TempCountry;
+						break;
+					}
+				}
+				return new Airlift(d_Player,l_SourceCountry1,l_TargetCountry1,l_NumArmies2);
+			case "negotiate":
+				if(l_StringList.length != 2)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				for(Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
+					if(l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
+						return new Negotiate(d_Player, l_TempPlayer);
+					}
+				}
+
+				break;
+
+			default:
+				break;
+
+			}
+
+			
 		}
 		return null;
 		
