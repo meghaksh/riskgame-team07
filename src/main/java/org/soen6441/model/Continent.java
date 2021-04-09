@@ -1,11 +1,12 @@
 package org.soen6441.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * This Class is for all the Continents  of the Map
  */
-public class Continent {
+public class Continent implements Serializable {
 	private static int D_Count=0;
 	private int d_ID;
 	private String d_Name;

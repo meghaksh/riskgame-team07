@@ -1,9 +1,12 @@
 package org.soen6441.model;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;						import java.util.Queue;
+import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 
 import org.soen6441.strategypattern.*;
@@ -14,7 +17,7 @@ import org.soen6441.strategypattern.Strategy;
  * This class has a references of  Models. 
  * This class acts as an Data info for other controllers.
  */
-public class GameModelNew {
+public class GameModelNew implements Serializable {
 	private Map d_Map;
 	private Player d_PlayerID;
 	private ArrayList<Player> d_PlayerList;

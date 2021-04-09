@@ -1,5 +1,5 @@
 package org.soen6441.model;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -15,7 +15,7 @@ import org.soen6441.strategypattern.Strategy;
 /**
  * The Player class represents the actual player participating in the game.
  */
-public class Player {
+public class Player implements Serializable {
 	private String d_PlayerName="";
 	private int d_PlayerId;
 	private int d_Armies;

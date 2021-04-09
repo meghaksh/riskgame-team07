@@ -1,17 +1,23 @@
 package org.soen6441.model;
 
-import java.io.File;			import java.io.FileNotFoundException;
-import java.io.FileWriter;		import org.soen6441.controller.ValidateMap;
-import java.io.PrintWriter;		import java.util.ArrayList;
-import java.util.HashMap;		import java.util.Iterator;
-import java.util.Scanner;		
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
+
+import org.soen6441.controller.ValidateMap;		
 
 /**
  * This is the model class for the Map used in the game. 
  * This class consists of all the data members and behavior associated with Map. 
  * This class includes methods to add/remove continents, countries and borders as well as loadmap and savemap functionalities. 
  */
-public class Map {
+public class Map implements Serializable {
 	private ArrayList<Country> d_CountryObjects; 
 	private ArrayList<Continent> d_ContinentObjects;
 	//private HashMap<Integer,ArrayList<Integer>> d_Neighbors;

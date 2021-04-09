@@ -1,5 +1,6 @@
 package org.soen6441.strategypattern;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
 
-public class HumanPlayerStrategy extends Strategy {
+public class HumanPlayerStrategy extends Strategy implements Serializable {
 	
 	private GameModelNew d_GameModelNew;
 	Player d_Player;

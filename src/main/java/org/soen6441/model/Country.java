@@ -1,10 +1,12 @@
 package org.soen6441.model;
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *This is a class for all the countries/territories.
  */
-public class Country {
+public class Country implements Serializable{
 	private static int D_Count = 0;
 	int d_ID;
 	String d_Name;
