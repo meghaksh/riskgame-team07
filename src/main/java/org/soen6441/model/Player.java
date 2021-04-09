@@ -253,129 +253,15 @@ public class Player {
 	 * </ul>
 	 */
 	public void issue_order() {
-		int l_Flag = 0;
-		String[] l_StringList = d_StringOrder.split(" ");
-		String l_OrderType = l_StringList[0];
-		switch(l_OrderType) {
-
-		case "deploy":
-			if(l_StringList.length != 3)
-			{
-				System.out.println("Please enter valid number of parameters");
-				break;
-			}
-			int l_NumArmies = Integer.parseInt(l_StringList[2]);
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
-				{
-					d_Order.add(new Deploy(this,l_TempCountry,l_NumArmies));
-					break;
-				}
-			}
-			break;
-		case "advance" :
-			if(l_StringList.length != 4)
-			{
-				System.out.println("Please enter valid number of parameters");
-				break;
-			}
-			int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
-			Country l_SourceCountry = null, l_TargetCountry = null;
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
-				{
-					l_SourceCountry = l_TempCountry;
-					break;
-				}
-			}
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[2]))
-				{
-					l_TargetCountry = l_TempCountry;
-					break;
-				}
-			}
-			d_Order.add(new Advance(this,l_SourceCountry,l_TargetCountry,l_NumArmies1));
-			break;
-		case "bomb":
-			if(l_StringList.length != 2)
-			{
-				System.out.println("Please enter valid number of parameters");
-				break;
-			}
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
-				{
-					d_Order.add(new Bomb(this,l_TempCountry));
-					break;
-				}
-			}break;
-		case "blockade":
-			if(l_StringList.length != 2)
-			{
-				System.out.println("Please enter valid number of parameters");
-				break;
-			}
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
-				{
-					d_Order.add(new Blockade(this,l_TempCountry));
-					break;
-				}
-			}
-			break;
-		case "airlift":
-			if(l_StringList.length != 4)
-			{
-				System.out.println("Please enter valid number of parameters");
-				break;
-			}
-			int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
-			Country l_SourceCountry1 = null, l_TargetCountry1 = null;
-
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[1]))
-				{
-					l_SourceCountry1 = l_TempCountry;
-					break;
-				}
-			}
-			for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
-			{
-				if(l_TempCountry.getCountryName().equals(l_StringList[2]))
-				{
-					l_TargetCountry1 = l_TempCountry;
-					break;
-				}
-			}
-			d_Order.add(new Airlift(this,l_SourceCountry1,l_TargetCountry1,l_NumArmies2));
-			break;
-		case "negotiate":
-			if(l_StringList.length != 2)
-			{
-				System.out.println("Please enter valid number of parameters");
-				break;
-			}
-			for(Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
-				if(l_TempPlayer.getPlayerName().equals(l_StringList[1])) {
-					d_Order.add(new Negotiate(this, l_TempPlayer));
-					break;
-				}
-			}
-
-			break;
-
-		default:
-			break;
-
+		Order order ;
+		System.out.println("in player class");
+		System.out.println(d_PlayerStrategy);
+		order = d_PlayerStrategy.createOrder();
+		if(order!=null)
+		{
+			d_Order.add(order);
 		}
-
+	
 	}
 	/**
 	 * This method removes the first order in the queue Order list
