@@ -64,6 +64,10 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			d_decreasePlayerListSize = true;
 			//--d_PlayerListSize;
 		}
+		else if(l_StringOrder.contains("savegame"))
+		{
+			d_GameModelNew.saveGame(l_StringOrder.split(" ")[1]);
+		}
 		else
 		{
 			int l_Flag = 0;
