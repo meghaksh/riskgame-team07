@@ -17,6 +17,7 @@ import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
 import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.strategypattern.HumanPlayerStrategy;
+import org.soen6441.strategypattern.RandomPlayerStrategy;
 import org.soen6441.utility.state.GameOver;
 import org.soen6441.view.CommandPrompt;
 
@@ -63,17 +64,34 @@ public class PlayerController {
 	public void playerIssueOrder() {
 		ArrayList <Player> l_Players = d_GameEngine.getGameModel().getAllPlayers();
 		HashMap <Player,Boolean> l_CheckArmies = new HashMap<>();
+		boolean l_decreasePlayerListSize = false;
 		for(Player l_TempPlayer:l_Players) {
 			l_CheckArmies.put(l_TempPlayer,false);
 		}
-		int l_PlayerListSize = l_Players.size();	
+		int l_PlayerListSize = l_Players.size();
+		System.out.println("in player controller player list size - "+l_PlayerListSize);
 		while(l_PlayerListSize>1){
 			Iterator<Player>l_It = l_Players.iterator();
+			
 			while(l_It.hasNext()) {
 				Player l_Player = (Player)l_It.next(); 
+				System.out.println("in player controller player name "+l_Player.getPlayerName());
+				System.out.println("in player controller player startegy - "+l_Player.getPlayerStrategy());
 				if(!l_Player.getPlayerName().equals("Neutral Player")){
-					((HumanPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
-					l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
+					
+					System.out.println("in player controller - "+l_Player.getPlayerStrategy().toString().split("@")[0]);
+					if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
+					{
+						System.out.println("in player controller before issue order checkarmies-"+l_CheckArmies);
+						((HumanPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
+						l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
+					}
+					else if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.RandomPlayerStrategy"))
+					{
+						System.out.println("in player controller before issue order checkarmies-"+l_CheckArmies);
+						((RandomPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
+						l_CheckArmies = (HashMap<Player,Boolean>)((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();	
+					}
 				
 					if(l_CheckArmies.get(l_Player)==false)
 					{
@@ -85,15 +103,24 @@ public class PlayerController {
 							//l_Player.setOrder(l_StringOrder);
 						System.out.println("In playercontroller before issue order");
 							l_Player.issue_order();
-							boolean l_decreasePlayerListSize = ((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
-							if(l_decreasePlayerListSize==true)
+							if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
 							{
-								System.out.println("inplayercontroller the command is quit");
-								l_PlayerListSize--;
+								l_decreasePlayerListSize= ((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
+								l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
+								System.out.println("in player controller after issue order checkarmies-"+l_CheckArmies);
 							}
-			
-
-						
+							else if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.RandomPlayerStrategy"))
+							{
+								l_decreasePlayerListSize= ((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
+								l_CheckArmies = (HashMap<Player,Boolean>)((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
+								System.out.println("in player controller after issue order checkarmies-"+l_CheckArmies);
+							}
+							
+					}
+					if(l_decreasePlayerListSize==true)
+					{
+						System.out.println("inplayercontroller the command is quit");
+						l_PlayerListSize--;
 					}
 					
 				}
