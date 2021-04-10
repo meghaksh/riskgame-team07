@@ -20,7 +20,6 @@ public class Reinforcement extends Phase {
 		d_Leb.setResult("This is the Reinforcement Phase");
 		try{
 			d_Ge.getGameModel().assignReinforcementArmies();
-			d_Ge.showAllPlayerWithArmies();
 			}catch(Exception e){
 			d_Vw.setCommandAcknowledgement(e.getMessage()+"\n");
 			d_Leb.setResult(e.getMessage().toString());

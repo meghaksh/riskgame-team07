@@ -23,7 +23,6 @@ public class ExecuteOrder extends Phase {
 			d_Ge.getPlayerController().playerNextOrder();
 		
 		if(!d_Ge.getPhase().getPhaseName().equals("GameOver")) {
-			d_Ge.showMap(this);
 			d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));
 			
 		}

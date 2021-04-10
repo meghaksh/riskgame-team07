@@ -21,6 +21,8 @@ public class IssueOrder extends Phase {
 		try {
 		d_Leb=new LogEntryBuffer();
 		d_Leb.setResult("This is the Issue Order Phase");
+		d_Ge.showMap(this);
+		d_Ge.showAllPlayerWithArmies();
 		d_Ge.getPlayerController().playerIssueOrder();
 		d_Ge.setPhase(new ExecuteOrder(p_Ge,p_Vw));
 		}catch(Exception p_E) {}
