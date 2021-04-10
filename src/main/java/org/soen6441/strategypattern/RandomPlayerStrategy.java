@@ -56,21 +56,23 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		// TODO Auto-generated method stub
 		d_decreasePlayerListSize = false;
 		System.out.println("in random player create order");
-		int l_rndOrder = rand.nextInt(3);
-		int l_randomNoOfArmies;
+		int l_rndOrder = rand.nextInt(2);
 		Order l_returnOrder = null;
-		if(rand.nextInt(5)!=0)
-		{
+		
 			switch(l_rndOrder) 
 			{
 			case 0: l_returnOrder = new Deploy(d_Player,toDefend(),rand.nextInt(10));
+					break;
 			
 			case 1: Country l_defendCountry = toDefend();
-			l_returnOrder =  new Advance(d_Player,l_defendCountry,toAttack(),rand.nextInt(l_defendCountry.getNoOfArmies()+5));
+					l_returnOrder =  new Advance(d_Player,l_defendCountry,toAttack(),rand.nextInt(l_defendCountry.getNoOfArmies()+5));
+					break;
+			/*case 2: d_CheckArmies.put(d_Player, true);
+					d_decreasePlayerListSize = true;
+					break;*/
 			}
-		}
-		d_CheckArmies.put(d_Player, true);
-		d_decreasePlayerListSize = true;
+
+		
 		System.out.println("in random player order is "+l_returnOrder);
 		return l_returnOrder;
 	}
