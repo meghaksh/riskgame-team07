@@ -277,7 +277,7 @@ public class GameModelNew implements Serializable {
 			throw new Exception ("\"Please enter players using gameplayer add command");
 		}
 	}
-	public String saveGame(String p_FileName) {
+	public  void saveGame(String p_FileName) {
 		String l_File = p_FileName;
 		System.out.println(p_FileName);
 		try {
@@ -289,7 +289,7 @@ public class GameModelNew implements Serializable {
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
-		return "Game Saved";
+		
 	}
 	
 	public static GameModelNew loadGame(String p_FileName) {

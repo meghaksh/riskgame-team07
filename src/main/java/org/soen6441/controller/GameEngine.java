@@ -12,11 +12,11 @@ import java.io.File;
 
 import org.soen6441.model.Continent;			import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
-import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.observerpattern.LogEntryBuffer;	import org.soen6441.utility.state.Startup;
 import org.soen6441.utility.state.Edit;
 import org.soen6441.utility.state.Phase;
 import org.soen6441.utility.state.IssueOrder;
-
+import org.soen6441.utility.state.GameSaved;
 
 /**
  * This is the main controller class of MVC model. 
@@ -200,7 +200,11 @@ public class GameEngine  {
 					loadGame(l_CommandStringFromInput);
 					break;
 
-
+				case "savegame":
+					d_LEB.setResult(l_CommandStringFromInput);
+					saveGame(l_CommandStringFromInput);
+					break;
+					
 				default:
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
@@ -344,8 +348,41 @@ public class GameEngine  {
 	}
 	public void loadGame(String p_Command)
 	{
+		boolean flag=false;
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
-		this.setPhase(new IssueOrder(this,d_CpView));
+		
+		if(this.d_GameModelNew.getAllPlayers().size()<=1)
+		{
+			this.setPhase(new Startup(this,d_CpView));
+		}
+		
+		else 
+		{
+			ArrayList<Player> l_Players=this.d_GameModelNew.getAllPlayers();
+			for(Player l_P : l_Players)
+			{
+				if(l_P.getCountriesSize()>0)
+				{
+					flag=true;
+					break;
+				}
+			}
+			if(flag==true)
+			{
+				this.setPhase(new IssueOrder(this,d_CpView));
+			}
+			else
+			{
+				this.setPhase(new Startup(this,d_CpView));
+			}
+		}
+		
+	}
+	
+	public void saveGame(String p_Command)
+	{
+		this.d_GameModelNew.saveGame(p_Command.split(" ")[1]);
+		this.setPhase(new GameSaved(this,d_CpView));
 	}
 
 	public void tournament(String p_InputString) throws Exception {
