@@ -34,6 +34,7 @@ public class PlayerController {
 	private HashMap<Integer, String> d_AllCards;
 	private Random d_Rand;
 	private GameEngine d_GameEngine;
+	private static int d_NumberOfRounds =0;
 	/**
 	 * Constructor of Player controller
 	 * @param p_GameModelNew This is the reference of the the game model which is used to access the map.
@@ -54,7 +55,10 @@ public class PlayerController {
 		d_AllCards.put(i++,"Airlift");
 		d_Rand = new Random();
 	}
-
+	public int getNumberOfRounds()
+	{
+		return d_NumberOfRounds;
+	}
 
 	/**
 	 * The player_issue_order method asks each player to issue an order in a round robin fashion and they are added to the order list of that player.
@@ -62,14 +66,33 @@ public class PlayerController {
 	 * The acknowledgement are passed on to the view.
 	 */
 	public void playerIssueOrder() {
+		d_NumberOfRounds++;
 		ArrayList <Player> l_Players = d_GameEngine.getGameModel().getAllPlayers();
 		HashMap <Player,Boolean> l_CheckArmies = new HashMap<>();
 		boolean l_decreasePlayerListSize = false;
+		int l_HumanCounter = 0,l_QuitHumanCounter = 0;
 		for(Player l_TempPlayer:l_Players) {
 			l_CheckArmies.put(l_TempPlayer,false);
 		}
+		
+		for(Player l_TempPlayer : l_Players)
+		{
+			System.out.println("inside human checking for loop");
+			if(!l_TempPlayer.getPlayerName().equals("Neutral Player"))
+			{
+					if(l_TempPlayer.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
+					{
+						System.out.println("the player is a human player");
+						l_HumanCounter++;
+					}
+			}
+					System.out.println("outside if condition of human for loop");
+		}
+		System.out.println("outside human checking for loop");
 		int l_PlayerListSize = l_Players.size();
 		System.out.println("in player controller player list size - "+l_PlayerListSize);
+		
+		
 		while(l_PlayerListSize>1){
 			Iterator<Player>l_It = l_Players.iterator();
 			
@@ -77,6 +100,8 @@ public class PlayerController {
 				Player l_Player = (Player)l_It.next(); 
 				System.out.println("in player controller player name "+l_Player.getPlayerName());
 				System.out.println("in player controller player startegy - "+l_Player.getPlayerStrategy());
+				
+				
 				if(!l_Player.getPlayerName().equals("Neutral Player")){
 					
 					System.out.println("in player controller - "+l_Player.getPlayerStrategy().toString().split("@")[0]);
@@ -85,6 +110,7 @@ public class PlayerController {
 						System.out.println("in player controller before issue order checkarmies-"+l_CheckArmies);
 						((HumanPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
 						l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
+
 					}
 					else if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.RandomPlayerStrategy"))
 					{
@@ -96,10 +122,7 @@ public class PlayerController {
 					if(l_CheckArmies.get(l_Player)==false)
 					{
 
-						
 						//d_LEB.setResult(l_StringOrder);
-						
-						
 							//l_Player.setOrder(l_StringOrder);
 						System.out.println("In playercontroller before issue order");
 							l_Player.issue_order();
@@ -108,14 +131,16 @@ public class PlayerController {
 								l_decreasePlayerListSize= ((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
 								l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
 								System.out.println("in player controller after issue order checkarmies-"+l_CheckArmies);
+								if(l_decreasePlayerListSize==true)
+								{l_QuitHumanCounter++;}
+								
 							}
 							else if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.RandomPlayerStrategy"))
 							{
 								l_decreasePlayerListSize= ((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
 								l_CheckArmies = (HashMap<Player,Boolean>)((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
 								System.out.println("in player controller after issue order checkarmies-"+l_CheckArmies);
-							}
-							
+							}							
 					}
 					if(l_decreasePlayerListSize==true)
 					{
@@ -125,6 +150,11 @@ public class PlayerController {
 					
 				}
 			}
+			if(l_HumanCounter == l_QuitHumanCounter)
+			{
+				break;
+			}
+			//check the human player has given quit or  not - use 2 counter 
 		}
 	}
 	/**
