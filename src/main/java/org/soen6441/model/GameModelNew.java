@@ -109,7 +109,7 @@ public class GameModelNew implements Serializable {
 			{
 			case "aggresive" :
 				
-				l_PlayerObject.setPlayerStrategy(new AggresivePlayerStrategy());
+				l_PlayerObject.setPlayerStrategy(new AggresivePlayerStrategy(l_PlayerObject,this));
 				
 					
 				break;
@@ -123,7 +123,7 @@ public class GameModelNew implements Serializable {
 
 			case "benevolent" :
 				
-				l_PlayerObject.setPlayerStrategy(new BenevolentPlayerStrategy());
+				l_PlayerObject.setPlayerStrategy(new BenevolentPlayerStrategy(l_PlayerObject,this));
 				break;
 
 			case "Random": 
@@ -133,7 +133,7 @@ public class GameModelNew implements Serializable {
 				break;
 			case "cheater": 
 				
-				l_PlayerObject.setPlayerStrategy(new CheaterPlayerStrategy());
+				l_PlayerObject.setPlayerStrategy(new CheaterPlayerStrategy(l_PlayerObject,this));
 				
 				break;
 				

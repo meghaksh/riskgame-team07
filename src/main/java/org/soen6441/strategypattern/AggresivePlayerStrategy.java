@@ -1,6 +1,8 @@
 package org.soen6441.strategypattern;
 
+import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
+import org.soen6441.model.Player;
 
 public class AggresivePlayerStrategy extends Strategy {
 
@@ -10,7 +12,9 @@ public class AggresivePlayerStrategy extends Strategy {
 	 * then moves its armies in order to maximize aggregation of forces in one country.
 	 */
 	
-	
+	public AggresivePlayerStrategy(Player p_Player,GameModelNew p_GameModelNew) {
+		
+	}
 	
 	
 	@Override
