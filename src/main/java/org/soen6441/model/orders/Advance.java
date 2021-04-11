@@ -85,6 +85,8 @@ public class Advance implements Order {
 	@Override
 	public void execute()
 	{
+		
+		
 		Random l_rand = new Random();
 		int l_flag = isValid();
 		if(l_flag == 1)
@@ -103,6 +105,18 @@ public class Advance implements Order {
 				d_Player.addCountry(d_TargetCountry);
 				d_Player.setAtleastOneBattleWon(true);
 
+
+				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Success!!");
+				return;
+			}
+			if(d_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.CheaterPlayerStrategy"))
+			{
+				d_TargetCountry.getCountryOwnerPlayer().removeCountry(d_TargetCountry);
+				d_TargetCountry.setCountryOwnerPlayer(d_Player);
+				d_TargetCountry.setNoOfArmies(d_NumArmies);
+				d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
+				d_Player.addCountry(d_TargetCountry);
+				d_Player.setAtleastOneBattleWon(true);
 
 				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Success!!");
 				return;
@@ -191,6 +205,7 @@ public class Advance implements Order {
 				}
 			}catch(Exception p_E) {p_E.printStackTrace();}
 		}
+	
 
 	}
 
