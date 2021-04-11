@@ -3,17 +3,18 @@ package org.soen6441.strategypattern;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
+import org.soen6441.model.orders.Advance;
+import org.soen6441.model.orders.Deploy;
 
 public class CheaterPlayerStrategy extends Strategy {
 
 	private Random rand;
 	private GameModelNew d_GameModelNew;
 	private Player d_Player;
-	HashMap <Player,Boolean> d_CheckArmies = new HashMap<>();
-	boolean d_decreasePlayerListSize;
 	
 	
 	/*
@@ -30,11 +31,18 @@ public class CheaterPlayerStrategy extends Strategy {
 		rand = new Random();
 		System.out.println("Cheater");
 	}
-	
+	protected Country toAttack()
+	{
+		return d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1));
+	}
+	protected Country toDefend()
+	{
+		return d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()-1));
+	}
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
-		return null;
+				return null;
 	}
 
 }
