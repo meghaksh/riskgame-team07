@@ -42,7 +42,29 @@ public class CheaterPlayerStrategy extends Strategy {
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
-				return null;
+		System.out.println("in cheater player create order");
+		int l_rndOrder = rand.nextInt(2);
+		Order l_returnOrder = null;
+		
+			switch(l_rndOrder) 
+			{
+			case 0: l_returnOrder = new Deploy(d_Player,toDefend(),rand.nextInt(10));
+					break;
+			
+			case 1: Country l_DefendCountry = toDefend();
+					Country l_AttackCountry = toAttack();
+					while(!l_DefendCountry.getBorder().contains(l_AttackCountry))
+					{
+						l_AttackCountry = toAttack();
+					}
+					l_returnOrder =  new Advance(d_Player,l_DefendCountry,l_AttackCountry,rand.nextInt(l_DefendCountry.getNoOfArmies()+5));
+					
+					break;
+			}
+
+		
+		System.out.println("in cheater player order is "+l_returnOrder);
+		return l_returnOrder;
 	}
 
 }
