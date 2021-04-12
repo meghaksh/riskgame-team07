@@ -85,7 +85,7 @@ public class CommandPrompt {
 				+ "editneighbor -add countryID neighborcountryID -remove countryID neighborcountryID \n");
 		d_CommandAcknowledgeArea.append("savemap filename \neditmap filename \nvalidatemap \nshowmap \n");
 		d_CommandAcknowledgeArea.append("Below are the list of commands you can use in game phase : \n");
-		d_CommandAcknowledgeArea.append("loadmap filename \ngameplayer -add playername -remove playername \nassigncountries \nshowmap \n");
+		d_CommandAcknowledgeArea.append("loadmap filename\ntournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns \ngameplayer -add playername -remove playername \nassigncountries \nshowmap \n");
 		d_CommandPromptPanel.add(d_CommandInput);
 		d_CommandPromptPanel.add(d_CommandSendButton);
 		d_CommandPromptWindow.add(d_AckAreaScrollPane, BorderLayout.PAGE_START);
