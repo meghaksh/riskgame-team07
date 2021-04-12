@@ -107,7 +107,7 @@ public class GameModelNew implements Serializable {
 			Player l_PlayerObject = new Player(p_PlayerName, this);
 			switch(strategy)
 			{
-			case "aggresive" :
+			case "aggressive" :
 				
 				l_PlayerObject.setPlayerStrategy(new AggresivePlayerStrategy(l_PlayerObject,this));
 				
@@ -126,7 +126,7 @@ public class GameModelNew implements Serializable {
 				l_PlayerObject.setPlayerStrategy(new BenevolentPlayerStrategy(l_PlayerObject,this));
 				break;
 
-			case "Random": 
+			case "random": 
 				
 				l_PlayerObject.setPlayerStrategy(new RandomPlayerStrategy(l_PlayerObject,this));
 //				System.out.println("Random.\n");
