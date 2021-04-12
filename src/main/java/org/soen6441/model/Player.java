@@ -30,6 +30,7 @@ public class Player implements Serializable {
 	private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
 	private boolean d_AtleastOneBattleWon=false;
 	private Strategy d_PlayerStrategy;
+	private boolean d_SaveGame=false;
 	/**
 	 * default constructor of Player class	
 	 */
@@ -114,6 +115,17 @@ public class Player implements Serializable {
 	public boolean getAtleastOneBattleWon()
 	{
 		return this.d_AtleastOneBattleWon;
+	}
+	
+
+	public boolean getSaveGame()
+	{
+		return this.d_SaveGame;
+	}
+	
+	public void setSaveGame(boolean p_value)
+	{
+		this.d_SaveGame=p_value;
 	}
 
 	/**
@@ -261,7 +273,7 @@ public class Player implements Serializable {
 		{
 			d_Order.add(order);
 		}
-	
+		
 	}
 	/**
 	 * This method removes the first order in the queue Order list

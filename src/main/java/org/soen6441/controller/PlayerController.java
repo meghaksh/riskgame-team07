@@ -35,6 +35,7 @@ public class PlayerController {
 	private Random d_Rand;
 	private GameEngine d_GameEngine;
 	private static int d_NumberOfRounds =0;
+	private boolean d_SaveGame=false;
 	/**
 	 * Constructor of Player controller
 	 * @param p_GameModelNew This is the reference of the the game model which is used to access the map.
@@ -58,6 +59,11 @@ public class PlayerController {
 	public int getNumberOfRounds()
 	{
 		return d_NumberOfRounds;
+	}
+	
+	public boolean getSaved()
+	{
+		return this.d_SaveGame;
 	}
 
 	/**
@@ -92,7 +98,7 @@ public class PlayerController {
 		int l_PlayerListSize = l_Players.size();
 		System.out.println("in player controller player list size - "+l_PlayerListSize);
 		
-		
+		outerloop:
 		while(l_PlayerListSize>1){
 			Iterator<Player>l_It = l_Players.iterator();
 			
@@ -126,6 +132,11 @@ public class PlayerController {
 							//l_Player.setOrder(l_StringOrder);
 						System.out.println("In playercontroller before issue order");
 							l_Player.issue_order();
+							if(l_Player.getSaveGame()==true)
+							{
+								this.d_SaveGame=true;
+								break outerloop;
+							}
 							if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
 							{
 								l_decreasePlayerListSize= ((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();

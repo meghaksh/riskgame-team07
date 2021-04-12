@@ -30,7 +30,6 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 		d_Player = p_Player;
 		System.out.println("Human");
 	}
-
 	public void setCheckArmies(HashMap<Player,Boolean> l_CheckArmies)
 	{
 		d_CheckArmies= l_CheckArmies;
@@ -64,10 +63,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			d_decreasePlayerListSize = true;
 			//--d_PlayerListSize;
 		}
-		else if(l_StringOrder.contains("savegame"))
-		{
-			d_GameModelNew.saveGame(l_StringOrder.split(" ")[1]);
-		}
+		
 		else
 		{
 			int l_Flag = 0;
@@ -184,6 +180,18 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 				}
 
 				break;
+				
+			case "savegame":
+				if(l_StringList.length != 2)
+				{
+					System.out.println("Please enter valid number of parameters");
+					break;
+				}
+				d_GameModelNew.saveGame(l_StringList[1]);
+				d_Player.setSaveGame(true);
+				return null;
+				
+				
 
 			default:
 				break;
