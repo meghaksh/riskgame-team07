@@ -1,5 +1,11 @@
 package org.soen6441.strategypattern;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import org.soen6441.model.Country;
@@ -27,27 +33,59 @@ public class BenevolentPlayerStrategy extends Strategy {
 		d_Random = new Random();
 	}
 	
-	public Country toDefend() {
+	protected Country toDefend() {
+		System.out.println("in to defend of benevolent");
 		Country l_TempCountry=null;
 		int l_NumberOfArmies = 0;
-		for(Country l_Country : this.d_Player.getCountryList()) {
-			if(l_Country.getNoOfArmies()<l_NumberOfArmies) {
+		HashMap <Country,Integer> l_PlayerCountryMap = new HashMap<>();
+		System.out.println("player name - "+d_Player);
+		for(Country l_Country : d_Player.getCountryList())
+		{
+			System.out.println("in for loop "+l_Country+" - "+l_Country.getNoOfArmies());
+			l_PlayerCountryMap.put(l_Country, l_Country.getNoOfArmies());
+			System.out.println(l_Country+" - "+l_Country.getNoOfArmies());
+		}
+		System.out.println("int benevolent treemap is "+l_PlayerCountryMap);
+		List<Entry<Country, Integer>> list = new LinkedList<Entry<Country, Integer>>(l_PlayerCountryMap.entrySet()); 
+		Collections.sort(list, new Comparator<Entry<Country, Integer>>()   
+		{  
+			public int compare(Entry<Country, Integer> o1, Entry<Country, Integer> o2)   
+			{   
+				return o1.getValue().compareTo(o2.getValue());  
+			}  
+		});
+		System.out.println("in benevolent the list got sorted");
+		l_TempCountry = list.get(0).getKey();
+		/*for(Country l_Country : this.d_Player.getCountryList())
+		{
+			System.out.println("in benevolent player player name - "+d_Player.getPlayerName());
+			if(l_Country.getNoOfArmies()<l_NumberOfArmies)
+			{
+				System.out.println("in if condition in for loop");
 				l_NumberOfArmies = l_Country.getNoOfArmies();
 				l_TempCountry = l_Country;
+				System.out.println("leaving if condition the country is - "+l_TempCountry);
 			}
-		}
-		System.out.println("Weakest Country : " + l_TempCountry.getCountryName() + " Has armies : " + l_TempCountry.getNoOfArmies());
+			System.out.println("leaving for loop");
+		}*/
+		
+		System.out.println("left for loop  "+l_TempCountry);
+		//System.out.println("Weakest Country : " + l_TempCountry.getCountryName() + " Has armies : " + l_TempCountry.getNoOfArmies());
 		return l_TempCountry;
 	}
 	
-	public Country toMove() {
+	protected Country toMove() {
 		return null;
 	}
 	
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
-		return new Deploy(this.d_Player, toDefend(), 5);
+		Order l_returnOrder=null;
+		System.out.println("in benevolent player create order");
+		l_returnOrder =  new Deploy(this.d_Player, toDefend(), 5);
+		System.out.println("in benevolent player the order issued is - "+l_returnOrder);
+		return l_returnOrder;
 	}
 
 }
