@@ -31,14 +31,15 @@ public class BenevolentPlayerStrategy extends Strategy {
 		this.d_GameModelNew = p_GameModelNew;
 		this.d_Player = p_Player;
 		d_Random = new Random();
+		d_Leb.setResult("Benevolent Player");
 	}
 	
 	protected Country toDefend() {
-		System.out.println("in to defend of benevolent");
+
 		Country l_TempCountry=null;
 		int l_NumberOfArmies = 0;
 		HashMap <Country,Integer> l_PlayerCountryMap = new HashMap<>();
-		System.out.println("player name - "+d_Player);
+
 		for(Country l_Country : d_Player.getCountryList())
 		{
 			System.out.println("in for loop "+l_Country+" - "+l_Country.getNoOfArmies());
@@ -54,22 +55,10 @@ public class BenevolentPlayerStrategy extends Strategy {
 				return o1.getValue().compareTo(o2.getValue());  
 			}  
 		});
-		System.out.println("in benevolent the list got sorted");
 		l_TempCountry = list.get(0).getKey();
-		/*for(Country l_Country : this.d_Player.getCountryList())
-		{
-			System.out.println("in benevolent player player name - "+d_Player.getPlayerName());
-			if(l_Country.getNoOfArmies()<l_NumberOfArmies)
-			{
-				System.out.println("in if condition in for loop");
-				l_NumberOfArmies = l_Country.getNoOfArmies();
-				l_TempCountry = l_Country;
-				System.out.println("leaving if condition the country is - "+l_TempCountry);
-			}
-			System.out.println("leaving for loop");
-		}*/
 		
 		System.out.println("left for loop  "+l_TempCountry);
+		d_Leb.setResult("the Random Player is defefnding country "+l_TempCountry.getCountryName()+" country with "+l_TempCountry.getNoOfArmies()+" armies");
 		//System.out.println("Weakest Country : " + l_TempCountry.getCountryName() + " Has armies : " + l_TempCountry.getNoOfArmies());
 		return l_TempCountry;
 	}
@@ -82,9 +71,8 @@ public class BenevolentPlayerStrategy extends Strategy {
 	public Order createOrder() {
 		// TODO Auto-generated method stub
 		Order l_returnOrder=null;
-		System.out.println("in benevolent player create order");
 		l_returnOrder =  new Deploy(this.d_Player, toDefend(), 5);
-		System.out.println("in benevolent player the order issued is - "+l_returnOrder);
+		d_Leb.setResult("in benevolent player the order issued is - "+l_returnOrder);
 		return l_returnOrder;
 	}
 

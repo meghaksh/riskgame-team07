@@ -70,13 +70,13 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			String[] l_StringList = l_StringOrder.split(" ");
 			String l_OrderType = l_StringList[0];
 			
-			System.out.println("in human player the command is not quit "+l_StringOrder);
+			d_Leb.setResult("in human player the command is not quit "+l_StringOrder);
 			switch(l_OrderType) {
 
 			case "deploy":
 				if(l_StringList.length != 3)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				int l_NumArmies = Integer.parseInt(l_StringList[2]);
@@ -91,7 +91,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			case "advance" :
 				if(l_StringList.length != 4)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
@@ -116,7 +116,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			case "bomb":
 				if(l_StringList.length != 2)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
@@ -129,7 +129,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			case "blockade":
 				if(l_StringList.length != 2)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
@@ -144,7 +144,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			case "airlift":
 				if(l_StringList.length != 4)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
@@ -170,7 +170,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			case "negotiate":
 				if(l_StringList.length != 2)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				for(Player l_TempPlayer : d_GameModelNew.getAllPlayers()) {
@@ -184,10 +184,11 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			case "savegame":
 				if(l_StringList.length != 2)
 				{
-					System.out.println("Please enter valid number of parameters");
+					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
 				d_GameModelNew.saveGame(l_StringList[1]);
+				d_Leb.setResult("Saving the current Game");
 				d_Player.setSaveGame(true);
 				return null;
 				
