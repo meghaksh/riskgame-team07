@@ -66,11 +66,16 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		
 			switch(l_rndOrder) 
 			{
-			case 0: l_returnOrder = new Deploy(d_Player,toDefend(),rand.nextInt(10));
+			case 0: l_returnOrder = new Deploy(d_Player,toDefend(),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
 					break;
 			
 			case 1: Country l_defendCountry = toDefend();
-					l_returnOrder =  new Advance(d_Player,l_defendCountry,toAttack(),rand.nextInt(l_defendCountry.getNoOfArmies()+5));
+					if(l_defendCountry.getNoOfArmies()>1) {
+					l_returnOrder =  new Advance(d_Player,l_defendCountry,toAttack(),rand.nextInt(l_defendCountry.getNoOfArmies()+5));}
+					else
+					{
+						l_returnOrder = new Deploy(d_Player,l_defendCountry,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
+					}
 					break;
 					
 			}

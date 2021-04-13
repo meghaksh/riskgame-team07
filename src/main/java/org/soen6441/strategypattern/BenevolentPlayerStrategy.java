@@ -58,7 +58,7 @@ public class BenevolentPlayerStrategy extends Strategy {
 		l_TempCountry = list.get(0).getKey();
 		
 		System.out.println("left for loop  "+l_TempCountry);
-		d_Leb.setResult("the Random Player is defefnding country "+l_TempCountry.getCountryName()+" country with "+l_TempCountry.getNoOfArmies()+" armies");
+		d_Leb.setResult("the Benevolent Player is defefnding country "+l_TempCountry.getCountryName()+" country with "+l_TempCountry.getNoOfArmies()+" armies");
 		//System.out.println("Weakest Country : " + l_TempCountry.getCountryName() + " Has armies : " + l_TempCountry.getNoOfArmies());
 		return l_TempCountry;
 	}
@@ -71,7 +71,7 @@ public class BenevolentPlayerStrategy extends Strategy {
 	public Order createOrder() {
 		// TODO Auto-generated method stub
 		Order l_returnOrder=null;
-		l_returnOrder =  new Deploy(this.d_Player, toDefend(), 5);
+		l_returnOrder =  new Deploy(this.d_Player, toDefend(), Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 		d_Leb.setResult("in benevolent player the order issued is - "+l_returnOrder);
 		return l_returnOrder;
 	}

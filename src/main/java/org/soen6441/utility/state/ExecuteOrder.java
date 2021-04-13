@@ -21,10 +21,10 @@ public class ExecuteOrder extends Phase {
 			d_Leb=new LogEntryBuffer();
 			d_Leb.setResult("This is the Execute Order Phase");
 			d_Ge.getPlayerController().playerNextOrder();
-			if(d_Ge.getPlayerController().getNumberOfRounds()==10)
+			if(d_Ge.getPlayerController().getNumberOfRounds()==20)
 			{
 				d_Ge.setPhase(new GameOver(p_Ge,p_Vw));
-				p_Vw.setCommandAcknowledgement("The game has reached maximum number of rounds - 10. Hence it is a Draw!");
+				p_Vw.setCommandAcknowledgement("The game has reached maximum number of rounds - 20. Hence it is a Draw!");
 			}
 		if(!d_Ge.getPhase().getPhaseName().equals("GameOver")) {
 			d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));

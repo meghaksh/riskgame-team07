@@ -83,21 +83,23 @@ public class CheaterPlayerStrategy extends Strategy {
 		
 			switch(l_rndOrder) 
 			{
-			case 0: System.out.println("in cheater case 0 deploy order");
-			Country l_DefendCountry1 = toDefend();
+			case 0: 
+					Country l_DefendCountry1 = toDefend();
 					d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1);
-					l_returnOrder = new Deploy(d_Player,l_DefendCountry1,rand.nextInt(10));
+					l_returnOrder = new Deploy(d_Player,l_DefendCountry1,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
 					break;
 			
-			case 1: System.out.println("in cheater case 1 advance order");
-					
+			case 1: 
 					ArrayList<Country> l_Countries = toAttack();
-					/*while(!l_DefendCountry.getBorder().contains(l_AttackCountry))
+					if(l_Countries.get(0).getNoOfArmies()>1)
 					{
-						l_AttackCountry = toAttack();
-					}*/
 					d_Leb.setResult("in cheater defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1));
 					l_returnOrder =  new Advance(d_Player,l_Countries.get(0),l_Countries.get(1),rand.nextInt(l_Countries.get(0).getNoOfArmies()+5));
+					}
+					else
+					{
+						l_returnOrder = new Deploy(d_Player,l_Countries.get(0),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
+					}
 					
 					break;
 			}

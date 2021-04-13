@@ -86,10 +86,15 @@ public class AggresivePlayerStrategy extends Strategy {
 		Order l_OrderToBeReturned = null;
 		switch(l_RandomInt) {
 			case 0:
-				l_OrderToBeReturned = new Deploy(this.d_Player, attackFrom(), 5);
+				l_OrderToBeReturned = new Deploy(this.d_Player, attackFrom(), Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 				break;
-			case 1:
-				l_OrderToBeReturned =  new Advance(this.d_Player, attackFrom(), attackTo(), attackFrom().getNoOfArmies()-1);
+			case 1: Country l_AttackFrom = attackFrom();
+				if(l_AttackFrom.getNoOfArmies()>1)
+				{l_OrderToBeReturned =  new Advance(this.d_Player, l_AttackFrom, attackTo(), l_AttackFrom.getNoOfArmies()-1);}
+				else
+				{
+					l_OrderToBeReturned = new Deploy(this.d_Player, l_AttackFrom,Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+				}
 				break;	
 		}
 		d_Leb.setResult("in aggressive the order is - "+l_OrderToBeReturned);
