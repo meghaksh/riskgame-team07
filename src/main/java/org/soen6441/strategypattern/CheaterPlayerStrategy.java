@@ -29,20 +29,25 @@ public class CheaterPlayerStrategy extends Strategy {
 		this.d_GameModelNew = p_GameModelNew;
 		d_Player = p_Player;
 		rand = new Random();
-		System.out.println("Cheater");
+		d_Leb.setResult("Cheater Player");
 	}
 	protected Country toAttack()
 	{
-		return d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1));
+		Country l_ReturnCountry = null;
+		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(Math.max(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1),1));
+		d_Leb.setResult("The cheater player is attacking to "+l_ReturnCountry.getCountryName());
+		return l_ReturnCountry;
 	}
 	protected Country toDefend()
 	{
-		return d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()-1));
+		Country l_ReturnCountry = null;
+		l_ReturnCountry = d_Player.getCountryList().get(Math.max(rand.nextInt(d_Player.getCountryList().size()-1),1));
+		d_Leb.setResult("The cheater player is attacking from "+l_ReturnCountry.getCountryName());
+		return l_ReturnCountry;
 	}
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
-		System.out.println("in cheater player create order");
 		int l_rndOrder = rand.nextInt(2);
 		Order l_returnOrder = null;
 		
@@ -62,8 +67,7 @@ public class CheaterPlayerStrategy extends Strategy {
 					break;
 			}
 
-		
-		System.out.println("in cheater player order is "+l_returnOrder);
+		d_Leb.setResult("in cheater player order is "+l_returnOrder);
 		return l_returnOrder;
 	}
 

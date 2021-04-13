@@ -30,21 +30,17 @@ public class AggresivePlayerStrategy extends Strategy {
 		this.d_Player = p_Player;
 		this.d_GameModelNew = p_GameModelNew;
 		d_Random = new Random();
+		d_Leb.setResult("Aggressive Player");
 	}
 	
 	public Country attackFrom() {
-		System.out.println("in aggressive attcakfrom");
+		
 		Country l_TempCountry=null;
-		int l_NumberOfArmies = 0;
 		HashMap <Country,Integer> l_PlayerCountryMap = new HashMap<>();
-		System.out.println("player name - "+d_Player);
 		for(Country l_Country : d_Player.getCountryList())
 		{
-			System.out.println("in for loop "+l_Country+" - "+l_Country.getNoOfArmies());
 			l_PlayerCountryMap.put(l_Country, l_Country.getNoOfArmies());
-			System.out.println(l_Country+" - "+l_Country.getNoOfArmies());
 		}
-		System.out.println("int aggressive hashmap is "+l_PlayerCountryMap);
 		List<Entry<Country, Integer>> list = new LinkedList<Entry<Country, Integer>>(l_PlayerCountryMap.entrySet()); 
 		Collections.sort(list, new Comparator<Entry<Country, Integer>>()   
 		{  
@@ -53,7 +49,6 @@ public class AggresivePlayerStrategy extends Strategy {
 				return o2.getValue().compareTo(o1.getValue());  
 			}  
 		});
-		System.out.println("in aggressive the list got sorted");
 		l_TempCountry = list.get(0).getKey();
 		/*for(Country l_Country : this.d_Player.getCountryList()) {
 			if(l_Country.getNoOfArmies()>l_NumberOfArmies) {
@@ -61,22 +56,24 @@ public class AggresivePlayerStrategy extends Strategy {
 				l_TempCountry = l_Country;
 			}
 		}*/
-		System.out.println("Strongest Country : " + l_TempCountry + " Has armies : " + l_TempCountry.getNoOfArmies());
+		d_Leb.setResult("The aggressive player is attacking from "+l_TempCountry.getCountryName()+" country with "+ l_TempCountry.getNoOfArmies()+" armies");
 		return l_TempCountry;
 	}
 	
 	public Country attackTo() {
 		
-		System.out.println("in aggressive attack to");
+
 		Country l_Country = attackFrom();
+		Country l_ReturnCountry=null;
 		ArrayList<Country> l_BorderCountriesList = new ArrayList<>();
 		for(Country l_C : this.d_GameModelNew.getMap().getCountryList()) {
 			if(l_Country.getBorder().contains(l_C.getCountryName())) {
 				l_BorderCountriesList.add(l_C);
 			}
 		}
-		System.out.println("leaving attackTo in agressive");
-		return l_BorderCountriesList.get(d_Random.nextInt(l_BorderCountriesList.size()));
+		l_ReturnCountry = l_BorderCountriesList.get(d_Random.nextInt(l_BorderCountriesList.size()));
+		d_Leb.setResult("The aggresive player is attacking - "+l_ReturnCountry.getCountryName()+" country");
+		return l_ReturnCountry;
 	}
 	
 	/**
@@ -85,7 +82,6 @@ public class AggresivePlayerStrategy extends Strategy {
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
-		System.out.println("in aggressive create order");
 		int l_RandomInt = d_Random.nextInt(2);
 		Order l_OrderToBeReturned = null;
 		switch(l_RandomInt) {
@@ -96,7 +92,7 @@ public class AggresivePlayerStrategy extends Strategy {
 				l_OrderToBeReturned =  new Advance(this.d_Player, attackFrom(), attackTo(), attackFrom().getNoOfArmies()-1);
 				break;	
 		}
-		System.out.println("in aggressive the order is - "+l_OrderToBeReturned);
+		d_Leb.setResult("in aggressive the order is - "+l_OrderToBeReturned);
 		return l_OrderToBeReturned;
 	}
 

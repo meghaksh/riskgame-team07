@@ -27,16 +27,22 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		this.d_GameModelNew = p_GameModelNew;
 		d_Player = p_Player;
 		rand = new Random();
-		System.out.println("Random");
+		d_Leb.setResult("Random Player");
 	}
 	
 	protected Country toAttack()
 	{
-		return d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1));
+		Country l_ReturnCountry=null;
+		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(Math.max(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1),1));
+		d_Leb.setResult("The Random Player is attacking on "+l_ReturnCountry.getCountryName()+" country");
+		return l_ReturnCountry;
 	}
 	protected Country toDefend()
 	{
-		return d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()-1));
+		Country l_ReturnCountry=null;
+		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()-1));
+		d_Leb.setResult("The Random Player is attacking on "+l_ReturnCountry.getCountryName()+" country");
+		return l_ReturnCountry;
 	}
 	public boolean getDecreasePlayerListSize()
 	{
@@ -55,7 +61,6 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 	public Order createOrder() {
 		// TODO Auto-generated method stub
 		d_decreasePlayerListSize = false;
-		System.out.println("in random player create order");
 		int l_rndOrder = rand.nextInt(2);
 		Order l_returnOrder = null;
 		
@@ -67,13 +72,10 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 			case 1: Country l_defendCountry = toDefend();
 					l_returnOrder =  new Advance(d_Player,l_defendCountry,toAttack(),rand.nextInt(l_defendCountry.getNoOfArmies()+5));
 					break;
-			/*case 2: d_CheckArmies.put(d_Player, true);
-					d_decreasePlayerListSize = true;
-					break;*/
+					
 			}
-
-		
-		System.out.println("in random player order is "+l_returnOrder);
+		d_Leb.setResult("in random player order is "+l_returnOrder);
 		return l_returnOrder;
 	}
 }
+
