@@ -33,15 +33,15 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 	protected Country toAttack()
 	{
 		Country l_ReturnCountry=null;
-		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(Math.max(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1),1));
+		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()));
 		d_Leb.setResult("The Random Player is attacking on "+l_ReturnCountry.getCountryName()+" country");
 		return l_ReturnCountry;
 	}
 	protected Country toDefend()
 	{
 		Country l_ReturnCountry=null;
-		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()-1));
-		d_Leb.setResult("The Random Player is attacking on "+l_ReturnCountry.getCountryName()+" country");
+		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()));
+		d_Leb.setResult("The Random Player is attacking from "+l_ReturnCountry.getCountryName()+" country");
 		return l_ReturnCountry;
 	}
 	public boolean getDecreasePlayerListSize()

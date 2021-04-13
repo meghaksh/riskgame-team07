@@ -29,10 +29,7 @@ public class IssueOrder extends Phase {
 			d_Ge.setPhase(new GameSaved(p_Ge,p_Vw));
 		}
 		else {
-		if(d_Ge.getPlayerController().getNumberOfRounds()==10)
-		{
-			d_Ge.setPhase(new GameOver(p_Ge,p_Vw));
-		}
+		
 			
 		d_Ge.setPhase(new ExecuteOrder(p_Ge,p_Vw));
 		}

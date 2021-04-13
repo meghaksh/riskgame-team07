@@ -72,7 +72,6 @@ public class PlayerController {
 	 * The acknowledgement are passed on to the view.
 	 */
 	public void playerIssueOrder() {
-		d_NumberOfRounds++;
 		ArrayList <Player> l_Players = d_GameEngine.getGameModel().getAllPlayers();
 		HashMap <Player,Boolean> l_CheckArmies = new HashMap<>();
 		boolean l_decreasePlayerListSize = false;
@@ -300,7 +299,8 @@ public class PlayerController {
 		d_LEB.setResult("\nOrders are Succesfully Executed!!");
 		clearNegotiatedPlayerList();
 		removePlayerWithNoCountry();
-		checkTheWinner();		
+		checkTheWinner();	
+		d_NumberOfRounds++;
 	}
 	/**
 	 * This method is used to remove the player with no countries on its name.

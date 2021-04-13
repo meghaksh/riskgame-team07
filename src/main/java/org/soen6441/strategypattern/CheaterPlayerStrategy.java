@@ -1,6 +1,6 @@
 package org.soen6441.strategypattern;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.soen6441.model.Country;
@@ -31,17 +31,47 @@ public class CheaterPlayerStrategy extends Strategy {
 		rand = new Random();
 		d_Leb.setResult("Cheater Player");
 	}
-	protected Country toAttack()
+	protected ArrayList<Country> toAttack()
 	{
-		Country l_ReturnCountry = null;
-		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(Math.max(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()-1),1));
-		d_Leb.setResult("The cheater player is attacking to "+l_ReturnCountry.getCountryName());
-		return l_ReturnCountry;
+		ArrayList<Country> l_ReturnCountries = new ArrayList<Country>();
+		Country l_AttackCountry = null;
+		Country l_DefendingCountry = toDefend();
+		String l_ReturnCountryName="";
+		System.out.println("in cheater to attack method");
+		l_ReturnCountryName  = l_DefendingCountry.getBorder().get(rand.nextInt(l_DefendingCountry.getBorder().size()));
+		System.out.println("in cheater before for loop: "+l_ReturnCountryName);
+		for(Country l_TempCountry:d_GameModelNew.getMap().getCountryList())
+		{
+			if(l_TempCountry.getCountryName().equals(l_ReturnCountryName))
+			{
+				l_AttackCountry = l_TempCountry;
+				break;
+			}
+			
+		}
+		System.out.println("in cheater after for loop attcked country - "+l_AttackCountry.getCountryName());
+		l_ReturnCountries.add(0, l_DefendingCountry);
+		l_ReturnCountries.add(1, l_AttackCountry);
+		System.out.println("in cheater the returning arraylist -"+l_ReturnCountries.get(0).getCountryName()+" , "+l_ReturnCountries.get(1).getCountryName());
+		/*try {
+		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()));}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}*/
+		d_Leb.setResult("The cheater player is attacking to "+l_AttackCountry.getCountryName());
+		return l_ReturnCountries;
 	}
 	protected Country toDefend()
 	{
 		Country l_ReturnCountry = null;
-		l_ReturnCountry = d_Player.getCountryList().get(Math.max(rand.nextInt(d_Player.getCountryList().size()-1),1));
+		try
+		{
+		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()));}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		d_Leb.setResult("The cheater player is attacking from "+l_ReturnCountry.getCountryName());
 		return l_ReturnCountry;
 	}
@@ -53,16 +83,21 @@ public class CheaterPlayerStrategy extends Strategy {
 		
 			switch(l_rndOrder) 
 			{
-			case 0: l_returnOrder = new Deploy(d_Player,toDefend(),rand.nextInt(10));
+			case 0: System.out.println("in cheater case 0 deploy order");
+			Country l_DefendCountry1 = toDefend();
+					d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1);
+					l_returnOrder = new Deploy(d_Player,l_DefendCountry1,rand.nextInt(10));
 					break;
 			
-			case 1: Country l_DefendCountry = toDefend();
-					Country l_AttackCountry = toAttack();
-					while(!l_DefendCountry.getBorder().contains(l_AttackCountry))
+			case 1: System.out.println("in cheater case 1 advance order");
+					
+					ArrayList<Country> l_Countries = toAttack();
+					/*while(!l_DefendCountry.getBorder().contains(l_AttackCountry))
 					{
 						l_AttackCountry = toAttack();
-					}
-					l_returnOrder =  new Advance(d_Player,l_DefendCountry,l_AttackCountry,rand.nextInt(l_DefendCountry.getNoOfArmies()+5));
+					}*/
+					d_Leb.setResult("in cheater defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1));
+					l_returnOrder =  new Advance(d_Player,l_Countries.get(0),l_Countries.get(1),rand.nextInt(l_Countries.get(0).getNoOfArmies()+5));
 					
 					break;
 			}
