@@ -2,6 +2,7 @@ package org.soen6441.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.soen6441.view.CommandPrompt;
@@ -31,6 +32,7 @@ public class GameEngine  {
 	private PlayerController d_PlayerController;
 	private Phase d_GamePhase;
 	private LogEntryBuffer d_LEB;
+	static int NUM=0;
 
 	/**
 	 * This method returns the reference of the MapController
@@ -204,7 +206,7 @@ public class GameEngine  {
 					d_LEB.setResult(l_CommandStringFromInput);
 					saveGame(l_CommandStringFromInput);
 					break;
-					
+
 				default:
 					d_LEB.setResult(l_CommandStringFromInput);
 					d_CpView.setCommandAcknowledgement("Invalid Command. Please try again.\n");
@@ -350,12 +352,12 @@ public class GameEngine  {
 	{
 		boolean flag=false;
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
-		
+
 		if(this.d_GameModelNew.getAllPlayers().size()<=1)
 		{
 			this.setPhase(new Startup(this,d_CpView));
 		}
-		
+
 		else 
 		{
 			ArrayList<Player> l_Players=this.d_GameModelNew.getAllPlayers();
@@ -376,9 +378,9 @@ public class GameEngine  {
 				this.setPhase(new Startup(this,d_CpView));
 			}
 		}
-		
+
 	}
-	
+
 	public void saveGame(String p_Command)
 	{
 		this.d_GameModelNew.saveGame(p_Command.split(" ")[1]);
@@ -414,8 +416,10 @@ public class GameEngine  {
 			l_PlayerStrategyList=l_CommandArray[4].split(",");
 			if(l_PlayerStrategyList.length>4||l_PlayerStrategyList.length<2)
 				System.out.println("Number of Player strategies are are not in range");//throw exception
-			else
+			else {
 				l_P=l_PlayerStrategyList.length;
+				System.out.println("Player strategy list size: "+l_PlayerStrategyList.length);
+			}
 
 		}
 		if(l_CommandArray[5].equals("-G")){
@@ -436,32 +440,193 @@ public class GameEngine  {
 
 		}
 		HashMap<String, ArrayList<String>> tournamentResult = new HashMap<>();
+		
 		for (int i = 0; i < l_M; i++) {
+			System.out.println("Map number:"+(i+1));
 			ArrayList<String> result = new ArrayList<>();
+			d_GameModelNew.getAllPlayers().clear();
 			for (int j = 0; j < l_G; j++) {
-				GameModelNew l_Game_obj=new GameModelNew();
-				l_Game_obj.getMap().loadMap(l_MapList[i]);
-				for(int k=0;k<l_P;k++) {
-					l_Game_obj.addPlayer("Player"+k,l_PlayerStrategyList[i]);
+				this.showMap2();
+				
+				d_GameModelNew.getMap().loadMap(l_MapList[i]);
+				this.showMap2();
+				System.out.println("Game number:"+(j+1));
 
+				
+				d_GameModelNew.getAllPlayers().clear();
+				
+				for(int k=0;k<l_P;k++) {
+					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
+					
 				}
-				l_Game_obj.startUpPhase();
+				
+
+				d_GameModelNew.startUpPhase();
+
+				System.out.println("Gameenginewala:");
+				for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+					System.out.println("Player: "+l_Player);
+				}
+				int l_Noofturns=0;
 				while(true)
 				{
-					l_Game_obj.assignReinforcementArmies();
+					d_GameModelNew.assignReinforcementArmies();
 					this.getPlayerController().playerIssueOrder();
 					this.getPlayerController().playerNextOrder();
 					if(this.getPlayerController().getWinner()!=null) {
 						result.add(this.getPlayerController().getWinner().getPlayerName());
+						System.out.println("We got a  winner");
+
+						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+							l_Player.getCountryList().clear();
+						}						
+						
+						d_GameModelNew.getAllPlayers().clear();
+						d_GameModelNew.getMap().reset();
+						System.out.println("One match is over");
 						break;
 					}
+
+					if(l_Noofturns == l_D) {
+						System.out.println("Match is draw");
+						result.add("Draw");
+						System.out.println("One match is over");
+						
+						
+						
+						
+						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+							l_Player.getCountryList().clear();
+						}
+						
+						
+						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+							System.out.println("Player: "+l_Player);
+						}
+						d_GameModelNew.getAllPlayers().clear();
+						
+						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+							System.out.println("Player: "+l_Player);
+						}
+						d_GameModelNew.getMap().reset();
+						break;
+					}
+					l_Noofturns++;
 				}
-				
 				tournamentResult.put(l_MapList[i],result);
 			}
-
+			System.out.println("EXited the gameloop ponce");
 		}
-
-
+		printTournamentResult(l_M, l_G, l_D, tournamentResult, l_PlayerStrategyList);
 	}
+
+	private void printTournamentResult(int p_M, int p_G, int p_D, HashMap<String, ArrayList<String>> p_tournamentResult,
+			String[] p_PlayerStrategyList) {
+
+		String[] mapStrings = p_tournamentResult.keySet().toArray(new String[p_tournamentResult.keySet().size()]);
+		System.out.print("===========================================================================================");
+		System.out.print("=================================TOURNAMENT RESULT=========================================");
+		System.out.print("===========================================================================================");
+
+		StringBuffer mapNameString = new StringBuffer();
+		for (int i = 0; i < mapStrings.length; i++) {
+			mapNameString.append(mapStrings[i]+ ",");
+		}
+		System.out.print("M:" + mapNameString);
+
+		StringBuffer stratergiesNameString = new StringBuffer();
+		for (int i = 0; i < p_PlayerStrategyList.length; i++) {
+			stratergiesNameString.append(p_PlayerStrategyList[i] + ",");
+		}
+		System.out.print("P:" + stratergiesNameString);
+		System.out.print("G:" + p_G);
+		System.out.print("D:" + p_D);
+		System.out.print("\n");
+		System.out.print("\n");
+		StringBuilder sb = new StringBuilder();
+		sb.append("|");
+		sb.append(getFormattedString(" "));
+		for (int i = 0; i < p_G; i++) {
+			sb.append("|");
+			sb.append(getFormattedString("Game " + (i + 1)));
+		}
+		sb.append("|");
+		System.out.print(getRepeatedFormattedString("-", sb.length()));
+		System.out.print(sb.toString());
+		System.out.print(getRepeatedFormattedString("-", sb.length()));
+
+		for (int i = 0; i < mapStrings.length; i++) {
+
+			StringBuilder sbMap = new StringBuilder();
+			sbMap.append("|");
+			sbMap.append(getFormattedString(mapStrings[i]));
+
+			ArrayList<String> gameResults = p_tournamentResult.get(mapStrings[i]);
+			for (int j = 0; j < p_G; j++) {
+				sbMap.append("|");
+				sbMap.append(getFormattedString(gameResults.get(j)));
+			}
+			sbMap.append("|");
+			System.out.print(sbMap.toString());
+			System.out.print(getRepeatedFormattedString("-", sb.length()));
+		}
 	}
+
+	private String getRepeatedFormattedString(String input, int length) {
+		StringBuilder str = new StringBuilder(input);
+		for (int i = input.length(); i <= length - 1; i++)
+			str.append(input);
+		return str.toString();
+	}
+
+	private String getFormattedString(String input) {
+		int length = 14;
+
+		StringBuilder str = new StringBuilder(" " + input);
+		for (int i = input.length(); i <= length; i++)
+			str.append(" ");
+		return str.toString();
+	}
+
+	public void showMap2() {
+		d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
+		d_PlayerList = d_GameModelNew.getAllPlayers();
+		ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
+		if(l_ContinentList.size()>0) {
+			d_LEB.setResult("\n");
+			d_CpView.setCommandAcknowledgement("\n");
+			for(Continent l_Continent:l_ContinentList) {
+				d_LEB.setResult("Continent: "+l_Continent.getContinentName() + "\n");
+				d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
+				ArrayList<Country> l_CountryList = l_Continent.getCountryList();
+				d_LEB.setResult("\n");
+				d_CpView.setCommandAcknowledgement("\n");
+				for(Country l_Country:l_CountryList) {
+					d_LEB.setResult("Country: "+ l_Country.getCountryName());
+					d_CpView.setCommandAcknowledgement("Country: "+ l_Country.getCountryName());
+
+					if(l_Country.getCountryOwnerPlayer()!=null){
+						d_LEB.setResult("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
+						d_CpView.setCommandAcknowledgement("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
+						d_LEB.setResult("-->Armies deployed: "+ l_Country.getNoOfArmies());
+						d_CpView.setCommandAcknowledgement("-->Armies deployed: "+ l_Country.getNoOfArmies());
+					}
+					ArrayList<String> l_NeighborList = l_Country.getBorder();
+					if(l_NeighborList.size()>0) {
+						d_LEB.setResult("\n"+"--> Borders : ");
+						d_CpView.setCommandAcknowledgement("\n"+"--> Borders : ");
+						for(String l_Str:l_NeighborList) {
+							d_LEB.setResult(l_Str+ ",");
+							d_CpView.setCommandAcknowledgement(l_Str+ ",");
+						}	
+					}
+					d_LEB.setResult("\n");
+					d_CpView.setCommandAcknowledgement("\n");
+				}
+				d_LEB.setResult("\n");
+				d_CpView.setCommandAcknowledgement("\n");
+			}
+		}
+	}
+
+}
