@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -226,10 +227,18 @@ public class GameModelNew implements Serializable {
 				Random l_Random = new Random();
 				int l_Index = l_Random.nextInt(l_CountryList.size());
 				setPlayerId(d_PlayerQueue.remove());
+				System.out.println("playerid"+getPlayerId1());
 				getPlayerId1().addCountry(l_CountryList.get(l_Index));
 				l_CountryList.get(l_Index).setCountryOwnerPlayer(getPlayerId1());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_Index);
+			}
+			for(Player l_player:getAllPlayers())
+			{
+				for(Country L_country:l_player.getCountryList())
+				{
+				System.out.println("player"+l_player+"country"+L_country.getCountryName());
+				}
 			}
 
 		} else {
@@ -260,6 +269,7 @@ public class GameModelNew implements Serializable {
 		for (Player l_Player : getAllPlayers()) {
 			l_Player.setContinentsList();
 		}
+	
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
 				if(!l_Player.getPlayerName().equals("Neutral Player")) { 
@@ -308,6 +318,39 @@ public class GameModelNew implements Serializable {
 		}
 		return game;
 	}
+	public void tournamentstartUpPhase() throws Exception {
+		List<Country> l_CountryList = (List<Country>) getSelectedMap().getCountryList().clone();	
+		int playerIndex = 0, playerCount = getAllPlayers().size();
+		ArrayList<Integer> tempList = new ArrayList<>();
+		ArrayList<Player> l_playerList= getAllPlayers();
+		// Here creating the list with indexes
+		for (int i = 0; i < l_CountryList.size(); i++) {
+			tempList.add(i);
+		}
+
+		// Shuffling the list for randomness
+		Collections.shuffle(tempList, new Random());
+
+		// assigning the shuffled countries from tempList to the players one by
+		// one
+		for (int i = 0; i < l_CountryList.size(); i++) {
+			if (playerIndex == playerCount)
+				playerIndex = 0;
+
+			Country newCountry = getSelectedMap().getCountryList().get(tempList.get(i));
+			l_playerList.get(playerIndex).addCountry(newCountry);
+			newCountry.setCountryOwnerPlayer(l_playerList.get(playerIndex));
+			playerIndex++;
+		}
+		for(Player l_player:getAllPlayers())
+		{
+			for(Country L_country:l_player.getCountryList())
+			{
+			System.out.println("player"+l_player+"country are"+L_country.getCountryName());
+			}
+		}
+	}
+	
 
 
 }

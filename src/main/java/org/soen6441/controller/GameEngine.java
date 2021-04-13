@@ -444,7 +444,8 @@ public class GameEngine  {
 		for (int i = 0; i < l_M; i++) {
 			System.out.println("Map number:"+(i+1));
 			ArrayList<String> result = new ArrayList<>();
-			d_GameModelNew.getAllPlayers().clear();
+		
+			
 			for (int j = 0; j < l_G; j++) {
 				this.showMap2();
 				
@@ -453,7 +454,7 @@ public class GameEngine  {
 				System.out.println("Game number:"+(j+1));
 
 				
-				d_GameModelNew.getAllPlayers().clear();
+//				d_GameModelNew.getAllPlayers().clear();
 				
 				for(int k=0;k<l_P;k++) {
 					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
@@ -461,7 +462,7 @@ public class GameEngine  {
 				}
 				
 
-				d_GameModelNew.startUpPhase();
+				d_GameModelNew.tournamentstartUpPhase();
 
 				System.out.println("Gameenginewala:");
 				for(Player l_Player: d_GameModelNew.getAllPlayers()) {
@@ -477,13 +478,14 @@ public class GameEngine  {
 						result.add(this.getPlayerController().getWinner().getPlayerName());
 						System.out.println("We got a  winner");
 
-						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-							l_Player.getCountryList().clear();
-						}						
+//						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+//							l_Player.getCountryList().clear();
+//						}						
 						
-						d_GameModelNew.getAllPlayers().clear();
+//						d_GameModelNew.getAllPlayers().clear();
 						d_GameModelNew.getMap().reset();
 						System.out.println("One match is over");
+						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
 						break;
 					}
 
@@ -496,14 +498,10 @@ public class GameEngine  {
 						
 						
 						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-							l_Player.getCountryList().clear();
-						}
-						
-						
-						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
 							System.out.println("Player: "+l_Player);
 						}
 						d_GameModelNew.getAllPlayers().clear();
+						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
 						
 						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
 							System.out.println("Player: "+l_Player);
