@@ -36,7 +36,7 @@ public class EditTest {
 	 */
 	@Test
 	public void testLoadMap() {
-		String l_ExpectedMessage="Startup";
+		String l_ExpectedMessage="EditPhase";
 		String l_ActualMessage = "";
 		d_Ed.loadMap("map5");
 		d_P=d_Ge.getPhase();
