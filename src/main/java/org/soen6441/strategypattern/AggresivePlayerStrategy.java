@@ -1,13 +1,14 @@
 package org.soen6441.strategypattern;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;
@@ -16,7 +17,7 @@ import org.soen6441.model.Player;
 import org.soen6441.model.orders.Advance;
 import org.soen6441.model.orders.Deploy;
 
-public class AggresivePlayerStrategy extends Strategy {
+public class AggresivePlayerStrategy extends Strategy implements Serializable {
 
 	/*
 	 * An aggressive computer player strategy that focuses on centralization of forces and then attack, 

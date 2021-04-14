@@ -1,5 +1,6 @@
 package org.soen6441.strategypattern;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 import org.soen6441.model.orders.Deploy;
 
-public class BenevolentPlayerStrategy extends Strategy {
+public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 
 	/*
 	 * A benevolent computer player strategy that focuses on protecting its weak countries 

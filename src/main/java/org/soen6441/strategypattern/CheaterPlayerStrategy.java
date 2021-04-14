@@ -1,5 +1,6 @@
 package org.soen6441.strategypattern;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,7 +11,7 @@ import org.soen6441.model.Player;
 import org.soen6441.model.orders.Advance;
 import org.soen6441.model.orders.Deploy;
 
-public class CheaterPlayerStrategy extends Strategy {
+public class CheaterPlayerStrategy extends Strategy implements Serializable {
 
 	private Random rand;
 	private GameModelNew d_GameModelNew;
