@@ -51,8 +51,14 @@ public class BenevolentPlayerStrategyTest {
 		d_Country2.setBorder("india");
 		d_Country2.setBorder("japan");	
 	}
-	
-	
-	
+	@Test
+	public void testDefendCheck() throws Exception {
+		String l_Actual="";
+		String l_Expected="the Benevolent Player is defefnding country india";
+		BenevolentPlayerStrategy l_Benv=new BenevolentPlayerStrategy(d_Player1,d_GameModelNew);
+		l_Benv.toDefend();
+		l_Actual = d_Player1.getResult();
+		assertEquals(l_Expected,l_Actual);
+	}	
 
 }
