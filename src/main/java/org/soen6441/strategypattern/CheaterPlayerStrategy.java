@@ -51,7 +51,7 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		}
 		l_ReturnCountries.add(0, l_DefendingCountry);
 		l_ReturnCountries.add(1, l_AttackCountry);
-		
+		d_Player.setResult("The Cheater player is attacking on "+l_AttackCountry.getCountryName());
 		return l_ReturnCountries;
 	}
 	@Override
@@ -65,6 +65,7 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		{
 			e.printStackTrace();
 		}
+		d_Player.setResult("The Cheater player is defending from "+l_ReturnCountry.getCountryName());
 		return l_ReturnCountry;
 	}
 	@Override
