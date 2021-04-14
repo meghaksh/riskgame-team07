@@ -66,6 +66,9 @@ public class Edit extends Phase {
 		}catch(Exception p_Exception)
 		{
 			l_AckMsg=p_Exception.getMessage();
+			d_Leb.setResult(l_AckMsg);
+			d_Ge.setPhase(new Edit(d_Ge,d_Vw));
+			return l_AckMsg ;
 		}
 		d_Leb.setResult(l_AckMsg);
 
@@ -263,7 +266,7 @@ public class Edit extends Phase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return " Tournament Complete ";
+		return " ";
 	}
 	
 	

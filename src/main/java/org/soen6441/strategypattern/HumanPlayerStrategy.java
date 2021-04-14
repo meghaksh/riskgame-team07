@@ -204,5 +204,10 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 		return null;
 		
 	}
+	@Override
+	public String strategyName() {
+		// TODO Auto-generated method stub
+		return "Human";
+	}
 
 }

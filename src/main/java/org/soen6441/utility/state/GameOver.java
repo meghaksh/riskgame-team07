@@ -17,7 +17,7 @@ public class GameOver extends Phase {
 	 */
 	public GameOver(GameEngine p_Ge, CommandPrompt p_Vw) {
 		super(p_Ge, p_Vw);
-		d_Vw.clearTextArea();
+		//d_Vw.clearTextArea();
 		d_Vw.setCommandAcknowledgement("Game Over");
 		d_Leb=new LogEntryBuffer();
 		d_Leb.setResult("This is Game over phase");

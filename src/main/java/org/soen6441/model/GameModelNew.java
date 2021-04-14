@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -98,38 +99,28 @@ public class GameModelNew implements Serializable {
 	 * @throws Exception if player size is more that country size or if player already exists
 	 */
 	public void addPlayer(String p_PlayerName,String strategy)throws Exception {
-		if ((d_PlayerList.size() >= getSelectedMap().getCountryList().size())) {
+		if ((d_PlayerList.size() > getSelectedMap().getCountryList().size())) {
 			throw new Exception("Reached Max Number of Players can be added to the game");
 		}
 		if (existDuplicatePlayer(p_PlayerName)) {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 		} else {
 			Player l_PlayerObject = new Player(p_PlayerName, this);
-			switch(strategy)
-			{
+			switch(strategy) {
 			case "aggressive" :
-				
 				l_PlayerObject.setPlayerStrategy(new AggresivePlayerStrategy(l_PlayerObject,this));
-				
-					
 				break;
 
 			case "human" :
-				
 				l_PlayerObject.setPlayerStrategy(new HumanPlayerStrategy(l_PlayerObject,this));
-//				System.out.println("Human.\n");
-
 				break;
 
-			case "benevolent" :
-				
+			case "benevolent" :				
 				l_PlayerObject.setPlayerStrategy(new BenevolentPlayerStrategy(l_PlayerObject,this));
 				break;
 
 			case "random": 
-				
 				l_PlayerObject.setPlayerStrategy(new RandomPlayerStrategy(l_PlayerObject,this));
-//				System.out.println("Random.\n");
 				break;
 			case "cheater": 
 				
@@ -226,10 +217,18 @@ public class GameModelNew implements Serializable {
 				Random l_Random = new Random();
 				int l_Index = l_Random.nextInt(l_CountryList.size());
 				setPlayerId(d_PlayerQueue.remove());
+				System.out.println("playerid"+getPlayerId1());
 				getPlayerId1().addCountry(l_CountryList.get(l_Index));
 				l_CountryList.get(l_Index).setCountryOwnerPlayer(getPlayerId1());
 				d_PlayerQueue.add(d_PlayerID);
 				l_CountryList.remove(l_Index);
+			}
+			for(Player l_player:getAllPlayers())
+			{
+				for(Country L_country:l_player.getCountryList())
+				{
+				System.out.println("player"+l_player+"country"+L_country.getCountryName());
+				}
 			}
 
 		} else {
@@ -260,6 +259,7 @@ public class GameModelNew implements Serializable {
 		for (Player l_Player : getAllPlayers()) {
 			l_Player.setContinentsList();
 		}
+	
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
 				if(!l_Player.getPlayerName().equals("Neutral Player")) { 
@@ -302,12 +302,51 @@ public class GameModelNew implements Serializable {
 			in.close();
 			fileIn.close();
 		} catch (IOException i) {
-			i.printStackTrace();
+			return null;
 		} catch (ClassNotFoundException c) {
-			c.printStackTrace();
+			return null;
 		}
 		return game;
 	}
+	public void tournamentstartUpPhase() throws Exception {
+		List<Country> l_CountryList = (List<Country>) this.getSelectedMap().getCountryList().clone();	
+		int playerIndex = 0, playerCount = this.getAllPlayers().size();
+		ArrayList<Integer> tempList = new ArrayList<>();
+		ArrayList<Player> l_playerList= this.getAllPlayers();
+		// Clearing the country list pf players
+		System.out.println("In startup tournament:");
+		for(Player l_Player : this.getAllPlayers()) {
+			System.out.println("Player: "+l_Player+ " name:"+l_Player.getPlayerName());
+			for(Country l_Country: l_Player.getCountryList()) {
+				System.out.println("Country: "+ l_Country.getCountryName());
+			}
+		}
+		
+		
+		// Here creating the list with indexes
+		for (int i = 0; i < l_CountryList.size(); i++) {
+			tempList.add(i);
+		}
+		// Shuffling the list for randomness
+		Collections.shuffle(tempList, new Random());
 
-
+		// assigning the shuffled countries from tempList to the players one by
+		// one
+		for (int i = 0; i < l_CountryList.size(); i++) {
+			if (playerIndex == playerCount)
+				playerIndex = 0;
+			Country newCountry = l_CountryList.get(tempList.get(i));
+			l_playerList.get(playerIndex).addCountry(newCountry);
+			newCountry.setCountryOwnerPlayer(l_playerList.get(playerIndex));
+			l_CountryList.remove(tempList.get(i));
+			System.out.println("Temp get i"+tempList.get(i)+" Country: "+ l_CountryList.get(tempList.get(i)).getCountryName());
+			playerIndex++;
+		}
+		for(Player l_player:getAllPlayers()) {
+			for(Country L_country:l_player.getCountryList())
+			{
+			System.out.println("player"+l_player+"country are"+L_country.getCountryName());
+			}
+		}
+	}
 }

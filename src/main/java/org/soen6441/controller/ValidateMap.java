@@ -31,6 +31,7 @@ public class ValidateMap {
 	 * @throws Exception If any continent doesn't have a country, it notifies the user. 
 	 */
 	public ValidateMap(ArrayList<Country> p_CountryObjects,ArrayList<Continent> p_ContinentObjects) throws Exception{
+		
 		if(checkCountryAndContinent(p_CountryObjects,p_ContinentObjects)){
 			checkContinentIsConnectedSubgraph(p_ContinentObjects);
 			HashMap<Integer,ArrayList<Integer>> l_HMap;
@@ -43,7 +44,7 @@ public class ValidateMap {
 			assignBorders(l_HMap);
 		}
 		else{
-			throw new Exception("There should be atleast one country for a continent");
+			throw new Exception("\nThere should be atleast one continent and one country for a continent");
 		}
 	}
 
@@ -55,6 +56,10 @@ public class ValidateMap {
 	 * @return true if all continents have at least one country. false otherwise. 
 	 */
 	public boolean checkCountryAndContinent(ArrayList<Country> p_CountryObjects,ArrayList<Continent> p_ContinentObjects) {
+		if(p_ContinentObjects.size()<1)
+		{
+			return false;
+		}
 		for(Continent l_C1:p_ContinentObjects){
 			if(l_C1.getCountryList().size()<1){
 				return false;
