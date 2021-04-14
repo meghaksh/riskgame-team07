@@ -295,7 +295,6 @@ public class GameModelNew implements Serializable {
 	public static GameModelNew loadGame(String p_FileName) {
 		GameModelNew game = null;
 		try {
-			System.out.println("gameTitle:" + p_FileName);
 			FileInputStream fileIn = new FileInputStream("savedgames\\" + p_FileName);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			game = (GameModelNew) in.readObject();
@@ -310,43 +309,25 @@ public class GameModelNew implements Serializable {
 	}
 	public void tournamentstartUpPhase() throws Exception {
 		List<Country> l_CountryList = (List<Country>) this.getSelectedMap().getCountryList().clone();	
-		int playerIndex = 0, playerCount = this.getAllPlayers().size();
-		ArrayList<Integer> tempList = new ArrayList<>();
+		int l_PlayerIndex = 0, l_PlayerCount = this.getAllPlayers().size();
+		ArrayList<Integer> l_TempList = new ArrayList<>();
 		ArrayList<Player> l_playerList= this.getAllPlayers();
-		// Clearing the country list pf players
-		System.out.println("In startup tournament:");
-		for(Player l_Player : this.getAllPlayers()) {
-			System.out.println("Player: "+l_Player+ " name:"+l_Player.getPlayerName());
-			for(Country l_Country: l_Player.getCountryList()) {
-				System.out.println("Country: "+ l_Country.getCountryName());
-			}
-		}
-		
-		
 		// Here creating the list with indexes
 		for (int i = 0; i < l_CountryList.size(); i++) {
-			tempList.add(i);
+			l_TempList.add(i);
 		}
 		// Shuffling the list for randomness
-		Collections.shuffle(tempList, new Random());
-
-		// assigning the shuffled countries from tempList to the players one by
-		// one
+		Collections.shuffle(l_TempList, new Random());
+		// assigning the shuffled countries from tempList to the players one by one
 		for (int i = 0; i < l_CountryList.size(); i++) {
-			if (playerIndex == playerCount)
-				playerIndex = 0;
-			Country newCountry = l_CountryList.get(tempList.get(i));
-			l_playerList.get(playerIndex).addCountry(newCountry);
-			newCountry.setCountryOwnerPlayer(l_playerList.get(playerIndex));
-			l_CountryList.remove(tempList.get(i));
-			System.out.println("Temp get i"+tempList.get(i)+" Country: "+ l_CountryList.get(tempList.get(i)).getCountryName());
-			playerIndex++;
+			if (l_PlayerIndex == l_PlayerCount)
+				l_PlayerIndex = 0;
+			Country l_NewCountry = l_CountryList.get(l_TempList.get(i));
+			l_playerList.get(l_PlayerIndex).addCountry(l_NewCountry);
+			l_NewCountry.setCountryOwnerPlayer(l_playerList.get(l_PlayerIndex));
+			l_CountryList.remove(l_TempList.get(i));
+			l_PlayerIndex++;
 		}
-		for(Player l_player:getAllPlayers()) {
-			for(Country L_country:l_player.getCountryList())
-			{
-			System.out.println("player"+l_player+"country are"+L_country.getCountryName());
-			}
-		}
+		
 	}
 }
