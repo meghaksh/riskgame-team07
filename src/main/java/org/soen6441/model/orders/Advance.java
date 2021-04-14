@@ -2,7 +2,6 @@ package org.soen6441.model.orders;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +13,7 @@ import java.util.TreeMap;
 import org.soen6441.model.Country;
 import org.soen6441.model.Order;
 import org.soen6441.model.Player;
+import org.soen6441.observerpattern.LogEntryBuffer;
 /**
  * The Advance class is a type of an Order issued by a Player. This Order provides the ability for a player
  *  to attack a territory belonging to some other player with some number of armies. The attacker has a probability of 60%
@@ -22,7 +22,7 @@ import org.soen6441.model.Player;
  *
  */
 public class Advance implements Order {
-	
+	LogEntryBuffer d_Leb = new LogEntryBuffer();
 	/**
 	 * The sourceCountry of the attacking player and the targetCountry of the Defending Player.
 	 */
@@ -176,6 +176,7 @@ public class Advance implements Order {
 				{
 					Map.Entry<Integer,Integer> entry_Attack = itr_Attacker.next(); 
 					Map.Entry<Integer,Integer> entry_Defend = itr_Defender.next(); 
+					d_Leb.setResult("Attack Army : " + entry_Attack.getKey() +  " with " + entry_Attack.getValue() + " Value Vs.  Defend Army : " + entry_Defend.getKey() + " with " + entry_Defend.getValue() + " Value");
 					if(entry_Attack.getValue()>=entry_Defend.getValue())
 					{
 						l_attackWin++;
@@ -274,7 +275,6 @@ public class Advance implements Order {
 			// Selecting top n armies to be sent to fight.
 			for(int i=0;i<p_MinArmies;i++)
 			{	
-				System.out.println("inside for of min armies");
 				Map.Entry<Integer,Integer> entry = itr.next(); 
 				System.out.println(entry.getKey()+" : "+ entry.getValue());
 				l_DefenderArmiesinHand.put(entry.getKey(),entry.getValue());
