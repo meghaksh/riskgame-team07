@@ -9,7 +9,11 @@ import java.util.Scanner;
 import org.soen6441.controller.GameEngine;
 import org.soen6441.model.Continent;
 import org.soen6441.model.Country;
-
+/**
+ * 
+ * 
+ *
+ */
 public class Adaptee {
 	
 	public String loadConquestMap(String p_S,GameEngine p_GameEngine) {
