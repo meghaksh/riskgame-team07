@@ -76,7 +76,7 @@ public class GameModelTest {
 		try {
 			d_Game.addPlayer("zeal","human");
 			d_Game.addPlayer("alpha","human");
-
+			d_Game.addPlayer("beta","human");
 		} catch (Exception p_E) {
 			l_ActualMessage = p_E.getMessage();
 		}
