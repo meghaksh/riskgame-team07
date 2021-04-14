@@ -266,7 +266,7 @@ public class Edit extends Phase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return " Tournament Complete ";
+		return " ";
 	}
 	
 	

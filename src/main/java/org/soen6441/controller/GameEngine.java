@@ -348,12 +348,10 @@ public class GameEngine  {
 		}
 		d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
 	}
-	public void loadGame(String p_Command)
-	{
+	public void loadGame(String p_Command) {
 		boolean flag=false;
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
-		if (this.d_GameModelNew==null)
-		{
+		if (this.d_GameModelNew==null) {
 			d_CpView.setCommandAcknowledgement("\nGame not found");
 			d_LEB.setResult("Game not found");
 			return;
@@ -361,37 +359,25 @@ public class GameEngine  {
 		d_LEB.setResult("Game Loaded");
 		d_CpView.setCommandAcknowledgement("\nGame Loaded");
 
-		if(this.d_GameModelNew.getAllPlayers().size()<=1)
-		{
-
+		if(this.d_GameModelNew.getAllPlayers().size()<=1) {
 			this.setPhase(new Startup(this,d_CpView));
-		}
-
-		else 
-		{
+		} else {
 			ArrayList<Player> l_Players=this.d_GameModelNew.getAllPlayers();
-			for(Player l_P : l_Players)
-			{
-				if(l_P.getCountriesSize()>0)
-				{
+			for(Player l_P : l_Players) {
+				if(l_P.getCountriesSize()>0) {
 					flag=true;
 					break;
 				}
 			}
-			if(flag==true)
-			{
+			if(flag==true) {
 				this.setPhase(new IssueOrder(this,d_CpView));
-			}
-			else
-			{
+			} else {
 				this.setPhase(new Startup(this,d_CpView));
 			}
 		}
-
 	}
 
-	public void saveGame(String p_Command)
-	{
+	public void saveGame(String p_Command) {
 		this.d_GameModelNew.saveGame(p_Command.split(" ")[1]);
 		this.setPhase(new GameSaved(this,d_CpView));
 	}
@@ -417,9 +403,7 @@ public class GameEngine  {
 					d_CpView.setCommandAcknowledgement("File does not Exists");//throw exception
 				else
 					l_Files.add(l_F);
-
 			}
-
 		}
 		if(l_CommandArray[3].equals("-P")){
 			l_PlayerStrategyList=l_CommandArray[4].split(",");
@@ -429,7 +413,6 @@ public class GameEngine  {
 				l_P=l_PlayerStrategyList.length;
 				System.out.println("Player strategy list size: "+l_PlayerStrategyList.length);
 			}
-
 		}
 		if(l_CommandArray[5].equals("-G")){
 			int l_NumGames=Integer.parseInt(l_CommandArray[6]);
@@ -437,8 +420,6 @@ public class GameEngine  {
 				d_CpView.setCommandAcknowledgement("Number of Games are not in range");//throw exception
 			else
 				l_G=l_NumGames;
-
-
 		}
 		if(l_CommandArray[7].equals("-D")){
 			int l_MaxTurns=Integer.parseInt(l_CommandArray[8]);
@@ -446,32 +427,25 @@ public class GameEngine  {
 				d_CpView.setCommandAcknowledgement("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");//throw exception
 			else
 				l_D=l_MaxTurns;
-
 		}
 		HashMap<String, ArrayList<String>> tournamentResult = new HashMap<>();
 
 		for (int i = 0; i < l_M; i++) {
-			d_CpView.setCommandAcknowledgement("Map number:"+(i+1));
+			d_CpView.setCommandAcknowledgement("\n=============================================\n");
+			d_CpView.setCommandAcknowledgement("\nMap number:"+(i+1)+"\n");
 			ArrayList<String> result = new ArrayList<>();
 
 
 			for (int j = 0; j < l_G; j++) {
 
 				d_GameModelNew.getMap().loadMap(l_MapList[i]);
-				d_CpView.setCommandAcknowledgement("Game number:"+(j+1));
+				d_CpView.setCommandAcknowledgement("\n=============================================\n");
+				d_CpView.setCommandAcknowledgement("\nGame number:"+(j+1)+"\n");
 
 				for(int k=0;k<l_P;k++) {
 					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
-
 				}
-
-
 				d_GameModelNew.tournamentstartUpPhase();
-
-				System.out.println("Gameenginewala:");
-				for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-					System.out.println("Player: "+l_Player);
-				}
 				int l_Noofturns=0;
 				while(true)
 				{
@@ -480,30 +454,15 @@ public class GameEngine  {
 					this.getPlayerController().playerNextOrder();
 					if(this.getPlayerController().getWinner()!=null) {
 						result.add(this.getPlayerController().getWinner().getPlayerName());
-						d_CpView.setCommandAcknowledgement("We got a  winner");
+						d_CpView.setCommandAcknowledgement(this.getPlayerController().getWinner().getPlayerName()+"is the winner");
 						d_GameModelNew.getMap().reset();
-						System.out.println("One match is over");
-						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
 						break;
 					}
 
 					if(l_Noofturns == l_D) {
-						d_CpView.setCommandAcknowledgement("Match is draw");
+						d_CpView.setCommandAcknowledgement("\nMatch is draw");
 						result.add("Draw");
-						System.out.println("One match is over");
-
-
-
-
-						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-							System.out.println("Player: "+l_Player);
-						}
 						d_GameModelNew.getAllPlayers().clear();
-						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
-
-						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-							System.out.println("Player: "+l_Player);
-						}
 						d_GameModelNew.getMap().reset();
 						break;
 					}
@@ -511,7 +470,6 @@ public class GameEngine  {
 				}
 				tournamentResult.put(l_MapList[i],result);
 			}
-			System.out.println("EXited the gameloop ponce");
 		}
 		printTournamentResult(l_M, l_G, l_D, tournamentResult, l_PlayerStrategyList);
 	}
@@ -520,14 +478,17 @@ public class GameEngine  {
 			String[] p_PlayerStrategyList) {
 
 		String[] mapStrings = p_tournamentResult.keySet().toArray(new String[p_tournamentResult.keySet().size()]);
-		d_CpView.setCommandAcknowledgement("=============================================");
-		d_CpView.setCommandAcknowledgement("==============TOURNAMENT RESULT==============");
-		d_CpView.setCommandAcknowledgement("=============================================");
+		d_CpView.setCommandAcknowledgement("\n");
+		d_CpView.setCommandAcknowledgement("\n");
+		d_CpView.setCommandAcknowledgement("=============================================\n");
+		d_CpView.setCommandAcknowledgement("==============TOURNAMENT RESULT===============\n");
+		d_CpView.setCommandAcknowledgement("=============================================\n");
 		d_CpView.setCommandAcknowledgement("\n");
 		StringBuffer mapNameString = new StringBuffer();
 		for (int i = 0; i < mapStrings.length; i++) {
 			mapNameString.append(mapStrings[i]+ ",");
 		}
+		d_CpView.setCommandAcknowledgement("\n");
 		d_CpView.setCommandAcknowledgement("M:" + mapNameString);
 
 		StringBuffer stratergiesNameString = new StringBuffer();
@@ -547,10 +508,11 @@ public class GameEngine  {
 			sb.append(getFormattedString("Game " + (i + 1)));
 		}
 		sb.append("|");
-		d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
+		d_CpView.setCommandAcknowledgement("\n");
+		//d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
 		d_CpView.setCommandAcknowledgement(sb.toString());
-		d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
-
+		//d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
+		d_CpView.setCommandAcknowledgement("\n");
 		for (int i = 0; i < mapStrings.length; i++) {
 
 			StringBuilder sbMap = new StringBuilder();
@@ -562,9 +524,10 @@ public class GameEngine  {
 				sbMap.append("|");
 				sbMap.append(getFormattedString(gameResults.get(j)));
 			}
+			d_CpView.setCommandAcknowledgement("\n");
 			sbMap.append("|");
 			d_CpView.setCommandAcknowledgement(sbMap.toString());
-			d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
+			//d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
 		}
 	}
 
@@ -576,7 +539,7 @@ public class GameEngine  {
 	}
 
 	private String getFormattedString(String input) {
-		int length = 14;
+		int length = 4;
 
 		StringBuilder str = new StringBuilder(" " + input);
 		for (int i = input.length(); i <= length; i++)
