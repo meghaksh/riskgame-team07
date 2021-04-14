@@ -46,6 +46,7 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 	{
 		Country l_ReturnCountry=null;
 		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()));
+		d_Player.setResult("The Random player is defending from "+l_ReturnCountry.getCountryName());
 		return l_ReturnCountry;
 	}
 	public boolean getDecreasePlayerListSize()
