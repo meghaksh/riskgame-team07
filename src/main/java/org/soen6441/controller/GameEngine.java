@@ -442,10 +442,28 @@ public class GameEngine  {
 				d_CpView.setCommandAcknowledgement("\n=============================================\n");
 				d_CpView.setCommandAcknowledgement("\nGame number:"+(j+1)+"\n");
 
+				
+				d_GameModelNew.getAllPlayers().clear();
+				
 				for(int k=0;k<l_P;k++) {
 					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
 				}
+				
+				System.out.println("Tournamnet country list");
+				for(Country l_Country:d_GameModelNew.getSelectedMap().getCountryList() ) {
+					System.out.println("Country : "+l_Country.getCountryName());
+				}
+				
 				d_GameModelNew.tournamentstartUpPhase();
+				
+				System.out.println("Tournament player country list");
+				for(Player l_Player : d_GameModelNew.getAllPlayers()) {
+					System.out.println("Player: "+l_Player+ " name:"+l_Player.getPlayerName());
+					for(Country l_Country: l_Player.getCountryList()) {
+						System.out.println("Country: "+ l_Country.getCountryName());
+					}
+				}
+				
 				int l_Noofturns=0;
 				while(true)
 				{
@@ -453,7 +471,7 @@ public class GameEngine  {
 					this.getPlayerController().playerIssueOrder();
 					this.getPlayerController().playerNextOrder();
 					if(this.getPlayerController().getWinner()!=null) {
-						result.add(this.getPlayerController().getWinner().getPlayerName());
+						result.add(this.getPlayerController().getWinner().getPlayerStrategy().strategyName());
 						d_CpView.setCommandAcknowledgement(this.getPlayerController().getWinner().getPlayerName()+"is the winner");
 						d_GameModelNew.getMap().reset();
 						break;
