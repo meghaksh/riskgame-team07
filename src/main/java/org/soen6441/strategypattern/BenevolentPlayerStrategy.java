@@ -77,4 +77,10 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 		return l_returnOrder;
 	}
 
+	@Override
+	public String strategyName() {
+		// TODO Auto-generated method stub
+		return "Benevolent";
+	}
+
 }

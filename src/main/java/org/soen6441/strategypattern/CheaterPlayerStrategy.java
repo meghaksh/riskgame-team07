@@ -106,5 +106,10 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		d_Leb.setResult("in cheater player order is "+l_returnOrder);
 		return l_returnOrder;
 	}
+	@Override
+	public String strategyName() {
+		// TODO Auto-generated method stub
+		return "Cheater";
+	}
 
 }

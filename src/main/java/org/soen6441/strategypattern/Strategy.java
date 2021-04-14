@@ -8,4 +8,5 @@ import org.soen6441.observerpattern.LogEntryBuffer;
 public abstract class Strategy implements Serializable {
 	LogEntryBuffer d_Leb = new LogEntryBuffer();
 	public abstract Order createOrder();
+	public abstract String strategyName();
 }

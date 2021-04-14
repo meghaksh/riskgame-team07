@@ -97,4 +97,9 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		return l_OrderToBeReturned;
 	}
 
+	@Override
+	public String strategyName() {
+		return "Aggressive";
+	}
+
 }

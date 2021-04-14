@@ -77,5 +77,11 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		d_Leb.setResult("in random player order is "+l_returnOrder);
 		return l_returnOrder;
 	}
+
+	@Override
+	public String strategyName() {
+		// TODO Auto-generated method stub
+		return "Random";
+	}
 }
 
