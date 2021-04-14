@@ -16,7 +16,9 @@ import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 import org.soen6441.model.orders.Advance;
 import org.soen6441.model.orders.Deploy;
-
+/**
+ *
+ */
 public class AggresivePlayerStrategy extends Strategy implements Serializable {
 
 	/*
@@ -97,7 +99,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		else
 		{
 			d_Leb.setResult("in agrressive the armies are deployed to -" +l_Countries.get(0));
-			l_OrderToBeReturned = new Deploy(this.d_Player, l_Countries.get(0),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+			l_OrderToBeReturned = new Deploy(this.d_Player, toDefend(),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 		}
 		break;	
 		}
