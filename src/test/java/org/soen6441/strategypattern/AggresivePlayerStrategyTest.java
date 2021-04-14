@@ -58,5 +58,14 @@ public class AggresivePlayerStrategyTest {
 		d_Country3.setBorder("india");
 		
 	}
+	@Test
+	public void testDefendCheck() throws Exception {
+		String l_Actual="";
+		String l_Expected="The aggressive player is defending from china";
+		AggresivePlayerStrategy l_Agress=new AggresivePlayerStrategy(d_Player1,d_GameModelNew);
+		l_Agress.toDefend();
+		l_Actual = d_Player1.getResult();
+		assertEquals(l_Expected,l_Actual);
+	}
 	
 }
