@@ -51,13 +51,6 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 			}  
 		});
 		l_TempCountry = list.get(0).getKey();
-		/*for(Country l_Country : this.d_Player.getCountryList()) {
-			if(l_Country.getNoOfArmies()>l_NumberOfArmies) {
-				l_NumberOfArmies = l_Country.getNoOfArmies();
-				l_TempCountry = l_Country;
-			}
-		}*/
-		d_Leb.setResult("The aggressive player is attacking from "+l_TempCountry.getCountryName()+" country with "+ l_TempCountry.getNoOfArmies()+" armies");
 		return l_TempCountry;
 	}
 	@Override
@@ -74,7 +67,6 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 			}
 		}
 		l_ReturnCountry = l_BorderCountriesList.get(d_Random.nextInt(l_BorderCountriesList.size()));
-		d_Leb.setResult("The aggresive player is attacking - "+l_ReturnCountry.getCountryName()+" country");
 
 		l_ReturnCountries.add(0,l_Country);
 		l_ReturnCountries.add(0,l_ReturnCountry);
@@ -90,14 +82,19 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		int l_RandomInt = d_Random.nextInt(2);
 		Order l_OrderToBeReturned = null;
 		switch(l_RandomInt) {
-		case 0:
-			l_OrderToBeReturned = new Deploy(this.d_Player, toDefend(), Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
-			break;
+		case 0: Country l_DefendCountry1 = toDefend();
+				d_Leb.setResult("in agressive the armies are deployed to -" +l_DefendCountry1);
+				l_OrderToBeReturned = new Deploy(this.d_Player, l_DefendCountry1, Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+				break;
 		case 1: ArrayList<Country> l_Countries = toAttack();
 		if(l_Countries.get(0).getNoOfArmies()>1)
-		{l_OrderToBeReturned =  new Advance(this.d_Player, l_Countries.get(0), l_Countries.get(1), l_Countries.get(0).getNoOfArmies()-1);}
+		{
+			d_Leb.setResult("in aggressive defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1)+" with armies- "+(l_Countries.get(0).getNoOfArmies()-1));
+			l_OrderToBeReturned =  new Advance(this.d_Player, l_Countries.get(0), l_Countries.get(1), l_Countries.get(0).getNoOfArmies()-1);
+		}
 		else
 		{
+			d_Leb.setResult("in agrressive the armies are deployed to -" +l_Countries.get(0));
 			l_OrderToBeReturned = new Deploy(this.d_Player, l_Countries.get(0),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 		}
 		break;	

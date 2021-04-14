@@ -75,7 +75,9 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 	public Order createOrder() {
 		// TODO Auto-generated method stub
 		Order l_returnOrder=null;
-		l_returnOrder =  new Deploy(this.d_Player, toDefend(), Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+		Country l_DefendCountry1 = toDefend();
+		d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1);
+		l_returnOrder =  new Deploy(this.d_Player, l_DefendCountry1, Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 		d_Leb.setResult("in benevolent player the order issued is - "+l_returnOrder);
 		return l_returnOrder;
 	}

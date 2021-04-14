@@ -37,7 +37,6 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		Country l_ReturnCountry=null;
 		Country l_DefendCountry = toDefend();
 		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()));
-		d_Leb.setResult("The Random Player is attacking on "+l_ReturnCountry.getCountryName()+" country");
 		l_ReturnCountries.add(0,l_DefendCountry);
 		l_ReturnCountries.add(1,l_ReturnCountry);
 		return l_ReturnCountries;
@@ -47,7 +46,6 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 	{
 		Country l_ReturnCountry=null;
 		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()));
-		d_Leb.setResult("The Random Player is attacking from "+l_ReturnCountry.getCountryName()+" country");
 		return l_ReturnCountry;
 	}
 	public boolean getDecreasePlayerListSize()
@@ -72,14 +70,20 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 
 		switch(l_rndOrder) 
 		{
-		case 0: l_returnOrder = new Deploy(d_Player,toDefend(),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
-		break;
+		case 0: Country l_DefendCountry1 = toDefend();
+				d_Leb.setResult("in random the armies are deployed to -" +l_DefendCountry1);
+				l_returnOrder = new Deploy(d_Player,l_DefendCountry1,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
+				break;
 
 		case 1: ArrayList<Country> l_Countries = toAttack();
-		if(l_Countries.get(0).getNoOfArmies()>1) {
-			l_returnOrder =  new Advance(d_Player,l_Countries.get(0),l_Countries.get(1),rand.nextInt(l_Countries.get(0).getNoOfArmies()+5));}
+		if(l_Countries.get(0).getNoOfArmies()>1) 
+		{
+			d_Leb.setResult("in random defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1)+" with armies- "+(l_Countries.get(0).getNoOfArmies()-1));
+			l_returnOrder =  new Advance(d_Player,l_Countries.get(0),l_Countries.get(1),(l_Countries.get(0).getNoOfArmies()-1));
+		}
 		else
 		{
+			d_Leb.setResult("in random the armies are deployed to -" +l_Countries.get(0));
 			l_returnOrder = new Deploy(d_Player,l_Countries.get(0),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
 		}
 		break;
