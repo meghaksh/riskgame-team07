@@ -27,10 +27,6 @@ public class AggresivePlayerStrategyTest {
 		d_GameModelNew = new GameModelNew(d_Map);
 		d_Player1 = new Player("raj", d_GameModelNew);
 		d_Player2 = new Player("zeal", d_GameModelNew);
-		d_Strategy1 = new BenevolentPlayerStrategy(d_Player1, d_GameModelNew);
-		d_Strategy2 = new AggresivePlayerStrategy(d_Player2, d_GameModelNew);
-		d_Player1.setPlayerStrategy(d_Strategy1);
-		d_Player2.setPlayerStrategy(d_Strategy2);
 		d_Continent = new Continent("asia",3);
 		d_Map.addContinent(d_Continent.getContinentName(), "3");
 		d_Map.addCountry("india","asia");
