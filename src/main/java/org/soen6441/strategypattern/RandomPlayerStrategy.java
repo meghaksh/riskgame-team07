@@ -1,6 +1,7 @@
 package org.soen6441.strategypattern;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -29,15 +30,20 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		rand = new Random();
 		d_Leb.setResult("Random Player");
 	}
-	
-	protected Country toAttack()
+	@Override
+	public ArrayList<Country> toAttack()
 	{
+		ArrayList<Country> l_ReturnCountries = new ArrayList<Country>();
 		Country l_ReturnCountry=null;
+		Country l_DefendCountry = toDefend();
 		l_ReturnCountry = d_GameModelNew.getMap().getCountryList().get(rand.nextInt(d_GameModelNew.getMap().getCountryList().size()));
 		d_Leb.setResult("The Random Player is attacking on "+l_ReturnCountry.getCountryName()+" country");
-		return l_ReturnCountry;
+		l_ReturnCountries.add(0,l_DefendCountry);
+		l_ReturnCountries.add(1,l_ReturnCountry);
+		return l_ReturnCountries;
 	}
-	protected Country toDefend()
+	@Override
+	public Country toDefend()
 	{
 		Country l_ReturnCountry=null;
 		l_ReturnCountry = d_Player.getCountryList().get(rand.nextInt(d_Player.getCountryList().size()));
@@ -56,29 +62,29 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 	{
 		d_CheckArmies= l_CheckArmies;
 	}
-	
+
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
 		d_decreasePlayerListSize = false;
 		int l_rndOrder = rand.nextInt(2);
 		Order l_returnOrder = null;
-		
-			switch(l_rndOrder) 
-			{
-			case 0: l_returnOrder = new Deploy(d_Player,toDefend(),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
-					break;
-			
-			case 1: Country l_defendCountry = toDefend();
-					if(l_defendCountry.getNoOfArmies()>1) {
-					l_returnOrder =  new Advance(d_Player,l_defendCountry,toAttack(),rand.nextInt(l_defendCountry.getNoOfArmies()+5));}
-					else
-					{
-						l_returnOrder = new Deploy(d_Player,l_defendCountry,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
-					}
-					break;
-					
-			}
+
+		switch(l_rndOrder) 
+		{
+		case 0: l_returnOrder = new Deploy(d_Player,toDefend(),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
+		break;
+
+		case 1: ArrayList<Country> l_Countries = toAttack();
+		if(l_Countries.get(0).getNoOfArmies()>1) {
+			l_returnOrder =  new Advance(d_Player,l_Countries.get(0),l_Countries.get(1),rand.nextInt(l_Countries.get(0).getNoOfArmies()+5));}
+		else
+		{
+			l_returnOrder = new Deploy(d_Player,l_Countries.get(0),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
+		}
+		break;
+
+		}
 		d_Leb.setResult("in random player order is "+l_returnOrder);
 		return l_returnOrder;
 	}

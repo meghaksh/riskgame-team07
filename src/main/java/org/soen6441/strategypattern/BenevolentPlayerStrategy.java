@@ -1,6 +1,7 @@
 package org.soen6441.strategypattern;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -23,19 +24,19 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 	 * never attacks, 
 	 * then moves its armies in order to reinforce its weaker country).
 	 * */
-	
+
 	private Random d_Random;
 	private GameModelNew d_GameModelNew;
 	private Player d_Player;
-	
+
 	public BenevolentPlayerStrategy(Player p_Player,GameModelNew p_GameModelNew) {
 		this.d_GameModelNew = p_GameModelNew;
 		this.d_Player = p_Player;
 		d_Random = new Random();
 		d_Leb.setResult("Benevolent Player");
 	}
-	
-	protected Country toDefend() {
+	@Override
+	public Country toDefend() {
 
 		Country l_TempCountry=null;
 		int l_NumberOfArmies = 0;
@@ -57,17 +58,19 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 			}  
 		});
 		l_TempCountry = list.get(0).getKey();
-		
+
 		System.out.println("left for loop  "+l_TempCountry);
 		d_Leb.setResult("the Benevolent Player is defefnding country "+l_TempCountry.getCountryName()+" country with "+l_TempCountry.getNoOfArmies()+" armies");
 		//System.out.println("Weakest Country : " + l_TempCountry.getCountryName() + " Has armies : " + l_TempCountry.getNoOfArmies());
 		return l_TempCountry;
 	}
-	
-	protected Country toMove() {
+
+	@Override
+	public ArrayList<Country> toAttack()
+	{
 		return null;
 	}
-	
+
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub

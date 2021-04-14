@@ -33,9 +33,9 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		d_Random = new Random();
 		d_Leb.setResult("Aggressive Player");
 	}
-	
-	public Country attackFrom() {
-		
+	@Override
+	public Country toDefend() {
+
 		Country l_TempCountry=null;
 		HashMap <Country,Integer> l_PlayerCountryMap = new HashMap<>();
 		for(Country l_Country : d_Player.getCountryList())
@@ -60,11 +60,12 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		d_Leb.setResult("The aggressive player is attacking from "+l_TempCountry.getCountryName()+" country with "+ l_TempCountry.getNoOfArmies()+" armies");
 		return l_TempCountry;
 	}
-	
-	public Country attackTo() {
-		
+	@Override
+	public ArrayList<Country> toAttack()
+	{
 
-		Country l_Country = attackFrom();
+		ArrayList<Country> l_ReturnCountries = new ArrayList<Country>();
+		Country l_Country = toDefend();
 		Country l_ReturnCountry=null;
 		ArrayList<Country> l_BorderCountriesList = new ArrayList<>();
 		for(Country l_C : this.d_GameModelNew.getMap().getCountryList()) {
@@ -74,9 +75,12 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		}
 		l_ReturnCountry = l_BorderCountriesList.get(d_Random.nextInt(l_BorderCountriesList.size()));
 		d_Leb.setResult("The aggresive player is attacking - "+l_ReturnCountry.getCountryName()+" country");
-		return l_ReturnCountry;
+
+		l_ReturnCountries.add(0,l_Country);
+		l_ReturnCountries.add(0,l_ReturnCountry);
+		return l_ReturnCountries;
 	}
-	
+
 	/**
 	 * Either deploy to the strongest country or attack from strongest country
 	 */
@@ -86,17 +90,17 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		int l_RandomInt = d_Random.nextInt(2);
 		Order l_OrderToBeReturned = null;
 		switch(l_RandomInt) {
-			case 0:
-				l_OrderToBeReturned = new Deploy(this.d_Player, attackFrom(), Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
-				break;
-			case 1: Country l_AttackFrom = attackFrom();
-				if(l_AttackFrom.getNoOfArmies()>1)
-				{l_OrderToBeReturned =  new Advance(this.d_Player, l_AttackFrom, attackTo(), l_AttackFrom.getNoOfArmies()-1);}
-				else
-				{
-					l_OrderToBeReturned = new Deploy(this.d_Player, l_AttackFrom,Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
-				}
-				break;	
+		case 0:
+			l_OrderToBeReturned = new Deploy(this.d_Player, toDefend(), Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+			break;
+		case 1: ArrayList<Country> l_Countries = toAttack();
+		if(l_Countries.get(0).getNoOfArmies()>1)
+		{l_OrderToBeReturned =  new Advance(this.d_Player, l_Countries.get(0), l_Countries.get(1), l_Countries.get(0).getNoOfArmies()-1);}
+		else
+		{
+			l_OrderToBeReturned = new Deploy(this.d_Player, l_Countries.get(0),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+		}
+		break;	
 		}
 		d_Leb.setResult("in aggressive the order is - "+l_OrderToBeReturned);
 		return l_OrderToBeReturned;
