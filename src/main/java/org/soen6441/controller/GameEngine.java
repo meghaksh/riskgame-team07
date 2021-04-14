@@ -408,13 +408,13 @@ public class GameEngine  {
 		if(l_CommandArray[1].equals("-M")){
 			l_MapList=l_CommandArray[2].split(",");
 			if(l_MapList.length>5||l_MapList.length<1)
-				System.out.println("Number of Maps are not in range");//throw exception
+				d_CpView.setCommandAcknowledgement("Number of Maps are not in range");//throw exception
 			else 
 				l_M=l_MapList.length;
 			for(int i=0;i<l_M;i++) {
 				File l_F = new File(l_Path+l_MapList[i]);
 				if (!l_F.exists())
-					System.out.println("File does not Exists");//throw exception
+					d_CpView.setCommandAcknowledgement("File does not Exists");//throw exception
 				else
 					l_Files.add(l_F);
 
@@ -424,7 +424,7 @@ public class GameEngine  {
 		if(l_CommandArray[3].equals("-P")){
 			l_PlayerStrategyList=l_CommandArray[4].split(",");
 			if(l_PlayerStrategyList.length>4||l_PlayerStrategyList.length<2)
-				System.out.println("Number of Player strategies are are not in range");//throw exception
+				d_CpView.setCommandAcknowledgement("Number of Player strategies are are not in range");//throw exception
 			else {
 				l_P=l_PlayerStrategyList.length;
 				System.out.println("Player strategy list size: "+l_PlayerStrategyList.length);
@@ -434,7 +434,7 @@ public class GameEngine  {
 		if(l_CommandArray[5].equals("-G")){
 			int l_NumGames=Integer.parseInt(l_CommandArray[6]);
 			if(l_NumGames>5||l_NumGames<1)
-				System.out.println("Number of Games are not in range");//throw exception
+				d_CpView.setCommandAcknowledgement("Number of Games are not in range");//throw exception
 			else
 				l_G=l_NumGames;
 
@@ -443,7 +443,7 @@ public class GameEngine  {
 		if(l_CommandArray[7].equals("-D")){
 			int l_MaxTurns=Integer.parseInt(l_CommandArray[8]);
 			if(l_MaxTurns>50||l_MaxTurns<10)
-				System.out.println("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");//throw exception
+				d_CpView.setCommandAcknowledgement("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");//throw exception
 			else
 				l_D=l_MaxTurns;
 
@@ -451,14 +451,14 @@ public class GameEngine  {
 		HashMap<String, ArrayList<String>> tournamentResult = new HashMap<>();
 
 		for (int i = 0; i < l_M; i++) {
-			System.out.println("Map number:"+(i+1));
+			d_CpView.setCommandAcknowledgement("Map number:"+(i+1));
 			ArrayList<String> result = new ArrayList<>();
 
 
 			for (int j = 0; j < l_G; j++) {
 
 				d_GameModelNew.getMap().loadMap(l_MapList[i]);
-				System.out.println("Game number:"+(j+1));
+				d_CpView.setCommandAcknowledgement("Game number:"+(j+1));
 
 				for(int k=0;k<l_P;k++) {
 					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
@@ -480,13 +480,7 @@ public class GameEngine  {
 					this.getPlayerController().playerNextOrder();
 					if(this.getPlayerController().getWinner()!=null) {
 						result.add(this.getPlayerController().getWinner().getPlayerName());
-						System.out.println("We got a  winner");
-
-						//						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-						//							l_Player.getCountryList().clear();
-						//						}						
-
-						//						d_GameModelNew.getAllPlayers().clear();
+						d_CpView.setCommandAcknowledgement("We got a  winner");
 						d_GameModelNew.getMap().reset();
 						System.out.println("One match is over");
 						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
@@ -494,7 +488,7 @@ public class GameEngine  {
 					}
 
 					if(l_Noofturns == l_D) {
-						System.out.println("Match is draw");
+						d_CpView.setCommandAcknowledgement("Match is draw");
 						result.add("Draw");
 						System.out.println("One match is over");
 
@@ -526,25 +520,25 @@ public class GameEngine  {
 			String[] p_PlayerStrategyList) {
 
 		String[] mapStrings = p_tournamentResult.keySet().toArray(new String[p_tournamentResult.keySet().size()]);
-		System.out.print("===========================================================================================");
-		System.out.print("=================================TOURNAMENT RESULT=========================================");
-		System.out.print("===========================================================================================");
-
+		d_CpView.setCommandAcknowledgement("=============================================");
+		d_CpView.setCommandAcknowledgement("==============TOURNAMENT RESULT==============");
+		d_CpView.setCommandAcknowledgement("=============================================");
+		d_CpView.setCommandAcknowledgement("\n");
 		StringBuffer mapNameString = new StringBuffer();
 		for (int i = 0; i < mapStrings.length; i++) {
 			mapNameString.append(mapStrings[i]+ ",");
 		}
-		System.out.print("M:" + mapNameString);
+		d_CpView.setCommandAcknowledgement("M:" + mapNameString);
 
 		StringBuffer stratergiesNameString = new StringBuffer();
 		for (int i = 0; i < p_PlayerStrategyList.length; i++) {
 			stratergiesNameString.append(p_PlayerStrategyList[i] + ",");
 		}
-		System.out.print("P:" + stratergiesNameString);
-		System.out.print("G:" + p_G);
-		System.out.print("D:" + p_D);
-		System.out.print("\n");
-		System.out.print("\n");
+		d_CpView.setCommandAcknowledgement("P:" + stratergiesNameString);
+		d_CpView.setCommandAcknowledgement("G:" + p_G);
+		d_CpView.setCommandAcknowledgement("D:" + p_D);
+		d_CpView.setCommandAcknowledgement("\n");
+		d_CpView.setCommandAcknowledgement("\n");
 		StringBuilder sb = new StringBuilder();
 		sb.append("|");
 		sb.append(getFormattedString(" "));
@@ -553,9 +547,9 @@ public class GameEngine  {
 			sb.append(getFormattedString("Game " + (i + 1)));
 		}
 		sb.append("|");
-		System.out.print(getRepeatedFormattedString("-", sb.length()));
-		System.out.print(sb.toString());
-		System.out.print(getRepeatedFormattedString("-", sb.length()));
+		d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
+		d_CpView.setCommandAcknowledgement(sb.toString());
+		d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
 
 		for (int i = 0; i < mapStrings.length; i++) {
 
@@ -569,8 +563,8 @@ public class GameEngine  {
 				sbMap.append(getFormattedString(gameResults.get(j)));
 			}
 			sbMap.append("|");
-			System.out.print(sbMap.toString());
-			System.out.print(getRepeatedFormattedString("-", sb.length()));
+			d_CpView.setCommandAcknowledgement(sbMap.toString());
+			d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
 		}
 	}
 
