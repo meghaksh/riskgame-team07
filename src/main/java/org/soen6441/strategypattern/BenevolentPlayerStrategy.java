@@ -60,6 +60,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 		l_TempCountry = list.get(0).getKey();
 
 		System.out.println("left for loop  "+l_TempCountry);
+		d_Player.setResult("the Benevolent Player is defefnding country "+l_TempCountry.getCountryName());
 		d_Leb.setResult("the Benevolent Player is defefnding country "+l_TempCountry.getCountryName()+" country with "+l_TempCountry.getNoOfArmies()+" armies");
 		//System.out.println("Weakest Country : " + l_TempCountry.getCountryName() + " Has armies : " + l_TempCountry.getNoOfArmies());
 		return l_TempCountry;
