@@ -51,6 +51,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 			}  
 		});
 		l_TempCountry = list.get(0).getKey();
+		d_Player.setResult("The aggressive player is defending from "+l_TempCountry.getCountryName());
 		return l_TempCountry;
 	}
 	@Override
@@ -70,6 +71,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 
 		l_ReturnCountries.add(0,l_Country);
 		l_ReturnCountries.add(0,l_ReturnCountry);
+		d_Player.setResult("The aggressive player is attacking on "+l_ReturnCountry.getCountryName());
 		return l_ReturnCountries;
 	}
 
