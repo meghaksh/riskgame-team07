@@ -363,7 +363,7 @@ public class GameEngine  {
 
 		if(this.d_GameModelNew.getAllPlayers().size()<=1)
 		{
-			
+
 			this.setPhase(new Startup(this,d_CpView));
 		}
 
@@ -449,27 +449,22 @@ public class GameEngine  {
 
 		}
 		HashMap<String, ArrayList<String>> tournamentResult = new HashMap<>();
-		
+
 		for (int i = 0; i < l_M; i++) {
 			System.out.println("Map number:"+(i+1));
 			ArrayList<String> result = new ArrayList<>();
-		
-			
+
+
 			for (int j = 0; j < l_G; j++) {
-				this.showMap2();
-				
+
 				d_GameModelNew.getMap().loadMap(l_MapList[i]);
-				this.showMap2();
 				System.out.println("Game number:"+(j+1));
 
-				
-//				d_GameModelNew.getAllPlayers().clear();
-				
 				for(int k=0;k<l_P;k++) {
 					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
-					
+
 				}
-				
+
 
 				d_GameModelNew.tournamentstartUpPhase();
 
@@ -487,11 +482,11 @@ public class GameEngine  {
 						result.add(this.getPlayerController().getWinner().getPlayerName());
 						System.out.println("We got a  winner");
 
-//						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
-//							l_Player.getCountryList().clear();
-//						}						
-						
-//						d_GameModelNew.getAllPlayers().clear();
+						//						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
+						//							l_Player.getCountryList().clear();
+						//						}						
+
+						//						d_GameModelNew.getAllPlayers().clear();
 						d_GameModelNew.getMap().reset();
 						System.out.println("One match is over");
 						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
@@ -502,16 +497,16 @@ public class GameEngine  {
 						System.out.println("Match is draw");
 						result.add("Draw");
 						System.out.println("One match is over");
-						
-						
-						
-						
+
+
+
+
 						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
 							System.out.println("Player: "+l_Player);
 						}
 						d_GameModelNew.getAllPlayers().clear();
 						System.out.println("gameobjs"+d_GameModelNew.getAllPlayers().size());
-						
+
 						for(Player l_Player: d_GameModelNew.getAllPlayers()) {
 							System.out.println("Player: "+l_Player);
 						}
@@ -594,46 +589,4 @@ public class GameEngine  {
 			str.append(" ");
 		return str.toString();
 	}
-
-	public void showMap2() {
-		d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
-		d_PlayerList = d_GameModelNew.getAllPlayers();
-		ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
-		if(l_ContinentList.size()>0) {
-			d_LEB.setResult("\n");
-			d_CpView.setCommandAcknowledgement("\n");
-			for(Continent l_Continent:l_ContinentList) {
-				d_LEB.setResult("Continent: "+l_Continent.getContinentName() + "\n");
-				d_CpView.setCommandAcknowledgement("Continent: "+l_Continent.getContinentName() + "\n");
-				ArrayList<Country> l_CountryList = l_Continent.getCountryList();
-				d_LEB.setResult("\n");
-				d_CpView.setCommandAcknowledgement("\n");
-				for(Country l_Country:l_CountryList) {
-					d_LEB.setResult("Country: "+ l_Country.getCountryName());
-					d_CpView.setCommandAcknowledgement("Country: "+ l_Country.getCountryName());
-
-					if(l_Country.getCountryOwnerPlayer()!=null){
-						d_LEB.setResult("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
-						d_CpView.setCommandAcknowledgement("-->Owner: "+ l_Country.getCountryOwnerPlayer().getPlayerName());
-						d_LEB.setResult("-->Armies deployed: "+ l_Country.getNoOfArmies());
-						d_CpView.setCommandAcknowledgement("-->Armies deployed: "+ l_Country.getNoOfArmies());
-					}
-					ArrayList<String> l_NeighborList = l_Country.getBorder();
-					if(l_NeighborList.size()>0) {
-						d_LEB.setResult("\n"+"--> Borders : ");
-						d_CpView.setCommandAcknowledgement("\n"+"--> Borders : ");
-						for(String l_Str:l_NeighborList) {
-							d_LEB.setResult(l_Str+ ",");
-							d_CpView.setCommandAcknowledgement(l_Str+ ",");
-						}	
-					}
-					d_LEB.setResult("\n");
-					d_CpView.setCommandAcknowledgement("\n");
-				}
-				d_LEB.setResult("\n");
-				d_CpView.setCommandAcknowledgement("\n");
-			}
-		}
-	}
-
 }
