@@ -312,9 +312,9 @@ public class GameModelNew implements Serializable {
 			in.close();
 			fileIn.close();
 		} catch (IOException i) {
-			i.printStackTrace();
+			return null;
 		} catch (ClassNotFoundException c) {
-			c.printStackTrace();
+			return null;
 		}
 		return game;
 	}

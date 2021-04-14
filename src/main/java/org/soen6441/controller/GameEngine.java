@@ -352,9 +352,18 @@ public class GameEngine  {
 	{
 		boolean flag=false;
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
+		if (this.d_GameModelNew==null)
+		{
+			d_CpView.setCommandAcknowledgement("\nGame not found");
+			d_LEB.setResult("Game not found");
+			return;
+		}
+		d_LEB.setResult("Game Loaded");
+		d_CpView.setCommandAcknowledgement("\nGame Loaded");
 
 		if(this.d_GameModelNew.getAllPlayers().size()<=1)
 		{
+			
 			this.setPhase(new Startup(this,d_CpView));
 		}
 
