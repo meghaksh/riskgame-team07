@@ -16,7 +16,9 @@ import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 import org.soen6441.model.orders.Advance;
 import org.soen6441.model.orders.Deploy;
-
+/**
+ *
+ */
 public class AggresivePlayerStrategy extends Strategy implements Serializable {
 
 	/*
