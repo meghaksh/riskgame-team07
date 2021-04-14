@@ -1,6 +1,7 @@
 package org.soen6441.strategypattern;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -49,6 +50,16 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 	public boolean getDecreasePlayerListSize()
 	{
 		return d_decreasePlayerListSize;
+	}
+	@Override
+	public ArrayList<Country> toAttack()
+	{
+		return null;
+	}
+	@Override
+	public Country toDefend() 
+	{
+		return null;
 	}
 	@Override
 	public Order createOrder() {
