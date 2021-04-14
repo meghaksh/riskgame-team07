@@ -33,6 +33,15 @@ public class RandomPlayerStrategyTest {
 		d_Country1.setNoOfArmies(2);
 		
 	}
+	@Test
+	public void testDefendCheck() throws Exception {
+		String l_Actual="";
+		String l_Expected="The Random player is defending from india";
+		RandomPlayerStrategy l_random=new RandomPlayerStrategy(d_Player1,d_GameModelNew);
+		l_random.toDefend();
+		l_Actual = d_Player1.getResult();
+		assertEquals(l_Expected,l_Actual);
+	}
 	
 
 }
