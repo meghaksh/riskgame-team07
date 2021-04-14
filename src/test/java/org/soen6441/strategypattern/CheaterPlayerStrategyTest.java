@@ -56,5 +56,14 @@ public class CheaterPlayerStrategyTest {
 		l_Actual = d_Player1.getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
+	@Test
+	public void testAttackCheck() throws Exception {
+		String l_Actual="";
+		String l_Expected="The Cheater player is attacking on china";
+		CheaterPlayerStrategy l_cheater=new CheaterPlayerStrategy(d_Player1,d_GameModelNew);
+		l_cheater.toAttack();
+		l_Actual = d_Player1.getResult();
+		assertEquals(l_Expected,l_Actual);
+	}
 	
 }
