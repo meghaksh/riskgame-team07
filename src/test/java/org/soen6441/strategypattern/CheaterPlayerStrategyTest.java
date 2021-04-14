@@ -47,5 +47,14 @@ public class CheaterPlayerStrategyTest {
 		d_Country2.setBorder("india");
 		
 	}
+	@Test
+	public void testDefendCheck() throws Exception {
+		String l_Actual="";
+		String l_Expected="The Cheater player is defending from india";
+		CheaterPlayerStrategy l_cheater=new CheaterPlayerStrategy(d_Player1,d_GameModelNew);
+		l_cheater.toDefend();
+		l_Actual = d_Player1.getResult();
+		assertEquals(l_Expected,l_Actual);
+	}
 	
 }
