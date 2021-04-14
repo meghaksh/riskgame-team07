@@ -1,9 +1,11 @@
 package org.soen6441.observerpattern;
 
+import java.io.Serializable;
+
 /**
  * Class which extends the Observable class. To log any changes in file, we use the object of this class. 
  */
-public class LogEntryBuffer extends Observable {
+public class LogEntryBuffer extends Observable implements Serializable {
 	private String d_Result;
 	private Logger d_Logger;
 
