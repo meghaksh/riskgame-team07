@@ -67,5 +67,13 @@ public class AggresivePlayerStrategyTest {
 		l_Actual = d_Player1.getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
-	
+	@Test
+	public void testAttackFromCheck() throws Exception {
+		String l_Actual="";
+		String l_Expected="The aggressive player is attacking on japan";
+		AggresivePlayerStrategy l_Agress=new AggresivePlayerStrategy(d_Player1,d_GameModelNew);
+		l_Agress.toAttack();
+		l_Actual = d_Player1.getResult();
+		assertEquals(l_Expected,l_Actual);
+	}
 }
