@@ -15,13 +15,37 @@ import org.soen6441.view.CommandPrompt;
  * This class tests the methods written in Advance order class.
  */
 public class AdvanceTest {
+	/**
+	 * Object of CommandPrompt
+	 */
 	CommandPrompt d_CpView;
+	/**
+	 *  Object of GameModel
+	 */
 	GameModelNew d_GameModel;
+	/**
+	 * Object of GameEngine
+	 */
 	GameEngine d_Ge;
+	/**
+	 * Objects of Continent
+	 */
 	Continent d_C0,d_C1;
+	/**
+	 * Objects of country
+	 */
 	Country d_Country1,d_Country2,d_Country3,d_Country4,d_Country5;
+	/**
+	 * Objects of Player
+	 */
 	Player d_P1,d_P2;
+	/**
+	 * Objects of Map
+	 */
 	Map d_Map;
+	/**
+	 * Objects of advance 
+	 */
 	Advance d_Adv;
 
 	/**
