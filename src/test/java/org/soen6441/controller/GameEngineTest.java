@@ -49,5 +49,21 @@ public class GameEngineTest {
 	}
 
 
+	/**
+	 * To test if the number of maps entered are in range or not
+	 */
+	@Test
+	public void testTournamentMapRange()  {
+		String l_ActualMessage="";
+		String l_ExpectedMessage = "Number of Maps should be in between 1 to 5 both inclusive";
+
+		l_InputString = "tournament -M map9,map99,map1,map2,map5,map8 -P benevolent,aggressive -G 2 -D 10";
+		try {
+			d_GameEngine.tournament(l_InputString);
+		} catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage, l_ActualMessage);
+	}
 
 }
