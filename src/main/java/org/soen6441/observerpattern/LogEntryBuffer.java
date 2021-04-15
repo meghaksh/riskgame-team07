@@ -6,7 +6,13 @@ import java.io.Serializable;
  * Class which extends the Observable class. To log any changes in file, we use the object of this class. 
  */
 public class LogEntryBuffer extends Observable implements Serializable {
+	/**
+	 * String variable which holds the text to be printed in the log file
+	 */
 	private String d_Result;
+	/**
+	 * Object of the Logger class
+	 */
 	private Logger d_Logger;
 
 	/**

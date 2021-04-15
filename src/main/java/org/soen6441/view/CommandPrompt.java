@@ -13,13 +13,37 @@ import javax.swing.text.DefaultCaret;
  *
  */
 public class CommandPrompt {
+	/**
+	 * Base frame for the commandprompt user interface
+	 */
 	private JFrame d_CommandPromptWindow;
+	/**
+	 * Panel upon which other ui components are put
+	 */
 	private JPanel d_CommandPromptPanel;
+	/**
+	 * TextField to take input
+	 */
 	private JTextField d_CommandInput;
+	/**
+	 * TextArea to show game acknowledgement
+	 */
 	private JTextArea d_CommandAcknowledgeArea;
+	/**
+	 * Command submit button
+	 */
 	private JButton d_CommandSendButton;
+	/**
+	 * Vertical and horizontal scroller for the window
+	 */
 	private JScrollPane d_AckAreaScrollPane;
+	/**
+	 * Font to be used in the window
+	 */
 	private Font d_Font;
+	/**
+	 * caret to be used in the window
+	 */
 	private DefaultCaret d_Caret;
 
 	/**

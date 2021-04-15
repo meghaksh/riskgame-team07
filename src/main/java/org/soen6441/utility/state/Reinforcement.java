@@ -7,7 +7,10 @@ import org.soen6441.view.CommandPrompt;
 *It returns invalid command for others which are not compatible with this phase 
 */
 public class Reinforcement extends Phase {
-		LogEntryBuffer d_Leb;
+	/**
+	 * object of LogEntryBuffer class to log in the logfile
+	 */	
+	LogEntryBuffer d_Leb;
 	/**
 	 * This is the constructor of Reinforcement class which initializes Game engine object and command prompt object and assigning log entry buffer
 	 * It then calls the assign reinforcement armies method and then displays all the assigned armies and territories

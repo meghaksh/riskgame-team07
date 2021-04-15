@@ -7,6 +7,9 @@ import org.soen6441.view.CommandPrompt;
  *It returns invalid command for others which are not compatible with this phase 
  */
 public class Startup extends Phase {
+	/**
+	 * object of LogEntryBuffer class to log in the logfile
+	 */
 	LogEntryBuffer d_Leb;
 	/**
 	 * This is the constructor of Startup which initializes Game engine object and command prompt object and assigning log entry buffer

@@ -7,6 +7,9 @@ import org.soen6441.controller.GameEngine;
  * This class is used to call the existing implementation of loadmap and savemap functionality of domination map type.
  */
 public class Target {
+	/**
+	 * GameEngine object to call the loadmap/savemap methods of domination type
+	 */
 	GameEngine d_GameEngine;
 	/**
 	 * Default constructor used for testing

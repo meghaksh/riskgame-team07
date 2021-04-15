@@ -7,8 +7,13 @@ import org.soen6441.controller.GameEngine;
  * We can use the adapter to call the method of adaptee by calling the methods used in target. 
  */
 public class Adapter extends Target {
-
+	/**
+	 * Object of the adaptee class to call the methods to load/save conquest files
+	 */
 	private Adaptee d_Adaptee; 
+	/**
+	 * GameEngine object 
+	 */
 	private GameEngine d_GameEngine;
 	/**
 	 * Constructor which bring the GameEngine object in the class

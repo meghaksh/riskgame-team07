@@ -6,6 +6,9 @@ import java.util.ArrayList;
  * Observable class which has methods to connect/disconnect with observers and notifies if there is any update. 
  */
 public class Observable {
+	/**
+	 * arraylist of ovservers which are going to be attached to this observable
+	 */
 	ArrayList<Observer> d_Observers= new ArrayList<Observer>();
 
 	/**

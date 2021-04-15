@@ -8,6 +8,9 @@ import org.soen6441.view.CommandPrompt;
  *It returns invalid command for others which are not compatible with this phase 
  */
 public class IssueOrder extends Phase {
+		/**
+		 * object of LogEntryBuffer class to log in the logfile
+		 */
 		LogEntryBuffer d_Leb;
 		
 		/**
