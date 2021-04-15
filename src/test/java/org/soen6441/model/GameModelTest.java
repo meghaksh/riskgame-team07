@@ -147,5 +147,17 @@ public class GameModelTest {
 		l_ActualValue=l_Actual.getAllPlayers().size();
 		assertEquals(l_Expected,l_ActualValue);
 	}
+	@Test 
+	public void testSaveLoadGameCountrycheck() throws Exception {
+		GameModelNew l_Actual = null;
+		int l_Expected=3;
+		int l_ActualValue=0;
+		d_Game.startUpPhase();
+		String l_ExpectedMessage="Countrysize is 0";
+		d_Game.saveGame("SaveTest.txt");
+		l_Actual=d_Game.loadGame("SaveTest.txt");
+		l_ActualValue=l_Actual.getSelectedMap().getCountryList().size();
+		assertEquals(l_Expected,l_ActualValue);
+	}
 	
 }
