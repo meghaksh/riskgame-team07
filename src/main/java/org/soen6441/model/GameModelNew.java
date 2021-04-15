@@ -202,7 +202,6 @@ public class GameModelNew implements Serializable {
 	 * <li>Then it will check for all the countries available in a map 
 	 * <li>It will run the loop until all the countries are assigned to players
 	 * <li>Now it will Randomly assign countries to all players and remove the assigned countries from the list
-	 * <li>Finally once the assigning countries to players is completed it will call AssignReinforcementArmies Method
 	 * </ul> 
 	 * @throws Exception if there are no players in the list
 	 *
@@ -307,7 +306,19 @@ public class GameModelNew implements Serializable {
 		}
 		return game;
 	}
-	public void tournamentstartUpPhase() throws Exception {
+	
+	/**
+	 * <p>
+	 * This Method is the startup Phase method for TournamentPhase
+	 * </p>
+	 * <ul>
+	 * <li>This Method will take all the players in a a list.</li>
+	 * <li>Then it will check for all the countries available in a map.</li> 
+	 * <li>It will run the loop until all the countries are assigned to players.</li>
+	 * <li>Now it will Randomly assign countries to all players and remove the assigned countries from the list.</li>
+	 * </ul> 
+	 */
+	public void tournamentstartUpPhase() {
 		List<Country> l_CountryList = (List<Country>) this.getSelectedMap().getCountryList().clone();	
 		int l_PlayerIndex = 0, l_PlayerCount = this.getAllPlayers().size();
 		ArrayList<Integer> l_TempList = new ArrayList<>();
