@@ -381,7 +381,7 @@ public class GameEngine  {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method calls the savegame method of GameModel to save the game during gameplay.
 	 * Once the game is saved, this method also sets it phase to GameSaved phase.  
@@ -392,6 +392,23 @@ public class GameEngine  {
 		this.setPhase(new GameSaved(this,d_CpView));
 	}
 
+
+
+	/**
+	 * This method implements tournament mode.
+	 * <ul>
+	 * <li> It takes the input string from the user and initializes variables. </li>
+	 * <li> Based on number of maps and number of games we will iterate the main tournament loop.</li>
+	 * <li> Based on number of player strategies we will create the players with respective strategies.</li>
+	 * <li> Now we will call the tournament startup phase to assign the countries to the players.<li>
+	 * <li> Iterate all the players starting with assign reinforcements, player issue order and player next order. </li>
+	 * <li> Now we will terminate the above loop in two cases : (i) if we have a winner (ii) If the number of turns are exceeded.</li>
+	 * <li> So once a game is completed we will clear the game model object and map object.</li>
+	 * <li> As the game is completed, we store the result in the hashmap.</li>
+	 * </ul>
+	 * @param p_InputString tournament command with list of maps, player strategies, number of games, number of turns
+	 * @throws Exception for addPlayer
+	 */
 	public void tournament(String p_InputString) throws Exception {
 
 		int l_M = 0, l_P = 0, l_G = 0, l_D = 0;
@@ -406,16 +423,14 @@ public class GameEngine  {
 			if(l_MapList.length>5||l_MapList.length<1) {
 				d_CpView.setCommandAcknowledgement("Number of Maps are not in range");//throw exception
 				d_LEB.setResult("Number of Maps are not in range");
-			}
-			else 
+			} else 
 				l_M=l_MapList.length;
 			for(int i=0;i<l_M;i++) {
 				File l_F = new File(l_Path+l_MapList[i]);
 				if (!l_F.exists()) {
 					d_CpView.setCommandAcknowledgement("File does not Exists");//throw exception
 					d_LEB.setResult("File does not Exists");
-				}
-				else
+				} else
 					l_Files.add(l_F);
 			}
 		}
@@ -424,8 +439,7 @@ public class GameEngine  {
 			if(l_PlayerStrategyList.length>4||l_PlayerStrategyList.length<2) {
 				d_CpView.setCommandAcknowledgement("Number of Player strategies are are not in range");//throw exception
 				d_LEB.setResult("Number of Player strategies are are not in range");
-			}
-			else {
+			} else {
 				l_P=l_PlayerStrategyList.length;
 			}
 		}
@@ -434,8 +448,7 @@ public class GameEngine  {
 			if(l_NumGames>5||l_NumGames<1) {
 				d_CpView.setCommandAcknowledgement("Number of Games are not in range");//throw exception
 				d_LEB.setResult("Number of Games are not in range");
-			}
-			else
+			} else
 				l_G=l_NumGames;
 		}
 		if(l_CommandArray[7].equals("-D")){
@@ -443,35 +456,31 @@ public class GameEngine  {
 			if(l_MaxTurns>50||l_MaxTurns<10) {
 				d_CpView.setCommandAcknowledgement("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");//throw exception
 				d_LEB.setResult("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");
-			}
-			else
+			} else
 				l_D=l_MaxTurns;
 		}
-		HashMap<String, ArrayList<String>> tournamentResult = new HashMap<>();
+		HashMap<String, ArrayList<String>> l_TournamentResult = new HashMap<>();
 
 		for (int i = 0; i < l_M; i++) {
 			d_CpView.setCommandAcknowledgement("\n=============================================\n");
 			d_CpView.setCommandAcknowledgement("\nMap number:"+(i+1)+"\n");
 			d_LEB.setResult("\n=============================================\n");
 			d_LEB.setResult("\nMap number:"+(i+1)+"\n");
-			ArrayList<String> result = new ArrayList<>();
-
+			ArrayList<String> l_Result = new ArrayList<>();
 
 			for (int j = 0; j < l_G; j++) {
-
 				d_GameModelNew.getMap().loadMap(l_MapList[i]);
 				d_CpView.setCommandAcknowledgement("\n=============================================\n");
 				d_CpView.setCommandAcknowledgement("\nGame number:"+(j+1)+"\n");
 				d_LEB.setResult("\n=============================================\n");
 				d_LEB.setResult("\nGame number:"+(j+1)+"\n");
-
 				
 				d_GameModelNew.getAllPlayers().clear();
-				
+
 				for(int k=0;k<l_P;k++) {
 					d_GameModelNew.addPlayer("Player"+(NUM++),l_PlayerStrategyList[k]);
 				}
-				
+
 				d_GameModelNew.tournamentstartUpPhase();
 				int l_Noofturns=0;
 				while(true)
@@ -480,7 +489,7 @@ public class GameEngine  {
 					this.getPlayerController().playerIssueOrder();
 					this.getPlayerController().playerNextOrder();
 					if(this.getPlayerController().getWinner()!=null) {
-						result.add(this.getPlayerController().getWinner().getPlayerStrategy().strategyName());
+						l_Result.add(this.getPlayerController().getWinner().getPlayerStrategy().strategyName());
 						d_CpView.setCommandAcknowledgement(this.getPlayerController().getWinner().getPlayerName()+"is the winner");
 						d_LEB.setResult(this.getPlayerController().getWinner().getPlayerName()+"is the winner");
 						d_GameModelNew.getMap().reset();
@@ -490,23 +499,32 @@ public class GameEngine  {
 					if(l_Noofturns == l_D) {
 						d_CpView.setCommandAcknowledgement("\nMatch is draw");
 						d_LEB.setResult("\nMatch is draw");
-						result.add("Draw");
+						l_Result.add("Draw");
 						d_GameModelNew.getAllPlayers().clear();
 						d_GameModelNew.getMap().reset();
 						break;
 					}
 					l_Noofturns++;
 				}
-				tournamentResult.put(l_MapList[i],result);
+				l_TournamentResult.put(l_MapList[i],l_Result);
 			}
 		}
-		printTournamentResult(l_M, l_G, l_D, tournamentResult, l_PlayerStrategyList);
+		printTournamentResult(l_M, l_G, l_D, l_TournamentResult, l_PlayerStrategyList);
 	}
 
+
+	/**
+	 * This method prints the tournament result for each individual map and each individual game.
+	 * @param p_M Number of maps
+	 * @param p_G Number of games
+	 * @param p_D Number of turns
+	 * @param p_tournamentResult Result of the tournament
+	 * @param p_PlayerStrategyList Player strategy list
+	 */
 	private void printTournamentResult(int p_M, int p_G, int p_D, HashMap<String, ArrayList<String>> p_tournamentResult,
 			String[] p_PlayerStrategyList) {
 
-		String[] mapStrings = p_tournamentResult.keySet().toArray(new String[p_tournamentResult.keySet().size()]);
+		String[] l_MapStrings = p_tournamentResult.keySet().toArray(new String[p_tournamentResult.keySet().size()]);
 		d_CpView.setCommandAcknowledgement("\n");
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n=============================================\n");
@@ -516,14 +534,14 @@ public class GameEngine  {
 		d_CpView.setCommandAcknowledgement("=============================================\n");
 		d_LEB.setResult("\n=============================================\n");
 		d_CpView.setCommandAcknowledgement("\n");
-		StringBuffer mapNameString = new StringBuffer();
-		for (int i = 0; i < mapStrings.length; i++) {
-			mapNameString.append(mapStrings[i]+ ",");
+		StringBuffer l_MapNameString = new StringBuffer();
+		for (int i = 0; i < l_MapStrings.length; i++) {
+			l_MapNameString.append(l_MapStrings[i]+ ",");
 		}
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n=============================================\n");
-		d_CpView.setCommandAcknowledgement("M:" + mapNameString);
-		d_LEB.setResult("M:" + mapNameString);
+		d_CpView.setCommandAcknowledgement("M:" + l_MapNameString);
+		d_LEB.setResult("M:" + l_MapNameString);
 		StringBuffer stratergiesNameString = new StringBuffer();
 		for (int i = 0; i < p_PlayerStrategyList.length; i++) {
 			stratergiesNameString.append(p_PlayerStrategyList[i] + ",");
@@ -538,52 +556,39 @@ public class GameEngine  {
 		d_LEB.setResult("\n");
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n");
-		StringBuilder sb = new StringBuilder();
-		sb.append("|");
-		sb.append(getFormattedString(" "));
+		StringBuilder l_StringBuilder = new StringBuilder();
+		l_StringBuilder.append("|");
+		l_StringBuilder.append(getFormattedString(" "));
 		for (int i = 0; i < p_G; i++) {
-			sb.append("|");
-			sb.append(getFormattedString("Game " + (i + 1)));
+			l_StringBuilder.append("|");
+			l_StringBuilder.append(getFormattedString("Game " + (i + 1)));
 		}
-		sb.append("|");
+		l_StringBuilder.append("|");
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n");
-		d_CpView.setCommandAcknowledgement(sb.toString());
-		d_LEB.setResult(sb.toString());
+		d_CpView.setCommandAcknowledgement(l_StringBuilder.toString());
+		d_LEB.setResult(l_StringBuilder.toString());
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n");
-		for (int i = 0; i < mapStrings.length; i++) {
+		for (int i = 0; i < l_MapStrings.length; i++) {
 
-			StringBuilder sbMap = new StringBuilder();
-			sbMap.append("|");
-			sbMap.append(getFormattedString(mapStrings[i]));
+			StringBuilder l_SbMap = new StringBuilder();
+			l_SbMap.append("|");
+			l_SbMap.append(getFormattedString(l_MapStrings[i]));
 
-			ArrayList<String> gameResults = p_tournamentResult.get(mapStrings[i]);
+			ArrayList<String> l_GameResults = p_tournamentResult.get(l_MapStrings[i]);
 			for (int j = 0; j < p_G; j++) {
-				sbMap.append("|");
-				sbMap.append(getFormattedString(gameResults.get(j)));
+				l_SbMap.append("|");
+				l_SbMap.append(getFormattedString(l_GameResults.get(j)));
 			}
 			d_CpView.setCommandAcknowledgement("\n");
-			sbMap.append("|");
-			d_CpView.setCommandAcknowledgement(sbMap.toString());
-			d_LEB.setResult(sbMap.toString());
-			
-			//d_CpView.setCommandAcknowledgement(getRepeatedFormattedString("-", sb.length()));
+			l_SbMap.append("|");
+			d_CpView.setCommandAcknowledgement(l_SbMap.toString());
+			d_LEB.setResult(l_SbMap.toString());
+
 		}
 	}
 
-	/**
-	 * This is a method to receive String in a specific format. 
-	 * @param p_Input input string which needs to be appended
-	 * @param p_Length lengthh of the input string
-	 * @return
-	 */
-	private String getRepeatedFormattedString(String p_Input, int p_Length) {
-		StringBuilder l_Str = new StringBuilder(p_Input);
-		for (int l_I = p_Input.length(); l_I <= p_Length - 1; l_I++)
-			l_Str.append(p_Input);
-		return l_Str.toString();
-	}
 
 	/**
 	 * This is a generic method to receive String in a specific format. 
