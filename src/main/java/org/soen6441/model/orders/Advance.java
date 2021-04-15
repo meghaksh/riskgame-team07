@@ -29,7 +29,11 @@ public class Advance implements Order {
 	/**
 	 * The sourceCountry of the attacking player and the targetCountry of the Defending Player.
 	 */
-	Country d_SourceCountry,d_TargetCountry;
+	Country d_SourceCountry;
+	/**
+	 * The sourceCountry of the attacking player and the targetCountry of the Defending Player.
+	 */
+	Country d_TargetCountry;
 	/**
 	 * The issuing or the attacking player.
 	 */
@@ -112,7 +116,7 @@ public class Advance implements Order {
 				d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Success!!");
 				return;
 			}
-			if(d_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.CheaterPlayerStrategy"))
+			if("org.soen6441.strategypattern.CheaterPlayerStrategy".equals(d_Player.getPlayerStrategy().toString().split("@")[0]))
 			{
 				d_TargetCountry.getCountryOwnerPlayer().removeCountry(d_TargetCountry);
 				d_TargetCountry.setCountryOwnerPlayer(d_Player);
@@ -174,7 +178,8 @@ public class Advance implements Order {
 				}
 				//now attack
 
-				int l_AttackWin=0,l_DefendWin=0;
+				int l_AttackWin=0;
+				int l_DefendWin=0;
 				for(int i=0;i<l_ReturnedHashMap.size();i++)
 				{
 					Map.Entry<Integer,Integer> l_EntryAttack = l_ItrAttacker.next(); 
@@ -240,6 +245,7 @@ public class Advance implements Order {
 			List<Entry<Integer, Integer>> list = new LinkedList<Entry<Integer, Integer>>(p_AttackerArmies.entrySet()); 
 			Collections.sort(list, new Comparator<Entry<Integer, Integer>>()   
 			{  
+				@Override
 				public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2)   
 				{   
 					return o2.getValue().compareTo(o1.getValue());  
@@ -266,6 +272,7 @@ public class Advance implements Order {
 			List<Entry<Integer, Integer>> list = new LinkedList<Entry<Integer, Integer>>(p_DefenderArmies.entrySet()); 
 			Collections.sort(list, new Comparator<Entry<Integer, Integer>>()   
 			{  
+				@Override
 				public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2)   
 				{   
 					return o2.getValue().compareTo(o1.getValue());  

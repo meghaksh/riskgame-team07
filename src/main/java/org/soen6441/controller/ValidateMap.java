@@ -1,7 +1,10 @@
 package org.soen6441.controller;
 
-import java.util.ArrayList;						import java.util.HashMap;						
-import org.soen6441.model.Continent;			import org.soen6441.model.Country;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.soen6441.model.Continent;
+import org.soen6441.model.Country;
 
 /**
  * This class checks the validity of the map by converting into a graph object. 
@@ -82,7 +85,8 @@ public class ValidateMap {
 	 * @return d_UpdatedMap Hashmap which contains the updated ID and their respective borders of each country 
 	 */
 	public HashMap<Integer,ArrayList<Integer>> updateCount(ArrayList<Country> p_CountryObjects ){
-		int l_Sequence=0,l_ID;
+		int l_Sequence=0;
+		int l_ID;
 		ArrayList<String>l_UpdatedNeighbors=new ArrayList<String>();
 		ArrayList<Country> l_NCountryObjects=p_CountryObjects;
 		HashMap<Integer,Integer> l_UpdatedIDCount=new HashMap<Integer,Integer>();
@@ -222,7 +226,7 @@ public class ValidateMap {
 			}
 			assignBorders(l_CountryMapForEachContinent);
 			String l_Return = isValid();
-			if(l_Return.equals("Map is not Valid")){
+			if("Map is not Valid".equals(l_Return)){
 				throw new Exception("The countries inside "+l_C.getContinentName()+" are not internally Connected");
 			}
 		}

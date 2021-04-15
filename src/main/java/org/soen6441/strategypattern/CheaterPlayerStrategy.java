@@ -102,7 +102,7 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		{
 		case 0: 
 			Country l_DefendCountry1 = toDefend();
-			d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1);
+			d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1.getCountryName());
 			l_returnOrder = new Deploy(d_Player,l_DefendCountry1,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
 			break;
 
@@ -110,12 +110,12 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 			ArrayList<Country> l_Countries = toAttack();
 			if(l_Countries.get(0).getNoOfArmies()>1)
 			{
-				d_Leb.setResult("in cheater defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1)+" with armies - "+(l_Countries.get(0).getNoOfArmies()-1));
+				d_Leb.setResult("in cheater defending country - "+l_Countries.get(0).getCountryName()+" Attacking country - "+l_Countries.get(1).getCountryName()+" with armies - "+(l_Countries.get(0).getNoOfArmies()-1));
 				l_returnOrder =  new Advance(d_Player,l_Countries.get(0),l_Countries.get(1),l_Countries.get(0).getNoOfArmies()-1);
 			}
 			else
 			{
-				d_Leb.setResult("in cheater the armies are deployed to -" +l_Countries.get(0));
+				d_Leb.setResult("in cheater the armies are deployed to -" +l_Countries.get(0).getCountryName());
 				l_returnOrder = new Deploy(d_Player,l_Countries.get(0),Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
 			}
 

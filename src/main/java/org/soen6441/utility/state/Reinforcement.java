@@ -1,6 +1,7 @@
 package org.soen6441.utility.state;
 
-import org.soen6441.controller.GameEngine;				import org.soen6441.observerpattern.*;
+import org.soen6441.controller.GameEngine;
+import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 /**
 *The Reinforcement Phase extends the phase class and implements all the methods suitable for that particular phase.
@@ -25,7 +26,7 @@ public class Reinforcement extends Phase {
 			d_Ge.getGameModel().assignReinforcementArmies();
 			}catch(Exception e){
 			d_Vw.setCommandAcknowledgement(e.getMessage()+"\n");
-			d_Leb.setResult(e.getMessage().toString());
+			d_Leb.setResult(e.getMessage());
 			}
 		
 		d_Ge.setPhase(new IssueOrder(d_Ge,d_Vw));

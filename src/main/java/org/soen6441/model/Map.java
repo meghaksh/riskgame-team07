@@ -78,8 +78,10 @@ public class Map implements Serializable {
 	 */
 	public String loadMap(String p_FileName) throws Exception {
 		reset();
-		String l_Path="resource\\",l_Result;
-		int l_ControlValue,l_ContinentID=1;
+		String l_Path="resource\\";
+		String l_Result;
+		int l_ControlValue;
+		int l_ContinentID=1;
 		File l_File =new File(l_Path+p_FileName);
 		Scanner l_Sc = new Scanner(l_File);
 		while(l_Sc.hasNextLine()){
@@ -87,7 +89,7 @@ public class Map implements Serializable {
 			//searching for the continent keyword in file and loading all continents into continent object list
 			if(l_Line.contains("continent")){	
 				l_Line=l_Sc.nextLine();
-				while(!l_Line.equals("") && l_Sc.hasNextLine()){
+				while(!"".equals(l_Line) && l_Sc.hasNextLine()){
 					String[] l_Arr = l_Line.split(" ", 3);
 					l_ControlValue=Integer.parseInt(l_Arr[1]);
 					this.d_ContinentObjects.add(new Continent(l_Arr[0],l_ControlValue));
@@ -97,7 +99,7 @@ public class Map implements Serializable {
 			//searching for countries keyword and loading all countries from file to map's country object list
 			if(l_Line.contains("countries")){
 				l_Line=l_Sc.nextLine();
-				while(!l_Line.equals("") && l_Sc.hasNextLine()){
+				while(!"".equals(l_Line) && l_Sc.hasNextLine()){
 					String[] l_Arr1=l_Line.split(" ",4);
 					l_ContinentID=Integer.parseInt(l_Arr1[2]);
 					String l_NeighborName="";
@@ -118,7 +120,7 @@ public class Map implements Serializable {
 			}
 			//searching for borders keyword and loading all neighbors from file to map's country object list
 			if(l_Line.contains("borders")){
-				while(!l_Line.equals("") && l_Sc.hasNextLine()){
+				while(!"".equals(l_Line) && l_Sc.hasNextLine()){
 					l_Line=l_Sc.nextLine();
 					String[] l_Arr2=l_Line.split(" ");
 					for(Country l_Tempcountry: this.d_CountryObjects){
@@ -140,7 +142,7 @@ public class Map implements Serializable {
 		}
 		l_Sc.close();
 		String l_Result1=validateMap();
-		if(l_Result1.equals("Map is not Valid")){
+		if("Map is not Valid".equals(l_Result1)){
 			reset();
 			return l_Result1;
 		}
@@ -155,7 +157,7 @@ public class Map implements Serializable {
 	 */
 	public String saveMap(String p_FileName) throws Exception{
 		String l_Result=validateMap();
-		if(l_Result.equals("Map is not Valid")){
+		if("Map is not Valid".equals(l_Result)){
 			return l_Result;
 		}
 		String l_Path="resource\\";
@@ -225,7 +227,7 @@ public class Map implements Serializable {
 	 */
 	public void addContinent(String p_ContinentName, String p_ContinentControlValue) throws Exception {
 
-		if(p_ContinentControlValue.equals("0")){
+		if("0".equals(p_ContinentControlValue)){
 			throw new Exception("Continent control value cannot be 0");
 		}
 		for(Continent l_Contient:this.d_ContinentObjects) {
@@ -325,7 +327,7 @@ public class Map implements Serializable {
 					ArrayList<String> l_CountryNeighbors = l_Country.getBorder();
 					Iterator<String> l_NeighborIterator = l_CountryNeighbors.iterator();
 					while(l_NeighborIterator.hasNext()) {
-						String l_NeighborName = l_NeighborIterator.next().toString();
+						String l_NeighborName = l_NeighborIterator.next();
 						if(l_NeighborName.equalsIgnoreCase(p_CountryName)) {
 							l_NeighborIterator.remove();
 						}
@@ -401,10 +403,8 @@ public class Map implements Serializable {
 			throw new Exception("Country does not exists!");
 		}
 		for(Country l_C: this.getCountryList()) {
-			if(l_C.getCountryName().equals(p_CountryName)) {
-				if(l_C.getBorder().contains(p_NeighborName)) {
-					throw new Exception("Neighbor Already Exist");
-				}
+			if(l_C.getCountryName().equals(p_CountryName) && l_C.getBorder().contains(p_NeighborName)) {
+				throw new Exception("Neighbor Already Exist");
 			}
 		}
 		int l_NeighborId=0;
@@ -432,7 +432,8 @@ public class Map implements Serializable {
 	public void removeBorder(String p_CountryName, String p_NeighbourName) throws Exception {
 		int l_NeighborId=0;
 		int l_CountryId=0;
-		int l_Flag=0,l_Flag1=0;
+		int l_Flag=0;
+		int l_Flag1=0;
 		for(Country l_C : this.getCountryList()) {
 			if(l_C.getCountryName().equals(p_CountryName)) {
 				l_Flag=1;break;

@@ -1,6 +1,7 @@
 package org.soen6441.model.orders;
 
-import org.soen6441.model.Country;			import org.soen6441.model.Order;
+import org.soen6441.model.Country;
+import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 
 /**
@@ -15,7 +16,11 @@ public class Airlift implements Order {
 	/**
 	 * The Source Country from which the armies are to be moved to the target country.
 	 */
-	Country d_SourceCountry,d_TargetCountry;
+	Country d_SourceCountry;
+	/**
+	 * The Source Country from which the armies are to be moved to the target country.
+	 */
+	Country d_TargetCountry;
 	/**
 	 * The number of armies to be moved.
 	 */

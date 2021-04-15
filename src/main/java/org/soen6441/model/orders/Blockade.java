@@ -1,7 +1,10 @@
 package org.soen6441.model.orders;
 
-import java.util.Iterator;						import org.soen6441.model.Country;
-import org.soen6441.model.GameModelNew;			import org.soen6441.model.Order;
+import java.util.Iterator;
+
+import org.soen6441.model.Country;
+import org.soen6441.model.GameModelNew;
+import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 
 /**
@@ -44,7 +47,7 @@ public class Blockade implements Order {
 			d_Country.setNoOfArmies(d_Country.getNoOfArmies()*3);
 			getPlayer().getCountryList().remove(d_Country);
 			for(Player l_Player : d_GameObj.getAllPlayers()) {
-				if(l_Player.getPlayerName().equals("Neutral Player")) {
+				if("Neutral Player".equals(l_Player.getPlayerName())) {
 					d_Country.setCountryOwnerPlayer(l_Player);
 					l_Player.setPlayerArmies(l_Player.getPlayerArmies()+d_Country.getNoOfArmies());
 					l_Player.addCountry(d_Country);

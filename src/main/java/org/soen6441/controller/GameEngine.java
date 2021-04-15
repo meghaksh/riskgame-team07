@@ -1,23 +1,23 @@
 package org.soen6441.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import org.soen6441.view.CommandPrompt;
-
-
-import java.awt.event.ActionEvent;				import java.awt.event.ActionListener;
-import java.io.File;
-
-import org.soen6441.model.Continent;			import org.soen6441.model.Country;
-import org.soen6441.model.GameModelNew;			import org.soen6441.model.Player;
-import org.soen6441.observerpattern.LogEntryBuffer;	import org.soen6441.utility.state.Startup;
+import org.soen6441.model.Continent;
+import org.soen6441.model.Country;
+import org.soen6441.model.GameModelNew;
+import org.soen6441.model.Player;
+import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.utility.state.Edit;
-import org.soen6441.utility.state.Phase;
-import org.soen6441.utility.state.IssueOrder;
 import org.soen6441.utility.state.GameSaved;
+import org.soen6441.utility.state.IssueOrder;
+import org.soen6441.utility.state.Phase;
+import org.soen6441.utility.state.Startup;
+import org.soen6441.view.CommandPrompt;
 
 /**
  * This is the main controller class of MVC model. 
@@ -303,7 +303,7 @@ public class GameEngine  {
 	 * @param p_GamePhase takes the phase object and shows the map accordingly
 	 */
 	public void showMap(Phase p_GamePhase) {
-		if(!p_GamePhase.getClass().getSimpleName().equals("Edit")) {
+		if(!"Edit".equals(p_GamePhase.getClass().getSimpleName())) {
 			d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
 			d_PlayerList = d_GameModelNew.getAllPlayers();
 			ArrayList<Continent> l_ContinentList = d_GameModelNew.getMap().getContinentList();
@@ -439,14 +439,17 @@ public class GameEngine  {
 	 */
 	public void tournament(String p_InputString) throws Exception {
 
-		int l_M = 0, l_P = 0, l_G = 0, l_D = 0;
+		int l_M = 0;
+		int l_P = 0;
+		int l_G = 0;
+		int l_D = 0;
 		String[] l_MapList = null;
 		String[] l_PlayerStrategyList=null;
 		ArrayList<Map> l_Maps=new ArrayList<Map>();
 		ArrayList<File> l_Files=new ArrayList<File>();
 		String l_Path="resource\\";
 		String[] l_CommandArray = p_InputString.split(" ");
-		if(l_CommandArray[1].equals("-M")){
+		if("-M".equals(l_CommandArray[1])){
 			l_MapList=l_CommandArray[2].split(",");
 			if(l_MapList.length>5||l_MapList.length<1) {
 				d_LEB.setResult("Number of Maps should be in between 1 to 5 both inclusive");
@@ -464,7 +467,7 @@ public class GameEngine  {
 					l_Files.add(l_F);
 			}
 		}
-		if(l_CommandArray[3].equals("-P")){
+		if("-P".equals(l_CommandArray[3])){
 			l_PlayerStrategyList=l_CommandArray[4].split(",");
 			if(l_PlayerStrategyList.length>4||l_PlayerStrategyList.length<2) {
 				d_LEB.setResult("Number of Player strategies should be in between 2 to 4 both inclusive");
@@ -474,7 +477,7 @@ public class GameEngine  {
 				l_P=l_PlayerStrategyList.length;
 			}
 		}
-		if(l_CommandArray[5].equals("-G")){
+		if("-G".equals(l_CommandArray[5])){
 			int l_NumGames=Integer.parseInt(l_CommandArray[6]);
 			if(l_NumGames>5||l_NumGames<1) {
 				d_LEB.setResult("Number of Games should be in between 1 to 5 both inclusive");
@@ -483,7 +486,7 @@ public class GameEngine  {
 			} else
 				l_G=l_NumGames;
 		}
-		if(l_CommandArray[7].equals("-D")){
+		if("-D".equals(l_CommandArray[7])){
 			int l_MaxTurns=Integer.parseInt(l_CommandArray[8]);
 			if(l_MaxTurns>50||l_MaxTurns<10) {
 				d_LEB.setResult("Number of turns should be in between 10 to 50 both inclusive");
@@ -568,16 +571,16 @@ public class GameEngine  {
 		d_LEB.setResult("\n=============================================\n");
 		d_CpView.setCommandAcknowledgement("\n");
 		StringBuffer l_MapNameString = new StringBuffer();
-		for (int i = 0; i < l_MapStrings.length; i++) {
-			l_MapNameString.append(l_MapStrings[i]+ ",");
+		for (String l_MapString : l_MapStrings) {
+			l_MapNameString.append(l_MapString+ ",");
 		}
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n=============================================\n");
 		d_CpView.setCommandAcknowledgement("M:" + l_MapNameString);
 		d_LEB.setResult("M:" + l_MapNameString);
 		StringBuffer stratergiesNameString = new StringBuffer();
-		for (int i = 0; i < p_PlayerStrategyList.length; i++) {
-			stratergiesNameString.append(p_PlayerStrategyList[i] + ",");
+		for (String aP_PlayerStrategyList : p_PlayerStrategyList) {
+			stratergiesNameString.append(aP_PlayerStrategyList + ",");
 		}
 		d_CpView.setCommandAcknowledgement("P:" + stratergiesNameString);
 		d_LEB.setResult("P:" + stratergiesNameString);
@@ -603,13 +606,13 @@ public class GameEngine  {
 		d_LEB.setResult(l_StringBuilder.toString());
 		d_CpView.setCommandAcknowledgement("\n");
 		d_LEB.setResult("\n");
-		for (int i = 0; i < l_MapStrings.length; i++) {
+		for (String l_MapString : l_MapStrings) {
 
 			StringBuilder l_SbMap = new StringBuilder();
 			l_SbMap.append("|");
-			l_SbMap.append(getFormattedString(l_MapStrings[i]));
+			l_SbMap.append(getFormattedString(l_MapString));
 
-			ArrayList<String> l_GameResults = p_tournamentResult.get(l_MapStrings[i]);
+			ArrayList<String> l_GameResults = p_tournamentResult.get(l_MapString);
 			for (int j = 0; j < p_G; j++) {
 				l_SbMap.append("|");
 				l_SbMap.append(getFormattedString(l_GameResults.get(j)));

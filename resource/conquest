@@ -1,0 +1,11 @@
+
+[Continents]
+mercury=4
+venus=4
+earth=4
+
+[Territories]
+terr1,0,0,mercury,terr2
+terr2,0,0,venus,terr3
+terr3,0,0,earth,terr1
+

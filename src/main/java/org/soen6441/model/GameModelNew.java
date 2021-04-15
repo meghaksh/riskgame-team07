@@ -277,7 +277,7 @@ public class GameModelNew implements Serializable {
 	
 		if(getAllPlayers().size()>0) {
 			for (Player l_Player : getAllPlayers()) {
-				if(!l_Player.getPlayerName().equals("Neutral Player")) { 
+				if(!"Neutral Player".equals(l_Player.getPlayerName())) { 
 					int l_ArmyCount = ((l_Player.getCountriesSize())/3);
 					for(Continent l_Continent:l_Player.getContinentList()) {
 						l_ContinentValue =  l_Continent.getContinentControlValue();
@@ -299,12 +299,9 @@ public class GameModelNew implements Serializable {
 	public  void saveGame(String p_FileName) {
 		String l_File = p_FileName;
 		System.out.println(p_FileName);
-		try {
-			FileOutputStream fileOut = new FileOutputStream("savedgames\\" + l_File);
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		try (FileOutputStream fileOut = new FileOutputStream("savedgames\\" + l_File);
+				ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 			out.writeObject(this);
-			out.close();
-			fileOut.close();
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
@@ -318,12 +315,9 @@ public class GameModelNew implements Serializable {
 	 */
 	public static GameModelNew loadGame(String p_FileName) {
 		GameModelNew game = null;
-		try {
-			FileInputStream fileIn = new FileInputStream("savedgames\\" + p_FileName);
-			ObjectInputStream in = new ObjectInputStream(fileIn);
+		try (FileInputStream fileIn = new FileInputStream("savedgames\\" + p_FileName);
+				ObjectInputStream in = new ObjectInputStream(fileIn)) {
 			game = (GameModelNew) in.readObject();
-			in.close();
-			fileIn.close();
 		} catch (IOException i) {
 			return null;
 		} catch (ClassNotFoundException c) {
@@ -345,7 +339,8 @@ public class GameModelNew implements Serializable {
 	 */
 	public void tournamentstartUpPhase() {
 		List<Country> l_CountryList = (List<Country>) this.getSelectedMap().getCountryList().clone();	
-		int l_PlayerIndex = 0, l_PlayerCount = this.getAllPlayers().size();
+		int l_PlayerIndex = 0;
+		int l_PlayerCount = this.getAllPlayers().size();
 		ArrayList<Integer> l_TempList = new ArrayList<>();
 		ArrayList<Player> l_playerList= this.getAllPlayers();
 		// Here creating the list with indexes

@@ -19,14 +19,13 @@ public class Logger implements Observer,Serializable {
 	/**
 	 * This method will internally update the Log file on each notification from observable.
 	 */
+	@Override
 	public void update(Observable p_Observable){
 		String l_Updated= ((LogEntryBuffer) p_Observable).getResult();
 		String l_Path="resource\\LogFile";
 		if(D_Count==0){
-			try{
-				PrintWriter l_PrintWriter = new PrintWriter(l_Path);
+			try (PrintWriter l_PrintWriter = new PrintWriter(l_Path)){
 				l_PrintWriter.println("");
-				l_PrintWriter.close();
 				D_Count++;
 
 			}catch(Exception l_Exp ){}

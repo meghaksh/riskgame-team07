@@ -1,6 +1,7 @@
 package org.soen6441.model.orders;
 
-import org.soen6441.model.Country;			import org.soen6441.model.Order;
+import org.soen6441.model.Country;
+import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 
 /**

@@ -1,6 +1,7 @@
 package org.soen6441.utility.state;
 
-import org.soen6441.controller.GameEngine;               import org.soen6441.view.CommandPrompt;
+import org.soen6441.controller.GameEngine;
+import org.soen6441.view.CommandPrompt;
 /**
  * The phase class is an abstract class which has all the methods representing the commands in the game.
  * There are different phases in the game which will be extending the methods of phase class.

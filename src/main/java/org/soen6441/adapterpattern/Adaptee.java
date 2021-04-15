@@ -31,7 +31,7 @@ public class Adaptee {
 				String l_Line=l_Sc.nextLine();
 				if(l_Line.contains("Continents")){	
 					l_Line=l_Sc.nextLine();
-					while(!l_Line.equals("") && l_Sc.hasNextLine()){
+					while(!"".equals(l_Line) && l_Sc.hasNextLine()){
 						String[] l_Arr = l_Line.split("=", 2);
 						p_GameEngine.getGameModel().getMap().addContinent(l_Arr[0],l_Arr[1]);
 						l_Line=l_Sc.nextLine();
@@ -39,7 +39,7 @@ public class Adaptee {
 				}
 				if(l_Line.contains("Territories")){
 					l_Line=l_Sc.nextLine();
-					while(!l_Line.equals("") && l_Sc.hasNextLine()){
+					while(!"".equals(l_Line) && l_Sc.hasNextLine()){
 						String[] l_Arr1=l_Line.split(",");
 						p_GameEngine.getGameModel().getMap().addCountry(l_Arr1[0], l_Arr1[3]);
 						l_Line=l_Sc.nextLine();
@@ -52,7 +52,7 @@ public class Adaptee {
 				String l_Line=l_Sc2.nextLine();
 				if(l_Line.contains("Territories")){
 					l_Line=l_Sc2.nextLine();
-					while(!l_Line.equals("") && l_Sc2.hasNextLine()){
+					while(!"".equals(l_Line) && l_Sc2.hasNextLine()){
 						String[] l_Arr1=l_Line.split(",");
 						for(int l_K=4;l_K<l_Arr1.length;l_K++){
 							p_GameEngine.getGameModel().getMap().addBorder(l_Arr1[0], l_Arr1[l_K]);
@@ -64,7 +64,7 @@ public class Adaptee {
 			l_Sc.close();
 			l_Sc2.close();
 			String l_Result1=p_GameEngine.getGameModel().getMap().validateMap();
-			if(l_Result1.equals("Map is not Valid")){
+			if("Map is not Valid".equals(l_Result1)){
 				p_GameEngine.getGameModel().getMap().reset();
 				return l_Result1;
 			}
@@ -82,7 +82,7 @@ public class Adaptee {
 	public String saveConquestMap(String p_S,GameEngine p_GameEngine) {
 		try {
 			String l_Result=p_GameEngine.getGameModel().getMap().validateMap();
-			if(l_Result.equals("Map is not Valid")){
+			if("Map is not Valid".equals(l_Result)){
 				return l_Result;
 			}
 			System.out.println("reached");

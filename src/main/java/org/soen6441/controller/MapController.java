@@ -43,7 +43,7 @@ public class MapController {
 	 */
 	public String loadMap(String p_Str)throws Exception{
 		String[] l_CommandArray = p_Str.split(" ");
-		if(l_CommandArray[0].equals("editmap")) {
+		if("editmap".equals(l_CommandArray[0])) {
 			String l_Result=d_MapModel.loadMap(l_CommandArray[1]);
 			l_Result=l_Result+"\n"+" You Can Now Edit IT";
 			return l_Result;
@@ -105,7 +105,7 @@ public class MapController {
 		if(l_CommandArray.length<=1)
 			throw new Exception("Please enter valid Parameters!");
 		while(l_Counter<l_CommandArray.length) {
-			if(l_CommandArray[l_Counter].equals("-add")) {
+			if("-add".equals(l_CommandArray[l_Counter])) {
 				switch(p_Command) {
 				case "editcontinent":
 					if(l_CommandArray.length<3) {
@@ -137,7 +137,7 @@ public class MapController {
 
 				}
 
-			}else if(l_CommandArray[l_Counter].equals("-remove")) {
+			}else if("-remove".equals(l_CommandArray[l_Counter])) {
 				switch(p_Command) {
 				case "editcontinent":
 					if(l_CommandArray.length<3) {

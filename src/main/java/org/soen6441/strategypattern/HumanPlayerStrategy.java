@@ -109,7 +109,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 		String l_StringOrder = JOptionPane.showInputDialog(d_Player.getPlayerName()+" : Please Enter Your Order");
 		d_decreasePlayerListSize = false;
 		System.out.println("in human player createorder");
-		if(l_StringOrder.equalsIgnoreCase("quit"))
+		if("quit".equalsIgnoreCase(l_StringOrder))
 		{
 			System.out.println("in human player the command is quit");
 			d_CheckArmies.put(d_Player, true);
@@ -148,7 +148,8 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 					break;
 				}
 				int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
-				Country l_SourceCountry = null, l_TargetCountry = null;
+				Country l_SourceCountry = null;
+				Country l_TargetCountry = null;
 				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
@@ -201,7 +202,8 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 					break;
 				}
 				int l_NumArmies2 = Integer.parseInt(l_StringList[3]);
-				Country l_SourceCountry1 = null, l_TargetCountry1 = null;
+				Country l_SourceCountry1 = null;
+				Country l_TargetCountry1 = null;
 
 				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
 				{
@@ -244,18 +246,11 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 				d_Leb.setResult("Saving the current Game");
 				d_Player.setSaveGame(true);
 				return null;
-
-
-
 			default:
 				break;
-
 			}
-
-
 		}
 		return null;
-
 	}
 	/**
 	 * This is an overridden method to provide the strategy of the player.

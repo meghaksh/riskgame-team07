@@ -29,7 +29,7 @@ public class ExecuteOrder extends Phase {
 				d_Ge.setPhase(new GameOver(p_Ge,p_Vw));
 				p_Vw.setCommandAcknowledgement("The game has reached maximum number of rounds - 20. Hence it is a Draw!");
 			}
-		if(!d_Ge.getPhase().getPhaseName().equals("GameOver")) {
+		if(!"GameOver".equals(d_Ge.getPhase().getPhaseName())) {
 			d_Ge.setPhase(new Reinforcement(d_Ge,d_Vw));
 			
 		}

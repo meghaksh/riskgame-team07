@@ -129,7 +129,7 @@ public class Country implements Serializable{
 	public void removeBorder(String p_Border) {
 		Iterator<String>l_Iterator = this.d_Neighbors.iterator();
 		while(l_Iterator.hasNext()) {
-			if(l_Iterator.next().toString().equals(p_Border)) {
+			if(l_Iterator.next().equals(p_Border)) {
 				l_Iterator.remove();
 			}
 		}

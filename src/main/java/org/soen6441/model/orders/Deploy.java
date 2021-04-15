@@ -1,7 +1,10 @@
 package org.soen6441.model.orders;
 
-import java.util.Iterator;			import org.soen6441.model.Country;
-import org.soen6441.model.Order;	import org.soen6441.model.Player;
+import java.util.Iterator;
+
+import org.soen6441.model.Country;
+import org.soen6441.model.Order;
+import org.soen6441.model.Player;
 
 /**
  * Deploy class implements the Order interface and overrides the execute method.

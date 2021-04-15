@@ -1,0 +1,15 @@
+
+continents
+mercury 4
+venus 4
+earth 4
+
+countries
+1 terr1 1
+2 terr2 2
+3 terr3 3
+
+borders
+1 2 
+2 3 
+3 1 

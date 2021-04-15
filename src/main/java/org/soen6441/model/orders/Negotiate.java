@@ -1,6 +1,7 @@
 package org.soen6441.model.orders;
 
-import org.soen6441.model.Order;		import org.soen6441.model.Player;
+import org.soen6441.model.Order;
+import org.soen6441.model.Player;
 
 /**
  *	Negotiate class implements the Order interface and overrides the execute method. 
@@ -11,7 +12,11 @@ public class Negotiate implements Order {
 	/**
 	 * The source player is the negotiate order issuing player, the target player is the player with whom the deal is struck.
 	 */
-	Player d_SourcePlayer,d_TargetPlayer;
+	Player d_SourcePlayer;
+	/**
+	 * The source player is the negotiate order issuing player, the target player is the player with whom the deal is struck.
+	 */
+	Player d_TargetPlayer;
 
 	/**
 	 * Constructor of the Negotiate class which is called when object is created. 

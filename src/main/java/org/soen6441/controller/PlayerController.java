@@ -109,7 +109,8 @@ public class PlayerController {
 		ArrayList <Player> l_Players = d_GameEngine.getGameModel().getAllPlayers();
 		HashMap <Player,Boolean> l_CheckArmies = new HashMap<>();
 		boolean l_decreasePlayerListSize = false;
-		int l_HumanCounter = 0,l_QuitHumanCounter = 0;
+		int l_HumanCounter = 0;
+		int l_QuitHumanCounter = 0;
 		for(Player l_TempPlayer:l_Players) {
 			l_CheckArmies.put(l_TempPlayer,false);
 		}
@@ -117,13 +118,10 @@ public class PlayerController {
 		for(Player l_TempPlayer : l_Players)
 		{
 			System.out.println("inside human checking for loop");
-			if(!l_TempPlayer.getPlayerName().equals("Neutral Player"))
-			{
-					if(l_TempPlayer.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
-					{
-						System.out.println("the player is a human player");
-						l_HumanCounter++;
-					}
+			boolean condition = !"Neutral Player".equals(l_TempPlayer.getPlayerName()) && "org.soen6441.strategypattern.HumanPlayerStrategy".equals(l_TempPlayer.getPlayerStrategy().toString().split("@")[0]);
+			if(condition) {
+				System.out.println("the player is a human player");
+				l_HumanCounter++;
 			}
 					System.out.println("outside if condition of human for loop");
 		}
@@ -141,17 +139,17 @@ public class PlayerController {
 				System.out.println("in player controller player startegy - "+l_Player.getPlayerStrategy());
 				
 				
-				if(!l_Player.getPlayerName().equals("Neutral Player")){
+				if(!"Neutral Player".equals(l_Player.getPlayerName())){
 					
 					System.out.println("in player controller - "+l_Player.getPlayerStrategy().toString().split("@")[0]);
-					if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
+					if("org.soen6441.strategypattern.HumanPlayerStrategy".equals(l_Player.getPlayerStrategy().toString().split("@")[0]))
 					{
 						System.out.println("in player controller before issue order checkarmies-"+l_CheckArmies);
 						((HumanPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
 						l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
 
 					}
-					else if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.RandomPlayerStrategy"))
+					else if("org.soen6441.strategypattern.RandomPlayerStrategy".equals(l_Player.getPlayerStrategy().toString().split("@")[0]))
 					{
 						System.out.println("in player controller before issue order checkarmies-"+l_CheckArmies);
 						((RandomPlayerStrategy)l_Player.getPlayerStrategy()).setCheckArmies(l_CheckArmies);
@@ -170,7 +168,7 @@ public class PlayerController {
 								this.d_SaveGame=true;
 								break outerloop;
 							}
-							if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.HumanPlayerStrategy"))
+							if("org.soen6441.strategypattern.HumanPlayerStrategy".equals(l_Player.getPlayerStrategy().toString().split("@")[0]))
 							{
 								l_decreasePlayerListSize= ((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
 								l_CheckArmies = (HashMap<Player,Boolean>)((HumanPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
@@ -179,7 +177,7 @@ public class PlayerController {
 								{l_QuitHumanCounter++;}
 								
 							}
-							else if(l_Player.getPlayerStrategy().toString().split("@")[0].equals("org.soen6441.strategypattern.RandomPlayerStrategy"))
+							else if("org.soen6441.strategypattern.RandomPlayerStrategy".equals(l_Player.getPlayerStrategy().toString().split("@")[0]))
 							{
 								l_decreasePlayerListSize= ((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getDecreasePlayerListSize();
 								l_CheckArmies = (HashMap<Player,Boolean>)((RandomPlayerStrategy)l_Player.getPlayerStrategy()).getCheckArmies();
@@ -220,11 +218,11 @@ public class PlayerController {
 		if(l_CommandArray.length < 3)
 			throw new Exception("Please provide valid Parameters to add player");
 		while(l_Counter<l_CommandArray.length) {
-			if(l_CommandArray[l_Counter].equals("-add")) {
+			if("-add".equals(l_CommandArray[l_Counter])) {
 				d_GameEngine.getGameModel().addPlayer(l_CommandArray[l_Counter+1],l_CommandArray[l_Counter+2]);
 				l_Counter+=3;
 				l_AddCounter+=1;
-			} else if(l_CommandArray[l_Counter].equals("-remove")){
+			} else if("-remove".equals(l_CommandArray[l_Counter])){
 				d_GameEngine.getGameModel().removePlayer(l_CommandArray[l_Counter+1]);
 
 				l_Counter+=2;
@@ -260,7 +258,7 @@ public class PlayerController {
 				Player l_Player = (Player)l_It.next(); 
 				if(l_Player.getOrderSize()!=0) {
 					Order l_Order = l_Player.next_order();
-					if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Deploy")) {
+					if("org.soen6441.model.orders.Deploy".equals(l_Order.getClass().getName())) {
 						Deploy l_DeployOrder = (Deploy) l_Order;
 						l_DeployOrder.execute();
 						String l_Result = l_Player.getResult();
@@ -268,7 +266,7 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
-					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Advance")) {
+					else if("org.soen6441.model.orders.Advance".equals(l_Order.getClass().getName())) {
 						Advance l_AdvanceOrder = (Advance) l_Order;
 						l_AdvanceOrder.execute();
 						String l_Result = l_Player.getResult();
@@ -276,7 +274,7 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
-					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Blockade")) {
+					else if("org.soen6441.model.orders.Blockade".equals(l_Order.getClass().getName())) {
 						Blockade l_BlockadeOrder = (Blockade) l_Order;
 						l_BlockadeOrder.execute();
 						String l_Result = l_Player.getResult();
@@ -284,7 +282,7 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
-					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Bomb")) {
+					else if("org.soen6441.model.orders.Bomb".equals(l_Order.getClass().getName())) {
 						Bomb l_BombOrder = (Bomb) l_Order;
 						l_BombOrder.execute();
 						String l_Result = l_Player.getResult();
@@ -292,7 +290,7 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
-					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Airlift")) {
+					else if("org.soen6441.model.orders.Airlift".equals(l_Order.getClass().getName())) {
 						Airlift l_AirliftOrder = (Airlift) l_Order;
 						l_AirliftOrder.execute();
 						String l_Result = l_Player.getResult();
@@ -300,7 +298,7 @@ public class PlayerController {
 						d_CpView.setCommandAcknowledgement(d_OrderAcknowledgment);
 						d_LEB.setResult(d_OrderAcknowledgment);
 					}
-					else if(l_Order.getClass().getName().equals("org.soen6441.model.orders.Negotiate")) {
+					else if("org.soen6441.model.orders.Negotiate".equals(l_Order.getClass().getName())) {
 						Negotiate l_NegotiateOrder = (Negotiate) l_Order;
 						l_NegotiateOrder.execute();
 						String l_Result = l_Player.getResult();
@@ -344,7 +342,7 @@ public class PlayerController {
 		Iterator<Player> l_PlayerIterator = d_GameEngine.getGameModel().getAllPlayers().iterator();
 		while(l_PlayerIterator.hasNext()) {
 			Player l_TempPlayer = (Player)l_PlayerIterator.next();
-			if(l_TempPlayer.getCountriesSize()<=0 && !l_TempPlayer.getPlayerName().equals("Neutral Player")) {
+			if(l_TempPlayer.getCountriesSize()<=0 && !"Neutral Player".equals(l_TempPlayer.getPlayerName())) {
 				l_PlayerIterator.remove();
 			}
 		}

@@ -65,6 +65,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 		System.out.println("int benevolent treemap is "+l_PlayerCountryMap);
 		List<Entry<Country, Integer>> l_List = new LinkedList<Entry<Country, Integer>>(l_PlayerCountryMap.entrySet()); 
 		Collections.sort(l_List, new Comparator<Entry<Country, Integer>>(){  
+			@Override
 			public int compare(Entry<Country, Integer> l_O1, Entry<Country, Integer> l_O2)   
 			{   
 				return l_O1.getValue().compareTo(l_O2.getValue());  
@@ -97,7 +98,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 		// TODO Auto-generated method stub
 		Order l_ReturnOrder=null;
 		Country l_DefendCountry1 = toDefend();
-		d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1);
+		d_Leb.setResult("in cheater the armies are deployed to -" +l_DefendCountry1.getCountryName());
 		l_ReturnOrder =  new Deploy(this.d_Player, l_DefendCountry1, Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 		d_Leb.setResult("in benevolent player the order issued is - "+l_ReturnOrder);
 		return l_ReturnOrder;

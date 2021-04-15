@@ -59,6 +59,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		}
 		List<Entry<Country, Integer>> l_List = new LinkedList<Entry<Country, Integer>>(l_PlayerCountryMap.entrySet()); 
 		Collections.sort(l_List, new Comparator<Entry<Country, Integer>>()   {  
+			@Override
 			public int compare(Entry<Country, Integer> l_O1, Entry<Country, Integer> l_O2){   
 				return l_O2.getValue().compareTo(l_O1.getValue());  
 			}  
@@ -104,18 +105,18 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		switch(l_RandomInt) {
 		case 0: 
 			Country l_DefendCountry1 = toDefend();
-			d_Leb.setResult("in agressive the armies are deployed to -" +l_DefendCountry1);
+			d_Leb.setResult("in agressive the armies are deployed to -" +l_DefendCountry1.getCountryName());
 			l_OrderToBeReturned = new Deploy(this.d_Player, l_DefendCountry1, Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 			break;
 		case 1: 
 			ArrayList<Country> l_Countries = toAttack();
 			/*If player does not have enough armies, it will not advance. it will still deploy*/
 			if(l_Countries.get(0).getNoOfArmies()>1){
-				d_Leb.setResult("in aggressive defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1)+" with armies- "+(l_Countries.get(0).getNoOfArmies()-1));
+				d_Leb.setResult("in aggressive defending country - "+l_Countries.get(0).getCountryName()+" Attacking country - "+l_Countries.get(1).getCountryName()+" with armies- "+(l_Countries.get(0).getNoOfArmies()-1));
 				l_OrderToBeReturned =  new Advance(this.d_Player, l_Countries.get(0), l_Countries.get(1), l_Countries.get(0).getNoOfArmies()-1);
 			}
 			else{
-				d_Leb.setResult("in agrressive the armies are deployed to -" +l_Countries.get(0));
+				d_Leb.setResult("in agrressive the armies are deployed to -" +l_Countries.get(0).getCountryName());
 				l_OrderToBeReturned = new Deploy(this.d_Player, toDefend(),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
 			}
 			break;	

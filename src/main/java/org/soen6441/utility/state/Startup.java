@@ -1,6 +1,7 @@
 package org.soen6441.utility.state;
 
-import org.soen6441.controller.GameEngine;                   import org.soen6441.observerpattern.LogEntryBuffer;
+import org.soen6441.controller.GameEngine;
+import org.soen6441.observerpattern.LogEntryBuffer;
 import org.soen6441.view.CommandPrompt;
 /**
  *The Startup Phase extends the phase class and implements all the methods suitable for that particular phase.
@@ -117,7 +118,7 @@ public class Startup extends Phase {
 		  	}catch(Exception p_Exception)
 			{
 		  		d_Vw.setCommandAcknowledgement(p_Exception.getMessage());
-		  		d_Leb.setResult(p_Exception.getMessage().toString());
+		  		d_Leb.setResult(p_Exception.getMessage());
 		  		d_Ge.setPhase(new Startup(d_Ge,d_Vw));
 		  		return;
 		  	}

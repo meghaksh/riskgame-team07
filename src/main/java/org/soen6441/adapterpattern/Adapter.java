@@ -37,6 +37,7 @@ public class Adapter extends Target {
 	 * This method internally calls the loadmap method of adaptee to load the conquest map file. 
 	 * @param p_S name of the map file
 	 */
+	@Override
 	public String loadMap(String p_S){
 		return this.d_Adaptee.loadConquestMap(p_S, d_GameEngine);
 	}
@@ -44,6 +45,7 @@ public class Adapter extends Target {
 	 * This method internally calls the savemap method of adaptee to save conquest map file. 
 	 * @param p_S name of the map file
 	 */
+	@Override
 	public String saveMap(String p_S){
 		return this.d_Adaptee.saveConquestMap(p_S,d_GameEngine);
 	}

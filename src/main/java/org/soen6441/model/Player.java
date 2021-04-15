@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.soen6441.model.orders.Advance;
-import org.soen6441.model.orders.Airlift;
-import org.soen6441.model.orders.Blockade;
-import org.soen6441.model.orders.Bomb;
-import org.soen6441.model.orders.Deploy;
-import org.soen6441.model.orders.Negotiate;
 import org.soen6441.strategypattern.Strategy;
 
 /**
