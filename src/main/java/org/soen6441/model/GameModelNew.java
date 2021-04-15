@@ -27,10 +27,25 @@ import org.soen6441.strategypattern.RandomPlayerStrategy;
  * This class acts as an Data info for other controllers.
  */
 public class GameModelNew implements Serializable {
+	/**
+	 * This is the object of map class
+	 */
 	private Map d_Map;
+	/**
+	 * This is the object of player class
+	 */
 	private Player d_PlayerID;
+	/**
+	 * This arraylist  contains all the players
+	 */
 	private ArrayList<Player> d_PlayerList;
+	/**
+	 * This player queue is used to add all the players to assign them countries
+	 */
 	private Queue<Player> d_PlayerQueue= new LinkedList<Player>();
+	/**
+	 * This is the min number of armies a player should get in every turn
+	 */
 	private final int D_MINARMIES=3;
 
 	/**
@@ -276,6 +291,10 @@ public class GameModelNew implements Serializable {
 			throw new Exception ("\"Please enter players using gameplayer add command");
 		}
 	}
+	/**
+	 * This method takes the filename from the user and saves the game as in saves the game model object in to the file 
+	 * @param p_FileName name of the file to save the game
+	 */
 	public  void saveGame(String p_FileName) {
 		String l_File = p_FileName;
 		System.out.println(p_FileName);
@@ -290,7 +309,12 @@ public class GameModelNew implements Serializable {
 		}
 		
 	}
-	
+	/**
+	 * This methods loads the saved game.
+	 * It takes the name of the saved game file as input and converts it into the game model object and returns this object
+	 * @param p_FileName name of the saved game file 
+	 * @return game  object of gamemodel
+	 */
 	public static GameModelNew loadGame(String p_FileName) {
 		GameModelNew game = null;
 		try {
