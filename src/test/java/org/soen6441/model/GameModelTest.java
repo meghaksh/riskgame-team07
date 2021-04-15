@@ -1,17 +1,23 @@
 package org.soen6441.model;				import static org.junit.Assert.assertEquals;											
 import java.util.ArrayList;				import java.util.List;import static org.junit.Assert.*;
 import org.junit.Before;				import org.junit.Test;
+import org.soen6441.controller.GameEngine;
+import org.soen6441.utility.state.Phase;
+import org.soen6441.view.CommandPrompt;
 
 /**
  * This is a class to test the methods of GameModel class
  */
 public class GameModelTest {
 	GameModelNew d_Game = new GameModelNew();
+	GameEngine d_Ge;
+	CommandPrompt d_CpView;
 	ArrayList<Player> d_Check;
 	List<String> d_Names;
 	ArrayList<Player> d_List;
 	List<String> d_CheckNames;
 	Player d_C1,d_C2;
+	Phase d_P;
 	private Map d_Map;
 	/**
 	 * To set up the context for test cases
@@ -19,7 +25,8 @@ public class GameModelTest {
 	 */
 	@Before
 	public void setTestContext() throws Exception {
-
+		d_CpView= new CommandPrompt();
+		d_Ge= new GameEngine(d_CpView,d_Game);
 		d_Check =  new ArrayList<Player>();
 		d_Names = new ArrayList<>();
 		d_CheckNames = new ArrayList<>();
@@ -126,7 +133,19 @@ public class GameModelTest {
 		for(Player l_Player:d_Game.getAllPlayers()) {
 			int l_Value=l_Player.getPlayerArmies();
 			assertTrue(3<=l_Value);
-
 		}
 	}
+	@Test 
+	public void testSaveLoadGamePLayercheck() throws Exception {
+		GameModelNew l_Actual = null;
+		int l_Expected=3;
+		int l_ActualValue=0;
+		d_Game.startUpPhase();
+		String l_ExpectedMessage="Countrysize is 0";
+		d_Game.saveGame("SaveTest.txt");
+		l_Actual=d_Game.loadGame("SaveTest.txt");
+		l_ActualValue=l_Actual.getAllPlayers().size();
+		assertEquals(l_Expected,l_ActualValue);
+	}
+	
 }
