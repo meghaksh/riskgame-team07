@@ -38,6 +38,7 @@ public class Airlift implements Order {
 		d_SourceCountry = p_SourceCountry;
 		d_TargetCountry = p_TargetCountry;
 		d_NumArmies = p_NumArmies;
+		
 	}
 
 	/**
