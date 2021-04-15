@@ -12,11 +12,29 @@ import org.soen6441.model.Player;
 
 public class BenevolentPlayerStrategyTest {
 	
+	/**
+	 * Player Objects
+	 */
 	Player d_Player1,d_Player2;
+	/**
+	 * Map Objects
+	 */
 	Map d_Map;
+	/**
+	 * GamemodelNew object
+	 */
 	GameModelNew d_GameModelNew;
+	/**
+	 * Strategy Objects
+	 */
 	Strategy d_Strategy1,d_Strategy2;
+	/**
+	 * continent object
+	 */
 	Continent d_Continent;
+	/**
+	 * Country objects
+	 */
 	Country d_Country1, d_Country2, d_Country3;
 
 	@Before

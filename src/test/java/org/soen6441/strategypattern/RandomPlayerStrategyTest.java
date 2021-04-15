@@ -11,12 +11,29 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 
 public class RandomPlayerStrategyTest {
-
+	/**
+	 * Player objects 
+	 */
 	Player d_Player1,d_Player2;
+	/**
+	 * Map object
+	 */
 	Map d_Map;
+	/**
+	 * GameModelNew Object
+	 */
 	GameModelNew d_GameModelNew;
+	/**
+	 * Strategy Object	
+	 */
 	Strategy d_Strategy1,d_Strategy2;
+	/**
+	 * Continent Object
+	 */
 	Continent d_Continent;
+	/*
+	 * Country objects
+	 */
 	Country d_Country1, d_Country2, d_Country3;
 
 	@Before
