@@ -10,6 +10,11 @@ import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 
+/**
+ * 
+ * This is the Benevolent Player Strategy Class
+ *
+ */
 public class BenevolentPlayerStrategyTest {
 	
 	/**

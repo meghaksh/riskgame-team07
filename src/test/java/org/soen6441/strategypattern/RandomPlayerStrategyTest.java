@@ -9,7 +9,11 @@ import org.soen6441.model.Country;
 import org.soen6441.model.GameModelNew;
 import org.soen6441.model.Map;
 import org.soen6441.model.Player;
-
+/**
+ * 
+ * This is the Random Player Strategy Class
+ *
+ */
 public class RandomPlayerStrategyTest {
 	/**
 	 * Player objects 
