@@ -126,6 +126,9 @@ public class GameOver extends Phase {
 		// TODO Auto-generated method stub
 		return "GameOver";
 	}
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String tournament(String p_string, String p_CommandStringFromInput) {
 		d_Vw.setCommandAcknowledgement("Invalid command in state " + this.getClass().getSimpleName()+"\n" );
