@@ -8,9 +8,18 @@ import org.soen6441.model.Player;
  * The object of this method is created when the player issues airlift order. 
  */
 public class Airlift implements Order {
-	Player d_Player;
-	Country d_SourceCountry,d_TargetCountry;
-	int d_NumArmies;
+	/**
+	 * The airlift order issuing player.
+	 */
+	private Player d_Player;
+	/**
+	 * The Source Country from which the armies are to be moved to the target country.
+	 */
+	private Country d_SourceCountry,d_TargetCountry;
+	/**
+	 * The number of armies to be moved.
+	 */
+	private int d_NumArmies;
 
 	/**
 	 * Constructor of the class which is called when the new object of Airlift class is created.

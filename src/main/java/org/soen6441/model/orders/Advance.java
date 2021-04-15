@@ -22,19 +22,22 @@ import org.soen6441.observerpattern.LogEntryBuffer;
  *
  */
 public class Advance implements Order {
-	LogEntryBuffer d_Leb = new LogEntryBuffer();
+	/**
+	 * Logger object to logs the vents in the log file
+	 */
+	private LogEntryBuffer d_Leb = new LogEntryBuffer();
 	/**
 	 * The sourceCountry of the attacking player and the targetCountry of the Defending Player.
 	 */
-	Country d_SourceCountry,d_TargetCountry;
+	private Country d_SourceCountry,d_TargetCountry;
 	/**
 	 * The issuing or the attacking player.
 	 */
-	Player d_Player;
+	private Player d_Player;
 	/**
 	 * The number of armies with which the player plans to attack.
 	 */
-	int d_NumArmies;
+	private int d_NumArmies;
 
 	/**
 	 * Default Constructor
@@ -87,14 +90,14 @@ public class Advance implements Order {
 	{
 		
 		
-		Random l_rand = new Random();
-		int l_flag = isValid();
-		if(l_flag == 1)
+		Random l_Rand = new Random();
+		int l_Flag = isValid();
+		if(l_Flag == 1)
 		{
 			d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
 			d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()+d_NumArmies);
 		}
-		if(l_flag==2)
+		if(l_Flag==2)
 		{
 			if(d_TargetCountry.getNoOfArmies()==0)
 			{
@@ -129,11 +132,11 @@ public class Advance implements Order {
 			//Assigning random values to the armies.
 			for(int i=0;i<d_NumArmies;i++)
 			{
-				l_AttackerArmies.put(i, l_rand.nextInt(6));
+				l_AttackerArmies.put(i, l_Rand.nextInt(6));
 			}
 			for(int i=0;i<d_TargetCountry.getNoOfArmies();i++)
 			{
-				l_DefenderArmies.put(i, l_rand.nextInt(7));
+				l_DefenderArmies.put(i, l_Rand.nextInt(7));
 			}
 			l_AttackerArmiesinHand=l_AttackerArmies;
 			l_DefenderArmiesinHand=l_DefenderArmies;
@@ -146,22 +149,22 @@ public class Advance implements Order {
 
 			try{
 				// Getting the armies to fight in battleground based on who has less number of armies.
-				TreeMap<Integer, Integer> returnedHashMap = ArmiestoFight(l_SizeDiff,l_MinArmies,l_AttackerArmies,l_DefenderArmies);
-				System.out.println("returned hashmap "+returnedHashMap);
-				Iterator<Map.Entry<Integer,Integer>> itr_Attacker=l_AttackerArmiesinHand.entrySet().iterator();
-				Iterator<Map.Entry<Integer,Integer>> itr_Defender=l_DefenderArmiesinHand.entrySet().iterator();
+				TreeMap<Integer, Integer> l_ReturnedHashMap = ArmiestoFight(l_SizeDiff,l_MinArmies,l_AttackerArmies,l_DefenderArmies);
+				System.out.println("returned hashmap "+l_ReturnedHashMap);
+				Iterator<Map.Entry<Integer,Integer>> l_ItrAttacker=l_AttackerArmiesinHand.entrySet().iterator();
+				Iterator<Map.Entry<Integer,Integer>> l_ItrDefender=l_DefenderArmiesinHand.entrySet().iterator();
 				
 				// When attacking armies are greater than defending armies
 				if(l_SizeDiff>0)
 				{
-					l_AttackerArmiesinHand = returnedHashMap;
-					itr_Attacker = l_AttackerArmiesinHand.entrySet().iterator();
+					l_AttackerArmiesinHand = l_ReturnedHashMap;
+					l_ItrAttacker = l_AttackerArmiesinHand.entrySet().iterator();
 				}
 				// When defending armies are greater than attacking armies.
 				else if(l_SizeDiff<0)
 				{
-					l_DefenderArmiesinHand = returnedHashMap;
-					itr_Defender = l_DefenderArmiesinHand.entrySet().iterator();
+					l_DefenderArmiesinHand = l_ReturnedHashMap;
+					l_ItrDefender = l_DefenderArmiesinHand.entrySet().iterator();
 				}
 				// When both have equal number of armies
 				else
@@ -171,26 +174,26 @@ public class Advance implements Order {
 				}
 				//now attack
 
-				int l_attackWin=0,l_defendWin=0;
-				for(int i=0;i<returnedHashMap.size();i++)
+				int l_AttackWin=0,l_DefendWin=0;
+				for(int i=0;i<l_ReturnedHashMap.size();i++)
 				{
-					Map.Entry<Integer,Integer> entry_Attack = itr_Attacker.next(); 
-					Map.Entry<Integer,Integer> entry_Defend = itr_Defender.next(); 
-					d_Leb.setResult("Attack Army : " + entry_Attack.getKey() +  " with " + entry_Attack.getValue() + " Value Vs.  Defend Army : " + entry_Defend.getKey() + " with " + entry_Defend.getValue() + " Value");
-					if(entry_Attack.getValue()>=entry_Defend.getValue())
+					Map.Entry<Integer,Integer> l_EntryAttack = l_ItrAttacker.next(); 
+					Map.Entry<Integer,Integer> l_EntryDefend = l_ItrDefender.next(); 
+					d_Leb.setResult("Attack Army : " + l_EntryAttack.getKey() +  " with " + l_EntryAttack.getValue() + " Value Vs.  Defend Army : " + l_EntryDefend.getKey() + " with " + l_EntryDefend.getValue() + " Value");
+					if(l_EntryAttack.getValue()>=l_EntryDefend.getValue())
 					{
-						l_attackWin++;
+						l_AttackWin++;
 					}
 					else
 					{
-						l_defendWin++;
+						l_DefendWin++;
 					}
 				}
-				if(l_attackWin>l_defendWin)
+				if(l_AttackWin>l_DefendWin)
 				{
 					d_TargetCountry.getCountryOwnerPlayer().removeCountry(d_TargetCountry);
 					d_TargetCountry.setCountryOwnerPlayer(d_Player);
-					d_TargetCountry.setNoOfArmies(d_NumArmies-l_MinArmies+l_attackWin);
+					d_TargetCountry.setNoOfArmies(d_NumArmies-l_MinArmies+l_AttackWin);
 					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-d_NumArmies);
 					d_Player.addCountry(d_TargetCountry);
 					d_Player.setAtleastOneBattleWon(true);
@@ -200,8 +203,8 @@ public class Advance implements Order {
 				}
 				else
 				{
-					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-l_MinArmies+l_attackWin);
-					d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()-l_MinArmies+l_defendWin);
+					d_SourceCountry.setNoOfArmies(d_SourceCountry.getNoOfArmies()-l_MinArmies+l_AttackWin);
+					d_TargetCountry.setNoOfArmies(d_TargetCountry.getNoOfArmies()-l_MinArmies+l_DefendWin);
 					d_Player.setResult("\n"+d_Player.getPlayerName()+" your attack on "+d_TargetCountry.getCountryName()+" was a Failure!!");
 				}
 			}catch(Exception p_E) {p_E.printStackTrace();}
@@ -227,7 +230,7 @@ public class Advance implements Order {
 	
 	TreeMap<Integer,Integer> ArmiestoFight(int p_SizeDiffint,int  p_MinArmies, TreeMap <Integer,Integer> p_AttackerArmies,TreeMap <Integer,Integer> p_DefenderArmies)
 	{
-		TreeMap<Integer,Integer> returnHashMap = null;
+		TreeMap<Integer,Integer> l_ReturnHashMap = null;
 		System.out.println("size difference"+p_SizeDiffint);
 		
 		// Attacking armies greater than defending armies.
@@ -253,7 +256,7 @@ public class Advance implements Order {
 				l_AttackerArmiesinHand.put(entry.getKey(),entry.getValue());
 			}
 			System.out.println("l_AttackerArmiesinHand"+l_AttackerArmiesinHand);
-			returnHashMap = l_AttackerArmiesinHand;
+			l_ReturnHashMap = l_AttackerArmiesinHand;
 		}
 		
 		// Defending armies greater than attacking armies.
@@ -280,16 +283,16 @@ public class Advance implements Order {
 				l_DefenderArmiesinHand.put(entry.getKey(),entry.getValue());
 			}
 			System.out.println("l_DefenderArmiesinHand"+l_DefenderArmiesinHand);
-			returnHashMap =  l_DefenderArmiesinHand;
+			l_ReturnHashMap =  l_DefenderArmiesinHand;
 		}
 		
 		// When both have same number of armies.
 		else
 		{
-			returnHashMap = p_AttackerArmies;
+			l_ReturnHashMap = p_AttackerArmies;
 		}
-		System.out.println("in armies to fight"+returnHashMap);
-		return returnHashMap;
+		System.out.println("in armies to fight"+l_ReturnHashMap);
+		return l_ReturnHashMap;
 	}
 
 	/**
