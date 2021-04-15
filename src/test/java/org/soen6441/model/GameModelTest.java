@@ -195,7 +195,7 @@ public class GameModelTest {
 		d_Game.startUpPhase();
 		d_Game.saveGame("SaveTest.txt");
 		l_Actual=d_Game.loadGame("SaveTest.txt");
-		l_ActualValue=l_Actual.getSelectedMap().getCountryList().size();
+		l_ActualValue=l_Actual.getMap().getCountryList().size();
 		assertEquals(l_Expected,l_ActualValue);
 	}
 	/**
@@ -210,7 +210,7 @@ public class GameModelTest {
 		d_Game.startUpPhase();
 		d_Game.saveGame("SaveTest.txt");
 		l_Actual=d_Game.loadGame("SaveTest.txt");
-		l_ActualValue=l_Actual.getSelectedMap().getContinentList().size();
+		l_ActualValue=l_Actual.getMap().getContinentList().size();
 		assertEquals(l_Expected,l_ActualValue);
 	}
 	

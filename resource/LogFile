@@ -1,1014 +1,191 @@
 
 This is the Edit Phase
-tournament -M map5,map99 -P cheater,benevolent,random -G 3 -D 15
-
-=============================================
-
-
-Map number:1
-
-
-=============================================
-
-
-Game number:1
-
-Cheater Player
+Number of Player strategies should be in between 2 to 4 both inclusive
+This is the Edit Phase
+File does not Exists
+This is the Edit Phase
+Number of Games should be in between 1 to 5 both inclusive
+This is the Edit Phase
+Number of Maps should be in between 1 to 5 both inclusive
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+Aggressive Player
+Aggressive Player
 Benevolent Player
-Random Player
-in cheater the armies are deployed to -kenya
-in cheater player order is org.soen6441.model.orders.Deploy@49626346
-the Benevolent Player is defefnding country pakistan country with 0 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@3bce4f29
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@5a7636ef
-
-order deploy kenya 4 added to list of Player0
-
-order deploy pakistan 4 added to list of Player1
-
-order deploy sydney 3 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mosambique
-in cheater player order is org.soen6441.model.orders.Deploy@3dc90feb
-the Benevolent Player is defefnding country india country with 0 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@3fe7c4a3
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@76997371
-
-order deploy mosambique 6 added to list of Player0
-
-order deploy india 2 added to list of Player1
-
-order deploy sydney 10 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -kenya
-in cheater player order is org.soen6441.model.orders.Deploy@1db3e203
+Aggressive Player
+Benevolent Player
 the Benevolent Player is defefnding country india country with 2 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@68700009
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@69b31378
-
-order deploy kenya 4 added to list of Player0
-
-order deploy india 2 added to list of Player1
-
-order deploy sydney 2 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater defending country - mosambique Attacking country - kenya with armies - 5
-in cheater player order is org.soen6441.model.orders.Advance@56adb4ac
-the Benevolent Player is defefnding country pakistan country with 4 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@3e359638
-in random the armies are deployed to -mel
-in random player order is org.soen6441.model.orders.Deploy@4fec6a55
-
-The source country and target country belong to the same player
-
-order deploy pakistan 9 added to list of Player1
-
-order deploy mel 2 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mosambique
-in cheater player order is org.soen6441.model.orders.Deploy@7c6d06ab
-the Benevolent Player is defefnding country india country with 4 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@47dec55e
-in random the armies are deployed to -mel
-in random player order is org.soen6441.model.orders.Deploy@55c81fcb
-
-order deploy mosambique 8 added to list of Player0
-
-order deploy india 2 added to list of Player1
-
-order deploy mel 9 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mosambique
-in cheater player order is org.soen6441.model.orders.Deploy@79da79e5
-the Benevolent Player is defefnding country india country with 6 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@6d16702b
-in random the armies are deployed to -mel
-in random player order is org.soen6441.model.orders.Deploy@5c53ace2
-
-order deploy mosambique 11 added to list of Player0
-
-order deploy india 2 added to list of Player1
-
-order deploy mel 7 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -kenya
-in cheater player order is org.soen6441.model.orders.Deploy@49f0d6e4
-the Benevolent Player is defefnding country india country with 8 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@634f8b6e
-in random the armies are deployed to -mel
-in random player order is org.soen6441.model.orders.Deploy@3d863804
-
-order deploy kenya 8 added to list of Player0
-
-order deploy india 19 added to list of Player1
-
-order deploy mel 6 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mosambique
-in cheater player order is org.soen6441.model.orders.Deploy@7c73b7ea
-the Benevolent Player is defefnding country pakistan country with 13 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@337b1976
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@2c70e08c
-
-order deploy mosambique 4 added to list of Player0
-
-order deploy pakistan 2 added to list of Player1
-
-order deploy sydney 12 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -kenya
-in cheater player order is org.soen6441.model.orders.Deploy@203aab1e
-the Benevolent Player is defefnding country pakistan country with 15 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@41979414
-in random the armies are deployed to -mel
-in random player order is org.soen6441.model.orders.Deploy@2a4c95f9
-
-order deploy kenya 6 added to list of Player0
-
-order deploy pakistan 4 added to list of Player1
-
-order deploy mel 2 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mosambique
-in cheater player order is org.soen6441.model.orders.Deploy@11374bc
-the Benevolent Player is defefnding country pakistan country with 19 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@74045ddb
-in random defending country - mel Attacking country - sydney with armies- 25
-in random player order is org.soen6441.model.orders.Advance@94e407b
-
-order deploy mosambique 3 added to list of Player0
-
-order deploy pakistan 2 added to list of Player1
-
-The source country and target country belong to the same player
-
-Orders are Succesfully Executed!!
-in cheater defending country - mosambique Attacking country - mel with armies - 26
-in cheater player order is org.soen6441.model.orders.Advance@4763eff6
-the Benevolent Player is defefnding country pakistan country with 21 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@5dcfc532
-in random the armies are deployed to -mel
-in random player order is org.soen6441.model.orders.Deploy@bf3a1d5
-
-Player0 your attack on mel was a Success!!
-
-order deploy pakistan 8 added to list of Player1
-
-This country mel doesnot belongs to Player2
-The player -Player0 has been assigned card - Blockade
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@70456548
-the Benevolent Player is defefnding country india country with 27 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@280128e9
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@bc49e8e
-
-order deploy mel 2 added to list of Player0
-
-order deploy india 7 added to list of Player1
-
-order deploy sydney 28 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@1d2f6b2a
-the Benevolent Player is defefnding country pakistan country with 29 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@461b22e2
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@677c0ca8
-
-order deploy mel 10 added to list of Player0
-
-order deploy pakistan 4 added to list of Player1
-
-order deploy sydney 8 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -kenya
-in cheater player order is org.soen6441.model.orders.Deploy@4863de27
-the Benevolent Player is defefnding country pakistan country with 33 armies
-in cheater the armies are deployed to -pakistan
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@2e739a3a
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@31e0a124
-
-order deploy kenya 9 added to list of Player0
-
-order deploy pakistan 15 added to list of Player1
-
-order deploy sydney 3 added to list of Player2
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@367ee2fc
-the Benevolent Player is defefnding country india country with 34 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@60ba90f2
-in random defending country - sydney Attacking country - sydney with armies- 90
-in random player order is org.soen6441.model.orders.Advance@52aa7495
-
-order deploy mel 3 added to list of Player0
-
-order deploy india 6 added to list of Player1
-
-The source country and target country cannot be same!
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mosambique
-in cheater player order is org.soen6441.model.orders.Deploy@66f70665
-the Benevolent Player is defefnding country india country with 40 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@275f6145
-in random defending country - sydney Attacking country - india with armies- 90
-in random player order is org.soen6441.model.orders.Advance@13d6485c
-
-order deploy mosambique 6 added to list of Player0
-
-order deploy india 2 added to list of Player1
-Attack Army : 0 with 5 Value Vs.  Defend Army : 0 with 6 Value
-Attack Army : 3 with 3 Value Vs.  Defend Army : 1 with 2 Value
-Attack Army : 4 with 5 Value Vs.  Defend Army : 2 with 5 Value
-Attack Army : 6 with 5 Value Vs.  Defend Army : 3 with 0 Value
-Attack Army : 7 with 3 Value Vs.  Defend Army : 4 with 1 Value
-Attack Army : 10 with 4 Value Vs.  Defend Army : 5 with 1 Value
-Attack Army : 12 with 5 Value Vs.  Defend Army : 6 with 3 Value
-Attack Army : 17 with 3 Value Vs.  Defend Army : 7 with 2 Value
-Attack Army : 19 with 5 Value Vs.  Defend Army : 8 with 3 Value
-Attack Army : 20 with 3 Value Vs.  Defend Army : 9 with 0 Value
-Attack Army : 22 with 4 Value Vs.  Defend Army : 10 with 0 Value
-Attack Army : 23 with 4 Value Vs.  Defend Army : 11 with 6 Value
-Attack Army : 24 with 5 Value Vs.  Defend Army : 12 with 6 Value
-Attack Army : 25 with 4 Value Vs.  Defend Army : 13 with 1 Value
-Attack Army : 27 with 4 Value Vs.  Defend Army : 14 with 0 Value
-Attack Army : 29 with 5 Value Vs.  Defend Army : 15 with 4 Value
-Attack Army : 31 with 4 Value Vs.  Defend Army : 16 with 0 Value
-Attack Army : 41 with 3 Value Vs.  Defend Army : 17 with 0 Value
-Attack Army : 42 with 3 Value Vs.  Defend Army : 18 with 1 Value
-Attack Army : 44 with 3 Value Vs.  Defend Army : 19 with 6 Value
-Attack Army : 45 with 3 Value Vs.  Defend Army : 20 with 6 Value
-Attack Army : 46 with 5 Value Vs.  Defend Army : 21 with 0 Value
-Attack Army : 50 with 3 Value Vs.  Defend Army : 22 with 4 Value
-Attack Army : 52 with 5 Value Vs.  Defend Army : 23 with 0 Value
-Attack Army : 53 with 4 Value Vs.  Defend Army : 24 with 5 Value
-Attack Army : 56 with 4 Value Vs.  Defend Army : 25 with 5 Value
-Attack Army : 60 with 5 Value Vs.  Defend Army : 26 with 0 Value
-Attack Army : 62 with 5 Value Vs.  Defend Army : 27 with 5 Value
-Attack Army : 65 with 5 Value Vs.  Defend Army : 28 with 5 Value
-Attack Army : 67 with 3 Value Vs.  Defend Army : 29 with 4 Value
-Attack Army : 72 with 5 Value Vs.  Defend Army : 30 with 2 Value
-Attack Army : 73 with 5 Value Vs.  Defend Army : 31 with 4 Value
-Attack Army : 75 with 3 Value Vs.  Defend Army : 32 with 1 Value
-Attack Army : 76 with 3 Value Vs.  Defend Army : 33 with 0 Value
-Attack Army : 77 with 3 Value Vs.  Defend Army : 34 with 3 Value
-Attack Army : 78 with 5 Value Vs.  Defend Army : 35 with 0 Value
-Attack Army : 79 with 5 Value Vs.  Defend Army : 36 with 3 Value
-Attack Army : 80 with 4 Value Vs.  Defend Army : 37 with 5 Value
-Attack Army : 83 with 5 Value Vs.  Defend Army : 38 with 5 Value
-Attack Army : 87 with 3 Value Vs.  Defend Army : 39 with 6 Value
-Attack Army : 88 with 5 Value Vs.  Defend Army : 40 with 1 Value
-Attack Army : 89 with 5 Value Vs.  Defend Army : 41 with 5 Value
-
-Player2 your attack on india was a Success!!
-The player -Player2 has been assigned card - Negotiate
-
-Orders are Succesfully Executed!!
-
-Match is draw
-
-=============================================
-
-
-Game number:2
-
 Cheater Player
-Benevolent Player
-Random Player
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@30667e69
-the Benevolent Player is defefnding country kenya country with 0 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@73fb7dbc
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@70edc09c
-
-order deploy mel 2 added to list of Player3
-
-order deploy kenya 2 added to list of Player4
-
-order deploy sydney 2 added to list of Player5
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@45c48b9c
-the Benevolent Player is defefnding country mosambique country with 0 armies
-in cheater the armies are deployed to -mosambique
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@189ad688
-in random defending country - sydney Attacking country - mosambique with armies- 1
-in random player order is org.soen6441.model.orders.Advance@30a44eba
-
-order deploy mel 2 added to list of Player3
-
-order deploy mosambique 6 added to list of Player4
-Attack Army : 0 with 5 Value Vs.  Defend Army : 0 with 6 Value
-
-Player5 your attack on mosambique was a Failure!!
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@4faa772f
-the Benevolent Player is defefnding country kenya country with 2 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@1cad6c4
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@138989d9
-
-order deploy mel 2 added to list of Player3
-
-order deploy kenya 4 added to list of Player4
-
-order deploy sydney 2 added to list of Player5
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@216051bb
-the Benevolent Player is defefnding country kenya country with 6 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@3def49b7
-in random the armies are deployed to -pakistan
-in random player order is org.soen6441.model.orders.Deploy@6a44d438
-
-order deploy mel 4 added to list of Player3
-
-order deploy kenya 5 added to list of Player4
-
-order deploy pakistan 4 added to list of Player5
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -india
-in cheater player order is org.soen6441.model.orders.Deploy@35dc5fe8
-the Benevolent Player is defefnding country mosambique country with 6 armies
-in cheater the armies are deployed to -mosambique
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@16123d61
-in random defending country - pakistan Attacking country - india with armies- 3
-in random player order is org.soen6441.model.orders.Advance@51776ce5
-
-order deploy india 3 added to list of Player3
-
-order deploy mosambique 6 added to list of Player4
-Attack Army : 0 with 1 Value Vs.  Defend Army : 0 with 3 Value
-Attack Army : 1 with 3 Value Vs.  Defend Army : 1 with 5 Value
-Attack Army : 2 with 0 Value Vs.  Defend Army : 2 with 1 Value
-
-Player5 your attack on india was a Failure!!
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -india
-in cheater player order is org.soen6441.model.orders.Deploy@1dde87e7
-the Benevolent Player is defefnding country kenya country with 11 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@4a2aa8ab
-in random defending country - sydney Attacking country - pakistan with armies- 2
-in random player order is org.soen6441.model.orders.Advance@4d546dba
-
-order deploy india 3 added to list of Player3
-
-order deploy kenya 11 added to list of Player4
-
-The source country and target country belong to the same player
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@272e20b1
-the Benevolent Player is defefnding country mosambique country with 12 armies
-in cheater the armies are deployed to -mosambique
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@4ea66a0c
-in random defending country - pakistan Attacking country - pakistan with armies- 2
-in random player order is org.soen6441.model.orders.Advance@51d6ec83
-
-order deploy mel 2 added to list of Player3
-
-order deploy mosambique 6 added to list of Player4
-
-The source country and target country cannot be same!
-
-Orders are Succesfully Executed!!
-in cheater defending country - india Attacking country - sydney with armies - 5
-in cheater player order is org.soen6441.model.orders.Advance@3f8172be
-the Benevolent Player is defefnding country mosambique country with 18 armies
-in cheater the armies are deployed to -mosambique
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@697ce657
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@1477177e
-
-Player3 your attack on sydney was a Success!!
-
-order deploy mosambique 6 added to list of Player4
-
-This country sydney doesnot belongs to Player5
-The player -Player3 has been assigned card - Bomb
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -sydney
-in cheater player order is org.soen6441.model.orders.Deploy@72a34387
-the Benevolent Player is defefnding country kenya country with 22 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@4603cbef
-in random defending country - pakistan Attacking country - pakistan with armies- 2
-in random player order is org.soen6441.model.orders.Advance@48c3d326
-
-order deploy sydney 2 added to list of Player3
-
-order deploy kenya 2 added to list of Player4
-
-The source country and target country cannot be same!
-
-Orders are Succesfully Executed!!
-in cheater defending country - mel Attacking country - india with armies - 11
-in cheater player order is org.soen6441.model.orders.Advance@6423e1a7
-the Benevolent Player is defefnding country kenya country with 24 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@c7439df
-in random defending country - pakistan Attacking country - sydney with armies- 2
-in random player order is org.soen6441.model.orders.Advance@5470d70d
-
-The source country and target country belong to the same player
-
-order deploy kenya 2 added to list of Player4
-Attack Army : 0 with 2 Value Vs.  Defend Army : 2 with 6 Value
-Attack Army : 1 with 2 Value Vs.  Defend Army : 0 with 6 Value
-
-Player5 your attack on sydney was a Failure!!
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -india
-in cheater player order is org.soen6441.model.orders.Deploy@2fc6446
-the Benevolent Player is defefnding country mosambique country with 24 armies
-in cheater the armies are deployed to -mosambique
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@79298367
-in random the armies are deployed to -pakistan
-in random player order is org.soen6441.model.orders.Deploy@543ef75c
-
-order deploy india 18 added to list of Player3
-
-order deploy mosambique 8 added to list of Player4
-
-order deploy pakistan 24 added to list of Player5
-
-Orders are Succesfully Executed!!
-in cheater defending country - india Attacking country - mosambique with armies - 29
-in cheater player order is org.soen6441.model.orders.Advance@6249a69
-the Benevolent Player is defefnding country kenya country with 26 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@679b10bf
-in random the armies are deployed to -pakistan
-in random player order is org.soen6441.model.orders.Deploy@529c9590
-
-Player3 your attack on mosambique was a Success!!
-
-order deploy kenya 7 added to list of Player4
-
-order deploy pakistan 2 added to list of Player5
-The player -Player3 has been assigned card - Negotiate
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@713b0c88
-the Benevolent Player is defefnding country kenya country with 33 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@53ee2714
-in random defending country - pakistan Attacking country - india with armies- 26
-in random player order is org.soen6441.model.orders.Advance@6c4fdb3e
-
-order deploy mel 5 added to list of Player3
-
-order deploy kenya 11 added to list of Player4
-Attack Army : 7 with 5 Value Vs.  Defend Army : 0 with 0 Value
-
-Player5 your attack on india was a Success!!
-The player -Player5 has been assigned card - Airlift
-
-Orders are Succesfully Executed!!
-in cheater defending country - mel Attacking country - mosambique with armies - 5
-in cheater player order is org.soen6441.model.orders.Advance@5ac9e332
-the Benevolent Player is defefnding country kenya country with 44 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@733ffbaf
-in random the armies are deployed to -india
-in random player order is org.soen6441.model.orders.Deploy@51cbb45b
-
-The source country and target country belong to the same player
-
-order deploy kenya 6 added to list of Player4
-
-order deploy india 10 added to list of Player5
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -sydney
-in cheater player order is org.soen6441.model.orders.Deploy@43cf1377
-the Benevolent Player is defefnding country kenya country with 50 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@560ab84f
-in random defending country - india Attacking country - sydney with armies- 35
-in random player order is org.soen6441.model.orders.Advance@5ae4d3a2
-
-order deploy sydney 6 added to list of Player3
-
-order deploy kenya 3 added to list of Player4
-Attack Army : 3 with 4 Value Vs.  Defend Army : 0 with 0 Value
-Attack Army : 5 with 4 Value Vs.  Defend Army : 1 with 5 Value
-Attack Army : 7 with 5 Value Vs.  Defend Army : 2 with 4 Value
-Attack Army : 8 with 4 Value Vs.  Defend Army : 3 with 1 Value
-Attack Army : 9 with 5 Value Vs.  Defend Army : 4 with 1 Value
-Attack Army : 10 with 4 Value Vs.  Defend Army : 5 with 6 Value
-Attack Army : 11 with 4 Value Vs.  Defend Army : 6 with 3 Value
-Attack Army : 15 with 5 Value Vs.  Defend Army : 7 with 1 Value
-Attack Army : 17 with 4 Value Vs.  Defend Army : 8 with 3 Value
-Attack Army : 18 with 4 Value Vs.  Defend Army : 9 with 1 Value
-Attack Army : 28 with 5 Value Vs.  Defend Army : 10 with 3 Value
-Attack Army : 30 with 5 Value Vs.  Defend Army : 11 with 3 Value
-Attack Army : 33 with 5 Value Vs.  Defend Army : 12 with 3 Value
-
-Player5 your attack on sydney was a Success!!
-The player -Player5 has been assigned card - Blockade
-
-Orders are Succesfully Executed!!
-in cheater defending country - mosambique Attacking country - sydney with armies - 33
-in cheater player order is org.soen6441.model.orders.Advance@5601ddc9
-the Benevolent Player is defefnding country kenya country with 53 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@6d6e38d5
-in random the armies are deployed to -pakistan
-in random player order is org.soen6441.model.orders.Deploy@6ea52df7
-
-Player3 your attack on sydney was a Success!!
-
-order deploy kenya 6 added to list of Player4
-
-order deploy pakistan 2 added to list of Player5
-The player -Player3 has been assigned card - Blockade
-
-Orders are Succesfully Executed!!
-
-Match is draw
-
-=============================================
-
-
-Game number:3
-
 Cheater Player
-Benevolent Player
 Random Player
-in cheater the armies are deployed to -pakistan
-in cheater player order is org.soen6441.model.orders.Deploy@3a4bd736
-the Benevolent Player is defefnding country india country with 0 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@2b0b6a6b
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@4f1dea5b
-
-order deploy pakistan 2 added to list of Player6
-
-order deploy india 2 added to list of Player7
-
-order deploy sydney 2 added to list of Player8
-
-Orders are Succesfully Executed!!
-in cheater defending country - pakistan Attacking country - mel with armies - 1
-in cheater player order is org.soen6441.model.orders.Advance@28f7a925
-the Benevolent Player is defefnding country kenya country with 0 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@48096817
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@38a10b4f
-
-The source country and target country belong to the same player
-
-order deploy kenya 2 added to list of Player7
-
-order deploy sydney 2 added to list of Player8
+This is the Edit Phase
+This is the Edit Phase
+Map is not Valid
+You Can Now Proceed To Add Players
+This is the Startup Phase
+This is the Edit Phase
+This is the Edit Phase
+Index 1 out of bounds for length 1
+This is the Edit Phase
+This is the Edit Phase
+This is the Edit Phase
+Invalid command in state 
+This is the Edit Phase
+This is the Edit Phase
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@184e6132
-the Benevolent Player is defefnding country india country with 2 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@d655d9f
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@e2fd5f4
-
-order deploy mel 3 added to list of Player6
-
-order deploy india 2 added to list of Player7
-
-order deploy sydney 3 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@3e644c0d
-the Benevolent Player is defefnding country kenya country with 2 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@5548fd02
-in random the armies are deployed to -mosambique
-in random player order is org.soen6441.model.orders.Deploy@7266db91
-
-order deploy mel 3 added to list of Player6
-
-order deploy kenya 3 added to list of Player7
-
-order deploy mosambique 2 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -pakistan
-in cheater player order is org.soen6441.model.orders.Deploy@216305c
-the Benevolent Player is defefnding country india country with 4 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@1e0e1037
-in random the armies are deployed to -sydney
-in random player order is org.soen6441.model.orders.Deploy@cbc5e19
-
-order deploy pakistan 2 added to list of Player6
-
-order deploy india 3 added to list of Player7
-
-order deploy sydney 4 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater defending country - mel Attacking country - sydney with armies - 6
-in cheater player order is org.soen6441.model.orders.Advance@48c2b64c
-the Benevolent Player is defefnding country kenya country with 5 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@7be5ebd8
-in random defending country - sydney Attacking country - pakistan with armies- 10
-in random player order is org.soen6441.model.orders.Advance@1504c33b
-
-Player6 your attack on sydney was a Success!!
-
-order deploy kenya 3 added to list of Player7
-
-The source country should be left with atleast one army!
-The player -Player6 has been assigned card - Airlift
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -sydney
-in cheater player order is org.soen6441.model.orders.Deploy@7ba61b14
-the Benevolent Player is defefnding country india country with 7 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@260ba2fa
-in random defending country - mosambique Attacking country - india with armies- 1
-in random player order is org.soen6441.model.orders.Advance@72e436c8
-
-order deploy sydney 2 added to list of Player6
-
-order deploy india 2 added to list of Player7
-Attack Army : 0 with 2 Value Vs.  Defend Army : 1 with 6 Value
-
-Player8 your attack on india was a Failure!!
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@41ca3eb4
-the Benevolent Player is defefnding country kenya country with 8 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@a7ff322
-in random the armies are deployed to -mosambique
-in random player order is org.soen6441.model.orders.Deploy@71188ce5
-
-order deploy mel 7 added to list of Player6
-
-order deploy kenya 4 added to list of Player7
-
-order deploy mosambique 5 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@2219b678
-the Benevolent Player is defefnding country india country with 9 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@32360311
-in random the armies are deployed to -mosambique
-in random player order is org.soen6441.model.orders.Deploy@47a51096
-
-order deploy mel 14 added to list of Player6
-
-order deploy india 4 added to list of Player7
-
-order deploy mosambique 2 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater defending country - mel Attacking country - sydney with armies - 21
-in cheater player order is org.soen6441.model.orders.Advance@72efd323
-the Benevolent Player is defefnding country kenya country with 12 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@1d2a1170
-in random the armies are deployed to -mosambique
-in random player order is org.soen6441.model.orders.Deploy@1f06a74f
-
-The source country and target country belong to the same player
-
-order deploy kenya 3 added to list of Player7
-
-order deploy mosambique 7 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -mel
-in cheater player order is org.soen6441.model.orders.Deploy@70c83599
-the Benevolent Player is defefnding country india country with 13 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@7c328668
-in random the armies are deployed to -mosambique
-in random player order is org.soen6441.model.orders.Deploy@315ea90f
-
-order deploy mel 14 added to list of Player6
-
-order deploy india 4 added to list of Player7
-
-order deploy mosambique 4 added to list of Player8
+Invalid command in state 
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater defending country - pakistan Attacking country - sydney with armies - 2
-in cheater player order is org.soen6441.model.orders.Advance@1bc84cb4
-the Benevolent Player is defefnding country kenya country with 15 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@2a9dc6a9
-in random defending country - mosambique Attacking country - mosambique with armies- 18
-in random player order is org.soen6441.model.orders.Advance@42f41454
-
-The source country and target country belong to the same player
-
-order deploy kenya 2 added to list of Player7
-
-The source country and target country cannot be same!
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater defending country - sydney Attacking country - mosambique with armies - 30
-in cheater player order is org.soen6441.model.orders.Advance@626cbd4
-the Benevolent Player is defefnding country india country with 17 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@5f528a48
-in random the armies are deployed to -mosambique
-in random player order is org.soen6441.model.orders.Deploy@1bbeb785
-
-Player6 your attack on mosambique was a Success!!
-
-order deploy india 4 added to list of Player7
-
-This country mosambique doesnot belongs to Player8
-The player -Player6 has been assigned card - Negotiate
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater defending country - mel Attacking country - kenya with armies - 14
-in cheater player order is org.soen6441.model.orders.Advance@798a4612
-the Benevolent Player is defefnding country kenya country with 17 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@49c24a9c
-
-Player6 your attack on kenya was a Success!!
-
-This country kenya doesnot belongs to Player7
-The player -Player6 has been assigned card - Blockade
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -pakistan
-in cheater player order is org.soen6441.model.orders.Deploy@2899926
-the Benevolent Player is defefnding country india country with 21 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@6ce5146d
-
-order deploy pakistan 6 added to list of Player6
-
-order deploy india 2 added to list of Player7
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -pakistan
-in cheater player order is org.soen6441.model.orders.Deploy@47f46535
-the Benevolent Player is defefnding country india country with 23 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@1cb951fd
-
-order deploy pakistan 12 added to list of Player6
-
-order deploy india 2 added to list of Player7
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-
-Match is draw
-
-=============================================
-
-
-Map number:2
-
-
-=============================================
-
-
-Game number:1
-
-Cheater Player
-Benevolent Player
-Random Player
-in cheater the armies are deployed to -paris
-in cheater player order is org.soen6441.model.orders.Deploy@676faa64
-the Benevolent Player is defefnding country kenya country with 0 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@37476d25
-in random the armies are deployed to -india
-in random player order is org.soen6441.model.orders.Deploy@a2e82d6
-
-order deploy paris 2 added to list of Player9
-
-order deploy kenya 7 added to list of Player10
-
-order deploy india 2 added to list of Player11
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater defending country - paris Attacking country - india with armies - 1
-in cheater player order is org.soen6441.model.orders.Advance@1088357d
-the Benevolent Player is defefnding country kenya country with 7 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@2d441872
-in random the armies are deployed to -india
-in random player order is org.soen6441.model.orders.Deploy@216676ba
-
-Player9 your attack on india was a Success!!
-
-order deploy kenya 2 added to list of Player10
-
-This country india doesnot belongs to Player11
-The player -Player9 has been assigned card - Bomb
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -paris
-in cheater player order is org.soen6441.model.orders.Deploy@5f207872
-the Benevolent Player is defefnding country kenya country with 9 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@ed28d36
-
-order deploy paris 3 added to list of Player9
-
-order deploy kenya 10 added to list of Player10
+This is the Edit Phase
+This is the Issue Order Phase
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::: Players, Armies, Countries, Cards :::::::::::::::::::::::::::::::::::::::
+This is the Execute Order Phase
 
 Orders are Succesfully Executed!!
-in cheater the armies are deployed to -paris
-in cheater player order is org.soen6441.model.orders.Deploy@3589316
-the Benevolent Player is defefnding country kenya country with 19 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@1199f661
-
-order deploy paris 9 added to list of Player9
-
-order deploy kenya 2 added to list of Player10
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -paris
-in cheater player order is org.soen6441.model.orders.Deploy@4d26efc8
-the Benevolent Player is defefnding country kenya country with 21 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@57877067
-
-order deploy paris 20 added to list of Player9
-
-order deploy kenya 18 added to list of Player10
-
-Orders are Succesfully Executed!!
-in cheater defending country - paris Attacking country - india with armies - 32
-in cheater player order is org.soen6441.model.orders.Advance@100089a2
-the Benevolent Player is defefnding country kenya country with 39 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@4e744f3d
-
-The source country and target country belong to the same player
-
-order deploy kenya 3 added to list of Player10
-
-Orders are Succesfully Executed!!
-in cheater the armies are deployed to -india
-in cheater player order is org.soen6441.model.orders.Deploy@34d6a194
-the Benevolent Player is defefnding country kenya country with 42 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@583eeb21
-
-order deploy india 8 added to list of Player9
-
-order deploy kenya 2 added to list of Player10
-
-Orders are Succesfully Executed!!
-in cheater defending country - india Attacking country - kenya with armies - 40
-in cheater player order is org.soen6441.model.orders.Advance@4ce7241d
-the Benevolent Player is defefnding country kenya country with 44 armies
-in cheater the armies are deployed to -kenya
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@2086871b
-
-Player9 your attack on kenya was a Success!!
-
-This country kenya doesnot belongs to Player10
-The player -Player9 has been assigned card - Negotiate
-
-Orders are Succesfully Executed!!
-This is Game over phase
-Player9is the winner
-
-=============================================
-
-
-Game number:2
-
-Cheater Player
-Benevolent Player
-Random Player
-in cheater the armies are deployed to -paris
-in cheater player order is org.soen6441.model.orders.Deploy@47310fff
-the Benevolent Player is defefnding country india country with 0 armies
-in cheater the armies are deployed to -india
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@56c630b1
-in random the armies are deployed to -kenya
-in random player order is org.soen6441.model.orders.Deploy@503c42f1
-
-order deploy paris 3 added to list of Player12
-
-order deploy india 3 added to list of Player13
-
-order deploy kenya 2 added to list of Player14
-
-Orders are Succesfully Executed!!
-Player9is the winner
-
-=============================================
-
-
-Game number:3
-
-Cheater Player
-Benevolent Player
-Random Player
-in cheater the armies are deployed to -kenya
-in cheater player order is org.soen6441.model.orders.Deploy@777376b9
-the Benevolent Player is defefnding country paris country with 0 armies
-in cheater the armies are deployed to -paris
-in benevolent player the order issued is - org.soen6441.model.orders.Deploy@1688b0b8
-in random the armies are deployed to -india
-in random player order is org.soen6441.model.orders.Deploy@70afc8af
-
-order deploy kenya 2 added to list of Player15
-
-order deploy paris 2 added to list of Player16
-
-order deploy india 2 added to list of Player17
-
-Orders are Succesfully Executed!!
-Player9is the winner
-
-=============================================
-
-==============TOURNAMENT RESULT===============
-
-
-=============================================
-
-
-=============================================
-
-M:map99,map5,
-P:cheater,benevolent,random,
-G:3
-D:15
-
-
-
-
-
-
-|      | Game 1| Game 2| Game 3|
-
-
-| map99| Cheater| Cheater| Cheater|
-| map5 | Draw | Draw | Draw |
