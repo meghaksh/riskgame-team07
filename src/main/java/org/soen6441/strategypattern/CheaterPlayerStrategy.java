@@ -10,28 +10,33 @@ import org.soen6441.model.Order;
 import org.soen6441.model.Player;
 import org.soen6441.model.orders.Advance;
 import org.soen6441.model.orders.Deploy;
-
+/**
+ * This Strategy class belongs to the Cheater Player. It encapsulates the behavior of a Cheater Player.
+ * This strategic player only issues deploy and advance orders to attacks on neighboring countries, 
+ * and increases the number of armies on its countries that have enemy neighbors.
+ *
+ */
 public class CheaterPlayerStrategy extends Strategy implements Serializable {
 
 	private Random rand;
 	private GameModelNew d_GameModelNew;
 	private Player d_Player;
-
-
-	/*
-	 * A cheater computer player strategy whose issueOrder() method conquers all the immediate neighboring enemy countries, 
-	 * and then doubles the number of armies on its countries that have enemy neighbors. 
-	 * Note that in order to achieve this, 
-	 * the cheater’s strategy implementation will still be called when the issueOrder() method, 
-	 * but will not end up creating orders, 
-	 * but rather implement the above-stated behavior by directly affecting the map during the order creation phase
-	 * */
+	/**
+	 * The constructor initializes the cheater player and the game model new object as well as the Random object is created.
+	 * @param p_Player The Player whose strategy is Cheater.
+	 * @param p_GameModelNew The Reference of GamemodelNew to get the Map on which the match is to be played.
+	 */
 	public CheaterPlayerStrategy(Player p_Player,GameModelNew p_GameModelNew) {
 		this.d_GameModelNew = p_GameModelNew;
 		d_Player = p_Player;
 		rand = new Random();
 		d_Leb.setResult("Cheater Player");
 	}
+	/**
+	 * This is an overridden toAttack method. The random player gets its own strongest country, the source country by calling the toDefend method.
+	 * Then it randomly chooses one of the neighboring countries of the source country. 
+	 * @return It returns an Arraylist containing the source country and the target country to attack to.
+	 */
 	@Override
 	public ArrayList<Country> toAttack()
 	{
@@ -54,6 +59,10 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		d_Player.setResult("The Cheater player is attacking on "+l_AttackCountry.getCountryName());
 		return l_ReturnCountries;
 	}
+	/**
+	 * This is an overridden toDefend method. The random player randomly selects one of the countries owned by it.
+	 * @return The country that it wants to deploy army to or move the armies from in case of an attack.
+	 */
 	@Override
 	public Country toDefend()
 	{
@@ -68,6 +77,12 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		d_Player.setResult("The Cheater player is defending from "+l_ReturnCountry.getCountryName());
 		return l_ReturnCountry;
 	}
+	/**
+	 * This is an overridden method to create an order. The cheater player can issue a deploy order or an advance order only.
+	 * In the case of advance order if the source country has armies less than 1, then instead of an advance order the 
+	 * random player chooses to issue a deploy order on that country.
+	 * @return It returns the order object issued.
+	 */
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
@@ -101,6 +116,10 @@ public class CheaterPlayerStrategy extends Strategy implements Serializable {
 		d_Leb.setResult("in cheater player order is "+l_returnOrder);
 		return l_returnOrder;
 	}
+	/**
+	 * This is an overridden method to provide the strategy of the player.
+	 * @return a String specifying "Cheater" - strategy of this class.
+	 */
 	@Override
 	public String strategyName() {
 		// TODO Auto-generated method stub
