@@ -21,14 +21,17 @@ import org.soen6441.model.orders.Deploy;
  * This class extends the parent Strategy class which has createOrder method to be implemented here. 
  */
 public class AggresivePlayerStrategy extends Strategy implements Serializable {
-
-	/*
-	 * An aggressive computer player strategy that focuses on centralization of forces and then attack, 
-	 * i.e. it deploys on its strongest country, then always attack with its strongest country, 
-	 * then moves its armies in order to maximize aggregation of forces in one country.
+	/**
+	 * The Random reference to generate random numbers.
 	 */
 	private Random d_Random;
+	/**
+	 * GameModel new object to get the current map.
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * Player reference of this strategy
+	 */
 	private Player d_Player;
 	/**
 	 * Constructor which accept the player of type aggresive and the gamemode which contains all other game related data. 
@@ -41,7 +44,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		d_Random = new Random();
 		d_Leb.setResult("Aggressive Player");
 	}
-	
+
 	/**
 	 * This method returns the strongest country for the aggresive player. 
 	 * It takes the list of players and sort them according to their number of armies. 
@@ -64,7 +67,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		d_Player.setResult("The aggressive player is defending from "+l_TempCountry.getCountryName());
 		return l_TempCountry;
 	}
-	
+
 	/**
 	 * This method checks for all the neighbors of the source country and randomly choose any one country to attack. 
 	 * If the country to be attacked is of same player then only transfer of armies happen else advance order is executed. 
@@ -99,23 +102,23 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 		int l_RandomInt = d_Random.nextInt(2);
 		Order l_OrderToBeReturned = null;
 		switch(l_RandomInt) {
-			case 0: 
-				Country l_DefendCountry1 = toDefend();
-				d_Leb.setResult("in agressive the armies are deployed to -" +l_DefendCountry1);
-				l_OrderToBeReturned = new Deploy(this.d_Player, l_DefendCountry1, Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
-				break;
-			case 1: 
-				ArrayList<Country> l_Countries = toAttack();
-				/*If player does not have enough armies, it will not advance. it will still deploy*/
-				if(l_Countries.get(0).getNoOfArmies()>1){
-					d_Leb.setResult("in aggressive defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1)+" with armies- "+(l_Countries.get(0).getNoOfArmies()-1));
-					l_OrderToBeReturned =  new Advance(this.d_Player, l_Countries.get(0), l_Countries.get(1), l_Countries.get(0).getNoOfArmies()-1);
-				}
-				else{
-					d_Leb.setResult("in agrressive the armies are deployed to -" +l_Countries.get(0));
-					l_OrderToBeReturned = new Deploy(this.d_Player, toDefend(),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
-				}
-				break;	
+		case 0: 
+			Country l_DefendCountry1 = toDefend();
+			d_Leb.setResult("in agressive the armies are deployed to -" +l_DefendCountry1);
+			l_OrderToBeReturned = new Deploy(this.d_Player, l_DefendCountry1, Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+			break;
+		case 1: 
+			ArrayList<Country> l_Countries = toAttack();
+			/*If player does not have enough armies, it will not advance. it will still deploy*/
+			if(l_Countries.get(0).getNoOfArmies()>1){
+				d_Leb.setResult("in aggressive defending country - "+l_Countries.get(0)+" Attacking country - "+l_Countries.get(1)+" with armies- "+(l_Countries.get(0).getNoOfArmies()-1));
+				l_OrderToBeReturned =  new Advance(this.d_Player, l_Countries.get(0), l_Countries.get(1), l_Countries.get(0).getNoOfArmies()-1);
+			}
+			else{
+				d_Leb.setResult("in agrressive the armies are deployed to -" +l_Countries.get(0));
+				l_OrderToBeReturned = new Deploy(this.d_Player, toDefend(),Math.max(d_Random.nextInt(d_Player.getPlayerArmies()),2));
+			}
+			break;	
 		}
 		d_Leb.setResult("in aggressive the order is - "+l_OrderToBeReturned);
 		return l_OrderToBeReturned;

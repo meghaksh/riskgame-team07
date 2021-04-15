@@ -27,7 +27,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 	 */
 	private GameModelNew d_GameModelNew;
 	/**
-	 * Player reference of this object
+	 * Player reference of this strategy
 	 */
 	Player d_Player;
 	/**
@@ -116,13 +116,13 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 			d_decreasePlayerListSize = true;
 			//--d_PlayerListSize;
 		}
-		
+
 		else
 		{
 			int l_Flag = 0;
 			String[] l_StringList = l_StringOrder.split(" ");
 			String l_OrderType = l_StringList[0];
-			
+
 			d_Leb.setResult("in human player the command is not quit "+l_StringOrder);
 			switch(l_OrderType) {
 
@@ -233,7 +233,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 				}
 
 				break;
-				
+
 			case "savegame":
 				if(l_StringList.length != 2)
 				{
@@ -244,18 +244,18 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 				d_Leb.setResult("Saving the current Game");
 				d_Player.setSaveGame(true);
 				return null;
-				
-				
+
+
 
 			default:
 				break;
 
 			}
 
-			
+
 		}
 		return null;
-		
+
 	}
 	/**
 	 * This is an overridden method to provide the strategy of the player.

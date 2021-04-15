@@ -26,7 +26,7 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 	 */
 	private GameModelNew d_GameModelNew;
 	/**
-	 * Player reference of this object
+	 * Player reference of this strategy
 	 */
 	private Player d_Player;
 	/**
@@ -117,9 +117,9 @@ public class RandomPlayerStrategy extends Strategy implements Serializable {
 		switch(l_rndOrder) 
 		{
 		case 0: Country l_DefendCountry1 = toDefend();
-				d_Leb.setResult("in random the armies are deployed to -" +l_DefendCountry1);
-				l_returnOrder = new Deploy(d_Player,l_DefendCountry1,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
-				break;
+		d_Leb.setResult("in random the armies are deployed to -" +l_DefendCountry1);
+		l_returnOrder = new Deploy(d_Player,l_DefendCountry1,Math.max(rand.nextInt(d_Player.getPlayerArmies()),2));
+		break;
 
 		case 1: ArrayList<Country> l_Countries = toAttack();
 		if(l_Countries.get(0).getNoOfArmies()>1) 

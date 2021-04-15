@@ -22,15 +22,17 @@ import org.soen6441.model.orders.Deploy;
  */
 public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 
-	/*
-	 * A benevolent computer player strategy that focuses on protecting its weak countries 
-	 * (deploys on its weakest country, 
-	 * never attacks, 
-	 * then moves its armies in order to reinforce its weaker country).
-	 * */
-
+	/**
+	 * The Random reference to generate random numbers.
+	 */
 	private Random d_Random;
+	/**
+	 * GameModel new object to get the current map.
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * Player reference of this strategy
+	 */
 	private Player d_Player;
 
 	/**
@@ -44,7 +46,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 		d_Random = new Random();
 		d_Leb.setResult("Benevolent Player");
 	}
-	
+
 	/**
 	 * This method returns the weakest country of the player where he wants to deploy armies just to save it. 
 	 * @return returns the country at which armies are deploy

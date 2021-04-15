@@ -18,8 +18,17 @@ import org.soen6441.model.orders.Deploy;
  */
 public class CheaterPlayerStrategy extends Strategy implements Serializable {
 
+	/**
+	 * The Random reference to generate random numbers.
+	 */
 	private Random rand;
+	/**
+	 * GameModel new object to get the current map.
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * Player reference of this strategy
+	 */
 	private Player d_Player;
 	/**
 	 * The constructor initializes the cheater player and the game model new object as well as the Random object is created.
