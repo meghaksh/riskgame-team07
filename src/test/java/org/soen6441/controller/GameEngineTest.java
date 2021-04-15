@@ -14,11 +14,16 @@ import org.soen6441.view.CommandPrompt;
  *
  */
 public class GameEngineTest {
-
+	/**
+	 * d_CpView:Object of CommandPrompt
+	 * d_GameModel:Object of GameModel
+	 * d_GameEngine:Object of GameEngine
+	 * l_InputString:String variable which holds the Command of tournament phase
+	 */
 	CommandPrompt d_CpView;
 	GameModelNew d_GameModel;
 	GameEngine d_GameEngine;
-	String l_InputString;
+	String d_InputString;
 
 	/**
 	 * To set the context before each test case
@@ -39,9 +44,9 @@ public class GameEngineTest {
 		String l_ActualMessage="";
 		String l_ExpectedMessage = "File does not Exists";
 
-		l_InputString = "tournament -M map9,map99 -P benevolent,aggressive -G 2 -D 10";
+		d_InputString = "tournament -M map9,map99 -P benevolent,aggressive -G 2 -D 10";
 		try {
-			d_GameEngine.tournament(l_InputString);
+			d_GameEngine.tournament(d_InputString);
 		} catch (Exception e) {
 			l_ActualMessage = e.getMessage();
 		}
@@ -57,9 +62,9 @@ public class GameEngineTest {
 		String l_ActualMessage="";
 		String l_ExpectedMessage = "Number of Maps should be in between 1 to 5 both inclusive";
 
-		l_InputString = "tournament -M map9,map99,map1,map2,map5,map8 -P benevolent,aggressive -G 2 -D 10";
+		d_InputString = "tournament -M map9,map99,map1,map2,map5,map8 -P benevolent,aggressive -G 2 -D 10";
 		try {
-			d_GameEngine.tournament(l_InputString);
+			d_GameEngine.tournament(d_InputString);
 		} catch (Exception e) {
 			l_ActualMessage = e.getMessage();
 		}
@@ -75,9 +80,9 @@ public class GameEngineTest {
 		String l_ActualMessage="";
 		String l_ExpectedMessage = "Number of Player strategies should be in between 2 to 4 both inclusive";
 
-		l_InputString = "tournament -M map99,map5 -P benevolent -G 2 -D 10";
+		d_InputString = "tournament -M map99,map5 -P benevolent -G 2 -D 10";
 		try {
-			d_GameEngine.tournament(l_InputString);
+			d_GameEngine.tournament(d_InputString);
 		} catch (Exception e) {
 			l_ActualMessage = e.getMessage();
 		}
@@ -92,9 +97,9 @@ public class GameEngineTest {
 		String l_ActualMessage="";
 		String l_ExpectedMessage = "Number of Games should be in between 1 to 5 both inclusive";
 
-		l_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 7 -D 10";
+		d_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 7 -D 10";
 		try {
-			d_GameEngine.tournament(l_InputString);
+			d_GameEngine.tournament(d_InputString);
 		} catch (Exception e) {
 			l_ActualMessage = e.getMessage();
 		}
@@ -108,9 +113,9 @@ public class GameEngineTest {
 		String l_ActualMessage="";
 		String l_ExpectedMessage = "Number of Games are not in range";
 
-		l_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
+		d_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
 		try {
-			d_GameEngine.tournament(l_InputString);
+			d_GameEngine.tournament(d_InputString);
 		} catch (Exception e) {
 			l_ActualMessage = e.getMessage();
 		}
@@ -122,8 +127,8 @@ public class GameEngineTest {
 	 * @throws Exception for file not found, add player, and ranges for different input parameter
 	 */
 	public void testTournamentMode() throws Exception {
-		l_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
-		d_GameEngine.tournament(l_InputString);
+		d_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
+		d_GameEngine.tournament(d_InputString);
 		Assert.assertNotNull(d_GameEngine.getTournamentResult());
 	}
 

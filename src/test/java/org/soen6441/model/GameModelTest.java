@@ -9,6 +9,18 @@ import org.soen6441.view.CommandPrompt;
  * This is a class to test the methods of GameModel class
  */
 public class GameModelTest {
+	
+	/**
+	 * d_Game:Object of GameModel
+	 * d_Ge:Object of GameEngine
+	 * d_CpView:Object of CommandPrompt
+	 * d_Check:Arraylist which holds all player list
+	 * d_Names:String list which holds all player Names 
+	 * l_InputString:String variable which holds the Command of tournament phase
+	 * d_C1 and d_C2:Player objects
+	 * d_P:object of Phase
+	 * d_Map:object of Map
+	 */
 	GameModelNew d_Game = new GameModelNew();
 	GameEngine d_Ge;
 	CommandPrompt d_CpView;

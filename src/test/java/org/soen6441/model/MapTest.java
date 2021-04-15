@@ -9,6 +9,13 @@ import org.junit.Test;
  * To test the methods of Map.java 
  */
 public class MapTest {
+	/**
+	 *  d_C0 and d_C1:objects of Continent
+	 *  d_Country1,d_Country2,d_Country3,d_Country4,d_Country5:objects of Country 
+	 *  d_Check:Arraylist which holds all Country 
+	 *  d_CheckContinent:Arraylist which holds all Continents 
+	 *  d_Map:object of Map
+	 */
 	Continent d_C0,d_C1;
 	Country d_Country1,d_Country2,d_Country3,d_Country4,d_Country5;
 	ArrayList<Country> d_Check;
