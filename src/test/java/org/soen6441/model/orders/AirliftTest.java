@@ -122,7 +122,7 @@ public class AirliftTest {
 		String l_Actual="", l_Expected="Player does not have a Airlift card";
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country5, 2);
 		d_Air.execute();
-		l_Actual = d_Air.d_Player.getResult();
+		l_Actual = d_Air.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -135,7 +135,7 @@ public class AirliftTest {
 		String l_Actual="", l_Expected="The source country and target country cannot be same!";
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country1, 2);
 		d_Air.execute();
-		l_Actual = d_Air.d_Player.getResult();
+		l_Actual = d_Air.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -149,7 +149,7 @@ public class AirliftTest {
 		String l_Actual="", l_Expected="The source country should be left with atleast one army!";
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country3, 3);
 		d_Air.execute();
-		l_Actual = d_Air.d_Player.getResult();
+		l_Actual = d_Air.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -162,7 +162,7 @@ public class AirliftTest {
 		String l_Actual="", l_Expected="The source country and target country belong to the same player";
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country3, 2);
 		d_Air.execute();
-		l_Actual = d_Air.d_Player.getResult();
+		l_Actual = d_Air.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -176,7 +176,7 @@ public class AirliftTest {
 		String l_Expected="You can only airlift armies to your own countries. egypt does not belongs to raj";
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country5, 2);
 		d_Air.execute();
-		l_Actual = d_Air.d_Player.getResult();
+		l_Actual = d_Air.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
@@ -190,7 +190,7 @@ public class AirliftTest {
 		d_Air = new Airlift(d_P1,  d_Country1, d_Country3, 2);
 		d_Air.execute();
 		d_Air.execute();
-		l_Actual = d_Air.d_Player.getResult();
+		l_Actual = d_Air.getPlayer().getResult();
 		assertEquals(l_Expected,l_Actual);
 
 	}
