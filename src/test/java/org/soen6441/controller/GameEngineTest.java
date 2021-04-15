@@ -15,14 +15,20 @@ import org.soen6441.view.CommandPrompt;
  */
 public class GameEngineTest {
 	/**
-	 * d_CpView:Object of CommandPrompt
-	 * d_GameModel:Object of GameModel
-	 * d_GameEngine:Object of GameEngine
-	 * l_InputString:String variable which holds the Command of tournament phase
+	 * Object of CommandPrompt
 	 */
 	CommandPrompt d_CpView;
+	/**
+	 * Object of GameModel
+	 */
 	GameModelNew d_GameModel;
+	/**
+	 * Object of GameEngine
+	 */
 	GameEngine d_GameEngine;
+	/**
+	 *String variable which holds the Command of tournament phase 
+	 */
 	String d_InputString;
 
 	/**

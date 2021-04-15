@@ -10,16 +10,24 @@ import org.junit.Test;
  */
 public class MapTest {
 	/**
-	 *  d_C0 and d_C1:objects of Continent
-	 *  d_Country1,d_Country2,d_Country3,d_Country4,d_Country5:objects of Country 
-	 *  d_Check:Arraylist which holds all Country 
-	 *  d_CheckContinent:Arraylist which holds all Continents 
-	 *  d_Map:object of Map
+	 * objects of Continent
 	 */
 	Continent d_C0,d_C1;
+	/**
+	 * objects of Country
+	 */
 	Country d_Country1,d_Country2,d_Country3,d_Country4,d_Country5;
+	/**
+	 * Arraylist which holds all Country 
+	 */
 	ArrayList<Country> d_Check;
+	/**
+	 * Arraylist which holds all Continents 
+	 */
 	ArrayList<Continent> d_CheckContinent;
+	/**
+	 * object of Map
+	 */
 	Map d_Map;
 
 	/**

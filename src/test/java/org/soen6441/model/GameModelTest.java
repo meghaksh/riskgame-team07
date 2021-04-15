@@ -11,25 +11,46 @@ import org.soen6441.view.CommandPrompt;
 public class GameModelTest {
 	
 	/**
-	 * d_Game:Object of GameModel
-	 * d_Ge:Object of GameEngine
-	 * d_CpView:Object of CommandPrompt
-	 * d_Check:Arraylist which holds all player list
-	 * d_Names:String list which holds all player Names 
-	 * l_InputString:String variable which holds the Command of tournament phase
-	 * d_C1 and d_C2:Player objects
-	 * d_P:object of Phase
-	 * d_Map:object of Map
+	 * Object of GameModel
 	 */
 	GameModelNew d_Game = new GameModelNew();
+	
+	/**
+	 * Object of GameEngine
+	 */
 	GameEngine d_Ge;
+	/**
+	 * Object of CommandPrompt
+	 */
 	CommandPrompt d_CpView;
+	/**
+	 * Arraylist which holds all player list
+	 */
+	
 	ArrayList<Player> d_Check;
+	/**
+	 * String list which holds all player Names
+	 */
 	List<String> d_Names;
+	/**
+	 * PlayersArraylist which holds all players
+	 */
 	ArrayList<Player> d_List;
+	/**
+	 *String list for Checking player names
+	 */
 	List<String> d_CheckNames;
+	/**
+	 * Player objects
+	 */
 	Player d_C1,d_C2;
+	/**
+	 * object of Phase
+	 */
 	Phase d_P;
+	/**
+	 * object of Map
+	 */
 	private Map d_Map;
 	/**
 	 * To set up the context for test cases
