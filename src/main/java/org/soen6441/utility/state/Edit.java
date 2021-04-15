@@ -257,6 +257,9 @@ public class Edit extends Phase {
 		return "EditPhase";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String tournament(String p_string, String p_CommandStringFromInput) {
 		// TODO Auto-generated method stub
