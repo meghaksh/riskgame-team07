@@ -13,10 +13,25 @@ import org.soen6441.view.CommandPrompt;
  * This class tests the methods written in Edit phase class.
  */
 public class EditTest {
+	/**
+	 * This is the command prompt object
+	 */
 	CommandPrompt d_CpView;
+	/**
+	 * This is the game model new object
+	 */
 	GameModelNew d_GameModel;
+	/**
+	 * This is the game engine object
+	 */
 	GameEngine d_Ge;
+	/**
+	 * This is the Edit class object
+	 */
 	Edit d_Ed;
+	/**
+	 * This is the Phase class object
+	 */
 	Phase d_P;
 	
 	/**

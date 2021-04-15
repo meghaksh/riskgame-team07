@@ -12,11 +12,25 @@ import org.soen6441.view.CommandPrompt;
  * This class tests the methods written inside ExecuteOrder phase class. 
  */
 public class ExecuteOrderTest {
-	
+	/**
+	 * This is the command prompt object
+	 */
 	CommandPrompt d_CpView;
+	/**
+	 * This is the game model new object
+	 */
 	GameModelNew d_GameModel;
+	/**
+	 * This is the game engine object
+	 */
 	GameEngine d_Ge;
+	/**
+	 * This is the ExecuteOrder class object
+	 */
 	ExecuteOrder d_Eo;
+	/**
+	 * This is the Phase class object
+	 */
 	Phase d_P;
 	
 	/**

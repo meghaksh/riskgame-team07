@@ -12,11 +12,25 @@ import org.soen6441.view.CommandPrompt;
  * This class tests the method return in the IssueOrder phase class. 
  */
 public class IssueOrderTest {
-	
+	/**
+	 * This is the command prompt object
+	 */
 	CommandPrompt d_CpView;
+	/**
+	 * This is the game model new object
+	 */
 	GameModelNew d_GameModel;
+	/**
+	 * This is the game engine object
+	 */
 	GameEngine d_Ge;
+	/**
+	 * This is the IssueOrder class object
+	 */
 	IssueOrder d_Io;
+	/**
+	 * This is the Phase class object
+	 */
 	Phase d_P;
 	
 	/**
