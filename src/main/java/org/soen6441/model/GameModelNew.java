@@ -132,7 +132,7 @@ public class GameModelNew implements Serializable {
 				System.out.println("Invalid Command. Please try again.\n");
 				break;
 			}
-			System.out.println("strat"+l_PlayerObject.getPlayerStrategy());
+//			System.out.println("strat"+l_PlayerObject.getPlayerStrategy());
 			d_PlayerList.add(l_PlayerObject);
 			
 		
