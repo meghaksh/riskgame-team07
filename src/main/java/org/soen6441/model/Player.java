@@ -178,7 +178,7 @@ public class Player implements Serializable {
 	 * set Continent list for the player. It consists of only those continent objects whose all countries belong to this player.
 	 */
 	public void setContinentsList() {
-		ArrayList <Continent> l_MapContinents = d_GameModelNew.getSelectedMap().getContinentList();
+		ArrayList <Continent> l_MapContinents = d_GameModelNew.getMap().getContinentList();
 		for(Continent l_MapContinent : l_MapContinents) {
 			int l_Flag = 0;
 			for(Country l_Country : l_MapContinent.getCountryList()) {

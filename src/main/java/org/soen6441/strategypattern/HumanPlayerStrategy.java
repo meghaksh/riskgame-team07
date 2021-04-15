@@ -133,7 +133,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 					break;
 				}
 				int l_NumArmies = Integer.parseInt(l_StringList[2]);
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 					{
@@ -150,7 +150,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 				int l_NumArmies1 = Integer.parseInt(l_StringList[3]);
 				Country l_SourceCountry = null;
 				Country l_TargetCountry = null;
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 					{
@@ -158,7 +158,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 						break;
 					}
 				}
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[2]))
 					{
@@ -173,7 +173,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 					{
@@ -186,7 +186,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 					d_Leb.setResult("Please enter valid number of parameters");
 					break;
 				}
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 					{
@@ -205,7 +205,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 				Country l_SourceCountry1 = null;
 				Country l_TargetCountry1 = null;
 
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[1]))
 					{
@@ -213,7 +213,7 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 						break;
 					}
 				}
-				for(Country l_TempCountry: d_GameModelNew.getSelectedMap().getCountryList() )
+				for(Country l_TempCountry: d_GameModelNew.getMap().getCountryList() )
 				{
 					if(l_TempCountry.getCountryName().equals(l_StringList[2]))
 					{

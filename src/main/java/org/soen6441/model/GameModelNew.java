@@ -72,6 +72,10 @@ public class GameModelNew implements Serializable {
 		return this.d_Map;
 	}
 
+	/**
+	 * setting the map
+	 * @param p_Map
+	 */
 	public void setMap(Map p_Map) {
 		this.d_Map = p_Map;
 	}
@@ -99,14 +103,7 @@ public class GameModelNew implements Serializable {
 	public ArrayList<Player> getAllPlayers() {
 		return this.d_PlayerList;
 	}
-	/**
-	 * This method gets selected map.
-	 *
-	 * @return the selected map
-	 */
-	public Map getSelectedMap() {
-		return this.d_Map;
-	}
+
 
 	/**
 	 * This Method Adds the player based on user input from the command prompt.
@@ -115,7 +112,7 @@ public class GameModelNew implements Serializable {
 	 * @throws Exception if player size is more that country size or if player already exists
 	 */
 	public void addPlayer(String p_PlayerName,String p_Strategy)throws Exception {
-		if ((d_PlayerList.size() > getSelectedMap().getCountryList().size())) {
+		if ((d_PlayerList.size() > getMap().getCountryList().size())) {
 			throw new Exception("Reached Max Number of Players can be added to the game");
 		}
 		if (existDuplicatePlayer(p_PlayerName)) {
@@ -227,7 +224,7 @@ public class GameModelNew implements Serializable {
 			d_PlayerQueue.addAll(getAllPlayers());
 
 			List<Country> l_CountryList = new ArrayList<>();
-			l_CountryList  = (List<Country>) getSelectedMap().getCountryList().clone();		
+			l_CountryList  = (List<Country>) getMap().getCountryList().clone();		
 			while (l_CountryList.size() > 0) {	
 				Random l_Random = new Random();
 				int l_Index = l_Random.nextInt(l_CountryList.size());
@@ -338,7 +335,7 @@ public class GameModelNew implements Serializable {
 	 * </ul> 
 	 */
 	public void tournamentstartUpPhase() {
-		List<Country> l_CountryList = (List<Country>) this.getSelectedMap().getCountryList().clone();	
+		List<Country> l_CountryList = (List<Country>) this.getMap().getCountryList().clone();	
 		int l_PlayerIndex = 0;
 		int l_PlayerCount = this.getAllPlayers().size();
 		ArrayList<Integer> l_TempList = new ArrayList<>();
