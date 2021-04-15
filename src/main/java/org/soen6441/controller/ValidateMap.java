@@ -7,7 +7,13 @@ import org.soen6441.model.Continent;			import org.soen6441.model.Country;
  * This class checks the validity of the map by converting into a graph object. 
  */
 public class ValidateMap {
+	/**
+	 * Number of countries in the map
+	 */
 	int d_VertexCount;
+	/**
+	 * Arraylist to be used to check the connectivity between map countries
+	 */
 	ArrayList<ArrayList<Integer>> d_VertexList;
 
 	/**

@@ -6,6 +6,9 @@ import org.soen6441.model.Map;
  * This class update the MapModel. Also receives the acknowledgement for the update and pass it back to the parent GameEngine.
  */
 public class MapController {
+	/**
+	 * Object of the Map class which is to be access from this controller
+	 */
 	private Map d_MapModel;
 
 	/**

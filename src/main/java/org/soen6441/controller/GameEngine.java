@@ -25,14 +25,41 @@ import org.soen6441.utility.state.GameSaved;
  * This class acts as an intermediary between models/controllers and view.
  */
 public class GameEngine  {
+	/**
+	 * Object of the GameModel which internally holds Map object
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * Object of view
+	 */
 	private CommandPrompt d_CpView;
+	/**
+	 * Object of MapController to access Map model from GameEngine
+	 */
 	private MapController d_MapController;
+	/**
+	 * ArrayList of players playing the game
+	 */
 	private ArrayList<Player> d_PlayerList;
+	/**
+	 * Object of PlayerController to access Player Model methods
+	 */
 	private PlayerController d_PlayerController;
+	/**
+	 * Object of the phase class to implement phases in game
+	 */
 	private Phase d_GamePhase;
+	/**
+	 * Object to edit logfile
+	 */
 	private LogEntryBuffer d_LEB;
+	/**
+	 * static variable used in tournament mode
+	 */
 	static int NUM=0;
+	/**
+	 * hashmap to store the result of tournament and display at last 
+	 */
 	private HashMap<String, ArrayList<String>> d_TournamentResult;
 
 	/**

@@ -25,16 +25,49 @@ import org.soen6441.view.CommandPrompt;
  * The Player Controller class controls the activities of all the players at once.
  */
 public class PlayerController {
+	/**
+	 * List of all players
+	 */
 	private ArrayList <Player> d_Players;
+	/**
+	 * Winner player for the individual game
+	 */
 	private Player d_Winner;
+	/**
+	 * Order acknowlegement string
+	 */
 	private String d_OrderAcknowledgment="";
+	/**
+	 * Object of the View
+	 */
 	private CommandPrompt d_CpView;
+	/**
+	 * object of the GameModel 
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * LogEntryBuffer object to log in log file
+	 */
 	private LogEntryBuffer d_LEB;
+	/**
+	 * All the cards that can be assigned to player when they win
+	 */
 	private HashMap<Integer, String> d_AllCards;
+	/**
+	 * Variable to randomly generate values
+	 */
 	private Random d_Rand;
+	/**
+	 * Object of the GameEngine class 
+	 */
 	private GameEngine d_GameEngine;
+	/**
+	 * number of rounds used for AI players to end the game
+	 */
 	private static int d_NumberOfRounds =0;
+	/**
+	 * Boolean which depicts if the game is saved or not
+	 */
 	private boolean d_SaveGame=false;
 	/**
 	 * Constructor of Player controller
