@@ -78,6 +78,7 @@ public class BenevolentPlayerStrategy extends Strategy implements Serializable {
 
 	/**
 	 * Benevolent player never attacks so it is returning null. 
+	 * @return null
 	 */
 	@Override
 	public ArrayList<Country> toAttack()

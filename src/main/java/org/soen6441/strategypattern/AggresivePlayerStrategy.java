@@ -68,7 +68,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 	/**
 	 * This method checks for all the neighbors of the source country and randomly choose any one country to attack. 
 	 * If the country to be attacked is of same player then only transfer of armies happen else advance order is executed. 
-	 * @return ArrayList<Country> returns the list of source and target country for the attack
+	 * @return returns the list of source and target country for the attack
 	 */
 	@Override
 	public ArrayList<Country> toAttack(){
@@ -123,7 +123,7 @@ public class AggresivePlayerStrategy extends Strategy implements Serializable {
 
 	/**
 	 * This method returns the strategy type of the player. 
-	 * return String returns the type of player
+	 * @return return String returns the type of player
 	 */
 	@Override
 	public String strategyName() {
