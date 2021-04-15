@@ -83,6 +83,39 @@ public class GameEngineTest {
 		}
 		assertEquals(l_ExpectedMessage, l_ActualMessage);
 	}	
+	
+	/**
+	 * To test if the number of games mentioned are in range or not 
+	 */
+	@Test
+	public void testTournamentGamesRange()  {
+		String l_ActualMessage="";
+		String l_ExpectedMessage = "Number of Games should be in between 1 to 5 both inclusive";
+
+		l_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 7 -D 10";
+		try {
+			d_GameEngine.tournament(l_InputString);
+		} catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage, l_ActualMessage);
+	}	
+
+	/**
+	 * To test if the number of turns mentioned are in range or not
+	 */
+	public void testTournamentTurnsRange()  {
+		String l_ActualMessage="";
+		String l_ExpectedMessage = "Number of Games are not in range";
+
+		l_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
+		try {
+			d_GameEngine.tournament(l_InputString);
+		} catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage, l_ActualMessage);
+	}
 
 
 }
