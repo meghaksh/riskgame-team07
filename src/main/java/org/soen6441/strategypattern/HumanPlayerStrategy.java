@@ -16,51 +16,93 @@ import org.soen6441.model.orders.Blockade;
 import org.soen6441.model.orders.Bomb;
 import org.soen6441.model.orders.Deploy;
 import org.soen6441.model.orders.Negotiate;
-
+/**
+ * This Strategy class belongs to the Human Player. It encapsulates the behavior of a Human Player.
+ * This strategic players issues all types of orders on its own.
+ *
+ */
 public class HumanPlayerStrategy extends Strategy implements Serializable {
-	
+	/**
+	 * GameModel new object to get the current map.
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * Player reference of this object
+	 */
 	Player d_Player;
+	/**
+	 * CheckArmies Hashmap to get if the player is still interested in issuing orders or wanted to quit.
+	 */
 	HashMap <Player,Boolean> d_CheckArmies = new HashMap<>();
-	int d_PlayerListSize;
+	/**
+	 * The boolean flag set to true if the player enters "quit" keyword, else false.
+	 */
 	boolean d_decreasePlayerListSize;
-	
+	/**
+	 * The constructor initializes the human player and the game model new object.
+	 * @param p_Player The Player whose strategy is Human.
+	 * @param p_GameModelNew The Reference of GamemodelNew to get the Map on which the match is to be played.
+	 */
 	public HumanPlayerStrategy(Player p_Player,GameModelNew p_GameModelNew)
 	{
 		this.d_GameModelNew = p_GameModelNew;
 		d_Player = p_Player;
 		System.out.println("Human");
 	}
+	/**
+	 * This is a setter method of the Checkarmies hashmap.
+	 * @param l_CheckArmies Shows the current status of the players, i.e whether they are playing or are out of the game.
+	 */
 	public void setCheckArmies(HashMap<Player,Boolean> l_CheckArmies)
 	{
 		d_CheckArmies= l_CheckArmies;
 	}
-	public void setPlayerListSize(int l_PlayerListSize)
-	{
-		d_PlayerListSize=l_PlayerListSize;
-	}
+	/**
+	 * This is the getter method for the Checkarmies hashmap.
+	 * @return The Hashmap -  Checkarmies
+	 */
 	public HashMap<Player,Boolean> getCheckArmies()
 	{
 		return d_CheckArmies;
 	}
-	public int getPlayerListSize()
-	{
-		return d_PlayerListSize;
-	}
+	/**
+	 * This is the getter method for the decreasePlayerListSize flag.
+	 * @return true - if the player entered "quit" else false.
+	 */
 	public boolean getDecreasePlayerListSize()
 	{
 		return d_decreasePlayerListSize;
 	}
+	/**
+	 * This is an overridden attack method. The human player enters the country of its own choice.
+	 */
 	@Override
 	public ArrayList<Country> toAttack()
 	{
 		return null;
 	}
+	/**
+	 * This is an overridden defend method. The human player enters the country it wants to deploy its armies to or attack from.
+	 */
 	@Override
 	public Country toDefend() 
 	{
 		return null;
 	}
+	/**
+	 * This in an overridden method to create an order. Based in the input order string entered by the human player. It creates a corresponding order.
+	 * <ol><li> A deploy keyword would create an object of a Deploy order.</li>
+	 * <li> An advance keyword would create an object of a Advance order.</li>
+	 * <li> A bomb keyword would create an object of a Bomb order.</li>
+	 * <li> A blockade keyword would create an object of a Blockade order.</li>
+	 * <li> An airlift keyword would create an object of a Airlift order.</li>
+	 * <li> A negotiate keyword would create an object of a Negotiate order.</li>
+	 * </ol>
+	 * Other than these 5 orders, if a player enters the command "quit", then the value of this player in checkArmies hashmap is changed to true
+	 *  and the decreasePlayerListSize boolean is also set to true.
+	 *  Or if a player enters the command "savegame", then the current game is saved in a txt filename mentioned by the player.
+	 *  @return It returns the order object issued.
+	 */
 	@Override
 	public Order createOrder() {
 		// TODO Auto-generated method stub
@@ -215,6 +257,10 @@ public class HumanPlayerStrategy extends Strategy implements Serializable {
 		return null;
 		
 	}
+	/**
+	 * This is an overridden method to provide the strategy of the player.
+	 * @return a String specifying "Human" - strategy of this class.
+	 */
 	@Override
 	public String strategyName() {
 		// TODO Auto-generated method stub

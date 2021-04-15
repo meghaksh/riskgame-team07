@@ -68,7 +68,8 @@ public class PlayerController {
 
 	/**
 	 * The player_issue_order method asks each player to issue an order in a round robin fashion and they are added to the order list of that player.
-	 * The loop terminates when all the player enter the keyword "quit".
+	 * The loop terminates when all the human player enter the keyword "quit".
+	 * If the match consists of all AI players then each of them issues only one order.
 	 * The acknowledgement are passed on to the view.
 	 */
 	public void playerIssueOrder() {
@@ -353,10 +354,18 @@ public class PlayerController {
 		}
 
 	}
+	/**
+	 * This is the getter method of providing winner player
+	 * @return The player who won the game.
+	 */
 	public Player getWinner()
 	{
 		return this.d_Winner;
 	}
+	/**
+	 * The setter method to set the player as winner of the game.
+	 * @param p_Winner The player who won the game.
+	 */
 	public void setWinner(Player p_Winner)
 	{
 		this.d_Winner=p_Winner;
