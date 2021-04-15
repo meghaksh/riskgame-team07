@@ -33,6 +33,7 @@ public class GameEngine  {
 	private Phase d_GamePhase;
 	private LogEntryBuffer d_LEB;
 	static int NUM=0;
+	private HashMap<String, ArrayList<String>> d_TournamentResult;
 
 	/**
 	 * This method returns the reference of the MapController
@@ -421,15 +422,17 @@ public class GameEngine  {
 		if(l_CommandArray[1].equals("-M")){
 			l_MapList=l_CommandArray[2].split(",");
 			if(l_MapList.length>5||l_MapList.length<1) {
-				d_CpView.setCommandAcknowledgement("Number of Maps are not in range");//throw exception
-				d_LEB.setResult("Number of Maps are not in range");
+				d_LEB.setResult("Number of Maps should be in between 1 to 5 both inclusive");
+				throw new Exception("Number of Maps should be in between 1 to 5 both inclusive");//throw exception
+				
 			} else 
 				l_M=l_MapList.length;
 			for(int i=0;i<l_M;i++) {
 				File l_F = new File(l_Path+l_MapList[i]);
 				if (!l_F.exists()) {
-					d_CpView.setCommandAcknowledgement("File does not Exists");//throw exception
 					d_LEB.setResult("File does not Exists");
+					throw new Exception("File does not Exists");//throw exception
+					
 				} else
 					l_Files.add(l_F);
 			}
@@ -437,8 +440,9 @@ public class GameEngine  {
 		if(l_CommandArray[3].equals("-P")){
 			l_PlayerStrategyList=l_CommandArray[4].split(",");
 			if(l_PlayerStrategyList.length>4||l_PlayerStrategyList.length<2) {
-				d_CpView.setCommandAcknowledgement("Number of Player strategies are are not in range");//throw exception
-				d_LEB.setResult("Number of Player strategies are are not in range");
+				d_LEB.setResult("Number of Player strategies should be in between 2 to 4 both inclusive");
+				throw new Exception("Number of Player strategies should be in between 2 to 4 both inclusive");//throw exception
+				
 			} else {
 				l_P=l_PlayerStrategyList.length;
 			}
@@ -446,20 +450,22 @@ public class GameEngine  {
 		if(l_CommandArray[5].equals("-G")){
 			int l_NumGames=Integer.parseInt(l_CommandArray[6]);
 			if(l_NumGames>5||l_NumGames<1) {
-				d_CpView.setCommandAcknowledgement("Number of Games are not in range");//throw exception
-				d_LEB.setResult("Number of Games are not in range");
+				d_LEB.setResult("Number of Games should be in between 1 to 5 both inclusive");
+				throw new Exception("Number of Games should be in between 1 to 5 both inclusive");//throw exception
+				
 			} else
 				l_G=l_NumGames;
 		}
 		if(l_CommandArray[7].equals("-D")){
 			int l_MaxTurns=Integer.parseInt(l_CommandArray[8]);
 			if(l_MaxTurns>50||l_MaxTurns<10) {
-				d_CpView.setCommandAcknowledgement("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");//throw exception
-				d_LEB.setResult("Number of Maxturns are greater than 50 so first 50 Maxturns have been considered");
+				d_LEB.setResult("Number of turns should be in between 10 to 50 both inclusive");
+				throw new Exception("Number of turns should be in between 10 to 50 both inclusive");//throw exception
+				
 			} else
 				l_D=l_MaxTurns;
 		}
-		HashMap<String, ArrayList<String>> l_TournamentResult = new HashMap<>();
+		 d_TournamentResult = new HashMap<>();
 
 		for (int i = 0; i < l_M; i++) {
 			d_CpView.setCommandAcknowledgement("\n=============================================\n");
@@ -506,10 +512,10 @@ public class GameEngine  {
 					}
 					l_Noofturns++;
 				}
-				l_TournamentResult.put(l_MapList[i],l_Result);
+				d_TournamentResult.put(l_MapList[i],l_Result);
 			}
 		}
-		printTournamentResult(l_M, l_G, l_D, l_TournamentResult, l_PlayerStrategyList);
+		printTournamentResult(l_M, l_G, l_D, d_TournamentResult, l_PlayerStrategyList);
 	}
 
 
@@ -602,5 +608,9 @@ public class GameEngine  {
 		for (int l_I = p_Input.length(); l_I <= l_Length; l_I++)
 			l_Str.append(" ");
 		return l_Str.toString();
+	}
+	
+	public HashMap<String, ArrayList<String>> getTournamentResult(){
+		return this.d_TournamentResult;
 	}
 }
