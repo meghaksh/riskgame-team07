@@ -116,6 +116,16 @@ public class GameEngineTest {
 		}
 		assertEquals(l_ExpectedMessage, l_ActualMessage);
 	}
+	
+	/**
+	 * To test if the tournament mode gives the result or not
+	 * @throws Exception for file not found, add player, and ranges for different input parameter
+	 */
+	public void testTournamentMode() throws Exception {
+		l_InputString = "tournament -M map99,map5 -P benevolent,aggressive -G 5 -D 9";
+		d_GameEngine.tournament(l_InputString);
+		Assert.assertNotNull(d_GameEngine.getTournamentResult());
+	}
 
 
 }
