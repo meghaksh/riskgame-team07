@@ -8,10 +8,22 @@ import org.soen6441.model.Player;
  * The object of this class is created when a player issues Bomb order. 
  */
 public class Bomb implements Order {
-	private Player d_Player;
-	private Player d_PlayerBombed;
-	private Country d_Country;
-	private int d_NoOfArmies;
+	/**
+	 * The bomb order issuing player
+	 */
+	Player d_Player;
+	/**
+	 * The player who is affected by the bomb order.
+	 */
+	Player d_PlayerBombed;
+	/**
+	 * The country to be bombed.
+	 */
+	Country d_Country;
+	/**
+	 * Half the number of armies on the country that is bombed.
+	 */
+	int d_NoOfArmies;
 
 	/**
 	 * Constructor which is called when a new object of Bomb class is created.

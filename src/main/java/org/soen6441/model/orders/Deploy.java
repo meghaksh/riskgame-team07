@@ -9,9 +9,18 @@ import org.soen6441.model.Order;	import org.soen6441.model.Player;
  */
 public class Deploy implements Order{
 
-	private Player d_Player;
-	private Country d_Country;
-	private int d_NumArmies;
+	/**
+	 * The deploy order issuing player.
+	 */
+	Player d_Player;
+	/**
+	 * The country on which the armies are to be deployed.
+	 */
+	Country d_Country;
+	/**
+	 * The number of armies to be deployed.
+	 */
+	int d_NumArmies;
 
 	/**
 	 * Constructor which is created on creation of the object

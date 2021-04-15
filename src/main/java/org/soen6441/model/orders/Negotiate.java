@@ -8,7 +8,10 @@ import org.soen6441.model.Order;		import org.soen6441.model.Player;
  *  During the ExecuteOrder phase, execute method of this class is called.
  */
 public class Negotiate implements Order {
-	private Player d_SourcePlayer,d_TargetPlayer;
+	/**
+	 * The source player is the negotiate order issuing player, the target player is the player with whom the deal is struck.
+	 */
+	Player d_SourcePlayer,d_TargetPlayer;
 
 	/**
 	 * Constructor of the Negotiate class which is called when object is created. 
