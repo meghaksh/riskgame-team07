@@ -51,8 +51,12 @@ public class BenevolentPlayerStrategyTest {
 		d_Country2.setBorder("india");
 		d_Country2.setBorder("japan");	
 	}
+	
+	/**
+	 * This Method is to check whether the Player is defending on the Players Weakest Country
+	 */
 	@Test
-	public void testDefendCheck() throws Exception {
+	public void testDefendCheck() {
 		String l_Actual="";
 		String l_Expected="the Benevolent Player is defefnding country india";
 		BenevolentPlayerStrategy l_Benv=new BenevolentPlayerStrategy(d_Player1,d_GameModelNew);

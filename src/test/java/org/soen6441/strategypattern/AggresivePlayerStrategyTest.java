@@ -13,7 +13,6 @@ import org.soen6441.model.Map;
 import org.soen6441.model.Player;
 
 public class AggresivePlayerStrategyTest {
-
 	Player d_Player1,d_Player2;
 	Map d_Map;
 	GameModelNew d_GameModelNew;
@@ -54,8 +53,11 @@ public class AggresivePlayerStrategyTest {
 		d_Country3.setBorder("india");
 		
 	}
+	/**
+	 * This Method is to check whether the Player is defending on the Players Strongest Country
+	 */
 	@Test
-	public void testDefendCheck() throws Exception {
+	public void testDefendCheck() {
 		String l_Actual="";
 		String l_Expected="The aggressive player is defending from china";
 		AggresivePlayerStrategy l_Agress=new AggresivePlayerStrategy(d_Player1,d_GameModelNew);
@@ -63,8 +65,11 @@ public class AggresivePlayerStrategyTest {
 		l_Actual = d_Player1.getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
+	/**
+	 * This Method is to check whether the Player is attacking on the Neighbor Country
+	 */
 	@Test
-	public void testAttackFromCheck() throws Exception {
+	public void testAttackFromCheck() {
 		String l_Actual="";
 		String l_Expected="The aggressive player is attacking on japan";
 		AggresivePlayerStrategy l_Agress=new AggresivePlayerStrategy(d_Player1,d_GameModelNew);

@@ -43,8 +43,11 @@ public class CheaterPlayerStrategyTest {
 		d_Country2.setBorder("india");
 		
 	}
+	/**
+	 * This Method is to check whether the Player is defending on the Players own Country
+	 */
 	@Test
-	public void testDefendCheck() throws Exception {
+	public void testDefendCheck() {
 		String l_Actual="";
 		String l_Expected="The Cheater player is defending from india";
 		CheaterPlayerStrategy l_cheater=new CheaterPlayerStrategy(d_Player1,d_GameModelNew);
@@ -52,8 +55,11 @@ public class CheaterPlayerStrategyTest {
 		l_Actual = d_Player1.getResult();
 		assertEquals(l_Expected,l_Actual);
 	}
+	/**
+	 * This Method is to check whether the Player is attacking on the other players Country
+	 */
 	@Test
-	public void testAttackCheck() throws Exception {
+	public void testAttackCheck(){
 		String l_Actual="";
 		String l_Expected="The Cheater player is attacking on china";
 		CheaterPlayerStrategy l_cheater=new CheaterPlayerStrategy(d_Player1,d_GameModelNew);

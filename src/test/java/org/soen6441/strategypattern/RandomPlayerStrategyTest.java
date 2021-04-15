@@ -33,8 +33,11 @@ public class RandomPlayerStrategyTest {
 		d_Country1.setNoOfArmies(2);
 		
 	}
+	/**
+	 * This Method is to check whether the Player is defending on random Country
+	 */
 	@Test
-	public void testDefendCheck() throws Exception {
+	public void testDefendCheck(){
 		String l_Actual="";
 		String l_Expected="The Random player is defending from india";
 		RandomPlayerStrategy l_random=new RandomPlayerStrategy(d_Player1,d_GameModelNew);

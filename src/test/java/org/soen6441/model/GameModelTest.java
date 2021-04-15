@@ -135,6 +135,10 @@ public class GameModelTest {
 			assertTrue(3<=l_Value);
 		}
 	}
+	/**
+	 * This Method check whether the saved model and loaded model has same number of players 
+	 * @throws Exception this exception is thrown when there are no players added to the game 
+	 */
 	@Test 
 	public void testSaveLoadGamePLayercheck() throws Exception {
 		GameModelNew l_Actual = null;
@@ -146,6 +150,10 @@ public class GameModelTest {
 		l_ActualValue=l_Actual.getAllPlayers().size();
 		assertEquals(l_Expected,l_ActualValue);
 	}
+	/**
+	 * This Method check whether the saved model and loaded model has same number of Countries 
+	 * @throws Exception this exception is thrown when there are no players added to the game 
+	 */
 	@Test 
 	public void testSaveLoadGameCountrycheck() throws Exception {
 		GameModelNew l_Actual = null;
@@ -157,6 +165,10 @@ public class GameModelTest {
 		l_ActualValue=l_Actual.getSelectedMap().getCountryList().size();
 		assertEquals(l_Expected,l_ActualValue);
 	}
+	/**
+	 * This Method check whether the saved model and loaded model has same number of Countinents
+	 * @throws Exception this exception is thrown when there are no players added to the game 
+	 */
 	@Test 
 	public void testSaveLoadGameContinentcheck() throws Exception {
 		GameModelNew l_Actual = null;
