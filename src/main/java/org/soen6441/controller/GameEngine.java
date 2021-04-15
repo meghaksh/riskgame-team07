@@ -348,8 +348,13 @@ public class GameEngine  {
 		}
 		d_LEB.setResult(":::::::::::::::::::::::::::: ShowMap :::::::::::::::::::::::::::::::::::::::");
 	}
+	/**
+	 * This method calls the loadGame method of the GameModel to load previously saved game. 
+	 * After loading all the objects to their respective places, it changes the state of the game accordingly.
+	 * @param p_Command command entered by the user.
+	 */
 	public void loadGame(String p_Command) {
-		boolean flag=false;
+		boolean l_Flag=false;
 		this.d_GameModelNew=GameModelNew.loadGame(p_Command.split(" ")[1]);
 		if (this.d_GameModelNew==null) {
 			d_CpView.setCommandAcknowledgement("\nGame not found");
@@ -365,18 +370,23 @@ public class GameEngine  {
 			ArrayList<Player> l_Players=this.d_GameModelNew.getAllPlayers();
 			for(Player l_P : l_Players) {
 				if(l_P.getCountriesSize()>0) {
-					flag=true;
+					l_Flag=true;
 					break;
 				}
 			}
-			if(flag==true) {
+			if(l_Flag==true) {
 				this.setPhase(new IssueOrder(this,d_CpView));
 			} else {
 				this.setPhase(new Startup(this,d_CpView));
 			}
 		}
 	}
-
+	
+	/**
+	 * This method calls the savegame method of GameModel to save the game during gameplay.
+	 * Once the game is saved, this method also sets it phase to GameSaved phase.  
+	 * @param p_Command command entered by the user
+	 */
 	public void saveGame(String p_Command) {
 		this.d_GameModelNew.saveGame(p_Command.split(" ")[1]);
 		this.setPhase(new GameSaved(this,d_CpView));
@@ -562,19 +572,30 @@ public class GameEngine  {
 		}
 	}
 
-	private String getRepeatedFormattedString(String input, int length) {
-		StringBuilder str = new StringBuilder(input);
-		for (int i = input.length(); i <= length - 1; i++)
-			str.append(input);
-		return str.toString();
+	/**
+	 * This is a method to receive String in a specific format. 
+	 * @param p_Input input string which needs to be appended
+	 * @param p_Length lengthh of the input string
+	 * @return
+	 */
+	private String getRepeatedFormattedString(String p_Input, int p_Length) {
+		StringBuilder l_Str = new StringBuilder(p_Input);
+		for (int l_I = p_Input.length(); l_I <= p_Length - 1; l_I++)
+			l_Str.append(p_Input);
+		return l_Str.toString();
 	}
 
-	private String getFormattedString(String input) {
-		int length = 4;
+	/**
+	 * This is a generic method to receive String in a specific format. 
+	 * @param p_Input input string which need to be modified in specific format
+	 * @return modified string
+	 */
+	private String getFormattedString(String p_Input) {
+		int l_Length = 4;
 
-		StringBuilder str = new StringBuilder(" " + input);
-		for (int i = input.length(); i <= length; i++)
-			str.append(" ");
-		return str.toString();
+		StringBuilder l_Str = new StringBuilder(" " + p_Input);
+		for (int l_I = p_Input.length(); l_I <= l_Length; l_I++)
+			l_Str.append(" ");
+		return l_Str.toString();
 	}
 }
