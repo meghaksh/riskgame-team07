@@ -25,19 +25,19 @@ public class Advance implements Order {
 	/**
 	 * Logger object to logs the vents in the log file
 	 */
-	private LogEntryBuffer d_Leb = new LogEntryBuffer();
+	LogEntryBuffer d_Leb = new LogEntryBuffer();
 	/**
 	 * The sourceCountry of the attacking player and the targetCountry of the Defending Player.
 	 */
-	private Country d_SourceCountry,d_TargetCountry;
+	Country d_SourceCountry,d_TargetCountry;
 	/**
 	 * The issuing or the attacking player.
 	 */
-	private Player d_Player;
+	Player d_Player;
 	/**
 	 * The number of armies with which the player plans to attack.
 	 */
-	private int d_NumArmies;
+	int d_NumArmies;
 
 	/**
 	 * Default Constructor

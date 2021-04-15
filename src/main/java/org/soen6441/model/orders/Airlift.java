@@ -11,15 +11,15 @@ public class Airlift implements Order {
 	/**
 	 * The airlift order issuing player.
 	 */
-	private Player d_Player;
+	Player d_Player;
 	/**
 	 * The Source Country from which the armies are to be moved to the target country.
 	 */
-	private Country d_SourceCountry,d_TargetCountry;
+	Country d_SourceCountry,d_TargetCountry;
 	/**
 	 * The number of armies to be moved.
 	 */
-	private int d_NumArmies;
+	int d_NumArmies;
 
 	/**
 	 * Constructor of the class which is called when the new object of Airlift class is created.

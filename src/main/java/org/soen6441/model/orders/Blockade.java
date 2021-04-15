@@ -9,9 +9,18 @@ import org.soen6441.model.Player;
  * The object of this class is created when the player issues blockade command.
  */
 public class Blockade implements Order {
-	private Player d_Player;
-	private Country d_Country;
-	private GameModelNew d_GameObj;
+	/**
+	 * The blockade order issuing player.
+	 */
+	Player d_Player;
+	/**
+	 * The country of the player to be blocked
+	 */
+	Country d_Country;
+	/**
+	 * The GameModel new reference to get the list of all countries in the map.
+	 */
+	GameModelNew d_GameObj;
 
 	/**
 	 * Constructor which is called when the object of the blockade is created. 
