@@ -1,7 +1,9 @@
 unnamed package
+org.soen6441.adapterpattern
 org.soen6441.controller
 org.soen6441.model
 org.soen6441.model.orders
 org.soen6441.observerpattern
+org.soen6441.strategypattern
 org.soen6441.utility.state
 org.soen6441.view

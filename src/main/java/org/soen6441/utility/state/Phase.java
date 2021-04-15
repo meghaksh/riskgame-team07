@@ -105,7 +105,7 @@ public abstract class Phase {
 	 * It does this if the command is applicable for that particular phase or else it will simply return String stating invalid command
 	 * @param p_String string input
 	 * @param p_CommandStringFromInput input entered by the user. 
-	 * @return
+	 * @return Acknowledgement
 	 */
 	abstract public String tournament(String p_String, String p_CommandStringFromInput);
 }

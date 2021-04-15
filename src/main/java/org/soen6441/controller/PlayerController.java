@@ -72,8 +72,8 @@ public class PlayerController {
 	/**
 	 * Constructor of Player controller
 	 * @param p_GameModelNew This is the reference of the the game model which is used to access the map.
-	 * @param p_Players list of players 
 	 * @param p_CpView object of command prompt for communicating with player
+	 * @param p_GameEngine object of Game Engine
 	 */
 	PlayerController(GameModelNew p_GameModelNew,CommandPrompt p_CpView, GameEngine p_GameEngine) {
 		d_GameModelNew = p_GameModelNew;

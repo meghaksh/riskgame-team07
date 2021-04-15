@@ -111,9 +111,10 @@ public class GameModelNew implements Serializable {
 	/**
 	 * This Method Adds the player based on user input from the command prompt.
 	 * @param p_PlayerName player name of player
+	 * @param p_Strategy It is the strategy that a player should adopt
 	 * @throws Exception if player size is more that country size or if player already exists
 	 */
-	public void addPlayer(String p_PlayerName,String strategy)throws Exception {
+	public void addPlayer(String p_PlayerName,String p_Strategy)throws Exception {
 		if ((d_PlayerList.size() > getSelectedMap().getCountryList().size())) {
 			throw new Exception("Reached Max Number of Players can be added to the game");
 		}
@@ -121,7 +122,7 @@ public class GameModelNew implements Serializable {
 			throw new Exception("Please enter a differnt Player name as this name already exists");
 		} else {
 			Player l_PlayerObject = new Player(p_PlayerName, this);
-			switch(strategy) {
+			switch(p_Strategy) {
 			case "aggressive" :
 				l_PlayerObject.setPlayerStrategy(new AggresivePlayerStrategy(l_PlayerObject,this));
 				break;
