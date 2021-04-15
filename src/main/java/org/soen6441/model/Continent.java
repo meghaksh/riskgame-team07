@@ -7,10 +7,25 @@ import java.util.ArrayList;
  * This Class is for all the Continents  of the Map
  */
 public class Continent implements Serializable {
+	/**
+	 * This static integer represents the id of the continent
+	 */
 	private static int D_Count=0;
+	/**
+	 * This is the normal id of the continent
+	 */
 	private int d_ID;
+	/**
+	 * This string represents the name of the continent
+	 */
 	private String d_Name;
+	/**
+	 * This integer represents the continent control value
+	 */
 	private int d_ContinentControlValue;
+	/**
+	 * This array list will have all the countries of that particular
+	 */
 	private ArrayList<Country> d_CountryList;
 
 	/**

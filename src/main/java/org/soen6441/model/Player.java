@@ -16,20 +16,65 @@ import org.soen6441.strategypattern.Strategy;
  * The Player class represents the actual player participating in the game.
  */
 public class Player implements Serializable {
+	/**
+	 * This string represents the name of the player 
+	 */
 	private String d_PlayerName="";
+	/**
+	 * This integer represents the id of the player
+	 */
 	private int d_PlayerId;
+	/**
+	 * This integer represents the number of armies 
+	 */
 	private int d_Armies;
+	/**
+	 * this integer represents the temporary armies given to the player
+	 */
 	private int d_TempArmies;
+	/**
+	 * This Array list consists of all the countries of the player
+	 */
 	private ArrayList<Country> d_Countries = new ArrayList<Country>();
+	/**
+	 * The Queue represents the queue of players order
+	 */
 	private Queue<Order> d_Order = new LinkedList<Order>();
+	/**
+	 * This Array list consists of all the continents
+	 */
 	private ArrayList<Continent> d_Continents = new ArrayList<Continent>();
+	/**
+	 * This string is used to store the result of issue order
+	 */
 	private String d_Result="";
+	/**
+	 * This string represents the name of order
+	 */
 	private String d_StringOrder="";
+	/**
+	 * This is the gamemodelnew objects
+	 */
 	private GameModelNew d_GameModelNew;
+	/**
+	 * This ArrayList represents all the cards given to players
+	 */
 	private ArrayList<String> d_Cards = new ArrayList<String>();
+	/**
+	 * This list has all the player objects of negotiated players
+	 */
 	private ArrayList<Player> d_NegotiatedPlayers = new ArrayList<Player>();
+	/**
+	 * Boolean to check if a player has won atleast one battle to alot him a card
+	 */
 	private boolean d_AtleastOneBattleWon=false;
+	/**
+	 * It is the object of Strategy Class
+	 */
 	private Strategy d_PlayerStrategy;
+	/**
+	 * Boolean to check if a game should be saved or not
+	 */
 	private boolean d_SaveGame=false;
 	/**
 	 * default constructor of Player class	
