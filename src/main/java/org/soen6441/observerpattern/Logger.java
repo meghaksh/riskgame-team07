@@ -12,6 +12,9 @@ import java.io.Serializable;
  * On any change, the object of this class will be notified. 
  */
 public class Logger implements Observer,Serializable {
+	/**
+	 * Static counter variable to clean log file
+	 */
 	private static int D_Count=0;
 	/**
 	 * This method will internally update the Log file on each notification from observable.

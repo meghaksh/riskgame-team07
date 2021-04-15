@@ -7,7 +7,13 @@ import org.soen6441.controller.GameEngine;               import org.soen6441.vie
  * The relevant phase will have the implementation of methods according to its phase.
  */
 public abstract class Phase {
+	/**
+	 * Object of the GameEngine class to be used in all phases
+	 */
 	public GameEngine d_Ge;
+	/**
+	 * Command prompt to write phase acknowledgements
+	 */
 	public CommandPrompt d_Vw;
 	/**
 	 * This is the constructor for Phase class. It initializes Game engine and command prompt object
