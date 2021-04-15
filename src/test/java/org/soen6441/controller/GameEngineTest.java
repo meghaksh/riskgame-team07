@@ -65,5 +65,24 @@ public class GameEngineTest {
 		}
 		assertEquals(l_ExpectedMessage, l_ActualMessage);
 	}
+	
+
+	/**
+	 * To test if the number of Players mentioned are in range or not
+	 */
+	@Test
+	public void testTournamentPlayerRange()  {
+		String l_ActualMessage="";
+		String l_ExpectedMessage = "Number of Player strategies should be in between 2 to 4 both inclusive";
+
+		l_InputString = "tournament -M map99,map5 -P benevolent -G 2 -D 10";
+		try {
+			d_GameEngine.tournament(l_InputString);
+		} catch (Exception e) {
+			l_ActualMessage = e.getMessage();
+		}
+		assertEquals(l_ExpectedMessage, l_ActualMessage);
+	}	
+
 
 }
