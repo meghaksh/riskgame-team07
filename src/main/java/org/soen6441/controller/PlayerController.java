@@ -326,6 +326,7 @@ public class PlayerController {
 			{
 				int l_cardInteger = d_Rand.nextInt(4);
 				l_TempPlayer.setCard(d_AllCards.get(l_cardInteger));
+				d_LEB.setResult("The player -"+l_TempPlayer.getPlayerName()+" has been assigned card - "+d_AllCards.get(l_cardInteger));
 				l_TempPlayer.setAtleastOneBattleWon(false);
 			}
 		}
