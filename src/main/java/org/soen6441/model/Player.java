@@ -117,15 +117,22 @@ public class Player implements Serializable {
 		return this.d_AtleastOneBattleWon;
 	}
 	
-
+	/**
+	 * This method returns the boolean which is set when game saved
+	 * @return true if savedgame else false
+	 */
 	public boolean getSaveGame()
 	{
 		return this.d_SaveGame;
 	}
 	
-	public void setSaveGame(boolean p_value)
+	/**
+	 * this method sets the flag for savedgame.
+	 * @param p_Value value to be set
+	 */
+	public void setSaveGame(boolean p_Value)
 	{
-		this.d_SaveGame=p_value;
+		this.d_SaveGame=p_Value;
 	}
 
 	/**
@@ -283,10 +290,18 @@ public class Player implements Serializable {
 		return d_Order.remove();
 	}
 	
+	/**
+	 * This method sets the strategy for the player when new player is created. 
+	 * @param p_PlayerStrategy strategy type of the player. 
+	 */
 	public void setPlayerStrategy(Strategy p_PlayerStrategy) {
 		this.d_PlayerStrategy = p_PlayerStrategy;
 	}
 	
+	/**
+	 * This method returns the player strategy type. 
+	 * @return type of player strategy
+	 */
 	public Strategy getPlayerStrategy() {
 		return this.d_PlayerStrategy;
 	}
